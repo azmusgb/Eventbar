@@ -29,6 +29,10 @@
 [data-theme="champagne"]{ --bg:#fbfafc; --card:#ffffff; --ink:#191720; --muted:#5e5a70; --edge:#ece7f0; --gold:#b88a44; --rose:#c06072; --shadow:none }
 [data-theme="botanical"]{ --bg:#0f1512; --card:#111a15; --ink:#eaf6ef; --muted:#a3c2b1; --edge:rgba(255,255,255,.12); --gold:#9fe4b3; --rose:#c1ffea; }
 
+/* ===== Role gating (FOUC-proof) ===== */
+body[data-role="user"] .admin-only { display:none !important; }
+body[data-role="admin"] .user-only { display:none !important; }
+
 /* ===== Base ===== */
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -52,11 +56,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   outline:2px solid var(--focus); outline-offset:3px; border-radius:10px
 }
 kbd{background:#0003; border:1px solid var(--edge); padding:.18em .48em; border-radius:6px; font-size:.85em}
-section{scroll-margin-top:calc(var(--nav-h) + 16px)} /* anchors not hidden by sticky nav */
+section{scroll-margin-top:calc(var(--nav-h) + 16px)}
 
-/* ===== Nav & Skip ===== */
-.skip-link{position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;}
-.skip-link:focus{left:16px; top:10px; width:auto; height:auto; padding:8px 10px; border-radius:8px; background:#0008; color:#fff}
+/* ===== Nav ===== */
 .nav{position:sticky; top:12px; height:var(--nav-h); backdrop-filter:saturate(1.1) blur(10px); -webkit-backdrop-filter:saturate(1.1) blur(10px);
   z-index:60; margin:-6px -6px 20px; padding:10px 14px; display:flex; gap:14px; align-items:center;
   border:1px solid var(--edge); border-radius:16px; background:color-mix(in oklab, var(--bg) 80%, black 20%);}
@@ -71,28 +73,24 @@ section{scroll-margin-top:calc(var(--nav-h) + 16px)} /* anchors not hidden by st
 .nav a{padding:8px 10px; border-radius:10px}
 .nav a[aria-current="true"]{background:color-mix(in oklab, var(--gold) 16%, transparent 84%); color:var(--ink)}
 
-/* ===== Form controls ===== */
+/* Forms, grids, etc. */
 select, input[type="text"], input[type="email"], input[type="number"], input[type="date"], textarea{
   width:100%; padding:12px 12px; border-radius:12px; border:1px solid var(--edge);
   background:color-mix(in oklab, var(--bg) 70%, black 30%); color:var(--ink); outline:none;
 }
 label{font-weight:600; font-size:13px; color:var(--muted-strong)}
-
-/* ===== Grids ===== */
 .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
 .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
 @media (max-width:900px){ .grid-3{grid-template-columns:1fr} .grid-2{grid-template-columns:1fr}}
 
-/* ===== Hero ===== */
+/* Hero & card visuals */
 .hero{display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:center}
 .tag{font-size:12px; border:1px solid var(--edge); border-radius:999px; padding:6px 10px}
-
-/* Coupe */
 .coupe{border-radius:18px; border:1px solid var(--edge); background:linear-gradient(180deg, #1f1724, #161018); display:flex; align-items:center; justify-content:center; padding:10px; overflow:hidden}
 .coupe:hover svg{transform:scale(1.02)}
 .coupe svg{transition:transform .3s ease}
 
-/* ===== Menu Card ===== */
+/* Menu card */
 .menu-card{width:100%; max-width:620px; margin:0 auto; border-radius:22px; border:1px solid var(--edge);
   background: conic-gradient(from 200deg at 50% 30%, color-mix(in oklab,var(--gold) 18%, transparent 82%), transparent 42% 58%, color-mix(in oklab,var(--rose) 16%, transparent 84%) 100%), color-mix(in oklab, var(--card) 92%, black 8%);
   padding:26px; box-shadow:var(--shadow)}
@@ -103,7 +101,7 @@ label{font-weight:600; font-size:13px; color:var(--muted-strong)}
 .menu-note{font-size:12px; opacity:.9; text-align:center; margin-top:10px}
 @media (max-width:520px){ .menu-card{padding:18px} .menu-card .title{font-size:24px} .menu-card .subtitle{font-size:12px}}
 
-/* ===== Tables & Print ===== */
+/* Tables & Print */
 table{width:100%; border-collapse:collapse}
 th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; vertical-align:top}
 .sig-pad{border:1px solid var(--edge); border-radius:12px; background:color-mix(in oklab, var(--bg) 72%, black 28%); width:100%; height:180px}
@@ -114,22 +112,18 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
   a[href^="mailto:"]::after{content:" (" attr(href) ")"; font-size:11px; color:#666}
 }
 
-/* Panels & Modals */
+/* Panels & toasts */
 .panel{position:fixed; top:0; right:0; width:420px; max-width:100%; height:100%; background:color-mix(in oklab, var(--card) 95%, black 5%); border-left:1px solid var(--edge); box-shadow:var(--shadow); transform:translateX(100%); transition:transform .2s ease; z-index:80; display:flex; flex-direction:column}
 .panel[data-open="true"]{transform:none}
 .panel header{display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--edge)}
 .panel .content{padding:16px; overflow:auto}
-
-/* Toasts */
 .toast-wrap{position:fixed; bottom:18px; left:50%; transform:translateX(-50%); z-index:90}
 .toast{background:color-mix(in oklab, var(--card) 95%, black 5%); border:1px solid var(--edge); border-radius:12px; padding:10px 14px; margin-top:10px; min-width:220px}
 .toast.ok{border-color:color-mix(in oklab,var(--ok) 40%, var(--edge) 60%)}
 .toast.warn{border-color:color-mix(in oklab,var(--warn) 40%, var(--edge) 60%)}
 
-/* A11y focus */
+/* A11y & motion */
 :focus-visible{outline:2px solid var(--focus); outline-offset:3px; border-radius:8px}
-
-/* Reduce motion */
 @media (prefers-reduced-motion: reduce){
   *{transition:none!important; animation:none!important; scroll-behavior:auto!important}
 }
@@ -157,7 +151,8 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
     <!-- NAV -->
     <nav class="nav" role="navigation" aria-label="Primary">
       <div class="wordmark" data-bind="brand" aria-label="Brand">Velvet Hour Events</div>
-      <span class="badge" aria-label="Theme switcher">Theme
+
+      <span class="badge">Theme
         <select id="themePick" aria-label="Theme">
           <option value="velvet" selected>Velvet</option>
           <option value="champagne">Champagne</option>
@@ -165,10 +160,12 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
         </select>
       </span>
 
-      <!-- User/Admin toggle -->
+      <span class="badge" id="modeChip" aria-live="polite" title="Current view">Mode: User</span>
+
+      <!-- User/Admin controls -->
       <button class="iconbtn no-print user-only" id="adminLogin" aria-label="Admin login">🔒 Admin</button>
-      <button class="iconbtn no-print admin-only" id="adminLogout" aria-label="Sign out admin" hidden>Sign out</button>
-      <button class="iconbtn no-print admin-only" id="openAdmin" aria-haspopup="dialog" aria-controls="adminPanel" aria-label="Open Admin Panel" hidden>⚙️ Admin</button>
+      <button class="iconbtn no-print admin-only" id="adminLogout" aria-label="Sign out admin">Sign out</button>
+      <button class="iconbtn no-print admin-only" id="openAdmin" aria-haspopup="dialog" aria-controls="adminPanel" aria-label="Open Admin Panel">⚙️ Admin</button>
 
       <div style="margin-left:auto"></div>
       <a href="#packages">Packages</a>
@@ -201,7 +198,7 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
       <div class="coupe" aria-hidden="true">
         <svg width="100%" height="220" viewBox="0 0 520 220" role="img" aria-label="Decorative coupe glass">
           <defs>
-            <linearGradient id="sh" x1="0" y="0" x2="1" y2="1">
+            <linearGradient id="sh" x1="0" y="0" x2="1" y="1">
               <stop offset="0" stop-color="#EBCB8B"/><stop offset="1" stop-color="#E68FA0"/>
             </linearGradient>
             <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
@@ -365,8 +362,8 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
         <div class="no-print" style="display:flex; gap:8px">
           <button class="button" onclick="printSection('contract')">Print</button>
           <button class="button" onclick="clearSignatures()">Clear signatures</button>
-          <button class="iconbtn admin-only" onclick="exportDraft('vh_contract','contract.json')" aria-label="Export contract JSON" hidden>Export</button>
-          <label class="iconbtn admin-only" aria-label="Import contract JSON" hidden><input type="file" accept="application/json" hidden onchange="importDraft(event,'vh_contract');">Import</label>
+          <button class="iconbtn admin-only" onclick="exportDraft('vh_contract','contract.json')" aria-label="Export contract JSON">Export</button>
+          <label class="iconbtn admin-only" aria-label="Import contract JSON"><input type="file" accept="application/json" hidden onchange="importDraft(event,'vh_contract');">Import</label>
         </div>
       </div>
       <div class="small">Provider: <b data-bind="brand">Velvet Hour Events</b> — <span data-bind="email">hello@velvethourevents.com</span> — <span data-bind="phone">(704) 000-0000</span></div>
@@ -440,8 +437,8 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
           <button class="button" onclick="invoiceCalc()">Update Total</button>
           <button class="button" onclick="openPay()" aria-haspopup="dialog" aria-controls="payPanel">Pay Now (Demo)</button>
           <button class="iconbtn" onclick="printSection('invoice')">Print</button>
-          <button class="iconbtn admin-only" onclick="exportDraft('vh_invoice','invoice.json')" aria-label="Export invoice JSON" hidden>Export</button>
-          <label class="iconbtn admin-only" aria-label="Import invoice JSON" hidden><input type="file" accept="application/json" hidden onchange="importDraft(event,'vh_invoice');">Import</label>
+          <button class="iconbtn admin-only" onclick="exportDraft('vh_invoice','invoice.json')" aria-label="Export invoice JSON">Export</button>
+          <label class="iconbtn admin-only" aria-label="Import invoice JSON"><input type="file" accept="application/json" hidden onchange="importDraft(event,'vh_invoice');">Import</label>
         </div>
       </div>
       <div class="grid-2">
@@ -484,8 +481,8 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
         <h2>Service Checklists & Incident Log</h2>
         <div class="no-print" style="display:flex; gap:8px">
           <button class="button" onclick="printSection('checklists')">Print</button>
-          <button class="iconbtn admin-only" onclick="exportDraft('vh_incidents','incidents.json')" aria-label="Export incidents JSON" hidden>Export</button>
-          <label class="iconbtn admin-only" aria-label="Import incidents JSON" hidden><input type="file" accept="application/json" hidden onchange="importDraft(event,'vh_incidents');">Import</label>
+          <button class="iconbtn admin-only" onclick="exportDraft('vh_incidents','incidents.json')" aria-label="Export incidents JSON">Export</button>
+          <label class="iconbtn admin-only" aria-label="Import incidents JSON"><input type="file" accept="application/json" hidden onchange="importDraft(event,'vh_incidents');">Import</label>
         </div>
       </div>
       <h3>Pre-Event (48–72h)</h3>
@@ -515,7 +512,7 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
       </table>
       <div class="no-print" style="margin-top:10px; display:flex; gap:8px">
         <button class="button" onclick="incidentAdd()">Add row</button>
-        <button class="iconbtn admin-only" onclick="saveIncidents()" hidden>Save Draft</button>
+        <button class="iconbtn admin-only" onclick="saveIncidents()">Save Draft</button>
       </div>
       <blockquote class="small">Refusal script: "For your safety, I'm not able to serve that right now. I'm happy to get you water or food, or a rideshare if you need it."</blockquote>
     </section>
@@ -576,7 +573,7 @@ Send as PDF to {{client email}} and cc {{email}}. Thank you.</pre>
   </div>
 
   <!-- ADMIN PANEL -->
-  <section id="adminPanel" class="panel admin-only" role="dialog" aria-modal="true" aria-labelledby="adminTitle" aria-hidden="true" hidden>
+  <section id="adminPanel" class="panel admin-only" role="dialog" aria-modal="true" aria-labelledby="adminTitle" aria-hidden="true">
     <header>
       <h3 id="adminTitle">Admin — Brand & Defaults</h3>
       <button class="iconbtn" id="closeAdmin" aria-label="Close admin panel">✖</button>
@@ -625,7 +622,10 @@ Send as PDF to {{client email}} and cc {{email}}. Thank you.</pre>
         <p><label>Admin PIN<br><input id="ad_pin" type="password" placeholder="0000"></label></p>
         <p><label><input id="ad_remember" type="checkbox"> Remember admin on this device</label></p>
       </div>
-      <p style="display:flex; gap:8px"><button class="button" onclick="saveAccess()">Save Access</button></p>
+      <p style="display:flex; gap:8px">
+        <button class="button" onclick="saveAccess()">Save Access</button>
+        <button class="iconbtn" onclick="forceUserView()">Force User View</button>
+      </p>
       <p class="small">Visibility is gated on this device only. Convenience, not security.</p>
     </div>
   </section>
@@ -667,7 +667,7 @@ const themePick=$('#themePick');
 function applyTheme(v){
   if(v==='champagne'){document.body.setAttribute('data-theme','champagne');}
   else if(v==='botanical'){document.body.setAttribute('data-theme','botanical');}
-  else{document.body.removeAttribute('data-theme');} // velvet default
+  else{document.body.removeAttribute('data-theme');}
   localStorage.setItem('vh_theme', v);
 }
 themePick.addEventListener('change',e=>applyTheme(e.target.value));
@@ -682,25 +682,25 @@ function applyBrand(){
   $$('[data-bind="phone"]').forEach(el=>el.textContent=BRAND.phone);
   $$('[data-bind="city"]').forEach(el=>el.textContent=BRAND.city);
   const rs=$('#rateSheet');
-  if(rs && rs.textContent.includes('{{city}}')){ // fill once
+  if(rs && rs.textContent.includes('{{city}}')){
     rs.textContent = rs.textContent.replaceAll('{{city}}',BRAND.city).replaceAll('{{email}}',BRAND.email).replaceAll('{{phone}}',BRAND.phone);
   }
   updateMailto();
 }
 applyBrand();
 
-/* ===== Admin/User mode (session by default; optional remember) ===== */
+/* ===== Admin/User mode ===== */
 const ADMIN_FLAG = 'vh_is_admin';
 const REMEMBER_FLAG = 'vh_admin_remember';
-
 function storageForState(){ return (localStorage.getItem(REMEMBER_FLAG)==='1') ? localStorage : sessionStorage; }
 function isAdmin(){ return storageForState().getItem(ADMIN_FLAG) === '1'; }
+function updateModeChip(){ const chip=$('#modeChip'); if(chip) chip.textContent = `Mode: ${isAdmin()?'Admin':'User'}`; }
 
 function setAdminMode(on){
-  // Clear both stores, then set in chosen storage
   localStorage.removeItem(ADMIN_FLAG);
   sessionStorage.removeItem(ADMIN_FLAG);
   storageForState().setItem(ADMIN_FLAG, on ? '1' : '0');
+  document.body.setAttribute('data-role', on ? 'admin' : 'user');
   applyAdminModeUI();
   toast(on ? 'Admin mode enabled' : 'Switched to user view', on ? 'ok' : 'warn');
   if(!on && window.adminPanel) closePanel(adminPanel);
@@ -710,6 +710,7 @@ function applyAdminModeUI(){
   document.body.setAttribute('data-role', admin ? 'admin' : 'user');
   $$('.admin-only').forEach(el=> el.hidden = !admin);
   $$('.user-only').forEach(el=> el.hidden = admin);
+  updateModeChip();
 }
 function promptAdminLogin(){
   const pin = localStorage.getItem('vh_admin_pin') || '0000';
@@ -722,7 +723,6 @@ function saveAccess(){
   const remember = $('#ad_remember')?.checked ? '1' : '0';
   localStorage.setItem('vh_admin_pin', pinVal);
   localStorage.setItem(REMEMBER_FLAG, remember);
-  // If we un-remember, migrate any admin flag to session
   if(remember !== '1' && localStorage.getItem(ADMIN_FLAG)){
     const active = localStorage.getItem(ADMIN_FLAG)==='1';
     localStorage.removeItem(ADMIN_FLAG);
@@ -730,25 +730,36 @@ function saveAccess(){
   }
   toast('Access settings updated','ok');
 }
-// URL switch ?admin=1 turns on admin for this session only
+function forceUserView(){
+  localStorage.removeItem(REMEMBER_FLAG);
+  localStorage.removeItem(ADMIN_FLAG);
+  sessionStorage.removeItem(ADMIN_FLAG);
+  document.body.setAttribute('data-role','user');
+  applyAdminModeUI();
+  toast('Forced user view','warn');
+}
+// URL switch ?admin=1 → session admin
 (function handleURLAdmin(){
   const params=new URLSearchParams(location.search);
   if(params.get('admin')==='1'){ sessionStorage.setItem(ADMIN_FLAG,'1'); }
 })();
-// First load: default to user for session unless remembered admin & flag both exist
+// Deterministic init (never default admin)
 (function initAdminState(){
-  if(localStorage.getItem(REMEMBER_FLAG)==='1'){
-    // Use stored state; if no flag yet, remain user
-    applyAdminModeUI();
-  }else{
-    sessionStorage.setItem(ADMIN_FLAG, sessionStorage.getItem(ADMIN_FLAG) || '0');
-    applyAdminModeUI();
+  const remembered = localStorage.getItem(REMEMBER_FLAG) === '1';
+  const rememberedAdmin = localStorage.getItem(ADMIN_FLAG) === '1';
+  if (remembered && rememberedAdmin) {
+    sessionStorage.setItem(ADMIN_FLAG,'1');
+    document.body.setAttribute('data-role','admin');
+  } else {
+    sessionStorage.setItem(ADMIN_FLAG,'0');
+    document.body.setAttribute('data-role','user');
   }
+  applyAdminModeUI();
 })();
 $('#adminLogin')?.addEventListener('click', promptAdminLogin);
 $('#adminLogout')?.addEventListener('click', ()=> setAdminMode(false));
 
-/* ===== Admin Panel (form-based) ===== */
+/* ===== Admin Panel ===== */
 const adminPanel = $('#adminPanel');
 const openAdminBtn = $('#openAdmin');
 const closeAdminBtn = $('#closeAdmin');
@@ -776,6 +787,7 @@ function loadAdminForm(){
   const rem = $('#ad_remember'); if(rem) rem.checked = localStorage.getItem(REMEMBER_FLAG) === '1';
 }
 
+/* Brand & data ops */
 function saveBrandForm(){
   BRAND = {...BRAND, brand:$('#ad_brand').value.trim()||BRAND.brand,
                      city:$('#ad_city').value.trim()||BRAND.city,
@@ -794,8 +806,6 @@ function importBrand(e){
     catch{ toast('Invalid JSON','warn'); }
   });
 }
-
-/* Backup/restore all */
 function exportAll(){
   const dump = {};
   for(const k of Object.keys(localStorage)){ if(k.startsWith('vh_')) dump[k]=localStorage.getItem(k); }
@@ -811,7 +821,6 @@ function importAll(e){
     }catch{ toast('Invalid backup','warn'); }
   });
 }
-
 function savePackages(){
   const e=$('#ad_pkg_essentials').value||'$55/hr', s=$('#ad_pkg_signature').value||'$65/hr', p=$('#ad_pkg_premier').value||'$85/hr';
   localStorage.setItem('vh_pkg_essentials', e);
@@ -823,7 +832,7 @@ function savePackages(){
   toast('Package pricing saved', 'ok');
 }
 
-/* Safer sanitizer for editable template lists */
+/* Sanitizer for editable templates */
 function sanitizeListHTML(html){
   const allowedTags = new Set(['UL','LI','B','I','STRONG','EM']);
   const parser=new DOMParser();
@@ -1004,7 +1013,7 @@ function saveIncidents(){
 }
 (function(){ const s=localStorage.getItem('vh_incidents'); if(s){ const rows=JSON.parse(s); const body=$('#incidentBody'); body.innerHTML=''; rows.forEach(cols=>{ const tr=document.createElement('tr'); tr.innerHTML=cols.map(c=>`<td contenteditable>${c}</td>`).join(''); body.appendChild(tr); }); } })();
 
-/* Draft export/import (generic) */
+/* Draft export/import */
 function exportDraft(key, filename){ const s=localStorage.getItem(key)||'{}'; download(filename, s); }
 function importDraft(e, key){
   const f=e.target.files[0]; if(!f) return;
@@ -1018,14 +1027,14 @@ function importDraft(e, key){
   });
 }
 
-/* ===== Incident table ===== */
+/* Incident table */
 function incidentAdd(){
   const tr=document.createElement('tr');
   tr.innerHTML="<td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td>";
   $('#incidentBody').appendChild(tr);
 }
 
-/* ===== Signatures (HiDPI crisp) ===== */
+/* Signatures (HiDPI) */
 ['sigClient','sigProvider'].forEach(id=>{
   const canvas=$('#'+id), ctx=canvas.getContext('2d');
   function resize(){
@@ -1052,7 +1061,7 @@ function sigClear(id){ const c=$('#'+id); const ctx=c.getContext('2d'); ctx.clea
 function sigSave(id){ const data=$('#'+id).toDataURL('image/png'); const a=document.createElement('a'); a.href=data; a.download=id+'.png'; a.click(); }
 function clearSignatures(){ ['sigClient','sigProvider'].forEach(sigClear); }
 
-/* ===== Contact (mailto + logging) ===== */
+/* Contact (mailto + logging) */
 function updateMailto(){
   const name=($('#req_name')||{}).value||'';
   const email=($('#req_email')||{}).value||'';
@@ -1090,7 +1099,7 @@ function logRequest(e){
   toast(`Request logged: ${rec.id}`,'ok');
 }
 
-/* ===== Print section ===== */
+/* Print section */
 function printSection(id){
   const clone=$('#'+id).cloneNode(true);
   $$('.no-print', clone).forEach(el => el.remove());
@@ -1103,7 +1112,7 @@ function printSection(id){
   w.document.body.appendChild(clone); w.document.write('</body></html>'); w.document.close(); w.focus(); w.print();
 }
 
-/* ===== Payment Simulation ===== */
+/* Payment Simulation */
 const payPanel = $('#payPanel');
 $('#closePay')?.addEventListener('click', ()=> closePanel(payPanel));
 function openPay(){
@@ -1115,10 +1124,7 @@ function openPay(){
   openPanel(payPanel); trapFocus(payPanel, true);
 }
 function fillInvoiceAmount(){ $('#pay_amount').value = (getInvoiceTotal()||0).toFixed(2); }
-function getInvoiceTotal(){
-  const txt = $('#inv_tot').innerText.replace(/[^0-9.]/g,'');
-  return parseFloat(txt)||0;
-}
+function getInvoiceTotal(){ const txt = $('#inv_tot').innerText.replace(/[^0-9.]/g,''); return parseFloat(txt)||0; }
 function simulatePay(){
   const name=$('#pay_name').value.trim();
   const amt=parseFloat($('#pay_amount').value)||0;
@@ -1141,7 +1147,7 @@ function renderPayments(){
   box.innerHTML = arr.slice().reverse().map(p=>`<div>• ${p.ts.split('T')[0]} — <b>${p.id}</b> — $${p.amount.toFixed(2)} — ${p.method} — Inv #${p.invoice} — ${p.name}</div>`).join('');
 }
 
-/* ===== Close panels on ESC + focus trap ===== */
+/* Panels: ESC & focus trap */
 document.addEventListener('keydown', (e)=>{
   if(e.key==='Escape'){ [adminPanel, payPanel].forEach(p=> p && p.dataset.open==="true" && closePanel(p)); }
 });
@@ -1159,7 +1165,7 @@ function trapFocus(panel, enable){
   panel.addEventListener('keydown', panel._trap);
 }
 
-/* ===== Active-section nav highlight ===== */
+/* Active-section nav highlight */
 const navLinks=[...document.querySelectorAll('.nav a[href^="#"]')];
 const sections=navLinks.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
 const obs=new IntersectionObserver((entries)=>{
@@ -1172,7 +1178,7 @@ const obs=new IntersectionObserver((entries)=>{
 },{rootMargin:'-50% 0px -40% 0px', threshold:.01});
 sections.forEach(s=>obs.observe(s));
 
-/* ===== Init ===== */
+/* Init */
 document.addEventListener('DOMContentLoaded', () => {
   applyAdminModeUI();
   renderMenu();
