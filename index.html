@@ -183,7 +183,7 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
     <section class="card hero" id="top">
       <div>
         <h1>Luxe cocktails. Calm, professional service.</h1>
-        <p class="small">Premium bartending by <b>Kate</b>, serving <span data-bind="city">Charlotte, NC</span> and the Carolinas. Menu design, quantity planning, and safe, on-time execution with a designer’s eye.</p>
+        <p class="small">Premium bartending by <b>Kate</b>, serving <span data-bind="city">Charlotte, NC</span> and the Carolinas. Menu design, quantity planning, and safe, on-time execution with a designer's eye.</p>
         <div style="display:flex; gap:10px; margin-top:10px" class="no-print">
           <a class="button" href="#contact" aria-label="Go to booking form">Book Kate</a>
           <a class="button" href="#designer" aria-label="Open menu designer">Menu Designer</a>
@@ -514,7 +514,7 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
         <button class="button" onclick="incidentAdd()">Add row</button>
         <button class="iconbtn" onclick="saveIncidents()">Save Draft</button>
       </div>
-      <blockquote class="small">Refusal script: “For your safety, I’m not able to serve that right now. I’m happy to get you water or food, or a rideshare if you need it.”</blockquote>
+      <blockquote class="small">Refusal script: "For your safety, I'm not able to serve that right now. I'm happy to get you water or food, or a rideshare if you need it."</blockquote>
     </section>
 
     <!-- MARKETING -->
@@ -527,7 +527,7 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
         </div>
       </div>
       <h3>Brand Bio</h3>
-      <p>Hi, I’m Kate — lead bartender behind <b data-bind="brand">Velvet Hour Events</b>. I craft menus that match your vibe and run a calm, safe bar that stays on schedule. Certified, insured, detail-obsessed.</p>
+      <p>Hi, I'm Kate — lead bartender behind <b data-bind="brand">Velvet Hour Events</b>. I craft menus that match your vibe and run a calm, safe bar that stays on schedule. Certified, insured, detail-obsessed.</p>
       <h3>Instagram Bio (120–150 chars)</h3>
       <pre class="small">Premium bartending · weddings & parties · certified + insured · signature cocktails · Charlotte, NC · Inquire ↓</pre>
       <h3>Outreach Scripts</h3>
@@ -1017,6 +1017,8 @@ function logRequest(e){
 /* ===== Print section ===== */
 function printSection(id){
   const clone=$('#'+id).cloneNode(true);
+  // Remove no-print elements from the clone
+  $$('.no-print', clone).forEach(el => el.remove());
   const w=window.open('','_blank');
   w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Print — ${id}</title>
   <style>body{font-family:${getComputedStyle(document.body).fontFamily}; color:#222; margin:20px}
@@ -1063,6 +1065,28 @@ function renderPayments(){
   box.innerHTML = arr.slice().reverse().map(p=>`<div>• ${p.ts.split('T')[0]} — <b>${p.id}</b> — $${p.amount.toFixed(2)} — ${p.method} — Inv #${p.invoice} — ${p.name}</div>`).join('');
 }
 
+/* ===== Marketing functions ===== */
+function downloadCalendar(){
+  const rows = [
+    ["Week","Platform","Content","Hashtags"],
+    ["1","Instagram","Behind the scenes: Menu creation process","#Bartending #EventPlanning #Mixology"],
+    ["2","Instagram","Signature cocktail showcase","#Cocktails #Drinks #BartenderLife"],
+    ["3","Facebook","Client testimonial feature","#Events #WeddingBartender #CharlotteEvents"]
+  ];
+  const csv = rows.map(r => r.join(',')).join('\n');
+  download('content_calendar.csv', csv, 'text/csv');
+  toast('Content calendar downloaded', 'ok');
+}
+
+function copyRateSheet(){
+  const text = $('#rateSheet').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    toast('Rate sheet copied to clipboard', 'ok');
+  }).catch(() => {
+    toast('Failed to copy rate sheet', 'warn');
+  });
+}
+
 /* ===== Close panels on ESC + focus trap ===== */
 document.addEventListener('keydown', (e)=>{
   if(e.key==='Escape'){ [adminPanel, payPanel].forEach(p=> p && p.dataset.open==="true" && closePanel(p)); }
@@ -1095,6 +1119,12 @@ const obs=new IntersectionObserver((entries)=>{
   });
 },{rootMargin:'-50% 0px -40% 0px', threshold:.01});
 sections.forEach(s=>obs.observe(s));
+
+// Initialize the menu designer on page load
+document.addEventListener('DOMContentLoaded', () => {
+  renderMenu();
+  invoiceCalc();
+});
 </script>
 </body>
 </html>
