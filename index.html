@@ -1,935 +1,826 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Velvet Hour Events — All-in-One Premium Bartending Kit</title>
-<meta name="description" content="Premium bartending by Kate. SPA toolkit with public tabs and advanced admin-only tabs (after PIN).">
-<meta name="theme-color" content="#120d12">
-<meta property="og:title" content="Velvet Hour Events — Premium Bartending by Kate">
-<meta property="og:description" content="Signature cocktails, safe service, luxe design.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%23EBCB8B' offset='0'/><stop stop-color='%23E68FA0' offset='1'/></linearGradient></defs><rect width='100%' height='100%' fill='%23130f16'/><circle cx='280' cy='420' r='260' fill='url(%23g)' fill-opacity='.22'/><circle cx='900' cy='230' r='180' fill='url(%23g)' fill-opacity='.18'/><text x='90' y='360' fill='white' font-family='Inter,Segoe UI,Arial' font-size='60' font-weight='800'>Velvet Hour Events</text><text x='90' y='420' fill='white' font-family='Inter,Segoe UI,Arial' font-size='32' opacity='.85'>Premium Bartending by Kate</text></svg>">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23EBCB8B'/%3E%3Cstop offset='1' stop-color='%23E68FA0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='12' width='64' height='64' fill='%23130f16'/%3E%3Cpath d='M20 46c4-6 10-9 12-9s8 3 12 9' fill='none' stroke='url(%23g)' stroke-width='3.5' stroke-linecap='round'/%3E%3Cpath d='M21 31h22M24 31l-2-10a4 4 0 014-5h12a4 4 0 014 5l-2 10' stroke='%23fff' stroke-linecap='round' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velvet Hour Events — Premium Bartending Services</title>
+    <meta name="description" content="Premium mobile bartending by Kate. Signature cocktails, safe service, luxe design. Certified & insured.">
+    <meta name="theme-color" content="#120d12">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Velvet Hour Events — Premium Bartending by Kate">
+    <meta property="og:description" content="Signature cocktails, safe service, luxe design.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%23EBCB8B' offset='0'/><stop stop-color='%23E68FA0' offset='1'/></linearGradient></defs><rect width='100%' height='100%' fill='%23130f16'/><circle cx='280' cy='420' r='260' fill='url(%23g)' fill-opacity='.22'/><circle cx='900' cy='230' r='180' fill='url(%23g)' fill-opacity='.18'/><text x='90' y='360' fill='white' font-family='Inter,Segoe UI,Arial' font-size='60' font-weight='800'>Velvet Hour Events</text><text x='90' y='420' fill='white' font-family='Inter,Segoe UI,Arial' font-size='32' opacity='.85'>Premium Bartending by Kate</text></svg>">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Velvet Hour Events",
+      "description": "Premium mobile bartending by Kate. Signature menus, safe service, luxe presentation. Certified & insured.",
+      "areaServed": "Charlotte, NC and Carolinas",
+      "email": "hello@velvethourevents.com",
+      "telephone": "(704) 000-0000",
+      "url": "https://example.invalid/velvet-hour",
+      "sameAs": []
+    }
+    </script>
+    
+    <style>
+        /* ===== CSS VARIABLES & RESET ===== */
+        :root {
+            /* Colors */
+            --bg-primary: #130f16;
+            --bg-secondary: #1a1520;
+            --bg-card: rgba(26, 21, 32, 0.8);
+            --text-primary: #f9f7fb;
+            --text-secondary: #d6cfdf;
+            --text-muted: #bcb1cd;
+            --border-color: rgba(255, 255, 255, 0.14);
+            
+            /* Brand Colors */
+            --gold: #EBCB8B;
+            --rose: #E68FA0;
+            --violet: #b7a0ff;
+            
+            /* Status Colors */
+            --success: #60d394;
+            --warning: #ffb860;
+            --error: #ff6c6c;
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+            --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.2);
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            
+            /* Typography */
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-md: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 1.875rem;
+            --font-size-4xl: 2.25rem;
+            
+            /* Layout */
+            --header-height: 70px;
+            --container-max-width: 1200px;
+            --sidebar-width: 280px;
+        }
 
-<style>
-:root{
-  --bg:#130f16; --ink:#f9f7fb; --muted:#d6cfdf; --muted-strong:#bcb1cd; --card:#1a1520; --edge:rgba(255,255,255,.14);
-  --gold:#EBCB8B; --rose:#E68FA0; --violet:#b7a0ff;
-  --ok:#60d394; --warn:#ffb860; --err:#ff6c6c;
-  --radius:20px; --pad:22px; --shadow:0 28px 70px rgba(10,6,12,.48);
-  --font: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
-  --focus: color-mix(in oklab, var(--gold) 70%, white 30%);
-  --nav-h:64px;
-}
-@media (prefers-color-scheme: light){
-  :root{ --bg:#fbfafc; --card:#ffffff; --ink:#191720; --muted:#5e5a70; --edge:#ece7f0; --shadow:none }
-}
-[data-theme="champagne"]{ --bg:#fbfafc; --card:#ffffff; --ink:#191720; --muted:#5e5a70; --edge:#ece7f0; --gold:#b88a44; --rose:#c06072; --shadow:none }
-[data-theme="botanical"]{ --bg:#0f1512; --card:#111a15; --ink:#eaf6ef; --muted:#a3c2b1; --edge:rgba(255,255,255,.12); --gold:#9fe4b3; --rose:#c1ffea; }
+        /* Light theme */
+        [data-theme="light"] {
+            --bg-primary: #fbfafc;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255, 255, 255, 0.9);
+            --text-primary: #191720;
+            --text-secondary: #5e5a70;
+            --text-muted: #8a8499;
+            --border-color: #ece7f0;
+            --gold: #b88a44;
+            --rose: #c06072;
+        }
 
-*{box-sizing:border-box}
-html,body{height:100%}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  background:
-    radial-gradient(1200px 800px at 15% -10%, #20182a, transparent 60%),
-    radial-gradient(900px 600px at 120% 10%, #2a1b24, transparent 40%),
-    var(--bg);
-  color:var(--ink); font-family:var(--font); line-height:1.6; -webkit-font-smoothing:antialiased;
-}
-.container{max-width:1180px; margin:0 auto; padding:28px 20px}
-.card{background:color-mix(in oklab, var(--card) 92%, black 8%); border:1px solid var(--edge); border-radius:var(--radius); padding:var(--pad); box-shadow:var(--shadow)}
-h1,h2,h3{margin:0 0 12px}
-h1{font-size:clamp(28px, 4vw, 36px); letter-spacing:.2px}
-.small{color:var(--muted); font-size:13.5px}
-hr{border:0; border-top:1px solid var(--edge); margin:12px 0}
-a{color:inherit; text-decoration:none}
-a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
-  outline:2px solid var(--focus); outline-offset:3px; border-radius:10px
-}
+        /* Reset & Base Styles */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-/* Nav */
-.nav{position:sticky; top:12px; height:var(--nav-h); backdrop-filter:saturate(1.1) blur(10px); -webkit-backdrop-filter:saturate(1.1) blur(10px);
-  z-index:60; margin:-6px -6px 20px; padding:10px 14px; display:flex; gap:14px; align-items:center; flex-wrap:wrap;
-  border:1px solid var(--edge); border-radius:16px; background:color-mix(in oklab, var(--bg) 80%, black 20%);}
-.wordmark{font-weight:900; letter-spacing:.2px; font-size:22px; background:linear-gradient(92deg,var(--gold),var(--rose),var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent}
-.badge{font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid var(--edge); color:var(--muted); display:flex; gap:6px; align-items:center}
-.nav a{padding:8px 10px; border-radius:10px}
-.nav a[aria-current="page"]{background:color-mix(in oklab, var(--gold) 16%, transparent 84%); color:var(--ink)}
-.nav .spacer{flex:1}
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
 
-/* Admin dropdown */
-.menu-wrap{position:relative}
-#adminMenuBtn{min-height:40px}
-.menu{position:absolute; right:0; top:calc(100% + 8px); min-width:260px;
-  background:color-mix(in oklab, var(--card) 96%, black 4%); border:1px solid var(--edge); border-radius:12px; box-shadow:var(--shadow); padding:6px; z-index:70}
-.menu[hidden]{display:none}
-.menu h4{font-size:12px; margin:6px 8px; color:var(--muted-strong)}
-.menu ul{list-style:none; padding:0; margin:0}
-.menu li{margin:0}
-.menu button.menuitem{all:unset; display:flex; align-items:center; gap:8px; width:100%; padding:10px 12px; border-radius:10px; cursor:pointer}
-.menu button.menuitem:hover, .menu button.menuitem:focus-visible{background:color-mix(in oklab, var(--gold) 15%, transparent 85%)}
-.menu .sep{height:1px; margin:6px; background:var(--edge); border-radius:1px}
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: 
+                radial-gradient(1200px 800px at 15% -10%, #20182a, transparent 60%),
+                radial-gradient(900px 600px at 120% 10%, #2a1b24, transparent 40%),
+                var(--bg-primary);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-/* Layout helpers */
-.grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
-.grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
-.grid-admin{display:grid; grid-template-columns:1.25fr .75fr; gap:16px}
-.sticky{position:sticky; top:calc(var(--nav-h) + 28px)}
-@media (max-width:1100px){ .grid-admin{grid-template-columns:1fr} .sticky{position:static} }
-@media (max-width:900px){ .grid-3{grid-template-columns:1fr} .grid-2{grid-template-columns:1fr}}
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.2;
+            margin-bottom: var(--space-md);
+            font-weight: 700;
+        }
 
-/* Components */
-.menu-card{width:100%; max-width:620px; margin:0 auto; border-radius:22px; border:1px solid var(--edge);
-  background: conic-gradient(from 200deg at 50% 30%, color-mix(in oklab,var(--gold) 18%, transparent 82%), transparent 42% 58%, color-mix(in oklab,var(--rose) 16%, transparent 84%) 100%), color-mix(in oklab, var(--card) 92%, black 8%);
-  padding:26px; box-shadow:var(--shadow)}
-.menu-card .title{font-size:30px; font-weight:900; text-align:center; margin-bottom:6px}
-.menu-card .subtitle{font-size:13px; color:var(--muted); text-align:center; margin-bottom:16px}
-.menu-item{margin:10px 0}
-.menu-note{font-size:12px; opacity:.9; text-align:center; margin-top:10px}
+        h1 {
+            font-size: var(--font-size-4xl);
+        }
 
-table{width:100%; border-collapse:collapse}
-th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; vertical-align:top}
-.sig-pad{border:1px solid var(--edge); border-radius:12px; background:color-mix(in oklab, var(--bg) 72%, black 28%); width:100%; height:180px}
+        h2 {
+            font-size: var(--font-size-3xl);
+        }
 
-/* Forms & buttons */
-select, input[type="text"], input[type="email"], input[type="number"], input[type="date"], textarea{
-  width:100%; padding:12px 12px; border-radius:12px; border:1px solid var(--edge);
-  background:color-mix(in oklab, var(--bg) 70%, black 30%); color:var(--ink); outline:none;
-}
-label{font-weight:600; font-size:13px; color:var(--muted-strong)}
-.iconbtn, .button{font-weight:600; cursor:pointer}
-.iconbtn{display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border:1px solid var(--edge); border-radius:12px; background:color-mix(in oklab, var(--bg) 70%, black 30%); min-height:40px}
-.button{display:inline-flex; gap:8px; align-items:center; padding:12px 16px; border-radius:12px; border:1px solid var(--edge);
-  background:linear-gradient(90deg, color-mix(in oklab, var(--gold) 40%, transparent 60%), color-mix(in oklab, var(--rose) 35%, transparent 65%));
-  color:var(--ink); transition:transform .06s ease, box-shadow .12s ease; min-height:44px}
-.button:hover{transform:translateY(-1px); box-shadow:0 6px 20px rgba(0,0,0,.18)}
-.stat{display:flex; align-items:center; justify-content:space-between; gap:8px; padding:10px 12px; border:1px dashed var(--edge); border-radius:12px}
+        h3 {
+            font-size: var(--font-size-2xl);
+        }
 
-/* Toasts & panels */
-.toast-wrap{position:fixed; bottom:18px; left:50%; transform:translateX(-50%); z-index:90}
-.toast{background:color-mix(in oklab, var(--card) 95%, black 5%); border:1px solid var(--edge); border-radius:12px; padding:10px 14px; margin-top:10px; min-width:220px}
-.toast.ok{border-color:color-mix(in oklab,var(--ok) 40%, var(--edge) 60%)}
-.toast.warn{border-color:color-mix(in oklab,var(--warn) 40%, var(--edge) 60%)}
-.panel{position:fixed; top:0; right:0; width:420px; max-width:100%; height:100%; background:color-mix(in oklab, var(--card) 95%, black 5%); border-left:1px solid var(--edge); box-shadow:var(--shadow); transform:translateX(100%); transition:transform .2s ease; z-index:80; display:flex; flex-direction:column}
-.panel[data-open="true"]{transform:none}
-.panel header{display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--edge)}
-.panel .content{padding:16px; overflow:auto}
+        p {
+            margin-bottom: var(--space-md);
+        }
 
-@media print{ .nav,.no-print{display:none!important} .card{box-shadow:none; border-color:#ddd} body{background:#fff; color:#222} }
-:focus-visible{outline:2px solid var(--focus); outline-offset:3px; border-radius:8px}
-</style>
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
 
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LocalBusiness","name":"Velvet Hour Events","description":"Premium mobile bartending by Kate. Signature menus, safe service, luxe presentation. Certified & insured.","areaServed":"Charlotte, NC and Carolinas","email":"hello@velvethourevents.com","telephone":"(704) 000-0000","url":"https://example.invalid/velvet-hour","sameAs":[]}
-</script>
+        /* Layout */
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .section {
+            padding: var(--space-2xl) 0;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+            transition: all var(--transition-normal);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: var(--font-size-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: none;
+            outline: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--rose));
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--gold);
+        }
+
+        /* Navigation */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(19, 15, 22, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            height: var(--header-height);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .logo {
+            font-size: var(--font-size-xl);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gold), var(--rose), var(--violet));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-lg);
+            align-items: center;
+        }
+
+        .nav-link {
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(235, 203, 139, 0.1);
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: var(--space-2xl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(235, 203, 139, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(230, 143, 160, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: var(--space-md);
+            background: linear-gradient(135deg, var(--text-primary), var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: var(--font-size-lg);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto var(--space-xl);
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            gap: var(--space-lg);
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: var(--space-sm);
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-md);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: var(--font-size-md);
+            transition: all var(--transition-fast);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(235, 203, 139, 0.2);
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .text-muted { color: var(--text-muted); }
+        .mt-1 { margin-top: var(--space-sm); }
+        .mt-2 { margin-top: var(--space-md); }
+        .mt-3 { margin-top: var(--space-lg); }
+        .mb-1 { margin-bottom: var(--space-sm); }
+        .mb-2 { margin-bottom: var(--space-md); }
+        .mb-3 { margin-bottom: var(--space-lg); }
+        .hidden { display: none; }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Loading States */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--gold);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            bottom: var(--space-lg);
+            right: var(--space-lg);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .toast {
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
+            animation: slideIn 0.3s ease;
+        }
+
+        .toast.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .toast.error {
+            border-left: 4px solid var(--error);
+        }
+
+        .toast.warning {
+            border-left: 4px solid var(--warning);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: var(--space-xl) 0;
+            }
+            
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            .card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            
+            body {
+                background: #fff;
+                color: #222;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="toast-wrap" aria-live="polite" aria-atomic="true"></div>
+    <!-- Toast Container -->
+    <div class="toast-container" aria-live="polite" aria-atomic="true"></div>
 
-  <div class="container">
-    <nav class="nav" role="navigation" aria-label="Primary">
-      <div class="wordmark" data-bind="brand">Velvet Hour Events</div>
-
-      <span class="badge">Theme
-        <select id="themePick" aria-label="Theme">
-          <option value="velvet" selected>Velvet</option>
-          <option value="champagne">Champagne</option>
-          <option value="botanical">Botanical</option>
-        </select>
-      </span>
-
-      <span class="badge" id="modeChip" title="Current view">Mode: User</span>
-
-      <div id="navLinks" style="display:flex; gap:8px; flex-wrap:wrap"></div>
-
-      <div class="spacer"></div>
-
-      <div class="menu-wrap">
-        <button id="adminMenuBtn" class="iconbtn" aria-haspopup="menu" aria-expanded="false" aria-controls="adminMenu" title="Admin">Admin ▾</button>
-        <div id="adminMenu" class="menu" role="menu" hidden></div>
-      </div>
-    </nav>
-
-    <main id="app" aria-live="polite" aria-busy="false"></main>
-
-    <footer class="small">&copy; 2025 <span data-bind="brand">Velvet Hour Events</span> — <span data-bind="city">Charlotte, NC</span></footer>
-  </div>
-
-  <!-- PIN -->
-  <section id="pinPanel" class="panel" role="dialog" aria-modal="true" aria-labelledby="pinTitle" aria-hidden="true">
-    <header><h3 id="pinTitle">Admin Access</h3><button class="iconbtn" id="closePin" aria-label="Close">✖</button></header>
-    <div class="content">
-      <p class="small">Enter Admin PIN to reveal admin-only tabs on this device (demo only).</p>
-      <p><label>PIN<br><input id="pinInput" type="password" placeholder="0000"></label></p>
-      <p><label><input id="rememberAdmin" type="checkbox"> Remember admin on this device</label></p>
-      <div style="display:flex; gap:8px">
-        <button class="button" id="confirmPin">Unlock Admin</button>
-        <button class="iconbtn" id="resetPin">Reset PIN to 0000</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Payment -->
-  <section id="payPanel" class="panel" role="dialog" aria-modal="true" aria-labelledby="payTitle" aria-hidden="true">
-    <header><h3 id="payTitle">Demo Payment</h3><button class="iconbtn" id="closePay" aria-label="Close">✖</button></header>
-    <div class="content">
-      <p class="small">Demo only — logs locally.</p>
-      <p><label>Name on Card<br><input id="pay_name" placeholder="Client Name"></label></p>
-      <div class="grid-2">
-        <p><label>Amount<br><input id="pay_amount" type="number" min="0" step="0.01"></label></p>
-        <p><label>Method<br><select id="pay_method"><option>Card</option><option>ACH</option><option>Cash</option></select></label></p>
-      </div>
-      <div style="display:flex; gap:8px">
-        <button class="button" id="confirmPay">Confirm Payment</button>
-        <button class="iconbtn" id="fillInvoiceAmt">Use Invoice Total</button>
-      </div>
-      <p class="small" id="payNotice"></p>
-    </div>
-  </section>
-
-<script>
-/* ========== Utils ========== */
-const $=(q,p=document)=>p.querySelector(q), $$=(q,p=document)=>[...p.querySelectorAll(q)];
-function toast(msg,type='ok'){ const d=document.createElement('div'); d.className=`toast ${type}`; d.textContent=msg; $('.toast-wrap').appendChild(d); setTimeout(()=>d.remove(),3200); }
-function download(filename,data,type='application/json'){ const blob=new Blob([data],{type}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=filename; a.click(); }
-function openPanel(p){ p.dataset.open="true"; p.setAttribute('aria-hidden','false'); p.querySelector('header button').focus(); }
-function closePanel(p){ p.dataset.open="false"; p.setAttribute('aria-hidden','true'); }
-
-/* Theme */
-const themePick=$('#themePick');
-function applyTheme(v){ if(v==='champagne') document.body.setAttribute('data-theme','champagne'); else if(v==='botanical') document.body.setAttribute('data-theme','botanical'); else document.body.removeAttribute('data-theme'); localStorage.setItem('vh_theme',v); }
-themePick.addEventListener('change',e=>applyTheme(e.target.value)); applyTheme(localStorage.getItem('vh_theme')||'velvet'); themePick.value=localStorage.getItem('vh_theme')||'velvet';
-
-/* Brand */
-const BRAND_DEFAULT={brand:"Velvet Hour Events", email:"hello@velvethourevents.com", phone:"(704) 000-0000", city:"Charlotte, NC"};
-let BRAND; try{ BRAND=JSON.parse(localStorage.getItem('vh_brand'))||{...BRAND_DEFAULT}; }catch{ BRAND={...BRAND_DEFAULT}; }
-function applyBrand(){ $$('[data-bind="brand"]').forEach(el=>el.textContent=BRAND.brand); $$('[data-bind="email"]').forEach(el=>el.textContent=BRAND.email); $$('[data-bind="phone"]').forEach(el=>el.textContent=BRAND.phone); $$('[data-bind="city"]').forEach(el=>el.textContent=BRAND.city); }
-applyBrand();
-
-/* Admin gating */
-const ADMIN_FLAG='vh_is_admin', REMEMBER_FLAG='vh_admin_remember', PIN_KEY='vh_admin_pin';
-function storageForState(){ return (localStorage.getItem(REMEMBER_FLAG)==='1') ? localStorage : sessionStorage; }
-function isAdmin(){ try{ return storageForState().getItem(ADMIN_FLAG)==='1'; }catch{ return false; } }
-function setAdmin(on){
-  localStorage.removeItem(ADMIN_FLAG); sessionStorage.removeItem(ADMIN_FLAG);
-  storageForState().setItem(ADMIN_FLAG,on?'1':'0');
-  $('#modeChip').textContent = `Mode: ${on?'Admin':'User'}`;
-  renderNav(); renderRoute(location.hash||firstUserRoute()); renderAdminMenu();
-}
-$('#closePin').addEventListener('click', ()=> closePanel($('#pinPanel')));
-$('#confirmPin').addEventListener('click', ()=>{
-  const pin=$('#pinInput').value; const saved=localStorage.getItem(PIN_KEY) ?? '0000';
-  localStorage.setItem(REMEMBER_FLAG, $('#rememberAdmin').checked?'1':'0');
-  if(pin===saved){ setAdmin(true); closePanel($('#pinPanel')); toast('Admin unlocked'); } else toast('Incorrect PIN','warn');
-});
-$('#resetPin').addEventListener('click', ()=>{ localStorage.setItem(PIN_KEY,'0000'); toast('PIN reset to 0000'); });
-
-/* Admin menu */
-const adminBtn=$('#adminMenuBtn'), adminMenu=$('#adminMenu'); let menuOpen=false;
-function renderAdminMenu(){
-  const a=isAdmin();
-  const wrap=document.createElement('div');
-  wrap.innerHTML = a ? `
-    <h4>Admin Shortcuts</h4>
-    <ul>
-      <li><button class="menuitem" role="menuitem" data-jump="#contract">Contract</button></li>
-      <li><button class="menuitem" role="menuitem" data-jump="#invoice">Invoice</button></li>
-      <li><button class="menuitem" role="menuitem" data-jump="#checklists">Checklists</button></li>
-      <li><button class="menuitem" role="menuitem" data-jump="#marketing">Marketing</button></li>
-    </ul>
-    <div class="sep"></div>
-    <h4>Data</h4>
-    <ul>
-      <li><button class="menuitem" role="menuitem" id="exportAllBtn">Export All</button></li>
-      <li><label class="menuitem" role="menuitem" style="cursor:pointer">
-        <input id="importAllInput" type="file" hidden accept="application/json">Import All…
-      </label></li>
-    </ul>
-    <div class="sep"></div>
-    <ul><li><button class="menuitem" role="menuitem" id="adminSignOut">Sign out</button></li></ul>
-  ` : `
-    <h4>Admin</h4>
-    <ul>
-      <li><button class="menuitem" role="menuitem" id="adminUnlock">Unlock Admin</button></li>
-      <li><button class="menuitem" role="menuitem" id="adminResetPin">Reset PIN to 0000</button></li>
-    </ul>
-  `;
-  adminMenu.innerHTML=wrap.innerHTML;
-
-  if(a){
-    adminMenu.querySelectorAll('[data-jump]').forEach(b=> b.addEventListener('click', ()=>{ closeAdminMenu(); location.hash=b.getAttribute('data-jump'); }));
-    $('#exportAllBtn',adminMenu)?.addEventListener('click', exportAll);
-    $('#importAllInput',adminMenu)?.addEventListener('change', importAll);
-    $('#adminSignOut',adminMenu)?.addEventListener('click', ()=>{ localStorage.removeItem(ADMIN_FLAG); sessionStorage.removeItem(ADMIN_FLAG); localStorage.removeItem(REMEMBER_FLAG); setAdmin(false); toast('Signed out','warn'); closeAdminMenu(); });
-  } else {
-    $('#adminUnlock',adminMenu)?.addEventListener('click', ()=>{ openPanel($('#pinPanel')); closeAdminMenu(); });
-    $('#adminResetPin',adminMenu)?.addEventListener('click', ()=>{ localStorage.setItem(PIN_KEY,'0000'); toast('PIN reset to 0000'); closeAdminMenu(); });
-  }
-}
-function openAdminMenu(){ if(menuOpen) return; adminMenu.hidden=false; adminBtn.setAttribute('aria-expanded','true'); menuOpen=true; adminMenu.querySelector('.menuitem')?.focus(); }
-function closeAdminMenu(){ if(!menuOpen) return; adminMenu.hidden=true; adminBtn.setAttribute('aria-expanded','false'); menuOpen=false; adminBtn.focus(); }
-adminBtn.addEventListener('click', ()=> menuOpen?closeAdminMenu():openAdminMenu());
-document.addEventListener('click', e=>{ if(menuOpen && !adminMenu.contains(e.target) && e.target!==adminBtn) closeAdminMenu(); });
-document.addEventListener('keydown', e=>{
-  if(!menuOpen) return;
-  const items=[...adminMenu.querySelectorAll('.menuitem')]; const i=items.indexOf(document.activeElement);
-  if(e.key==='Escape'){ e.preventDefault(); closeAdminMenu(); }
-  else if(e.key==='ArrowDown'){ e.preventDefault(); (items[i+1]||items[0])?.focus(); }
-  else if(e.key==='ArrowUp'){ e.preventDefault(); (items[i-1]||items[items.length-1])?.focus(); }
-  else if(e.key==='Home'){ e.preventDefault(); items[0]?.focus(); }
-  else if(e.key==='End'){ e.preventDefault(); items[items.length-1]?.focus(); }
-});
-
-/* Export/Import all */
-function exportAll(){ const dump={}; for(const k of Object.keys(localStorage)){ if(k.startsWith('vh_')) dump[k]=localStorage.getItem(k); } download('velvet_hour_backup.json', JSON.stringify(dump,null,2)); toast('Backup exported'); }
-function importAll(e){ const f=e.target.files[0]; if(!f) return; f.text().then(t=>{ try{ const obj=JSON.parse(t); for(const [k,v] of Object.entries(obj)){ if(k.startsWith('vh_')) localStorage.setItem(k,v); } toast('Backup imported'); location.reload(); }catch{ toast('Invalid backup','warn'); } }); }
-
-/* Routes & nav */
-const ROUTES={
-  '#packages':{label:'Packages',audience:'user'},
-  '#menus':{label:'Menus',audience:'user'},
-  '#designer':{label:'Designer',audience:'user'},
-  '#calculator':{label:'Calculator',audience:'user'},
-  '#contact':{label:'Book',audience:'user'},
-  '#contract':{label:'Contract',audience:'admin'},
-  '#invoice':{label:'Invoice',audience:'admin'},
-  '#checklists':{label:'Checklists',audience:'admin'},
-  '#marketing':{label:'Marketing',audience:'admin'},
-};
-function firstUserRoute(){ return '#packages'; }
-function renderNav(){ const nav=$('#navLinks'); nav.innerHTML=''; const a=isAdmin(); for(const [hash,meta] of Object.entries(ROUTES)){ if(meta.audience==='admin' && !a) continue; const link=document.createElement('a'); link.href=hash; link.textContent=meta.label; link.setAttribute('data-route',''); if(location.hash===hash) link.setAttribute('aria-current','page'); nav.appendChild(link);} }
-function setActiveLink(hash){ $$('#navLinks a').forEach(a=> a.setAttribute('aria-current', a.getAttribute('href')===hash ? 'page' : 'false')); }
-
-const app=$('#app'); const views={};
-function renderRoute(hash){
-  const a=isAdmin();
-  if(!ROUTES[hash]) hash=firstUserRoute();
-  if(ROUTES[hash].audience==='admin' && !a){ toast('Admin tab — access denied (unlock to continue)','warn'); hash=firstUserRoute(); if(location.hash!==hash) location.hash=hash; }
-  setActiveLink(hash);
-  app.setAttribute('aria-busy','true'); app.innerHTML='';
-  const frag = views[hash] ? views[hash]() : document.createTextNode('Not implemented');
-  app.appendChild(frag); app.setAttribute('aria-busy','false');
-}
-window.addEventListener('hashchange', ()=> renderRoute(location.hash||firstUserRoute()));
-
-/* Sanitizer for list markup */
-function sanitizeListHTML(html){
-  const allowed=new Set(['UL','OL','LI','B','I','STRONG','EM','SPAN']);
-  const parser=new DOMParser(); const doc=parser.parseFromString(`<div>${html}</div>`,'text/html');
-  (function scrub(node){
-    [...node.children].forEach(el=>{
-      if(!allowed.has(el.tagName)){ const frag=document.createDocumentFragment(); while(el.firstChild) frag.appendChild(el.firstChild); el.replaceWith(frag); scrub(node); }
-      else { [...el.attributes].forEach(a=>{ if(!/^class$/.test(a.name)) el.removeAttribute(a.name); }); scrub(el); }
-    });
-  })(doc.body.firstElementChild);
-  return doc.body.firstElementChild.innerHTML;
-}
-
-/* Menus default -> ensure present */
-function defaultMenuTemplates(){
-  return [
-`<ul class="menu">
-  <li><b>Signatures:</b> French 75 — gin, lemon, bubbles</li>
-  <li>Old Fashioned — bourbon, bitters, orange</li>
-  <li><b>House:</b> Gin &amp; Tonic · Vodka Soda · Paloma</li>
-  <li><b>Zero-Proof:</b> Citrus &amp; Mint Cooler</li>
-</ul>`,
-`<ul class="menu">
-  <li><b>Signatures:</b> Strawberry Basil Smash · Cucumber Gimlet</li>
-  <li>Spritz station · Hard seltzers</li>
-  <li><b>Zero-Proof:</b> Watermelon Fizz</li>
-</ul>`,
-`<ul class="menu">
-  <li><b>Signatures:</b> Espresso Martini · Ginger Pear Whiskey</li>
-  <li>Beer/Wine only option</li>
-  <li><b>Zero-Proof:</b> Spiced Apple Fizz</li>
-</ul>`
-];}
-function ensureMenuTemplates(){
-  try{
-    const raw=localStorage.getItem('vh_menu_templates');
-    if(!raw){ localStorage.setItem('vh_menu_templates', JSON.stringify(defaultMenuTemplates())); return defaultMenuTemplates(); }
-    const arr=JSON.parse(raw);
-    if(!Array.isArray(arr) || arr.length<1){ localStorage.setItem('vh_menu_templates', JSON.stringify(defaultMenuTemplates())); return defaultMenuTemplates(); }
-    return arr;
-  }catch{ localStorage.setItem('vh_menu_templates', JSON.stringify(defaultMenuTemplates())); return defaultMenuTemplates(); }
-}
-
-/* ===== USER VIEWS ===== */
-views['#packages']=function(){
-  const v=document.createElement('section'); v.className='card';
-  v.innerHTML=`
-    <div class="grid-2">
-      <div>
-        <h1>Luxe cocktails. Calm, professional service.</h1>
-        <p class="small">Premium bartending by <b>Kate</b>, serving <span data-bind="city">${BRAND.city}</span>. Menu design, quantity planning, and safe, on-time execution with a designer's eye.</p>
-        <div style="display:flex; gap:10px; margin-top:10px">
-          <a class="button" href="#contact">Request a Quote</a>
-          <a class="iconbtn" href="#designer">Menu Designer</a>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">Velvet Hour Events</a>
+                
+                <div class="nav-links">
+                    <a href="#packages" class="nav-link">Packages</a>
+                    <a href="#menus" class="nav-link">Menus</a>
+                    <a href="#calculator" class="nav-link">Calculator</a>
+                    <a href="#contact" class="nav-link">Book</a>
+                    <button class="btn btn-secondary" id="theme-toggle">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </div>
+                
+                <button class="btn btn-secondary mobile-menu-btn no-print" aria-label="Toggle menu">
+                    <span>☰</span>
+                </button>
+            </nav>
         </div>
-        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:12px">
-          <span class="badge">TIPS/ServSafe</span>
-          <span class="badge">Liquor Liability + COI</span>
-          <span class="badge">Zero-Proof Menus</span>
-          <span class="badge">Planner-Friendly SOPs</span>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero section">
+            <div class="container">
+                <h1>Luxe Cocktails, Unforgettable Events</h1>
+                <p>Premium bartending services by Kate. Signature menus, safe service, and luxe presentation for your special occasions.</p>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary">Book Your Event</a>
+                    <a href="#packages" class="btn btn-secondary">View Packages</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packages Section -->
+        <section id="packages" class="section">
+            <div class="container">
+                <h2 class="text-center">Our Premium Packages</h2>
+                <p class="text-center text-muted mb-3">Tailored experiences for every occasion</p>
+                
+                <div class="grid grid-3">
+                    <div class="card">
+                        <h3>Essentials</h3>
+                        <p class="text-muted">Perfect for corporate events and casual gatherings</p>
+                        <ul class="package-features">
+                            <li>4-hour minimum</li>
+                            <li>1 professional bartender</li>
+                            <li>Beer, wine & classic cocktails</li>
+                            <li>Basic garnish setup</li>
+                        </ul>
+                        <div class="package-price">
+                            <span class="price">$55</span>
+                            <span class="period">/hour</span>
+                        </div>
+                        <button class="btn btn-secondary">Select Package</button>
+                    </div>
+                    
+                    <div class="card featured">
+                        <div class="featured-badge">Most Popular</div>
+                        <h3>Signature</h3>
+                        <p class="text-muted">Elevated experience with custom cocktail creations</p>
+                        <ul class="package-features">
+                            <li>4-hour minimum</li>
+                            <li>1 professional bartender</li>
+                            <li>2 signature cocktails</li>
+                            <li>Premium garnish station</li>
+                            <li>Custom menu design</li>
+                        </ul>
+                        <div class="package-price">
+                            <span class="price">$65</span>
+                            <span class="period">/hour</span>
+                        </div>
+                        <button class="btn btn-primary">Select Package</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Premier</h3>
+                        <p class="text-muted">Ultimate luxury experience for weddings and special events</p>
+                        <ul class="package-features">
+                            <li>4-hour minimum</li>
+                            <li>1-2 professional bartenders</li>
+                            <li>3+ signature cocktails</li>
+                            <li>Zero-proof menu included</li>
+                            <li>Custom signage & branding</li>
+                            <li>Premium glassware available</li>
+                        </ul>
+                        <div class="package-price">
+                            <span class="price">$85</span>
+                            <span class="period">/hour</span>
+                        </div>
+                        <button class="btn btn-secondary">Select Package</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional sections would go here -->
+        <section id="menus" class="section">
+            <div class="container">
+                <h2 class="text-center">Signature Menu Templates</h2>
+                <p class="text-center text-muted mb-3">Curated cocktail experiences for every palate</p>
+                <!-- Menu content would go here -->
+            </div>
+        </section>
+
+        <section id="calculator" class="section">
+            <div class="container">
+                <h2 class="text-center">Beverage Calculator</h2>
+                <p class="text-center text-muted mb-3">Plan your perfect bar setup</p>
+                <!-- Calculator content would go here -->
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="text-center">Book Your Event</h2>
+                <p class="text-center text-muted mb-3">Let's create something unforgettable together</p>
+                <!-- Contact form would go here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer section">
+        <div class="container">
+            <div class="grid grid-3">
+                <div>
+                    <h3>Velvet Hour Events</h3>
+                    <p class="text-muted">Premium bartending services in Charlotte, NC and surrounding areas.</p>
+                </div>
+                
+                <div>
+                    <h4>Contact</h4>
+                    <p class="text-muted">hello@velvethourevents.com</p>
+                    <p class="text-muted">(704) 000-0000</p>
+                </div>
+                
+                <div>
+                    <h4>Certifications</h4>
+                    <p class="text-muted">TIPS Certified</p>
+                    <p class="text-muted">ServSafe Alcohol</p>
+                    <p class="text-muted">Fully Insured</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom text-center mt-3">
+                <p class="text-muted">&copy; 2023 Velvet Hour Events. All rights reserved.</p>
+            </div>
         </div>
-      </div>
-      <div class="card" aria-hidden="true" style="display:flex; align-items:center; justify-content:center; border:1px dashed var(--edge)">
-        <svg width="100%" height="220" viewBox="0 0 520 220" role="img" aria-label="Decorative coupe">
-          <defs><linearGradient id="sh" x1="0" y="0" x2="1" y2="1"><stop offset="0" stop-color="#EBCB8B"/><stop offset="1" stop-color="#E68FA0"/></linearGradient></defs>
-          <path d="M30 30h460c0 60-90 100-230 100S30 90 30 30z" fill="url(#sh)" fill-opacity=".18" stroke="url(#sh)" stroke-opacity=".6" stroke-width="2"/>
-          <rect x="250" y="130" width="20" height="40" rx="8" fill="#f6f1f9" opacity=".5"/>
-          <rect x="230" y="170" width="60" height="10" rx="5" fill="#f6f1f9" opacity=".4"/>
-        </svg>
-      </div>
-    </div>
-    <hr>
-    <h2>Packages</h2>
-    <div class="grid-3">
-      <div class="card"><h3>Essentials</h3><div class="small">4-hr min · 1 bartender</div><div class="small">Beer & wine + classic highballs</div>
-        <div class="stat"><span>From</span><b id="pkg_essentials">${localStorage.getItem('vh_pkg_essentials')||'$55/hr'}</b></div></div>
-      <div class="card" style="border-color:rgba(235,203,139,.55)"><h3>Signature</h3><div class="small">4-hr min · 1 bartender</div><div class="small">Two signatures + tasting</div>
-        <div class="stat"><span>From</span><b id="pkg_signature">${localStorage.getItem('vh_pkg_signature')||'$65/hr'}</b></div></div>
-      <div class="card"><h3>Premier</h3><div class="small">4-hr min · 1 bartender</div><div class="small">Zero-proof menu · custom signage</div>
-        <div class="stat"><span>From</span><b id="pkg_premier">${localStorage.getItem('vh_pkg_premier')||'$85/hr'}</b></div></div>
-    </div>`;
-  return v;
-};
+    </footer>
 
-views['#menus']=function(){
-  const [m1,m2,m3]=ensureMenuTemplates();
-  const v=document.createElement('section'); v.className='card';
-  v.innerHTML=`
-    <div style="display:flex; align-items:center; justify-content:space-between; gap:10px">
-      <h2>Menu Templates</h2>
-      <div class="no-print" style="display:flex; gap:8px">
-        ${isAdmin()?'<a class="iconbtn" href="#marketing" title="Edit templates in Marketing">Edit Templates</a>':''}
-        <button class="button" id="printMenus">Print</button>
-      </div>
-    </div>
-    <div class="grid-3">
-      <div class="card">${sanitizeListHTML(m1)}</div>
-      <div class="card">${sanitizeListHTML(m2)}</div>
-      <div class="card">${sanitizeListHTML(m3)}</div>
-    </div>`;
-  $('#printMenus',v).addEventListener('click', ()=> printNode(v, 'Menus'));
-  return v;
-};
-
-views['#designer']=function(){
-  const v=document.createElement('section'); v.className='card';
-  v.innerHTML=`
-    <div style="display:flex; align-items:center; justify-content:space-between; gap:10px">
-      <h2>Menu Designer (Print-ready)</h2>
-      <div class="no-print" style="display:flex; gap:8px">
-        <button class="button" id="btnPreview">Preview</button>
-        <button class="button" id="btnPrint">Print Card</button>
-      </div>
-    </div>
-    <p class="small">Public tool for clients/planners. No admin data needed.</p>
-    <div class="grid-2">
-      <div>
-        <div class="grid-2">
-          <p><label>Event Name<br><input id="m_event" placeholder="Ava & Noah — 10·19·25"></label></p>
-          <p><label>Subtitle<br><input id="m_sub" placeholder="Signature Cocktails + Zero-Proof"></label></p>
-        </div>
-        <p><label>Signature #1<br><input id="m_s1" value="French 75 — gin, lemon, bubbles"></label></p>
-        <p><label>Signature #2<br><input id="m_s2" value="Old Fashioned — bourbon, bitters, orange"></label></p>
-        <p><label>House Staples (comma)<br><input id="m_house" value="Gin & Tonic, Vodka Soda, Paloma"></label></p>
-        <p><label>Zero-Proof<br><input id="m_zero" value="Citrus & Mint Cooler"></label></p>
-        <div class="grid-3">
-          <p><label>Accent Style<br><select id="m_style"><option value="velvet">Velvet Luxe</option><option value="minimal">Minimal</option><option value="lively">Lively</option></select></label></p>
-          <p><label>Include note?<br><select id="m_note"><option>Yes</option><option>No</option></select></label></p>
-          <p><label>Show brand?<br><select id="m_brand"><option>Yes</option><option>No</option></select></label></p>
-        </div>
-      </div>
-      <div id="menuPreview">
-        <div class="menu-card" id="menuCard">
-          <div class="title" id="mc_title">Ava & Noah — 10·19·25</div>
-          <div class="subtitle" id="mc_sub">Signature Cocktails + Zero-Proof</div>
-          <div class="menu-item" id="mc_s1"><b>French 75</b> — gin, lemon, bubbles</div>
-          <div class="menu-item" id="mc_s2"><b>Old Fashioned</b> — bourbon, bitters, orange</div>
-          <div class="menu-item" id="mc_house"><b>House:</b> Gin & Tonic · Vodka Soda · Paloma</div>
-          <div class="menu-item" id="mc_zero"><b>Zero-Proof:</b> Citrus & Mint Cooler</div>
-          <div class="menu-note" id="mc_note">Please drink responsibly · IDs required</div>
-          <div class="menu-note" id="mc_brand">— <span data-bind="brand">${BRAND.brand}</span> —</div>
-        </div>
-      </div>
-    </div>`;
-  const tc=s=> s.replace(/^\s*([^-—–:]+)[-—–:]?\s*/,(m,n)=>`<b>${n.trim()}</b> — `);
-  function render(){
-    const t=$('#m_event',v).value||"Our Event", sub=$('#m_sub',v).value||"";
-    const s1=$('#m_s1',v).value||"", s2=$('#m_s2',v).value||"";
-    const house=$('#m_house',v).value||"", zero=$('#m_zero',v).value||"";
-    const style=$('#m_style',v).value, noteOn=$('#m_note',v).value==="Yes", brandOn=$('#m_brand',v).value==="Yes";
-    $('#mc_title',v).textContent=t; $('#mc_sub',v).textContent=sub;
-    $('#mc_s1',v).innerHTML=tc(s1); $('#mc_s2',v).innerHTML=tc(s2);
-    $('#mc_house',v).innerHTML=`<b>House:</b> ${house.split(',').map(s=>s.trim()).filter(Boolean).join(' · ')}`;
-    $('#mc_zero',v).innerHTML=`<b>Zero-Proof:</b> ${zero}`;
-    $('#mc_note',v).style.display=noteOn?'block':'none'; $('#mc_brand',v).style.display=brandOn?'block':'none';
-    const card=$('#menuCard',v);
-    card.style.background={
-      velvet:"conic-gradient(from 200deg at 50% 30%, color-mix(in oklab,var(--gold) 18%, transparent 82%), transparent 42% 58%, color-mix(in oklab,var(--rose) 16%, transparent 84%) 100%), color-mix(in oklab, var(--card) 92%, black 8%)",
-      minimal:"color-mix(in oklab, var(--card) 94%, black 6%)",
-      lively:"radial-gradient(700px 220px at 10% -30%, color-mix(in oklab,var(--violet) 24%, transparent 76%), transparent), radial-gradient(420px 200px at 90% 120%, color-mix(in oklab, var(--gold) 22%, transparent 78%), transparent), color-mix(in oklab, var(--card) 92%, black 8%)"
-    }[style]||card.style.background;
-  }
-  $('#btnPreview',v).addEventListener('click', render);
-  $('#btnPrint',v).addEventListener('click', ()=>{ render(); printNode($('#menuCard',v), 'Menu'); });
-  render();
-  return v;
-};
-
-views['#calculator']=function(){
-  const v=document.createElement('section'); v.className='card';
-  v.innerHTML=`
-    <div style="display:flex; align-items:center; justify-content:space-between">
-      <h2>Shopping Calculator</h2>
-      <div class="no-print" style="display:flex; gap:8px">
-        <button class="button" id="btnCalc">Calculate</button>
-        <button class="button" id="btnCSV">Export CSV</button>
-      </div>
-    </div>
-    <p class="small">Rule: 1.5 drinks first hour, then ~1/hr. 750ml ≈ 16 cocktails. Wine ≈ 5 pours. Beer case ≈ 24.</p>
-    <form class="grid-3">
-      <p><label>Guests<br><input id="c_guests" type="number" value="100" min="1"></label></p>
-      <p><label>Hours of Service<br><input id="c_hours" type="number" value="4" min="1"></label></p>
-      <p><label>Ice per guest (lbs)<br><input id="c_ice" type="number" value="1.5" step="0.1"></label></p>
-      <p><label>% Cocktails<br><input id="c_pc" type="number" value="40" min="0" max="100"></label></p>
-      <p><label>% Beer<br><input id="c_pb" type="number" value="35" min="0" max="100"></label></p>
-      <p><label>% Wine<br><input id="c_pw" type="number" value="25" min="0" max="100"></label></p>
-      <p class="grid-2" style="grid-column:1/-1"><label>Cocktail bases (comma)<br><input id="c_bases" value="vodka, tequila, bourbon"></label></p>
-      <p class="grid-2" style="grid-column:1/-1"><label>Garnish set (comma)<br><input id="c_garn" value="lemon, lime, orange, cherry"></label></p>
-    </form>
-    <pre id="calc_out" style="white-space:pre-wrap; border:1px solid var(--edge); padding:12px; border-radius:12px; background:color-mix(in oklab, var(--bg) 70%, black 30%)" aria-live="polite"></pre>
-  `;
-  function calc(){
-    const g=+$('#c_guests',v).value||0, h=+$('#c_hours',v).value||0;
-    const pc=(+$('#c_pc',v).value||0)/100, pb=(+$('#c_pb',v).value||0)/100, pw=(+$('#c_pw',v).value||0)/100;
-    const bases=($('#c_bases',v).value||'').split(',').map(s=>s.trim()).filter(Boolean);
-    const drinksPerGuest=1.5+Math.max(h-1,0)*1.0;
-    const total=Math.round(g*drinksPerGuest);
-    const cocktails=Math.round(total*pc), beer=Math.round(total*pb), wine=Math.round(total*pw);
-    const spiritBottles=Math.ceil(cocktails/16), perBase=Math.ceil(spiritBottles/Math.max(1,bases.length));
-    const wineBottles=Math.ceil(wine/5), beerCases=Math.ceil(beer/24);
-    const ice=Math.ceil((+$('#c_ice',v).value||1.5)*g);
-    const glassware=Math.ceil(g*(h>=4?3:2));
-    const mixerLiters=(cocktails*0.75)/33.8, syrupLiters=(cocktails*0.25)/33.8, citrus=Math.ceil(cocktails*0.5/12), cherryOlive=Math.ceil(cocktails*0.5);
-    const lines=[
-      `Guests: ${g} · Hours: ${h}`,
-      `Estimated total drinks: ${total}`,
-      ``,
-      `COCKTAILS ~ ${cocktails} pours → ~${spiritBottles} × 750ml`,
-      `  Bases: ${bases.join(", ")||"choose bases"} → ~${perBase} each`,
-      `BEER ~ ${beer} pours → ~${beerCases} case(s)`,
-      `WINE ~ ${wine} glasses → ~${wineBottles} bottles`,
-      ``,
-      `MIXERS: ~${mixerLiters.toFixed(1)} L · SYRUP: ~${syrupLiters.toFixed(1)} L`,
-      `CITRUS set: ~${citrus} pieces · GARNISH (cherry/olive): ~${cherryOlive}`,
-      `ICE: ~${ice} lbs · GLASSWARE: ${glassware}`
-    ];
-    $('#calc_out',v).textContent=lines.join('\n');
-    v._calcCSV=[["Item","Qty","Unit"],
-      ["Base spirits (750ml total)",spiritBottles,"bottles"],
-      ["Beer",beerCases,"cases"],
-      ["Wine (750ml)",wineBottles,"bottles"],
-      ["Mixers",mixerLiters.toFixed(1),"L"],
-      ["Simple syrup",syrupLiters.toFixed(1),"L"],
-      ["Citrus (mixed)",citrus,"pieces"],
-      ["Cherries/olives",cherryOlive,"units"],
-      ["Ice",ice,"lbs"],
-      ["Cups/Glassware",glassware,"each"]
-    ];
-  }
-  function exportCSV(){ if(!v._calcCSV) calc(); const rows=v._calcCSV.map(r=>r.join(',')); download('shopping_list.csv', rows.join('\n'), 'text/csv'); }
-  $('#btnCalc',v).addEventListener('click', calc); $('#btnCSV',v).addEventListener('click', exportCSV); calc(); return v;
-};
-
-views['#contact']=function(){
-  const v=document.createElement('section'); v.className='card';
-  v.innerHTML=`
-    <h2>Request a Quote</h2>
-    <form id="reqForm">
-      <div class="grid-2">
-        <p><label>Name<br><input id="req_name" required placeholder="Your name"></label></p>
-        <p><label>Email<br><input id="req_email" type="email" required placeholder="${BRAND.email}"></label></p>
-      </div>
-      <div class="grid-2">
-        <p><label>Event Date<br><input id="req_date" type="date" required></label></p>
-        <p><label>Guest Count<br><input id="req_guests" type="number" min="5" required placeholder="100"></label></p>
-      </div>
-      <p><label>Venue/Address<br><input id="req_addr" required placeholder="Venue or address"></label></p>
-      <p><label>Notes<br><textarea id="req_notes" rows="4" placeholder="Tell us your vibe, must-have drinks, timelines…"></textarea></label></p>
-      <div style="display:flex; gap:10px; align-items:center" class="no-print">
-        <button class="button" type="submit">Send Request (Demo)</button>
-        <a class="iconbtn" id="mailtoBtn" href="#" aria-label="Send via email">Email</a>
-        <span class="small">Text: <span data-bind="phone">${BRAND.phone}</span></span>
-      </div>
-    </form>`;
-  function mailto(){
-    const name=$('#req_name',v).value||''; const email=$('#req_email',v).value||''; const date=$('#req_date',v).value||''; const guests=$('#req_guests',v).value||''; const addr=$('#req_addr',v).value||''; const notes=$('#req_notes',v).value||'';
-    const subject=encodeURIComponent(`Quote Request — ${name||'Event'}`); const body=encodeURIComponent(`Hi ${BRAND.brand},
-
-I'd like a quote for: ${date} · ${guests} guests
-Venue: ${addr}
-
-Notes:
-${notes}
-
-You can reach me at ${email}. Thank you!`);
-    $('#mailtoBtn',v).href=`mailto:${BRAND.email}?subject=${subject}&body=${body}`;
-  }
-  ['req_name','req_email','req_date','req_guests','req_addr','req_notes'].forEach(id=> $('#'+id,v).addEventListener('input', mailto));
-  $('#reqForm',v).addEventListener('submit', e=>{
-    e.preventDefault();
-    const rec={ id:'REQ-'+Math.random().toString(36).slice(2,8).toUpperCase(), ts:new Date().toISOString(),
-      name:$('#req_name',v).value, email:$('#req_email',v).value, date:$('#req_date',v).value,
-      guests:+$('#req_guests',v).value, addr:$('#req_addr',v).value, notes:$('#req_notes',v).value, handled:false };
-    const arr=JSON.parse(localStorage.getItem('vh_requests')||'[]'); arr.push(rec); localStorage.setItem('vh_requests', JSON.stringify(arr));
-    toast(`Request logged: ${rec.id}`); e.target.reset(); mailto();
-  });
-  mailto(); return v;
-};
-
-/* ===== ADMIN VIEWS ===== */
-function money(n){ return `$${(+n||0).toFixed(2)}`; }
-function printNode(node,title='Print'){ const w=window.open('','_blank'); w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>${title}</title><style>body{font-family:${getComputedStyle(document.body).fontFamily}; color:#222; margin:20px}.small{color:#555} table{width:100%; border-collapse:collapse} th,td{border-bottom:1px solid #ddd; padding:8px; text-align:left; vertical-align:top}.menu-card{border:1px solid #ddd; border-radius:22px; padding:26px}</style></head><body>`); w.document.body.appendChild(node.cloneNode(true)); w.document.write('</body></html>'); w.document.close(); w.focus(); w.print(); }
-
-views['#invoice']=function(){
-  const saved = ( ()=>{ try{ return JSON.parse(localStorage.getItem('vh_invoice')) || null; }catch{ return null; } })()
-    || {no:'0001', rows:[{desc:'Bartending — Signature Package', qty:4, rate:65}], tax:0, tip:15, disc:0, status:'Unpaid'};
-  const v=document.createElement('section'); v.className='card grid-admin';
-  v.innerHTML=`
-    <div>
-      <div style="display:flex; align-items:center; justify-content:space-between">
-        <h2>Invoice</h2>
-        <div class="no-print" style="display:flex; gap:8px">
-          <button class="button" id="addLine">Add Line</button>
-          <button class="iconbtn" id="printInvoice">Print</button>
-        </div>
-      </div>
-      <div class="grid-2" style="margin-top:8px">
-        <div><b data-bind="brand">${BRAND.brand}</b><br><span data-bind="city">${BRAND.city}</span><br><span data-bind="email">${BRAND.email}</span> · <span data-bind="phone">${BRAND.phone}</span></div>
-        <div><div class="small">Date: <span id="inv_date">—</span></div><div class="small">Invoice #: <input id="inv_no" style="width:140px" value="${saved.no||'0001'}"></div></div>
-      </div>
-      <hr>
-      <table id="inv_tbl"><thead><tr><th>Description</th><th style="width:90px">Qty</th><th style="width:90px">Rate</th><th style="width:110px">Amount</th></tr></thead><tbody id="inv_body"></tbody></table>
-    </div>
-    <aside class="sticky">
-      <div class="card">
-        <h3>Summary</h3>
-        <div class="stat"><span>Status</span><select id="inv_status"><option>Unpaid</option><option>Paid</option><option>Partial</option></select></div>
-        <div class="stat"><span>Subtotal</span><b id="inv_sub">$0.00</b></div>
-        <div class="stat"><span>Tax</span><input id="inv_tax" type="number" value="${saved.tax||0}" min="0" step="1" style="width:110px"></div>
-        <div class="stat"><span>Service/Tip %</span><input id="inv_tip" type="number" value="${saved.tip||0}" min="0" step="1" style="width:110px"></div>
-        <div class="stat"><span>Discount</span><input id="inv_disc" type="number" value="${saved.disc||0}" min="0" step="1" style="width:110px"></div>
-        <div class="stat"><span><b>Total</b></span><b id="inv_tot">$0.00</b></div>
-        <div style="display:flex; gap:8px; margin-top:8px">
-          <button class="button" id="openPay">Record Payment</button>
-          <button class="iconbtn" id="exportInv">Export JSON</button>
-          <label class="iconbtn">Import<input id="importInv" type="file" hidden accept="application/json"></label>
-        </div>
-      </div>
-    </aside>`;
-  const body=$('#inv_body',v);
-  function pushRow(r={desc:'Item', qty:1, rate:0}){ const tr=document.createElement('tr'); tr.innerHTML=`<td contenteditable>${r.desc||'Item'}</td><td><input type="number" value="${r.qty||0}" min="0" step="0.5"></td><td><input type="number" value="${r.rate||0}" min="0" step="1"></td><td class="amt">$0.00</td>`; body.appendChild(tr); }
-  (saved.rows||[]).forEach(pushRow);
-  function serialize(){ return { no:$('#inv_no',v).value, rows: $$('#inv_tbl tbody tr',v).map(tr=>({desc: tr.cells[0].innerText.trim(), qty:+tr.cells[1].querySelector('input').value||0, rate:+tr.cells[2].querySelector('input').value||0})), tax:+$('#inv_tax',v).value||0, tip:+$('#inv_tip',v).value||0, disc:+$('#inv_disc',v).value||0, status: $('#inv_status',v).value }; }
-  function calc(){ let sub=0; $$('#inv_tbl tbody tr',v).forEach(tr=>{ const qty=+tr.querySelector('td:nth-child(2) input').value||0; const rate=+tr.querySelector('td:nth-child(3) input').value||0; const amt=qty*rate; sub+=amt; tr.querySelector('.amt').textContent=money(amt); }); $('#inv_sub',v).textContent=money(sub); const tax=+$('#inv_tax',v).value||0, tipPct=+$('#inv_tip',v).value||0, discount=+$('#inv_disc',v).value||0; $('#inv_tot',v).textContent=money(sub + tax + (sub*(tipPct/100)) - discount); localStorage.setItem('vh_invoice', JSON.stringify(serialize())); }
-  $('#inv_status',v).value=saved.status||'Unpaid';
-  $('#addLine',v).addEventListener('click', ()=>{ pushRow(); calc(); });
-  $('#printInvoice',v).addEventListener('click', ()=> printNode(v,'Invoice'));
-  $('#openPay',v).addEventListener('click', ()=>{ $('#pay_name').value = $('#cl_name')?.value || ''; $('#pay_amount').value = $('#inv_tot',v).innerText.replace(/[^0-9.]/g,'') || '0.00'; $('#pay_method').value='Card'; $('#payNotice').textContent=''; openPanel($('#payPanel')); });
-  $('#exportInv',v).addEventListener('click', ()=> download('invoice.json', JSON.stringify(serialize(),null,2)));
-  $('#importInv',v).addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; f.text().then(t=>{ try{ const obj=JSON.parse(t); localStorage.setItem('vh_invoice', JSON.stringify(obj)); toast('Invoice imported'); renderRoute('#invoice'); }catch{ toast('Invalid JSON','warn'); }}); });
-  (function(){ const d=new Date(); const f=n=>n.toString().padStart(2,'0'); $('#inv_date',v).textContent=`${d.getFullYear()}-${f(d.getMonth()+1)}-${f(d.getDate())}`; })();
-  v.addEventListener('input', e=>{ if(e.target.matches('input')) calc(); }); calc(); return v;
-};
-
-views['#contract']=function(){
-  const saved = ( ()=>{ try{ return JSON.parse(localStorage.getItem('vh_contract'))||{}; }catch{ return {}; } })();
-  const v=document.createElement('section'); v.className='card grid-admin';
-  v.innerHTML=`
-    <div>
-      <div style="display:flex; align-items:center; justify-content:space-between">
-        <h2>Service Agreement</h2>
-        <div class="no-print" style="display:flex; gap:8px">
-          <button class="button" id="printContract">Print</button>
-          <button class="iconbtn" id="clearSigs">Clear signatures</button>
-        </div>
-      </div>
-      <div class="grid-2" style="margin-top:8px">
-        <p><label>Client<br><input id="cl_name" value="${saved.name||''}"></label></p>
-        <p><label>Event Date<br><input id="cl_date" type="date" value="${saved.date||''}"></label></p>
-      </div>
-      <div class="grid-2">
-        <p><label>Start Time<br><input id="cl_start" placeholder="5:00 PM" value="${saved.start||''}"></label></p>
-        <p><label>End Time<br><input id="cl_end" placeholder="9:00 PM" value="${saved.end||''}"></label></p>
-      </div>
-      <p><label>Venue<br><input id="cl_venue" placeholder="Venue / Address" value="${saved.venue||''}"></label></p>
-      <div class="grid-2">
-        <p><label>Quoted Total ($)<br><input id="cl_total" type="number" value="${saved.total||0}"></label></p>
-        <p><label>Retainer %<br><input id="cl_rt_pct" type="number" value="${saved.rt_pct||30}"></label></p>
-      </div>
-      <h3>Scope</h3>
-      <ul id="scopeList">
-        <li contenteditable>Bartending service; bar setup & cleanup.</li>
-        <li contenteditable>Menu per proposal; quantity planning; garnish kit & tools.</li>
-        <li contenteditable>Client supplies alcohol unless otherwise agreed in writing.</li>
-      </ul>
-      <h3>Policies</h3>
-      <ul id="policyList">
-        <li contenteditable>Retainer due upon signing; balance due 3 days prior.</li>
-        <li contenteditable>Holiday dates may be billed at 1.5×.</li>
-        <li contenteditable>IDs checked; service may be refused for safety.</li>
-      </ul>
-      <h3>Signatures</h3>
-      <div class="grid-2">
-        <div><p><b>Client Signature</b></p><canvas id="sigClient" class="sig-pad"></canvas><div class="no-print" style="display:flex; gap:8px; margin-top:8px"><button class="button" id="sigClientClear">Clear</button><button class="button" id="sigClientSave">Save</button></div></div>
-        <div><p><b>Provider — ${BRAND.brand}</b></p><canvas id="sigProvider" class="sig-pad"></canvas><div class="no-print" style="display:flex; gap:8px; margin-top:8px"><button class="button" id="sigProviderClear">Clear</button><button class="button" id="sigProviderSave">Save</button></div></div>
-      </div>
-    </div>
-    <aside class="sticky">
-      <div class="card">
-        <h3>Summary</h3>
-        <div class="stat"><span>Retainer (calc)</span><b id="retainer">$0.00</b></div>
-        <div class="stat"><span>Balance Due</span><b id="balance">$0.00</b></div>
-        <div class="stat"><span>COI required?</span><select id="coiReq"><option>No</option><option>Yes</option></select></div>
-        <div style="display:flex; gap:8px; margin-top:8px">
-          <button class="iconbtn" id="exportContract">Export JSON</button>
-          <label class="iconbtn">Import<input id="importContract" type="file" hidden accept="application/json"></label>
-        </div>
-      </div>
-    </aside>`;
-  function serialize(){ return { name:$('#cl_name',v).value, date:$('#cl_date',v).value, start:$('#cl_start',v).value, end:$('#cl_end',v).value, venue:$('#cl_venue',v).value, total:+$('#cl_total',v).value||0, rt_pct:+$('#cl_rt_pct',v).value||30, coi:$('#coiReq',v).value, scope: $$('#scopeList li',v).map(li=>li.innerText), policies: $$('#policyList li',v).map(li=>li.innerText) }; }
-  function recalc(){ const total=+$('#cl_total',v).value||0, pct=(+$('#cl_rt_pct',v).value||0)/100; const ret=total*pct, bal=total-ret; $('#retainer',v).textContent=money(ret); $('#balance',v).textContent=money(bal); localStorage.setItem('vh_contract', JSON.stringify(serialize())); }
-  function sigWire(id){ const c=$('#'+id,v), ctx=c.getContext('2d'); function resize(){ const ratio=Math.max(1,Math.floor(window.devicePixelRatio||1)); const r=c.getBoundingClientRect(); c.width=Math.floor(r.width*ratio); c.height=Math.floor(r.height*ratio); ctx.setTransform(ratio,0,0,ratio,0,0); ctx.lineWidth=2; ctx.lineCap='round'; ctx.strokeStyle='#111'; } resize(); window.addEventListener('resize',resize,{passive:true}); let d=false,lx=0,ly=0; c.addEventListener('pointerdown',e=>{d=true; const r=c.getBoundingClientRect(); lx=e.clientX-r.left; ly=e.clientY-r.top; c.setPointerCapture(e.pointerId);}); c.addEventListener('pointerup',e=>{d=false; c.releasePointerCapture?.(e.pointerId);}); c.addEventListener('pointerleave',()=>d=false); c.addEventListener('pointermove',e=>{ if(!d) return; const r=c.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top; ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(x,y); ctx.stroke(); lx=x; ly=y; }); return {clear:()=>ctx.clearRect(0,0,c.width,c.height), save:()=>{ const a=document.createElement('a'); a.href=c.toDataURL('image/png'); a.download=id+'.png'; a.click(); }}; }
-  const sigC=sigWire('sigClient'), sigP=sigWire('sigProvider');
-  $('#sigClientClear',v).addEventListener('click', sigC.clear); $('#sigProviderClear',v).addEventListener('click', sigP.clear);
-  $('#sigClientSave',v).addEventListener('click', sigC.save);   $('#sigProviderSave',v).addEventListener('click', sigP.save);
-  ['cl_total','cl_rt_pct'].forEach(id=> $('#'+id,v).addEventListener('input', recalc));
-  ['cl_name','cl_date','cl_start','cl_end','cl_venue','coiReq'].forEach(id=> $('#'+id,v).addEventListener('input', ()=> localStorage.setItem('vh_contract', JSON.stringify(serialize())) ));
-  $('#printContract',v).addEventListener('click', ()=> printNode(v,'Contract')); $('#clearSigs',v).addEventListener('click', ()=>{ sigC.clear(); sigP.clear(); }); $('#exportContract',v).addEventListener('click', ()=> download('contract.json', JSON.stringify(serialize(),null,2)));
-  $('#importContract',v).addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; f.text().then(t=>{ try{ const obj=JSON.parse(t); localStorage.setItem('vh_contract', JSON.stringify(obj)); toast('Contract imported'); renderRoute('#contract'); }catch{ toast('Invalid JSON','warn'); }}); });
-  recalc(); return v;
-};
-
-views['#checklists']=function(){
-  const saved = ( ()=>{ try{ return JSON.parse(localStorage.getItem('vh_incidents'))||[]; }catch{ return []; } })();
-  const v=document.createElement('section'); v.className='card';
-  v.innerHTML=`
-    <div style="display:flex; align-items:center; justify-content:space-between">
-      <h2>Service Checklists & Incident Log</h2>
-      <div style="display:flex; gap:8px">
-        <button class="button" id="printChk">Print</button>
-        <button class="iconbtn" id="saveInc">Save Draft</button>
-        <button class="iconbtn" id="exportInc">Export JSON</button>
-        <label class="iconbtn">Import<input id="importInc" type="file" hidden accept="application/json"></label>
-      </div>
-    </div>
-    <div class="grid-3">
-      <div class="card">
-        <h3>Pre-Event (48–72h)</h3>
-        <ul class="check pre">
-          <li><label><input type="checkbox"> Confirm headcount, menu, glassware, ice plan</label></li>
-          <li><label><input type="checkbox"> Send shopping list & quantities</label></li>
-          <li><label><input type="checkbox"> COI wording if needed</label></li>
-          <li><label><input type="checkbox"> Pack kit; label bins; confirm travel/parking</label></li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>On-Site Setup (90–120m)</h3>
-        <ul class="check setup">
-          <li><label><input type="checkbox"> Walkthrough: bar location, water, trash, power</label></li>
-          <li><label><input type="checkbox"> Station: tools, garnishes, signage, spill mats</label></li>
-          <li><label><input type="checkbox"> Safety: ID checks; incident log ready</label></li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Teardown</h3>
-        <ul class="check teardown">
-          <li><label><input type="checkbox"> Close tabs; secure alcohol per client direction</label></li>
-          <li><label><input type="checkbox"> Bag trash; wipe surfaces; inventory tools</label></li>
-          <li><label><input type="checkbox"> Thank planner/host; request testimonial</label></li>
-        </ul>
-      </div>
-    </div>
-    <div class="card" style="margin-top:12px"><div class="stat"><span>Progress</span><progress id="prog" max="100" value="0" style="width:160px; height:12px"></progress></div></div>
-    <div class="card" style="margin-top:12px">
-      <h3>Incident & Refusal Log</h3>
-      <table id="incidentTbl"><thead><tr><th>Date/Time</th><th>Name/Desc</th><th>Reason</th><th>Actions Taken</th><th>Staff</th><th class="no-print">Actions</th></tr></thead><tbody id="incidentBody"></tbody></table>
-      <div class="no-print" style="margin-top:10px; display:flex; gap:8px"><button class="button" id="addIncident">Add row</button><button class="iconbtn" id="clearInc">Clear</button></div>
-      <blockquote class="small">Refusal script: "For your safety, I'm not able to serve that right now. I'm happy to get you water or food, or a rideshare if you need it."</blockquote>
-    </div>`;
-  function prog(){ const boxes=$$('ul.check input[type="checkbox"]',v); const c=boxes.filter(b=>b.checked).length; const t=boxes.length||1; $('#prog',v).value=Math.round((c/t)*100); }
-  v.addEventListener('change', e=>{ if(e.target.matches('ul.check input[type="checkbox"]')) prog(); });
-  const body=$('#incidentBody',v);
-  function row(cols){ const tr=document.createElement('tr'); const init=cols||['','','Over-service / No ID / Aggressive / Other','Water/food · Notified planner/security · Rideshare','']; tr.innerHTML=init.slice(0,5).map(c=>`<td contenteditable>${c}</td>`).join('')+`<td class="no-print"><button class="iconbtn btnDel">✖</button></td>`; body.appendChild(tr); tr.querySelector('.btnDel').addEventListener('click', ()=>tr.remove()); }
-  (saved.length?saved:[null]).forEach(cols=>row(cols));
-  $('#addIncident',v).addEventListener('click', ()=>row());
-  $('#clearInc',v).addEventListener('click', ()=>{ body.innerHTML=''; });
-  $('#saveInc',v).addEventListener('click', ()=>{ const rows=$$('#incidentBody tr',v).map(tr=>[...tr.cells].slice(0,5).map(td=>td.innerText)); localStorage.setItem('vh_incidents', JSON.stringify(rows)); toast('Incidents saved'); });
-  $('#exportInc',v).addEventListener('click', ()=>{ const rows=$$('#incidentBody tr',v).map(tr=>[...tr.cells].slice(0,5).map(td=>td.innerText)); download('incidents.json', JSON.stringify(rows,null,2)); });
-  $('#importInc',v).addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; f.text().then(t=>{ try{ const obj=JSON.parse(t); localStorage.setItem('vh_incidents', JSON.stringify(obj)); toast('Imported'); renderRoute('#checklists'); }catch{ toast('Invalid JSON','warn'); }}); });
-  $('#printChk',v).addEventListener('click', ()=> printNode(v, 'Checklists')); prog(); return v;
-};
-
-views['#marketing']=function(){
-  const v=document.createElement('section'); v.className='card grid-admin';
-  const [m1,m2,m3]=ensureMenuTemplates();
-  v.innerHTML=`
-    <div>
-      <div style="display:flex; align-items:center; justify-content:space-between">
-        <h2>Marketing Kit</h2>
-        <div style="display:flex; gap:8px">
-          <button class="button" id="dlCalendar">Content Calendar (CSV)</button>
-          <button class="button" id="copyRate">Copy 1-pager text</button>
-        </div>
-      </div>
-
-      <h3>Brand Bio</h3>
-      <p>Hi, I'm Kate — lead bartender behind <b data-bind="brand">${BRAND.brand}</b>. I craft menus that match your vibe and run a calm, safe bar that stays on schedule. Certified, insured, detail-obsessed.</p>
-      <h3>Instagram Bio</h3>
-      <pre class="small">Premium bartending · weddings & parties · certified + insured · signature cocktails · ${BRAND.city} · Inquire ↓</pre>
-
-      <h3>Outreach Scripts</h3>
-<pre class="small">Planner/venue DM:
-Hi {{first_name}} — I run {{brand}}, a certified & insured event bartending team serving {{city/region}}.
-We handle menus, quantities, and smooth, on-time service. Can I send a 1-page rate sheet and COI?
-
-COI request (to insurer):
-Please issue a certificate naming {{Venue Name}} as additional insured for {{Event Date}}.
-Send as PDF to {{client email}} and cc ${BRAND.email}. Thank you.</pre>
-
-      <h3>Rate Sheet (copy text)</h3>
-      <pre id="rateSheet" class="small">• Essentials — from ${localStorage.getItem('vh_pkg_essentials')||'$55/hr'} (beer, wine, highballs; shopping plan; garnish kit)
-• Signature — from ${localStorage.getItem('vh_pkg_signature')||'$65/hr'} (2 signatures + tasting; elevated garnish & signage)
-• Premier — from ${localStorage.getItem('vh_pkg_premier')||'$85/hr'} (signatures + zero-proof menu; custom signage)
-• Add-ons: extra bartenders, menu boards, glassware, mobile bar.
-• TIPS/ServSafe certified. Liquor liability; COI available.
-• Service area: ${BRAND.city} + Carolinas. Inquire: ${BRAND.email} · ${BRAND.phone}</pre>
-
-      <hr>
-      <h3>Menu Templates (Admin)</h3>
-      <p class="small">Enter simple HTML lists. Allowed tags: ul/ol/li,b,i,strong,em,span.</p>
-      <div class="grid-3">
-        <p><label>Template 1<br><textarea id="ad_menu1" rows="8">${m1}</textarea></label></p>
-        <p><label>Template 2<br><textarea id="ad_menu2" rows="8">${m2}</textarea></label></p>
-        <p><label>Template 3<br><textarea id="ad_menu3" rows="8">${m3}</textarea></label></p>
-      </div>
-      <div style="margin-top:8px; display:flex; gap:8px">
-        <button class="button" id="saveMenus">Save Templates</button>
-        <button class="iconbtn" id="resetMenus">Reset to Defaults</button>
-      </div>
-
-      <hr>
-      <h3>Leads Inbox</h3>
-      <div id="leadsBox" class="small">No requests yet.</div>
-    </div>
-
-    <aside class="sticky">
-      <div class="card">
-        <h3>Brand Controls</h3>
-        <div class="grid-2">
-          <p><label>Brand<br><input id="ad_brand" value="${BRAND.brand}"></label></p>
-          <p><label>City/Region<br><input id="ad_city" value="${BRAND.city}"></label></p>
-        </div>
-        <div class="grid-2">
-          <p><label>Email<br><input id="ad_email" type="email" value="${BRAND.email}"></label></p>
-          <p><label>Phone<br><input id="ad_phone" value="${BRAND.phone}"></label></p>
-        </div>
-        <div class="grid-3">
-          <p><label>Essentials (text)<br><input id="ad_pkg_essentials" value="${localStorage.getItem('vh_pkg_essentials')||'$55/hr'}"></label></p>
-          <p><label>Signature (text)<br><input id="ad_pkg_signature" value="${localStorage.getItem('vh_pkg_signature')||'$65/hr'}"></label></p>
-          <p><label>Premier (text)<br><input id="ad_pkg_premier" value="${localStorage.getItem('vh_pkg_premier')||'$85/hr'}"></label></p>
-        </div>
-        <div style="display:flex; gap:8px; margin-top:8px">
-          <button class="button" id="saveBrand">Save Brand</button>
-          <button class="iconbtn" id="resetBrandBtn">Reset</button>
-          <button class="iconbtn" id="exportBrand">Export</button>
-          <label class="iconbtn">Import<input id="importBrand" type="file" hidden accept="application/json"></label>
-        </div>
-        <hr>
-        <h4>Payments (Demo)</h4>
-        <div id="paymentsList" class="small">No payments yet.</div>
-      </div>
-    </aside>`;
-  // Menu templates
-  $('#saveMenus',v).addEventListener('click', ()=>{
-    const vals=[$('#ad_menu1',v).value,$('#ad_menu2',v).value,$('#ad_menu3',v).value].map(sanitizeListHTML);
-    localStorage.setItem('vh_menu_templates', JSON.stringify(vals)); toast('Menu templates saved');
-  });
-  $('#resetMenus',v).addEventListener('click', ()=>{ localStorage.setItem('vh_menu_templates', JSON.stringify(defaultMenuTemplates())); toast('Templates reset'); renderRoute('#marketing'); });
-  // Leads inbox
-  function renderLeads(){
-    const box=$('#leadsBox',v); const arr=JSON.parse(localStorage.getItem('vh_requests')||'[]').slice().reverse();
-    if(!arr.length){ box.textContent='No requests yet.'; return; }
-    box.innerHTML = arr.map(r=>`
-      <div class="card" style="margin-bottom:8px">
-        <div style="display:flex; justify-content:space-between; gap:8px">
-          <div><b>${r.name||'(no name)'}</b> · ${r.email||''}</div>
-          <div class="small">${r.ts?.split('T')[0]||''} · ID ${r.id}</div>
-        </div>
-        <div class="small">Date: ${r.date||'—'} · Guests: ${r.guests||'—'} · Venue: ${r.addr||'—'}</div>
-        <div class="small" style="white-space:pre-wrap">${(r.notes||'').trim()}</div>
-        <div style="margin-top:6px; display:flex; gap:8px">
-          <button class="iconbtn btnHandled" data-id="${r.id}">${r.handled?'Handled':'Mark handled'}</button>
-          <button class="iconbtn btnCSV" data-id="${r.id}">Export CSV</button>
-        </div>
-      </div>`).join('');
-    $$('.btnHandled',v).forEach(b=> b.addEventListener('click', ()=>{
-      const id=b.getAttribute('data-id'); const arr=JSON.parse(localStorage.getItem('vh_requests')||'[]');
-      const i=arr.findIndex(x=>x.id===id); if(i>-1){ arr[i].handled=!arr[i].handled; localStorage.setItem('vh_requests', JSON.stringify(arr)); renderLeads(); }
-    }));
-    $$('.btnCSV',v).forEach(b=> b.addEventListener('click', ()=>{
-      const id=b.getAttribute('data-id'); const arr=JSON.parse(localStorage.getItem('vh_requests')||'[]'); const r=arr.find(x=>x.id===id); if(!r) return;
-      const rows=[['id','ts','name','email','date','guests','addr','notes','handled'],[r.id,r.ts,r.name,r.email,r.date,r.guests,r.addr,(r.notes||'').replace(/\n/g,' '),r.handled]];
-      download(`lead_${r.id}.csv`, rows.map(x=>x.join(',')).join('\n'), 'text/csv');
-    }));
-  }
-  renderLeads();
-  // Marketing actions
-  $('#dlCalendar',v).addEventListener('click', ()=>{ const rows=[["Week","Platform","Content","Hashtags"],["1","Instagram","Behind the scenes: Menu creation","#Bartending #EventPlanning #Mixology"],["2","Instagram","Signature cocktail showcase","#Cocktails #Drinks #BartenderLife"],["3","Facebook","Client testimonial feature","#Events #WeddingBartender #CharlotteEvents"]]; download('content_calendar.csv', rows.map(r=>r.join(',')).join('\n'), 'text/csv'); toast('Calendar downloaded'); });
-  $('#copyRate',v).addEventListener('click', ()=>{ navigator.clipboard.writeText($('#rateSheet',v).textContent).then(()=> toast('Rate sheet copied')).catch(()=> toast('Copy failed','warn')); });
-  // Brand controls
-  $('#saveBrand',v).addEventListener('click', ()=>{
-    BRAND={...BRAND, brand:$('#ad_brand',v).value.trim()||BRAND.brand, city:$('#ad_city',v).value.trim()||BRAND.city, email:$('#ad_email',v).value.trim()||BRAND.email, phone:$('#ad_phone',v).value.trim()||BRAND.phone };
-    localStorage.setItem('vh_brand', JSON.stringify(BRAND)); applyBrand();
-    localStorage.setItem('vh_pkg_essentials',$('#ad_pkg_essentials',v).value||'$55/hr');
-    localStorage.setItem('vh_pkg_signature', $('#ad_pkg_signature',v).value||'$65/hr');
-    localStorage.setItem('vh_pkg_premier',   $('#ad_pkg_premier',v).value||'$85/hr');
-    toast('Brand + rates saved');
-  });
-  $('#resetBrandBtn',v).addEventListener('click', ()=>{ BRAND={...BRAND_DEFAULT}; localStorage.setItem('vh_brand', JSON.stringify(BRAND)); applyBrand(); toast('Brand reset'); renderRoute('#marketing'); });
-  $('#exportBrand',v).addEventListener('click', ()=> download('brand.json', JSON.stringify(BRAND,null,2)));
-  $('#importBrand',v).addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; f.text().then(t=>{ try{ const obj=JSON.parse(t); BRAND={...BRAND_DEFAULT,...obj}; localStorage.setItem('vh_brand', JSON.stringify(BRAND)); applyBrand(); toast('Brand imported'); renderRoute('#marketing'); }catch{ toast('Invalid JSON','warn'); }}); });
-  // Payments
-  (function renderPayments(){ const box=$('#paymentsList',v); const arr=JSON.parse(localStorage.getItem('vh_payments')||'[]'); box.innerHTML = arr.length ? arr.slice().reverse().map(p=>`<div>• ${p.ts.split('T')[0]} — <b>${p.id}</b> — $${p.amount.toFixed(2)} — ${p.method} — Inv #${p.invoice} — ${p.name}</div>`).join('') : 'No payments yet.'; })();
-  return v;
-};
-
-/* Payment panel wiring */
-$('#closePay').addEventListener('click', ()=> closePanel($('#payPanel')));
-$('#fillInvoiceAmt').addEventListener('click', ()=>{ const t=$('#app')?.querySelector('#inv_tot')?.innerText||'$0.00'; $('#pay_amount').value=t.replace(/[^0-9.]/g,'')||'0.00'; });
-$('#confirmPay').addEventListener('click', ()=>{
-  const name=$('#pay_name').value.trim(); const amt=parseFloat($('#pay_amount').value)||0; const method=$('#pay_method').value;
-  if(!name||!amt){ toast('Name and amount required','warn'); return; }
-  const rec={ id:'PMT-'+Math.random().toString(36).slice(2,8).toUpperCase(), ts:new Date().toISOString(), name, amount:amt, method, invoice: $('#app')?.querySelector('#inv_no')?.value||'—' };
-  const arr=JSON.parse(localStorage.getItem('vh_payments')||'[]'); arr.push(rec); localStorage.setItem('vh_payments', JSON.stringify(arr));
-  $('#payNotice').textContent = `Success: ${rec.id} for $${amt.toFixed(2)} via ${method}`; toast(`Payment recorded: ${rec.id}`);
-});
-
-/* Init */
-function onLoad(){
-  if(localStorage.getItem(REMEMBER_FLAG)==='1' && localStorage.getItem(ADMIN_FLAG)==='1'){ sessionStorage.setItem(ADMIN_FLAG,'1'); }
-  $('#modeChip').textContent = `Mode: ${isAdmin()?'Admin':'User'}`;
-  ensureMenuTemplates(); // guarantees Menus content
-  renderNav(); renderAdminMenu(); renderRoute(location.hash||firstUserRoute());
-}
-document.addEventListener('DOMContentLoaded', onLoad);
-</script>
+    <script>
+        // Enhanced JavaScript with modern features
+        class VelvetHourApp {
+            constructor() {
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                this.loadThemePreference();
+                this.setupRouting();
+            }
+            
+            setupEventListeners() {
+                // Theme toggle
+                document.getElementById('theme-toggle').addEventListener('click', () => {
+                    this.toggleTheme();
+                });
+                
+                // Mobile menu
+                document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
+                    this.toggleMobileMenu();
+                });
+                
+                // Smooth scrolling for anchor links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = document.querySelector(anchor.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+            }
+            
+            toggleTheme() {
+                const currentTheme = document.body.getAttribute('data-theme') || 'dark';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                document.body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('velvet-hour-theme', newTheme);
+                
+                // Update theme icon
+                const themeIcon = document.querySelector('.theme-icon');
+                themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+                
+                this.showToast(`Switched to ${newTheme} theme`, 'success');
+            }
+            
+            loadThemePreference() {
+                const savedTheme = localStorage.getItem('velvet-hour-theme') || 'dark';
+                document.body.setAttribute('data-theme', savedTheme);
+                
+                // Set correct theme icon
+                const themeIcon = document.querySelector('.theme-icon');
+                themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+            }
+            
+            toggleMobileMenu() {
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.classList.toggle('active');
+            }
+            
+            setupRouting() {
+                // Simple client-side routing for SPA-like experience
+                window.addEventListener('hashchange', () => {
+                    this.handleRouteChange();
+                });
+                
+                // Initial route handling
+                this.handleRouteChange();
+            }
+            
+            handleRouteChange() {
+                const hash = window.location.hash || '#packages';
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === hash) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // Scroll to section
+                const targetSection = document.querySelector(hash);
+                if (targetSection) {
+                    setTimeout(() => {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                }
+            }
+            
+            showToast(message, type = 'success') {
+                const toastContainer = document.querySelector('.toast-container');
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.textContent = message;
+                
+                toastContainer.appendChild(toast);
+                
+                // Remove toast after 5 seconds
+                setTimeout(() => {
+                    toast.remove();
+                }, 5000);
+            }
+            
+            // Additional utility methods would go here
+            // For handling forms, calculations, etc.
+        }
+        
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new VelvetHourApp();
+        });
+        
+        // Add some additional CSS for the new components
+        const additionalStyles = `
+            .featured {
+                position: relative;
+                border: 2px solid var(--gold);
+                transform: scale(1.05);
+            }
+            
+            .featured-badge {
+                position: absolute;
+                top: -10px;
+                right: 20px;
+                background: var(--gold);
+                color: var(--bg-primary);
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: var(--font-size-sm);
+                font-weight: 600;
+            }
+            
+            .package-features {
+                list-style: none;
+                margin: var(--space-lg) 0;
+            }
+            
+            .package-features li {
+                padding: var(--space-sm) 0;
+                border-bottom: 1px solid var(--border-color);
+            }
+            
+            .package-features li:last-child {
+                border-bottom: none;
+            }
+            
+            .package-price {
+                text-align: center;
+                margin: var(--space-lg) 0;
+            }
+            
+            .price {
+                font-size: var(--font-size-3xl);
+                font-weight: 700;
+                color: var(--gold);
+            }
+            
+            .period {
+                color: var(--text-muted);
+            }
+            
+            @media (max-width: 768px) {
+                .featured {
+                    transform: none;
+                }
+                
+                .nav-links.active {
+                    display: flex;
+                    flex-direction: column;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    right: 0;
+                    background: var(--bg-primary);
+                    border-bottom: 1px solid var(--border-color);
+                    padding: var(--space-lg);
+                }
+            }
+        `;
+        
+        // Inject additional styles
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = additionalStyles;
+        document.head.appendChild(styleSheet);
+    </script>
 </body>
 </html>
