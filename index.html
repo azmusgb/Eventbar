@@ -115,9 +115,10 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
 </script>
 </head>
 <body data-role="user">
+  <noscript><div class="container"><div class="card">This site needs JavaScript enabled.</div></div></noscript>
   <div class="toast-wrap" aria-live="polite" aria-atomic="true"></div>
   <div class="container">
-    <!-- NAV (SPA links) -->
+    <!-- NAV -->
     <nav class="nav" role="navigation" aria-label="Primary">
       <div class="wordmark" data-bind="brand" aria-label="Brand">Velvet Hour Events</div>
 
@@ -152,7 +153,7 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
     <footer class="small">&copy; 2025 <span data-bind="brand">Velvet Hour Events</span> — <span data-bind="city">Charlotte, NC</span></footer>
   </div>
 
-  <!-- PIN Dialog (no admin UI is in DOM until validated) -->
+  <!-- PIN Dialog -->
   <section id="pinPanel" class="panel" role="dialog" aria-modal="true" aria-labelledby="pinTitle" aria-hidden="true">
     <header>
       <h3 id="pinTitle">Admin Access</h3>
@@ -166,7 +167,7 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
         <button class="button" id="confirmPin">Unlock Admin</button>
         <button class="iconbtn" id="resetPin">Reset PIN to 0000</button>
       </div>
-      <p class="small">Note: This is visibility gating for demo and local ops, not a security boundary.</p>
+      <p class="small">Note: visibility gating for demos; not a security boundary.</p>
     </div>
   </section>
 
@@ -193,15 +194,21 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
       <p class="small" id="payNotice"></p>
     </div>
   </section>
-  <script>
-/* ========= Core Utilities ========= */
+  .<script>
+/* ====== Core utilities ====== */
 const $  = (q, p=document) => p.querySelector(q);
 const $$ = (q, p=document) => [...p.querySelectorAll(q)];
 const toastWrap = $('.toast-wrap');
 function toast(msg, type='ok'){ const d=document.createElement('div'); d.className=`toast ${type}`; d.textContent=msg; toastWrap.appendChild(d); setTimeout(()=>d.remove(), 3200); }
 function download(filename, data, type='application/json'){ const blob=new Blob([data],{type}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=filename; a.click(); }
 
-/* ========= Theme ========= */
+/* ====== Panels ====== */
+function openPanel(p){ p.dataset.open="true"; p.setAttribute('aria-hidden','false'); p.querySelector('header button').focus(); }
+function closePanel(p){ p.dataset.open="false"; p.setAttribute('aria-hidden','true'); }
+$('#closePin').addEventListener('click', ()=> closePanel($('#pinPanel')));
+$('#closePay').addEventListener('click', ()=> closePanel($('#payPanel')));
+
+/* ====== Theme ====== */
 const themePick=$('#themePick');
 function applyTheme(v){
   if(v==='champagne'){document.body.setAttribute('data-theme','champagne');}
@@ -212,9 +219,10 @@ function applyTheme(v){
 themePick.addEventListener('change',e=>applyTheme(e.target.value));
 (function(){ const t=localStorage.getItem('vh_theme')||'velvet'; applyTheme(t); themePick.value=t; })();
 
-/* ========= Brand Model ========= */
+/* ====== Brand ====== */
 const BRAND_DEFAULT={brand:"Velvet Hour Events", email:"hello@velvethourevents.com", phone:"(704) 000-0000", city:"Charlotte, NC"};
-let BRAND=JSON.parse(localStorage.getItem('vh_brand')||'null')||BRAND_DEFAULT;
+let BRAND;
+try{ BRAND = JSON.parse(localStorage.getItem('vh_brand')) || {...BRAND_DEFAULT}; } catch{ BRAND={...BRAND_DEFAULT}; }
 function applyBrand(){
   $$('[data-bind="brand"]').forEach(el=>el.textContent=BRAND.brand);
   $$('[data-bind="email"]').forEach(el=>el.textContent=BRAND.email);
@@ -223,63 +231,10 @@ function applyBrand(){
 }
 applyBrand();
 
-/* ========= Admin Gating (no admin DOM until PIN) ========= */
-const ADMIN_FLAG='vh_is_admin';            // '1'/'0' in session or local depending on remember
-const REMEMBER_FLAG='vh_admin_remember';   // '1' means use localStorage (remember), else sessionStorage
-const PIN_KEY='vh_admin_pin';              // stored PIN (not secure; demo gating)
-function storageForState(){ return (localStorage.getItem(REMEMBER_FLAG)==='1') ? localStorage : sessionStorage; }
-function isAdmin(){ return storageForState().getItem(ADMIN_FLAG)==='1'; }
-function setAdmin(on){
-  localStorage.removeItem(ADMIN_FLAG); sessionStorage.removeItem(ADMIN_FLAG);
-  storageForState().setItem(ADMIN_FLAG, on?'1':'0');
-  document.body.setAttribute('data-role', on?'admin':'user');
-  $('#adminLogoutBtn').hidden = !on;
-  $('#adminLoginBtn').hidden  =  on;
-  $('#modeChip').textContent = `Mode: ${on?'Admin':'User'}`;
-  renderRoute(location.hash || '#packages'); // re-render current tab with/without admin panes
-}
-(function initAdminState(){
-  const remembered = localStorage.getItem(REMEMBER_FLAG)==='1';
-  const rememberedAdmin = localStorage.getItem(ADMIN_FLAG)==='1';
-  if(remembered && rememberedAdmin){ sessionStorage.setItem(ADMIN_FLAG,'1'); setAdmin(true); }
-  else { sessionStorage.setItem(ADMIN_FLAG,'0'); setAdmin(false); }
-  // hash quick-toggle for demo: ?admin=1
-  const params=new URLSearchParams(location.search);
-  if(params.get('admin')==='1'){ sessionStorage.setItem(ADMIN_FLAG,'1'); setAdmin(true); }
-})();
-
-/* PIN panel */
-const pinPanel = $('#pinPanel');
-$('#adminLoginBtn').addEventListener('click', ()=> openPanel(pinPanel));
-$('#adminLogoutBtn').addEventListener('click', ()=> { localStorage.removeItem(ADMIN_FLAG); sessionStorage.removeItem(ADMIN_FLAG); localStorage.removeItem(REMEMBER_FLAG); setAdmin(false); toast('Signed out of admin','warn'); });
-$('#closePin').addEventListener('click', ()=> closePanel(pinPanel));
-$('#confirmPin').addEventListener('click', ()=>{
-  const input = $('#pinInput').value;
-  const saved = localStorage.getItem(PIN_KEY) ?? '0000';
-  const remember = $('#rememberAdmin').checked ? '1' : '0';
-  localStorage.setItem(REMEMBER_FLAG, remember);
-  if(input===saved){ setAdmin(true); closePanel(pinPanel); toast('Admin unlocked','ok'); }
-  else { toast('Incorrect PIN','warn'); }
-});
-$('#resetPin').addEventListener('click', ()=>{ localStorage.setItem(PIN_KEY,'0000'); toast('PIN reset to 0000','ok'); });
-
-/* Panels / focus trap */
-function openPanel(p){ p.dataset.open="true"; p.setAttribute('aria-hidden','false'); p.querySelector('header button').focus(); }
-function closePanel(p){ p.dataset.open="false"; p.setAttribute('aria-hidden','true'); }
-
-/* ========= SPA Router ========= */
+/* ====== Router skeleton (set after views exist) ====== */
 const app = $('#app');
-const routes = {
-  '#packages': renderPackages,
-  '#menus': renderMenus,
-  '#designer': renderDesigner,
-  '#calculator': renderCalculator,
-  '#contract': renderContract,
-  '#invoice': renderInvoice,
-  '#checklists': renderChecklists,
-  '#marketing': renderMarketing,
-  '#contact': renderContact
-};
+let routerReady = false;
+const routes = {}; // will be filled after view functions
 function setActiveLink(hash){
   $$('a[data-route]').forEach(a=> a.setAttribute('aria-current', a.getAttribute('href')===hash ? 'page':'false'));
 }
@@ -287,20 +242,18 @@ function renderRoute(hash){
   const route = routes[hash] ? hash : '#packages';
   setActiveLink(route);
   app.setAttribute('aria-busy','true');
-  app.innerHTML = ''; // clear
-  // render user view first
+  app.innerHTML='';
+  // render user view
   const frag = routes[route]({admin:false});
   app.appendChild(frag);
-  // then inject admin panes only if admin
+  // inject admin panes only if admin
   if(isAdmin()){
-    routes[route]({admin:true, mount:app}); // allow view to inject admin content
+    routes[route]({admin:true, mount:app});
   }
   app.setAttribute('aria-busy','false');
 }
-window.addEventListener('hashchange', ()=>renderRoute(location.hash));
-document.addEventListener('DOMContentLoaded', ()=> renderRoute(location.hash || '#packages'));
 
-/* ========= Shared helpers ========= */
+/* ====== Shared helpers ====== */
 function money(n){ return `$${(+n||0).toFixed(2)}`; }
 function printNode(node, title='Print'){
   const w=window.open('','_blank');
@@ -312,7 +265,7 @@ function printNode(node, title='Print'){
   w.document.write('</body></html>'); w.document.close(); w.focus(); w.print();
 }
 
-/* ========= View: Packages ========= */
+/* ====== View: Packages ====== */
 function renderPackages({admin}={}){
   const view=document.createElement('section'); view.className='view active card';
   view.innerHTML=`
@@ -345,7 +298,6 @@ function renderPackages({admin}={}){
     </div>
     <p class="small">Holiday dates may price at 1.5×. Client typically supplies alcohol; we provide a detailed shopping plan and serve.</p>
   `;
-  // Admin pane (generated only now)
   if(admin){
     const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.style.marginTop='12px';
     adminBox.innerHTML=`
@@ -372,7 +324,7 @@ function renderPackages({admin}={}){
   return view;
 }
 
-/* ========= View: Menus (templates) ========= */
+/* ====== View: Menus ====== */
 function renderMenus({admin}={}){
   const [m1,m2,m3] = JSON.parse(localStorage.getItem('vh_menu_templates')||'null') || [
     '<ul class="menu"><li><b>Signatures:</b> French 75 — gin, lemon, bubbles</li><li>Old Fashioned — bourbon, bitters, orange</li><li><b>House:</b> Gin & Tonic · Vodka Soda · Paloma</li><li><b>Zero-Proof:</b> Citrus & Mint Cooler</li></ul>',
@@ -415,7 +367,7 @@ function renderMenus({admin}={}){
   return view;
 }
 
-/* ========= View: Designer ========= */
+/* ====== View: Designer ====== */
 function renderDesigner({admin}={}){
   const view=document.createElement('section'); view.className='view active card';
   view.innerHTML=`
@@ -461,7 +413,7 @@ function renderDesigner({admin}={}){
         </div>
       </div>
     </div>
-    <p class="small">Tip: <kbd>Ctrl/Cmd+P</kbd> → Margins: None. Prints perfectly on 5×7 or A5.</p>
+    <p class="small">Tip: <kbd>Ctrl/Cmd+P</kbd> → Margins: None. Prints on 5×7 or A5.</p>
   `;
   function titleCaseDrink(s){ return s.replace(/^\s*([^-—–:]+)[-—–:]?\s*/,(m,name)=>`<b>${name.trim()}</b> — `); }
   function renderMenu(){
@@ -484,17 +436,16 @@ function renderDesigner({admin}={}){
     card.style.background={
       velvet:"conic-gradient(from 200deg at 50% 30%, color-mix(in oklab,var(--gold) 18%, transparent 82%), transparent 42% 58%, color-mix(in oklab,var(--rose) 16%, transparent 84%) 100%), color-mix(in oklab, var(--card) 92%, black 8%)",
       minimal:"color-mix(in oklab, var(--card) 94%, black 6%)",
-      lively:"radial-gradient(700px 220px at 10% -30%, color-mix(in oklab,var(--violet) 24%, transparent 76%), transparent), radial-gradient(420px 200px at 90% 120%, color-mix(in oklab,var(--gold) 22%, transparent 78%), transparent), color-mix(in oklab, var(--card) 92%, black 8%)"
+      lively:"radial-gradient(700px 220px at 10% -30%, color-mix(in oklab,var(--violet) 24%, transparent 76%), transparent), radial-gradient(420px 200px at 90% 120%, color-mix(in oklab, var(--gold) 22%, transparent 78%), transparent), color-mix(in oklab, var(--card) 92%, black 8%)"
     }[style]||card.style.background;
   }
   $('#btnPreview',view).addEventListener('click', renderMenu);
   $('#btnPrint',view).addEventListener('click', ()=>{ renderMenu(); printNode($('#menuCard',view), 'Menu'); });
-  // initial preview
   renderMenu();
   return view;
 }
 
-/* ========= View: Calculator ========= */
+/* ====== View: Calculator ====== */
 function renderCalculator({admin}={}){
   const view=document.createElement('section'); view.className='view active card';
   view.innerHTML=`
@@ -505,7 +456,7 @@ function renderCalculator({admin}={}){
         <button class="button" id="btnCSV">Export CSV</button>
       </div>
     </div>
-    <p class="small">Rule: 1.5 drinks first hour, then ~1/hr. 750ml ≈ 16 cocktails (1.5 oz). Wine ≈ 5 pours. Beer case ≈ 24.</p>
+    <p class="small">Rule: 1.5 drinks first hour, then ~1/hr. 750ml ≈ 16 cocktails. Wine ≈ 5 pours. Beer case ≈ 24.</p>
     <form class="grid-3 no-print" aria-label="Shopping calculator input">
       <p><label>Guests<br><input id="c_guests" type="number" value="100" min="1"></label></p>
       <p><label>Hours of Service<br><input id="c_hours" type="number" value="4" min="1"></label></p>
@@ -567,7 +518,7 @@ function renderCalculator({admin}={}){
   return view;
 }
 
-/* ========= View: Contract ========= */
+/* ====== View: Contract ====== */
 function renderContract({admin}={}){
   const view=document.createElement('section'); view.className='view active card';
   view.innerHTML=`
@@ -621,20 +572,15 @@ function renderContract({admin}={}){
     </div>
     <p class="small">Template only — confirm state/venue requirements.</p>
   `;
-  // persistence
   function serialize(){ return { name:$('#cl_name',view).value, date:$('#cl_date',view).value, start:$('#cl_start',view).value, end:$('#cl_end',view).value, venue:$('#cl_venue',view).value }; }
   function load(obj){ if(!obj) return; $('#cl_name',view).value=obj.name||''; $('#cl_date',view).value=obj.date||''; $('#cl_start',view).value=obj.start||''; $('#cl_end',view).value=obj.end||''; $('#cl_venue',view).value=obj.venue||''; }
   ['cl_name','cl_date','cl_start','cl_end','cl_venue'].forEach(id=> $('#'+id,view).addEventListener('input',()=> localStorage.setItem('vh_contract', JSON.stringify(serialize())) ));
-  load(JSON.parse(localStorage.getItem('vh_contract')||'null'));
+  try{ load(JSON.parse(localStorage.getItem('vh_contract'))); } catch{}
 
-  // signatures
   function wireSig(id){
     const c=$('#'+id,view), ctx=c.getContext('2d');
-    function resize(){
-      const ratio=Math.max(1,Math.floor(window.devicePixelRatio||1));
-      const r=c.getBoundingClientRect(); c.width=Math.floor(r.width*ratio); c.height=Math.floor(r.height*ratio);
-      ctx.setTransform(ratio,0,0,ratio,0,0); ctx.lineWidth=2; ctx.lineCap='round'; ctx.strokeStyle='#111';
-    } resize(); window.addEventListener('resize',resize,{passive:true});
+    function resize(){ const ratio=Math.max(1,Math.floor(window.devicePixelRatio||1)); const r=c.getBoundingClientRect(); c.width=Math.floor(r.width*ratio); c.height=Math.floor(r.height*ratio); ctx.setTransform(ratio,0,0,ratio,0,0); ctx.lineWidth=2; ctx.lineCap='round'; ctx.strokeStyle='#111'; }
+    resize(); window.addEventListener('resize',resize,{passive:true});
     let d=false, lx=0, ly=0;
     c.addEventListener('pointerdown',e=>{d=true; const r=c.getBoundingClientRect(); lx=e.clientX-r.left; ly=e.clientY-r.top; c.setPointerCapture(e.pointerId);});
     c.addEventListener('pointerup',e=>{d=false; c.releasePointerCapture?.(e.pointerId);});
@@ -647,7 +593,6 @@ function renderContract({admin}={}){
   $('#sigClientSave',view).addEventListener('click', sigC.save);
   $('#sigProviderClear',view).addEventListener('click', sigP.clear);
   $('#sigProviderSave',view).addEventListener('click', sigP.save);
-
   $('#printContract',view).addEventListener('click', ()=> printNode(view, 'Contract'));
   $('#clearSigs',view).addEventListener('click', ()=>{ sigC.clear(); sigP.clear(); });
 
@@ -667,9 +612,12 @@ function renderContract({admin}={}){
   return view;
 }
 
-/* ========= View: Invoice ========= */
+/* ====== View: Invoice ====== */
 function renderInvoice({admin}={}){
-  const saved=JSON.parse(localStorage.getItem('vh_invoice')||'null')||{no:'0001',rows:[{desc:'Bartending — Signature Package',qty:4,rate:65}],tax:0,tip:15,disc:0};
+  let saved;
+  try{ saved=JSON.parse(localStorage.getItem('vh_invoice'))||null; }catch{ saved=null; }
+  saved = saved || {no:'0001',rows:[{desc:'Bartending — Signature Package',qty:4,rate:65}],tax:0,tip:15,disc:0};
+
   const view=document.createElement('section'); view.className='view active card';
   view.innerHTML=`
     <div style="display:flex; align-items:center; justify-content:space-between; gap:10px">
@@ -706,7 +654,6 @@ function renderInvoice({admin}={}){
     </table>
     <p class="small">Demo payments are logged locally (see Marketing → Payments table when Admin).</p>
   `;
-  // rows
   const body=$('#inv_body',view);
   function pushRow(r={desc:'Item', qty:1, rate:0}){
     const tr=document.createElement('tr');
@@ -714,7 +661,6 @@ function renderInvoice({admin}={}){
     body.appendChild(tr);
   }
   (saved.rows||[]).forEach(pushRow);
-  // totals
   function serialize(){
     return {
       no: $('#inv_no',view).value,
@@ -744,7 +690,6 @@ function renderInvoice({admin}={}){
   (function(){ const d=new Date(); const f=n=>n.toString().padStart(2,'0'); $('#inv_date',view).textContent=`${d.getFullYear()}-${f(d.getMonth()+1)}-${f(d.getDate())}`; })();
   calc();
 
-  // payment
   $('#openPay',view).addEventListener('click', ()=>{
     $('#pay_name').value = $('#cl_name')?.value || '';
     $('#pay_amount').value = $('#inv_tot',view).innerText.replace(/[^0-9.]/g,'') || '0.00';
@@ -769,7 +714,7 @@ function renderInvoice({admin}={}){
   return view;
 }
 
-/* ========= View: Checklists ========= */
+/* ====== View: Checklists ====== */
 function renderChecklists({admin}={}){
   const view=document.createElement('section'); view.className='view active card';
   view.innerHTML=`
@@ -798,8 +743,9 @@ function renderChecklists({admin}={}){
   `;
   $('#printChk',view).addEventListener('click', ()=> printNode(view, 'Checklists'));
   $('#addIncident',view).addEventListener('click', ()=>{ const tr=document.createElement('tr'); tr.innerHTML="<td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td>"; $('#incidentBody',view).appendChild(tr); });
-  // load persisted incidents
-  (function(){ const s=localStorage.getItem('vh_incidents'); if(s){ const rows=JSON.parse(s); const body=$('#incidentBody',view); body.innerHTML=''; rows.forEach(cols=>{ const tr=document.createElement('tr'); tr.innerHTML=cols.map(c=>`<td contenteditable>${c}</td>`).join(''); body.appendChild(tr); }); } })();
+  try{
+    const s=localStorage.getItem('vh_incidents'); if(s){ const rows=JSON.parse(s); const body=$('#incidentBody',view); body.innerHTML=''; rows.forEach(cols=>{ const tr=document.createElement('tr'); tr.innerHTML=cols.map(c=>`<td contenteditable>${c}</td>`).join(''); body.appendChild(tr); }); }
+  }catch{}
 
   if(admin){
     const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.style.marginTop='12px';
@@ -827,7 +773,7 @@ function renderChecklists({admin}={}){
   return view;
 }
 
-/* ========= View: Marketing (includes Brand settings & Payments when admin) ========= */
+/* ====== View: Marketing (Brand + Payments in Admin) ====== */
 function renderMarketing({admin}={}){
   const view=document.createElement('section'); view.className='view active card';
   view.innerHTML=`
@@ -915,7 +861,7 @@ Send as PDF to {{client email}} and cc ${BRAND.email}. Thank you.</pre>
   return view;
 }
 
-/* ========= View: Contact ========= */
+/* ====== View: Contact ====== */
 function renderContact({admin}={}){
   const view=document.createElement('section'); view.className='view active card';
   view.innerHTML=`
@@ -990,8 +936,7 @@ You can reach me at ${email}. Thank you!`);
   return view;
 }
 
-/* ========= Payment Simulation (shared) ========= */
-$('#closePay').addEventListener('click', ()=> closePanel($('#payPanel')));
+/* ====== Shared Payment Simulation ====== */
 $('#fillInvoiceAmt').addEventListener('click', ()=>{
   const totText = $('#app')?.querySelector('#inv_tot')?.innerText || '$0.00';
   $('#pay_amount').value = totText.replace(/[^0-9.]/g,'') || '0.00';
@@ -1009,8 +954,59 @@ $('#confirmPay').addEventListener('click', ()=>{
   toast(`Payment recorded: ${rec.id}`);
 });
 
-/* ========= View: Menus helper (sanitize, not exposed here for brevity) ========= */
-/* The admin menus pane trusts only basic UL/LI markup; content is displayed as text/html by design in a constrained container. */
+/* ====== Hook up routes AFTER views exist ====== */
+routes['#packages']  = renderPackages;
+routes['#menus']     = renderMenus;
+routes['#designer']  = renderDesigner;
+routes['#calculator']= renderCalculator;
+routes['#contract']  = renderContract;
+routes['#invoice']   = renderInvoice;
+routes['#checklists']= renderChecklists;
+routes['#marketing'] = renderMarketing;
+routes['#contact']   = renderContact;
+routerReady = true;
+
+/* ====== Admin gating (moved AFTER router is ready) ====== */
+const ADMIN_FLAG='vh_is_admin';
+const REMEMBER_FLAG='vh_admin_remember';
+const PIN_KEY='vh_admin_pin';
+function storageForState(){ return (localStorage.getItem(REMEMBER_FLAG)==='1') ? localStorage : sessionStorage; }
+function isAdmin(){ try{ return storageForState().getItem(ADMIN_FLAG)==='1'; }catch{ return false; } }
+function setAdmin(on){
+  localStorage.removeItem(ADMIN_FLAG); sessionStorage.removeItem(ADMIN_FLAG);
+  storageForState().setItem(ADMIN_FLAG, on?'1':'0');
+  document.body.setAttribute('data-role', on?'admin':'user');
+  $('#adminLogoutBtn').hidden = !on;
+  $('#adminLoginBtn').hidden  =  on;
+  $('#modeChip').textContent = `Mode: ${on?'Admin':'User'}`;
+  if(routerReady){ renderRoute(location.hash || '#packages'); }
+}
+$('#adminLoginBtn').addEventListener('click', ()=> openPanel($('#pinPanel')));
+$('#adminLogoutBtn').addEventListener('click', ()=> { localStorage.removeItem(ADMIN_FLAG); sessionStorage.removeItem(ADMIN_FLAG); localStorage.removeItem(REMEMBER_FLAG); setAdmin(false); toast('Signed out of admin','warn'); });
+$('#confirmPin').addEventListener('click', ()=>{
+  const input = $('#pinInput').value;
+  const saved = localStorage.getItem(PIN_KEY) ?? '0000';
+  const remember = $('#rememberAdmin').checked ? '1' : '0';
+  localStorage.setItem(REMEMBER_FLAG, remember);
+  if(input===saved){ setAdmin(true); closePanel($('#pinPanel')); toast('Admin unlocked','ok'); }
+  else { toast('Incorrect PIN','warn'); }
+});
+$('#resetPin').addEventListener('click', ()=>{ localStorage.setItem(PIN_KEY,'0000'); toast('PIN reset to 0000','ok'); });
+
+/* ====== Start app ====== */
+window.addEventListener('hashchange', ()=> renderRoute(location.hash));
+document.addEventListener('DOMContentLoaded', ()=>{
+  // restore remembered admin session if set
+  const remembered = localStorage.getItem(REMEMBER_FLAG)==='1';
+  const rememberedAdmin = localStorage.getItem(ADMIN_FLAG)==='1';
+  if(remembered && rememberedAdmin){ sessionStorage.setItem(ADMIN_FLAG,'1'); setAdmin(true); }
+  else { sessionStorage.setItem(ADMIN_FLAG,'0'); setAdmin(false); }
+  // demo param support: ?admin=1 (session only)
+  const params=new URLSearchParams(location.search);
+  if(params.get('admin')==='1'){ sessionStorage.setItem(ADMIN_FLAG,'1'); setAdmin(true); }
+  // initial route
+  renderRoute(location.hash || '#packages');
+});
 </script>
 </body>
 </html>
