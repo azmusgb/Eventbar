@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Velvet Hour Events — All-in-One Premium Bartending Kit</title>
-<meta name="description" content="Premium bartending by Kate. Single-file toolkit with branding studio, menu designer, shopping calculator, contract w/ signatures, invoice, checklists, marketing, a mock payment flow, and an Admin/User mode.">
+<meta name="description" content="Premium bartending by Kate. Single-file toolkit with branding studio, menu designer, shopping calculator, contract w/ signatures, invoice, checklists, marketing, mock payment, and Admin/User mode.">
 <meta name="theme-color" content="#120d12">
 <meta property="og:title" content="Velvet Hour Events — Premium Bartending by Kate">
 <meta property="og:description" content="Signature cocktails, safe service, luxe design. All-in-one pro toolkit in a single HTML.">
@@ -13,7 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23EBCB8B'/%3E%3Cstop offset='1' stop-color='%23E68FA0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='12' width='64' height='64' fill='%23130f16'/%3E%3Cpath d='M20 46c4-6 10-9 12-9s8 3 12 9' fill='none' stroke='url(%23g)' stroke-width='3.5' stroke-linecap='round'/%3E%3Cpath d='M21 31h22M24 31l-2-10a4 4 0 014-5h12a4 4 0 014 5l-2 10' stroke='%23fff' stroke-linecap='round' stroke-width='2' fill='none'/%3E%3C/svg%3E">
 
 <style>
-/* ===== Design Tokens (Luxe Velvet, higher contrast & roomy spacing) ===== */
+/* ===== Design Tokens (Luxe Velvet) ===== */
 :root{
   --bg:#130f16; --ink:#f9f7fb; --muted:#d6cfdf; --muted-strong:#bcb1cd; --card:#1a1520; --edge:rgba(255,255,255,.14);
   --gold:#EBCB8B; --rose:#E68FA0; --violet:#b7a0ff;
@@ -34,7 +34,8 @@
 html,body{height:100%}
 html{scroll-behavior:smooth}
 body{
-  margin:0; background:
+  margin:0;
+  background:
     radial-gradient(1200px 800px at 15% -10%, #20182a, transparent 60%),
     radial-gradient(900px 600px at 120% 10%, #2a1b24, transparent 40%),
     var(--bg);
@@ -84,8 +85,6 @@ label{font-weight:600; font-size:13px; color:var(--muted-strong)}
 
 /* ===== Hero ===== */
 .hero{display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:center}
-.kpis{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
-.kpi{border:1px dashed var(--edge); border-radius:14px; padding:12px}
 .tag{font-size:12px; border:1px solid var(--edge); border-radius:999px; padding:6px 10px}
 
 /* Coupe */
@@ -205,7 +204,7 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
             <linearGradient id="sh" x1="0" y="0" x2="1" y2="1">
               <stop offset="0" stop-color="#EBCB8B"/><stop offset="1" stop-color="#E68FA0"/>
             </linearGradient>
-            <filter id="glow" x="-30%" y="-30%" width="160%">
+            <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
               <feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
           </defs>
@@ -624,9 +623,10 @@ Send as PDF to {{client email}} and cc {{email}}. Thank you.</pre>
       <h4>Access</h4>
       <div class="grid-2">
         <p><label>Admin PIN<br><input id="ad_pin" type="password" placeholder="0000"></label></p>
-        <p style="display:flex; align-items:end"><button class="button" onclick="saveAdminPin()">Save PIN</button></p>
+        <p><label><input id="ad_remember" type="checkbox"> Remember admin on this device</label></p>
       </div>
-      <p class="small">Visibility is gated on this device only. Not security.</p>
+      <p style="display:flex; gap:8px"><button class="button" onclick="saveAccess()">Save Access</button></p>
+      <p class="small">Visibility is gated on this device only. Convenience, not security.</p>
     </div>
   </section>
 
@@ -682,24 +682,34 @@ function applyBrand(){
   $$('[data-bind="phone"]').forEach(el=>el.textContent=BRAND.phone);
   $$('[data-bind="city"]').forEach(el=>el.textContent=BRAND.city);
   const rs=$('#rateSheet');
-  if(rs){ rs.textContent = rs.textContent.replaceAll('{{city}}',BRAND.city).replaceAll('{{email}}',BRAND.email).replaceAll('{{phone}}',BRAND.phone); }
+  if(rs && rs.textContent.includes('{{city}}')){ // fill once
+    rs.textContent = rs.textContent.replaceAll('{{city}}',BRAND.city).replaceAll('{{email}}',BRAND.email).replaceAll('{{phone}}',BRAND.phone);
+  }
   updateMailto();
 }
 applyBrand();
 
-/* ===== Admin/User mode (visibility gating via hidden + localStorage) ===== */
-function isAdmin(){ return localStorage.getItem('vh_is_admin')==='1'; }
+/* ===== Admin/User mode (session by default; optional remember) ===== */
+const ADMIN_FLAG = 'vh_is_admin';
+const REMEMBER_FLAG = 'vh_admin_remember';
+
+function storageForState(){ return (localStorage.getItem(REMEMBER_FLAG)==='1') ? localStorage : sessionStorage; }
+function isAdmin(){ return storageForState().getItem(ADMIN_FLAG) === '1'; }
+
 function setAdminMode(on){
-  localStorage.setItem('vh_is_admin', on?'1':'0');
+  // Clear both stores, then set in chosen storage
+  localStorage.removeItem(ADMIN_FLAG);
+  sessionStorage.removeItem(ADMIN_FLAG);
+  storageForState().setItem(ADMIN_FLAG, on ? '1' : '0');
   applyAdminModeUI();
-  toast(on?'Admin mode enabled':'Switched to user view', on?'ok':'warn');
-  if(!on){ closePanel(adminPanel); }
+  toast(on ? 'Admin mode enabled' : 'Switched to user view', on ? 'ok' : 'warn');
+  if(!on && window.adminPanel) closePanel(adminPanel);
 }
 function applyAdminModeUI(){
   const admin = isAdmin();
-  document.body.setAttribute('data-role', admin?'admin':'user');
-  $$('.admin-only').forEach(el=>el.hidden = !admin);
-  $$('.user-only').forEach(el=>el.hidden = admin);
+  document.body.setAttribute('data-role', admin ? 'admin' : 'user');
+  $$('.admin-only').forEach(el=> el.hidden = !admin);
+  $$('.user-only').forEach(el=> el.hidden = admin);
 }
 function promptAdminLogin(){
   const pin = localStorage.getItem('vh_admin_pin') || '0000';
@@ -707,12 +717,36 @@ function promptAdminLogin(){
   if((pin==='' && (input===null || input==='')) || input===pin){ setAdminMode(true); }
   else if(input!==null){ toast('Incorrect PIN','warn'); }
 }
-function saveAdminPin(){
-  const v = ($('#ad_pin')?.value || '').trim();
-  localStorage.setItem('vh_admin_pin', v);
-  toast('Admin PIN updated','ok');
+function saveAccess(){
+  const pinVal = ($('#ad_pin')?.value || '').trim();
+  const remember = $('#ad_remember')?.checked ? '1' : '0';
+  localStorage.setItem('vh_admin_pin', pinVal);
+  localStorage.setItem(REMEMBER_FLAG, remember);
+  // If we un-remember, migrate any admin flag to session
+  if(remember !== '1' && localStorage.getItem(ADMIN_FLAG)){
+    const active = localStorage.getItem(ADMIN_FLAG)==='1';
+    localStorage.removeItem(ADMIN_FLAG);
+    sessionStorage.setItem(ADMIN_FLAG, active ? '1' : '0');
+  }
+  toast('Access settings updated','ok');
 }
-applyAdminModeUI();
+// URL switch ?admin=1 turns on admin for this session only
+(function handleURLAdmin(){
+  const params=new URLSearchParams(location.search);
+  if(params.get('admin')==='1'){ sessionStorage.setItem(ADMIN_FLAG,'1'); }
+})();
+// First load: default to user for session unless remembered admin & flag both exist
+(function initAdminState(){
+  if(localStorage.getItem(REMEMBER_FLAG)==='1'){
+    // Use stored state; if no flag yet, remain user
+    applyAdminModeUI();
+  }else{
+    sessionStorage.setItem(ADMIN_FLAG, sessionStorage.getItem(ADMIN_FLAG) || '0');
+    applyAdminModeUI();
+  }
+})();
+$('#adminLogin')?.addEventListener('click', promptAdminLogin);
+$('#adminLogout')?.addEventListener('click', ()=> setAdminMode(false));
 
 /* ===== Admin Panel (form-based) ===== */
 const adminPanel = $('#adminPanel');
@@ -722,9 +756,6 @@ let panelReturnFocus = null;
 
 openAdminBtn?.addEventListener('click', ()=>{ panelReturnFocus=document.activeElement; openPanel(adminPanel); loadAdminForm(); renderPayments(); trapFocus(adminPanel, true); });
 closeAdminBtn?.addEventListener('click', ()=> closePanel(adminPanel));
-
-$('#adminLogin')?.addEventListener('click', promptAdminLogin);
-$('#adminLogout')?.addEventListener('click', ()=> setAdminMode(false));
 
 function openPanel(p){ p.dataset.open = "true"; p.setAttribute('aria-hidden','false'); p.querySelector('header button').focus(); }
 function closePanel(p){ p.dataset.open = "false"; p.setAttribute('aria-hidden','true'); trapFocus(p,false); if(panelReturnFocus) panelReturnFocus.focus(); }
@@ -742,6 +773,7 @@ function loadAdminForm(){
   $('#ad_menu2').value = menus[1] || '<ul class="menu"><li><b>Signatures:</b> Strawberry Basil Smash</li><li>Spritz station</li></ul>';
   $('#ad_menu3').value = menus[2] || '<ul class="menu"><li><b>Signatures:</b> Espresso Martini</li><li>Ginger Pear Whiskey</li></ul>';
   $('#ad_pin').value = localStorage.getItem('vh_admin_pin') || '0000';
+  const rem = $('#ad_remember'); if(rem) rem.checked = localStorage.getItem(REMEMBER_FLAG) === '1';
 }
 
 function saveBrandForm(){
@@ -791,15 +823,18 @@ function savePackages(){
   toast('Package pricing saved', 'ok');
 }
 
-/* Safer sanitizer using DOMParser + whitelist */
+/* Safer sanitizer for editable template lists */
 function sanitizeListHTML(html){
   const allowedTags = new Set(['UL','LI','B','I','STRONG','EM']);
   const parser=new DOMParser();
   const doc=parser.parseFromString(`<div>${html}</div>`,'text/html');
   (function scrub(node){
     [...node.children].forEach(el=>{
-      if(!allowedTags.has(el.tagName)){ const frag=document.createDocumentFragment(); while(el.firstChild) frag.appendChild(el.firstChild); el.replaceWith(frag); scrub(node); }
-      else{
+      if(!allowedTags.has(el.tagName)){
+        const frag=document.createDocumentFragment();
+        while(el.firstChild) frag.appendChild(el.firstChild);
+        el.replaceWith(frag); scrub(node);
+      }else{
         [...el.attributes].forEach(a=>el.removeAttribute(a.name));
         scrub(el);
       }
@@ -807,7 +842,6 @@ function sanitizeListHTML(html){
   })(doc.body.firstElementChild);
   return doc.body.firstElementChild.innerHTML;
 }
-
 function saveMenus(){
   const vals=[$('#ad_menu1').value, $('#ad_menu2').value, $('#ad_menu3').value];
   localStorage.setItem('vh_menu_templates', JSON.stringify(vals));
@@ -1111,8 +1145,6 @@ function renderPayments(){
 document.addEventListener('keydown', (e)=>{
   if(e.key==='Escape'){ [adminPanel, payPanel].forEach(p=> p && p.dataset.open==="true" && closePanel(p)); }
 });
-
-/* Simple focus trap for panels */
 function trapFocus(panel, enable){
   if(!enable){ panel.removeEventListener('keydown', panel._trap); return; }
   panel._trap = function(e){
