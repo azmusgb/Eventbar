@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Velvet Hour Events — All-in-One Premium Bartending Kit</title>
-<meta name="description" content="Premium bartending by Kate. SPA toolkit with user tabs and advanced admin-only tabs (after PIN).">
+<meta name="description" content="Premium bartending by Kate. SPA toolkit with public tabs and advanced admin-only tabs (after PIN).">
 <meta name="theme-color" content="#120d12">
 <meta property="og:title" content="Velvet Hour Events — Premium Bartending by Kate">
 <meta property="og:description" content="Signature cocktails, safe service, luxe design.">
@@ -13,7 +13,6 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23EBCB8B'/%3E%3Cstop offset='1' stop-color='%23E68FA0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='12' width='64' height='64' fill='%23130f16'/%3E%3Cpath d='M20 46c4-6 10-9 12-9s8 3 12 9' fill='none' stroke='url(%23g)' stroke-width='3.5' stroke-linecap='round'/%3E%3Cpath d='M21 31h22M24 31l-2-10a4 4 0 014-5h12a4 4 0 014 5l-2 10' stroke='%23fff' stroke-linecap='round' stroke-width='2' fill='none'/%3E%3C/svg%3E">
 
 <style>
-/* ===== Design tokens ===== */
 :root{
   --bg:#130f16; --ink:#f9f7fb; --muted:#d6cfdf; --muted-strong:#bcb1cd; --card:#1a1520; --edge:rgba(255,255,255,.14);
   --gold:#EBCB8B; --rose:#E68FA0; --violet:#b7a0ff;
@@ -29,7 +28,6 @@
 [data-theme="champagne"]{ --bg:#fbfafc; --card:#ffffff; --ink:#191720; --muted:#5e5a70; --edge:#ece7f0; --gold:#b88a44; --rose:#c06072; --shadow:none }
 [data-theme="botanical"]{ --bg:#0f1512; --card:#111a15; --ink:#eaf6ef; --muted:#a3c2b1; --edge:rgba(255,255,255,.12); --gold:#9fe4b3; --rose:#c1ffea; }
 
-/* ===== Base ===== */
 *{box-sizing:border-box}
 html,body{height:100%}
 html{scroll-behavior:smooth}
@@ -52,7 +50,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   outline:2px solid var(--focus); outline-offset:3px; border-radius:10px
 }
 
-/* ===== Nav ===== */
+/* Nav */
 .nav{position:sticky; top:12px; height:var(--nav-h); backdrop-filter:saturate(1.1) blur(10px); -webkit-backdrop-filter:saturate(1.1) blur(10px);
   z-index:60; margin:-6px -6px 20px; padding:10px 14px; display:flex; gap:14px; align-items:center; flex-wrap:wrap;
   border:1px solid var(--edge); border-radius:16px; background:color-mix(in oklab, var(--bg) 80%, black 20%);}
@@ -65,7 +63,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* Admin dropdown */
 .menu-wrap{position:relative}
 #adminMenuBtn{min-height:40px}
-.menu{position:absolute; right:0; top:calc(100% + 8px); min-width:240px;
+.menu{position:absolute; right:0; top:calc(100% + 8px); min-width:260px;
   background:color-mix(in oklab, var(--card) 96%, black 4%); border:1px solid var(--edge); border-radius:12px; box-shadow:var(--shadow); padding:6px; z-index:70}
 .menu[hidden]{display:none}
 .menu h4{font-size:12px; margin:6px 8px; color:var(--muted-strong)}
@@ -75,7 +73,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .menu button.menuitem:hover, .menu button.menuitem:focus-visible{background:color-mix(in oklab, var(--gold) 15%, transparent 85%)}
 .menu .sep{height:1px; margin:6px; background:var(--edge); border-radius:1px}
 
-/* ===== Layout helpers ===== */
+/* Layout helpers */
 .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
 .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
 .grid-admin{display:grid; grid-template-columns:1.25fr .75fr; gap:16px}
@@ -83,7 +81,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width:1100px){ .grid-admin{grid-template-columns:1fr} .sticky{position:static} }
 @media (max-width:900px){ .grid-3{grid-template-columns:1fr} .grid-2{grid-template-columns:1fr}}
 
-/* ===== Components ===== */
+/* Components */
 .menu-card{width:100%; max-width:620px; margin:0 auto; border-radius:22px; border:1px solid var(--edge);
   background: conic-gradient(from 200deg at 50% 30%, color-mix(in oklab,var(--gold) 18%, transparent 82%), transparent 42% 58%, color-mix(in oklab,var(--rose) 16%, transparent 84%) 100%), color-mix(in oklab, var(--card) 92%, black 8%);
   padding:26px; box-shadow:var(--shadow)}
@@ -96,7 +94,7 @@ table{width:100%; border-collapse:collapse}
 th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; vertical-align:top}
 .sig-pad{border:1px solid var(--edge); border-radius:12px; background:color-mix(in oklab, var(--bg) 72%, black 28%); width:100%; height:180px}
 
-/* ===== Forms ===== */
+/* Forms & buttons */
 select, input[type="text"], input[type="email"], input[type="number"], input[type="date"], textarea{
   width:100%; padding:12px 12px; border-radius:12px; border:1px solid var(--edge);
   background:color-mix(in oklab, var(--bg) 70%, black 30%); color:var(--ink); outline:none;
@@ -123,12 +121,15 @@ label{font-weight:600; font-size:13px; color:var(--muted-strong)}
 @media print{ .nav,.no-print{display:none!important} .card{box-shadow:none; border-color:#ddd} body{background:#fff; color:#222} }
 :focus-visible{outline:2px solid var(--focus); outline-offset:3px; border-radius:8px}
 </style>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Velvet Hour Events","description":"Premium mobile bartending by Kate. Signature menus, safe service, luxe presentation. Certified & insured.","areaServed":"Charlotte, NC and Carolinas","email":"hello@velvethourevents.com","telephone":"(704) 000-0000","url":"https://example.invalid/velvet-hour","sameAs":[]}
+</script>
 </head>
 <body>
   <div class="toast-wrap" aria-live="polite" aria-atomic="true"></div>
 
   <div class="container">
-    <!-- NAV (dynamic links) -->
     <nav class="nav" role="navigation" aria-label="Primary">
       <div class="wordmark" data-bind="brand">Velvet Hour Events</div>
 
@@ -142,56 +143,44 @@ label{font-weight:600; font-size:13px; color:var(--muted-strong)}
 
       <span class="badge" id="modeChip" title="Current view">Mode: User</span>
 
-      <!-- links get injected here -->
       <div id="navLinks" style="display:flex; gap:8px; flex-wrap:wrap"></div>
 
       <div class="spacer"></div>
 
-      <!-- admin dropdown -->
       <div class="menu-wrap">
         <button id="adminMenuBtn" class="iconbtn" aria-haspopup="menu" aria-expanded="false" aria-controls="adminMenu" title="Admin">Admin ▾</button>
         <div id="adminMenu" class="menu" role="menu" hidden></div>
       </div>
     </nav>
 
-    <!-- SPA outlet -->
     <main id="app" aria-live="polite" aria-busy="false"></main>
 
     <footer class="small">&copy; 2025 <span data-bind="brand">Velvet Hour Events</span> — <span data-bind="city">Charlotte, NC</span></footer>
   </div>
 
-  <!-- PIN Panel -->
+  <!-- PIN -->
   <section id="pinPanel" class="panel" role="dialog" aria-modal="true" aria-labelledby="pinTitle" aria-hidden="true">
-    <header>
-      <h3 id="pinTitle">Admin Access</h3>
-      <button class="iconbtn" id="closePin" aria-label="Close">✖</button>
-    </header>
+    <header><h3 id="pinTitle">Admin Access</h3><button class="iconbtn" id="closePin" aria-label="Close">✖</button></header>
     <div class="content">
-      <p class="small">Enter Admin PIN to reveal admin-only tabs on this device.</p>
+      <p class="small">Enter Admin PIN to reveal admin-only tabs on this device (demo only).</p>
       <p><label>PIN<br><input id="pinInput" type="password" placeholder="0000"></label></p>
       <p><label><input id="rememberAdmin" type="checkbox"> Remember admin on this device</label></p>
       <div style="display:flex; gap:8px">
         <button class="button" id="confirmPin">Unlock Admin</button>
         <button class="iconbtn" id="resetPin">Reset PIN to 0000</button>
       </div>
-      <p class="small">Gating is for demos; not a security boundary.</p>
     </div>
   </section>
 
-  <!-- Payment Panel -->
+  <!-- Payment -->
   <section id="payPanel" class="panel" role="dialog" aria-modal="true" aria-labelledby="payTitle" aria-hidden="true">
-    <header>
-      <h3 id="payTitle">Demo Payment</h3>
-      <button class="iconbtn" id="closePay" aria-label="Close">✖</button>
-    </header>
+    <header><h3 id="payTitle">Demo Payment</h3><button class="iconbtn" id="closePay" aria-label="Close">✖</button></header>
     <div class="content">
       <p class="small">Demo only — logs locally.</p>
       <p><label>Name on Card<br><input id="pay_name" placeholder="Client Name"></label></p>
       <div class="grid-2">
         <p><label>Amount<br><input id="pay_amount" type="number" min="0" step="0.01"></label></p>
-        <p><label>Method<br>
-          <select id="pay_method"><option>Card</option><option>ACH</option><option>Cash</option></select>
-        </label></p>
+        <p><label>Method<br><select id="pay_method"><option>Card</option><option>ACH</option><option>Cash</option></select></label></p>
       </div>
       <div style="display:flex; gap:8px">
         <button class="button" id="confirmPay">Confirm Payment</button>
@@ -202,93 +191,43 @@ label{font-weight:600; font-size:13px; color:var(--muted-strong)}
   </section>
 
 <script>
-/* ========= Utilities ========= */
-const $  = (q, p=document) => p.querySelector(q);
-const $$ = (q, p=document) => [...p.querySelectorAll(q)];
+/* ========== Utils ========== */
+const $=(q,p=document)=>p.querySelector(q), $$=(q,p=document)=>[...p.querySelectorAll(q)];
 function toast(msg,type='ok'){ const d=document.createElement('div'); d.className=`toast ${type}`; d.textContent=msg; $('.toast-wrap').appendChild(d); setTimeout(()=>d.remove(),3200); }
-function download(filename, data, type='application/json'){ const blob=new Blob([data],{type}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=filename; a.click(); }
+function download(filename,data,type='application/json'){ const blob=new Blob([data],{type}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=filename; a.click(); }
 function openPanel(p){ p.dataset.open="true"; p.setAttribute('aria-hidden','false'); p.querySelector('header button').focus(); }
 function closePanel(p){ p.dataset.open="false"; p.setAttribute('aria-hidden','true'); }
 
-/* ========= Theme ========= */
+/* Theme */
 const themePick=$('#themePick');
 function applyTheme(v){ if(v==='champagne') document.body.setAttribute('data-theme','champagne'); else if(v==='botanical') document.body.setAttribute('data-theme','botanical'); else document.body.removeAttribute('data-theme'); localStorage.setItem('vh_theme',v); }
-themePick.addEventListener('change',e=>applyTheme(e.target.value));
-applyTheme(localStorage.getItem('vh_theme')||'velvet'); themePick.value=localStorage.getItem('vh_theme')||'velvet';
+themePick.addEventListener('change',e=>applyTheme(e.target.value)); applyTheme(localStorage.getItem('vh_theme')||'velvet'); themePick.value=localStorage.getItem('vh_theme')||'velvet';
 
-/* ========= Brand ========= */
+/* Brand */
 const BRAND_DEFAULT={brand:"Velvet Hour Events", email:"hello@velvethourevents.com", phone:"(704) 000-0000", city:"Charlotte, NC"};
 let BRAND; try{ BRAND=JSON.parse(localStorage.getItem('vh_brand'))||{...BRAND_DEFAULT}; }catch{ BRAND={...BRAND_DEFAULT}; }
 function applyBrand(){ $$('[data-bind="brand"]').forEach(el=>el.textContent=BRAND.brand); $$('[data-bind="email"]').forEach(el=>el.textContent=BRAND.email); $$('[data-bind="phone"]').forEach(el=>el.textContent=BRAND.phone); $$('[data-bind="city"]').forEach(el=>el.textContent=BRAND.city); }
 applyBrand();
 
-/* ========= Admin gating ========= */
-const ADMIN_FLAG='vh_is_admin'; const REMEMBER_FLAG='vh_admin_remember'; const PIN_KEY='vh_admin_pin';
+/* Admin gating */
+const ADMIN_FLAG='vh_is_admin', REMEMBER_FLAG='vh_admin_remember', PIN_KEY='vh_admin_pin';
 function storageForState(){ return (localStorage.getItem(REMEMBER_FLAG)==='1') ? localStorage : sessionStorage; }
 function isAdmin(){ try{ return storageForState().getItem(ADMIN_FLAG)==='1'; }catch{ return false; } }
 function setAdmin(on){
   localStorage.removeItem(ADMIN_FLAG); sessionStorage.removeItem(ADMIN_FLAG);
-  storageForState().setItem(ADMIN_FLAG, on?'1':'0');
+  storageForState().setItem(ADMIN_FLAG,on?'1':'0');
   $('#modeChip').textContent = `Mode: ${on?'Admin':'User'}`;
-  renderNav(); renderRoute(location.hash||firstUserRoute());
-  renderAdminMenu();
+  renderNav(); renderRoute(location.hash||firstUserRoute()); renderAdminMenu();
 }
+$('#closePin').addEventListener('click', ()=> closePanel($('#pinPanel')));
+$('#confirmPin').addEventListener('click', ()=>{
+  const pin=$('#pinInput').value; const saved=localStorage.getItem(PIN_KEY) ?? '0000';
+  localStorage.setItem(REMEMBER_FLAG, $('#rememberAdmin').checked?'1':'0');
+  if(pin===saved){ setAdmin(true); closePanel($('#pinPanel')); toast('Admin unlocked'); } else toast('Incorrect PIN','warn');
+});
+$('#resetPin').addEventListener('click', ()=>{ localStorage.setItem(PIN_KEY,'0000'); toast('PIN reset to 0000'); });
 
-/* ========= Routes & Nav ========= */
-const ROUTES = {
-  // user routes
-  '#packages':  {label:'Packages',  audience:'user'},
-  '#menus':     {label:'Menus',     audience:'user'},
-  '#designer':  {label:'Designer',  audience:'user'},
-  '#calculator':{label:'Calculator',audience:'user'},
-  '#contact':   {label:'Book',      audience:'user'},
-
-  // admin-only routes
-  '#contract':  {label:'Contract',  audience:'admin'},
-  '#invoice':   {label:'Invoice',   audience:'admin'},
-  '#checklists':{label:'Checklists',audience:'admin'},
-  '#marketing': {label:'Marketing', audience:'admin'},
-};
-function firstUserRoute(){ return '#packages'; }
-function allowedRoutes(){ const a=isAdmin(); return Object.entries(ROUTES).filter(([h,m])=> m.audience==='user' || a); }
-function audienceOf(hash){ return ROUTES[hash]?.audience||'user'; }
-
-function renderNav(){
-  const nav = $('#navLinks'); nav.innerHTML='';
-  const a=isAdmin();
-  for(const [hash,meta] of Object.entries(ROUTES)){
-    if(meta.audience==='admin' && !a) continue;
-    const link=document.createElement('a');
-    link.href=hash; link.textContent=meta.label; link.setAttribute('data-route','');
-    if(location.hash===hash) link.setAttribute('aria-current','page');
-    nav.appendChild(link);
-  }
-}
-
-function setActiveLink(hash){
-  $$('#navLinks a').forEach(a=> a.setAttribute('aria-current', a.getAttribute('href')===hash ? 'page' : 'false'));
-}
-
-const app=$('#app'); let routerReady=false;
-const views={}; // map hash -> renderer
-
-function renderRoute(hash){
-  const a=isAdmin();
-  const known = ROUTES[hash];
-  if(!known){ hash=firstUserRoute(); }
-  // guard admin routes
-  if(ROUTES[hash]?.audience==='admin' && !a){
-    toast('Admin tab — access denied (unlock to continue)','warn');
-    hash=firstUserRoute();
-    if(location.hash!==hash) location.hash=hash;
-  }
-  setActiveLink(hash);
-  app.setAttribute('aria-busy','true'); app.innerHTML='';
-  const frag = views[hash] ? views[hash]() : document.createTextNode('Not implemented');
-  app.appendChild(frag); app.setAttribute('aria-busy','false');
-}
-
-/* ========= Admin dropdown ========= */
+/* Admin menu */
 const adminBtn=$('#adminMenuBtn'), adminMenu=$('#adminMenu'); let menuOpen=false;
 function renderAdminMenu(){
   const a=isAdmin();
@@ -310,9 +249,7 @@ function renderAdminMenu(){
       </label></li>
     </ul>
     <div class="sep"></div>
-    <ul>
-      <li><button class="menuitem" role="menuitem" id="adminSignOut">Sign out</button></li>
-    </ul>
+    <ul><li><button class="menuitem" role="menuitem" id="adminSignOut">Sign out</button></li></ul>
   ` : `
     <h4>Admin</h4>
     <ul>
@@ -346,47 +283,85 @@ document.addEventListener('keydown', e=>{
   else if(e.key==='End'){ e.preventDefault(); items[items.length-1]?.focus(); }
 });
 
-/* ========= Export / Import All ========= */
+/* Export/Import all */
 function exportAll(){ const dump={}; for(const k of Object.keys(localStorage)){ if(k.startsWith('vh_')) dump[k]=localStorage.getItem(k); } download('velvet_hour_backup.json', JSON.stringify(dump,null,2)); toast('Backup exported'); }
 function importAll(e){ const f=e.target.files[0]; if(!f) return; f.text().then(t=>{ try{ const obj=JSON.parse(t); for(const [k,v] of Object.entries(obj)){ if(k.startsWith('vh_')) localStorage.setItem(k,v); } toast('Backup imported'); location.reload(); }catch{ toast('Invalid backup','warn'); } }); }
 
-/* ========= Admin PIN ========= */
-$('#closePin').addEventListener('click', ()=> closePanel($('#pinPanel')));
-$('#confirmPin').addEventListener('click', ()=>{
-  const pin=$('#pinInput').value; const saved=localStorage.getItem(PIN_KEY) ?? '0000';
-  localStorage.setItem(REMEMBER_FLAG, $('#rememberAdmin').checked?'1':'0');
-  if(pin===saved){ setAdmin(true); closePanel($('#pinPanel')); toast('Admin unlocked'); }
-  else toast('Incorrect PIN','warn');
-});
-$('#resetPin').addEventListener('click', ()=>{ localStorage.setItem(PIN_KEY,'0000'); toast('PIN reset to 0000','ok'); });
+/* Routes & nav */
+const ROUTES={
+  '#packages':{label:'Packages',audience:'user'},
+  '#menus':{label:'Menus',audience:'user'},
+  '#designer':{label:'Designer',audience:'user'},
+  '#calculator':{label:'Calculator',audience:'user'},
+  '#contact':{label:'Book',audience:'user'},
+  '#contract':{label:'Contract',audience:'admin'},
+  '#invoice':{label:'Invoice',audience:'admin'},
+  '#checklists':{label:'Checklists',audience:'admin'},
+  '#marketing':{label:'Marketing',audience:'admin'},
+};
+function firstUserRoute(){ return '#packages'; }
+function renderNav(){ const nav=$('#navLinks'); nav.innerHTML=''; const a=isAdmin(); for(const [hash,meta] of Object.entries(ROUTES)){ if(meta.audience==='admin' && !a) continue; const link=document.createElement('a'); link.href=hash; link.textContent=meta.label; link.setAttribute('data-route',''); if(location.hash===hash) link.setAttribute('aria-current','page'); nav.appendChild(link);} }
+function setActiveLink(hash){ $$('#navLinks a').forEach(a=> a.setAttribute('aria-current', a.getAttribute('href')===hash ? 'page' : 'false')); }
 
-/* ========= Payment ========= */
-$('#closePay').addEventListener('click', ()=> closePanel($('#payPanel')));
-$('#fillInvoiceAmt').addEventListener('click', ()=>{ const t=$('#app')?.querySelector('#inv_tot')?.innerText||'$0.00'; $('#pay_amount').value=t.replace(/[^0-9.]/g,'')||'0.00'; });
-$('#confirmPay').addEventListener('click', ()=>{
-  const name=$('#pay_name').value.trim(); const amt=parseFloat($('#pay_amount').value)||0; const method=$('#pay_method').value;
-  if(!name||!amt){ toast('Name and amount required','warn'); return; }
-  const rec={ id:'PMT-'+Math.random().toString(36).slice(2,8).toUpperCase(), ts:new Date().toISOString(), name, amount:amt, method, invoice: $('#app')?.querySelector('#inv_no')?.value||'—' };
-  const arr=JSON.parse(localStorage.getItem('vh_payments')||'[]'); arr.push(rec); localStorage.setItem('vh_payments', JSON.stringify(arr));
-  $('#payNotice').textContent = `Success: ${rec.id} for $${amt.toFixed(2)} via ${method}`; toast(`Payment recorded: ${rec.id}`);
-});
+const app=$('#app'); const views={};
+function renderRoute(hash){
+  const a=isAdmin();
+  if(!ROUTES[hash]) hash=firstUserRoute();
+  if(ROUTES[hash].audience==='admin' && !a){ toast('Admin tab — access denied (unlock to continue)','warn'); hash=firstUserRoute(); if(location.hash!==hash) location.hash=hash; }
+  setActiveLink(hash);
+  app.setAttribute('aria-busy','true'); app.innerHTML='';
+  const frag = views[hash] ? views[hash]() : document.createTextNode('Not implemented');
+  app.appendChild(frag); app.setAttribute('aria-busy','false');
+}
+window.addEventListener('hashchange', ()=> renderRoute(location.hash||firstUserRoute()));
 
-/* ========= Helpers ========= */
-function money(n){ return `$${(+n||0).toFixed(2)}`; }
-function printNode(node,title='Print'){
-  const w=window.open('','_blank');
-  w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>${title}</title>
-  <style>body{font-family:${getComputedStyle(document.body).fontFamily}; color:#222; margin:20px}
-  .small{color:#555} table{width:100%; border-collapse:collapse} th,td{border-bottom:1px solid #ddd; padding:8px; text-align:left; vertical-align:top}
-  .menu-card{border:1px solid #ddd; border-radius:22px; padding:26px}</style></head><body>`);
-  w.document.body.appendChild(node.cloneNode(true));
-  w.document.write('</body></html>'); w.document.close(); w.focus(); w.print();
+/* Sanitizer for list markup */
+function sanitizeListHTML(html){
+  const allowed=new Set(['UL','OL','LI','B','I','STRONG','EM','SPAN']);
+  const parser=new DOMParser(); const doc=parser.parseFromString(`<div>${html}</div>`,'text/html');
+  (function scrub(node){
+    [...node.children].forEach(el=>{
+      if(!allowed.has(el.tagName)){ const frag=document.createDocumentFragment(); while(el.firstChild) frag.appendChild(el.firstChild); el.replaceWith(frag); scrub(node); }
+      else { [...el.attributes].forEach(a=>{ if(!/^class$/.test(a.name)) el.removeAttribute(a.name); }); scrub(el); }
+    });
+  })(doc.body.firstElementChild);
+  return doc.body.firstElementChild.innerHTML;
 }
 
-/* ========= USER VIEWS ========= */
+/* Menus default -> ensure present */
+function defaultMenuTemplates(){
+  return [
+`<ul class="menu">
+  <li><b>Signatures:</b> French 75 — gin, lemon, bubbles</li>
+  <li>Old Fashioned — bourbon, bitters, orange</li>
+  <li><b>House:</b> Gin &amp; Tonic · Vodka Soda · Paloma</li>
+  <li><b>Zero-Proof:</b> Citrus &amp; Mint Cooler</li>
+</ul>`,
+`<ul class="menu">
+  <li><b>Signatures:</b> Strawberry Basil Smash · Cucumber Gimlet</li>
+  <li>Spritz station · Hard seltzers</li>
+  <li><b>Zero-Proof:</b> Watermelon Fizz</li>
+</ul>`,
+`<ul class="menu">
+  <li><b>Signatures:</b> Espresso Martini · Ginger Pear Whiskey</li>
+  <li>Beer/Wine only option</li>
+  <li><b>Zero-Proof:</b> Spiced Apple Fizz</li>
+</ul>`
+];}
+function ensureMenuTemplates(){
+  try{
+    const raw=localStorage.getItem('vh_menu_templates');
+    if(!raw){ localStorage.setItem('vh_menu_templates', JSON.stringify(defaultMenuTemplates())); return defaultMenuTemplates(); }
+    const arr=JSON.parse(raw);
+    if(!Array.isArray(arr) || arr.length<1){ localStorage.setItem('vh_menu_templates', JSON.stringify(defaultMenuTemplates())); return defaultMenuTemplates(); }
+    return arr;
+  }catch{ localStorage.setItem('vh_menu_templates', JSON.stringify(defaultMenuTemplates())); return defaultMenuTemplates(); }
+}
+
+/* ===== USER VIEWS ===== */
 views['#packages']=function(){
-  const view=document.createElement('section'); view.className='card';
-  view.innerHTML=`
+  const v=document.createElement('section'); v.className='card';
+  v.innerHTML=`
     <div class="grid-2">
       <div>
         <h1>Luxe cocktails. Calm, professional service.</h1>
@@ -404,7 +379,7 @@ views['#packages']=function(){
       </div>
       <div class="card" aria-hidden="true" style="display:flex; align-items:center; justify-content:center; border:1px dashed var(--edge)">
         <svg width="100%" height="220" viewBox="0 0 520 220" role="img" aria-label="Decorative coupe">
-          <defs><linearGradient id="sh" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EBCB8B"/><stop offset="1" stop-color="#E68FA0"/></linearGradient></defs>
+          <defs><linearGradient id="sh" x1="0" y="0" x2="1" y2="1"><stop offset="0" stop-color="#EBCB8B"/><stop offset="1" stop-color="#E68FA0"/></linearGradient></defs>
           <path d="M30 30h460c0 60-90 100-230 100S30 90 30 30z" fill="url(#sh)" fill-opacity=".18" stroke="url(#sh)" stroke-opacity=".6" stroke-width="2"/>
           <rect x="250" y="130" width="20" height="40" rx="8" fill="#f6f1f9" opacity=".5"/>
           <rect x="230" y="170" width="60" height="10" rx="5" fill="#f6f1f9" opacity=".4"/>
@@ -420,36 +395,33 @@ views['#packages']=function(){
         <div class="stat"><span>From</span><b id="pkg_signature">${localStorage.getItem('vh_pkg_signature')||'$65/hr'}</b></div></div>
       <div class="card"><h3>Premier</h3><div class="small">4-hr min · 1 bartender</div><div class="small">Zero-proof menu · custom signage</div>
         <div class="stat"><span>From</span><b id="pkg_premier">${localStorage.getItem('vh_pkg_premier')||'$85/hr'}</b></div></div>
-    </div>
-  `;
-  return view;
+    </div>`;
+  return v;
 };
 
 views['#menus']=function(){
-  const [m1,m2,m3] = JSON.parse(localStorage.getItem('vh_menu_templates')||'null') || [
-    '<ul class="menu"><li><b>Signatures:</b> French 75 — gin, lemon, bubbles</li><li>Old Fashioned — bourbon, bitters, orange</li><li><b>House:</b> Gin & Tonic · Vodka Soda · Paloma</li><li><b>Zero-Proof:</b> Citrus & Mint Cooler</li></ul>',
-    '<ul class="menu"><li><b>Signatures:</b> Strawberry Basil Smash · Cucumber Gimlet</li><li>Spritz station · Hard seltzers</li><li><b>Zero-Proof:</b> Watermelon Fizz</li></ul>',
-    '<ul class="menu"><li><b>Signatures:</b> Espresso Martini · Ginger Pear Whiskey</li><li>Beer/Wine only option</li><li><b>Zero-Proof:</b> Spiced Apple Fizz</li></ul>'
-  ];
-  const view=document.createElement('section'); view.className='card';
-  view.innerHTML=`
+  const [m1,m2,m3]=ensureMenuTemplates();
+  const v=document.createElement('section'); v.className='card';
+  v.innerHTML=`
     <div style="display:flex; align-items:center; justify-content:space-between; gap:10px">
       <h2>Menu Templates</h2>
-      <div class="no-print" style="display:flex; gap:8px"><button class="button" id="printPage">Print</button></div>
+      <div class="no-print" style="display:flex; gap:8px">
+        ${isAdmin()?'<a class="iconbtn" href="#marketing" title="Edit templates in Marketing">Edit Templates</a>':''}
+        <button class="button" id="printMenus">Print</button>
+      </div>
     </div>
     <div class="grid-3">
-      <div class="card">${m1}</div>
-      <div class="card">${m2}</div>
-      <div class="card">${m3}</div>
-    </div>
-  `;
-  $('#printPage',view).addEventListener('click', ()=> printNode(view, 'Menus'));
-  return view;
+      <div class="card">${sanitizeListHTML(m1)}</div>
+      <div class="card">${sanitizeListHTML(m2)}</div>
+      <div class="card">${sanitizeListHTML(m3)}</div>
+    </div>`;
+  $('#printMenus',v).addEventListener('click', ()=> printNode(v, 'Menus'));
+  return v;
 };
 
 views['#designer']=function(){
-  const view=document.createElement('section'); view.className='card';
-  view.innerHTML=`
+  const v=document.createElement('section'); v.className='card';
+  v.innerHTML=`
     <div style="display:flex; align-items:center; justify-content:space-between; gap:10px">
       <h2>Menu Designer (Print-ready)</h2>
       <div class="no-print" style="display:flex; gap:8px">
@@ -457,6 +429,7 @@ views['#designer']=function(){
         <button class="button" id="btnPrint">Print Card</button>
       </div>
     </div>
+    <p class="small">Public tool for clients/planners. No admin data needed.</p>
     <div class="grid-2">
       <div>
         <div class="grid-2">
@@ -485,35 +458,34 @@ views['#designer']=function(){
           <div class="menu-note" id="mc_brand">— <span data-bind="brand">${BRAND.brand}</span> —</div>
         </div>
       </div>
-    </div>
-  `;
-  const titleCaseDrink=s=> s.replace(/^\s*([^-—–:]+)[-—–:]?\s*/,(m,name)=>`<b>${name.trim()}</b> — `);
-  function renderMenu(){
-    const t=$('#m_event',view).value||"Our Event"; const sub=$('#m_sub',view).value||"";
-    const s1=$('#m_s1',view).value||""; const s2=$('#m_s2',view).value||"";
-    const house=$('#m_house',view).value||""; const zero=$('#m_zero',view).value||"";
-    const style=$('#m_style',view).value; const noteOn=$('#m_note',view).value==="Yes"; const brandOn=$('#m_brand',view).value==="Yes";
-    $('#mc_title',view).textContent=t; $('#mc_sub',view).textContent=sub;
-    $('#mc_s1',view).innerHTML=titleCaseDrink(s1); $('#mc_s2',view).innerHTML=titleCaseDrink(s2);
-    $('#mc_house',view).innerHTML=`<b>House:</b> ${house.split(',').map(s=>s.trim()).filter(Boolean).join(' · ')}`;
-    $('#mc_zero',view).innerHTML=`<b>Zero-Proof:</b> ${zero}`;
-    $('#mc_note',view).style.display=noteOn?'block':'none'; $('#mc_brand',view).style.display=brandOn?'block':'none';
-    const card=$('#menuCard',view);
+    </div>`;
+  const tc=s=> s.replace(/^\s*([^-—–:]+)[-—–:]?\s*/,(m,n)=>`<b>${n.trim()}</b> — `);
+  function render(){
+    const t=$('#m_event',v).value||"Our Event", sub=$('#m_sub',v).value||"";
+    const s1=$('#m_s1',v).value||"", s2=$('#m_s2',v).value||"";
+    const house=$('#m_house',v).value||"", zero=$('#m_zero',v).value||"";
+    const style=$('#m_style',v).value, noteOn=$('#m_note',v).value==="Yes", brandOn=$('#m_brand',v).value==="Yes";
+    $('#mc_title',v).textContent=t; $('#mc_sub',v).textContent=sub;
+    $('#mc_s1',v).innerHTML=tc(s1); $('#mc_s2',v).innerHTML=tc(s2);
+    $('#mc_house',v).innerHTML=`<b>House:</b> ${house.split(',').map(s=>s.trim()).filter(Boolean).join(' · ')}`;
+    $('#mc_zero',v).innerHTML=`<b>Zero-Proof:</b> ${zero}`;
+    $('#mc_note',v).style.display=noteOn?'block':'none'; $('#mc_brand',v).style.display=brandOn?'block':'none';
+    const card=$('#menuCard',v);
     card.style.background={
       velvet:"conic-gradient(from 200deg at 50% 30%, color-mix(in oklab,var(--gold) 18%, transparent 82%), transparent 42% 58%, color-mix(in oklab,var(--rose) 16%, transparent 84%) 100%), color-mix(in oklab, var(--card) 92%, black 8%)",
       minimal:"color-mix(in oklab, var(--card) 94%, black 6%)",
       lively:"radial-gradient(700px 220px at 10% -30%, color-mix(in oklab,var(--violet) 24%, transparent 76%), transparent), radial-gradient(420px 200px at 90% 120%, color-mix(in oklab, var(--gold) 22%, transparent 78%), transparent), color-mix(in oklab, var(--card) 92%, black 8%)"
     }[style]||card.style.background;
   }
-  $('#btnPreview',view).addEventListener('click', renderMenu);
-  $('#btnPrint',view).addEventListener('click', ()=>{ renderMenu(); printNode($('#menuCard',view), 'Menu'); });
-  renderMenu();
-  return view;
+  $('#btnPreview',v).addEventListener('click', render);
+  $('#btnPrint',v).addEventListener('click', ()=>{ render(); printNode($('#menuCard',v), 'Menu'); });
+  render();
+  return v;
 };
 
 views['#calculator']=function(){
-  const view=document.createElement('section'); view.className='card';
-  view.innerHTML=`
+  const v=document.createElement('section'); v.className='card';
+  v.innerHTML=`
     <div style="display:flex; align-items:center; justify-content:space-between">
       <h2>Shopping Calculator</h2>
       <div class="no-print" style="display:flex; gap:8px">
@@ -534,16 +506,16 @@ views['#calculator']=function(){
     </form>
     <pre id="calc_out" style="white-space:pre-wrap; border:1px solid var(--edge); padding:12px; border-radius:12px; background:color-mix(in oklab, var(--bg) 70%, black 30%)" aria-live="polite"></pre>
   `;
-  function calcRun(){
-    const g=+$('#c_guests',view).value||0, h=+$('#c_hours',view).value||0;
-    const pc=(+$('#c_pc',view).value||0)/100, pb=(+$('#c_pb',view).value||0)/100, pw=(+$('#c_pw',view).value||0)/100;
-    const bases=($('#c_bases',view).value||'').split(',').map(s=>s.trim()).filter(Boolean);
+  function calc(){
+    const g=+$('#c_guests',v).value||0, h=+$('#c_hours',v).value||0;
+    const pc=(+$('#c_pc',v).value||0)/100, pb=(+$('#c_pb',v).value||0)/100, pw=(+$('#c_pw',v).value||0)/100;
+    const bases=($('#c_bases',v).value||'').split(',').map(s=>s.trim()).filter(Boolean);
     const drinksPerGuest=1.5+Math.max(h-1,0)*1.0;
     const total=Math.round(g*drinksPerGuest);
     const cocktails=Math.round(total*pc), beer=Math.round(total*pb), wine=Math.round(total*pw);
     const spiritBottles=Math.ceil(cocktails/16), perBase=Math.ceil(spiritBottles/Math.max(1,bases.length));
     const wineBottles=Math.ceil(wine/5), beerCases=Math.ceil(beer/24);
-    const ice=Math.ceil((+$('#c_ice',view).value||1.5)*g);
+    const ice=Math.ceil((+$('#c_ice',v).value||1.5)*g);
     const glassware=Math.ceil(g*(h>=4?3:2));
     const mixerLiters=(cocktails*0.75)/33.8, syrupLiters=(cocktails*0.25)/33.8, citrus=Math.ceil(cocktails*0.5/12), cherryOlive=Math.ceil(cocktails*0.5);
     const lines=[
@@ -559,8 +531,8 @@ views['#calculator']=function(){
       `CITRUS set: ~${citrus} pieces · GARNISH (cherry/olive): ~${cherryOlive}`,
       `ICE: ~${ice} lbs · GLASSWARE: ${glassware}`
     ];
-    $('#calc_out',view).textContent=lines.join('\n');
-    view._calcCSV=[["Item","Qty","Unit"],
+    $('#calc_out',v).textContent=lines.join('\n');
+    v._calcCSV=[["Item","Qty","Unit"],
       ["Base spirits (750ml total)",spiritBottles,"bottles"],
       ["Beer",beerCases,"cases"],
       ["Wine (750ml)",wineBottles,"bottles"],
@@ -572,16 +544,13 @@ views['#calculator']=function(){
       ["Cups/Glassware",glassware,"each"]
     ];
   }
-  function calcExport(){ if(!view._calcCSV) calcRun(); const rows=view._calcCSV.map(r=>r.join(',')); download('shopping_list.csv', rows.join('\n'), 'text/csv'); }
-  $('#btnCalc',view).addEventListener('click', calcRun);
-  $('#btnCSV',view).addEventListener('click', calcExport);
-  calcRun();
-  return view;
+  function exportCSV(){ if(!v._calcCSV) calc(); const rows=v._calcCSV.map(r=>r.join(',')); download('shopping_list.csv', rows.join('\n'), 'text/csv'); }
+  $('#btnCalc',v).addEventListener('click', calc); $('#btnCSV',v).addEventListener('click', exportCSV); calc(); return v;
 };
 
 views['#contact']=function(){
-  const view=document.createElement('section'); view.className='card';
-  view.innerHTML=`
+  const v=document.createElement('section'); v.className='card';
+  v.innerHTML=`
     <h2>Request a Quote</h2>
     <form id="reqForm">
       <div class="grid-2">
@@ -597,16 +566,12 @@ views['#contact']=function(){
       <div style="display:flex; gap:10px; align-items:center" class="no-print">
         <button class="button" type="submit">Send Request (Demo)</button>
         <a class="iconbtn" id="mailtoBtn" href="#" aria-label="Send via email">Email</a>
-        <span class="small">Prefer texting? <span data-bind="phone">${BRAND.phone}</span></span>
+        <span class="small">Text: <span data-bind="phone">${BRAND.phone}</span></span>
       </div>
-    </form>
-  `;
-  function updateMailto(){
-    const name=$('#req_name',view).value||''; const email=$('#req_email',view).value||'';
-    const date=$('#req_date',view).value||''; const guests=$('#req_guests',view).value||'';
-    const addr=$('#req_addr',view).value||''; const notes=$('#req_notes',view).value||'';
-    const subject=encodeURIComponent(`Quote Request — ${name||'Event'}`);
-    const body=encodeURIComponent(`Hi ${BRAND.brand},
+    </form>`;
+  function mailto(){
+    const name=$('#req_name',v).value||''; const email=$('#req_email',v).value||''; const date=$('#req_date',v).value||''; const guests=$('#req_guests',v).value||''; const addr=$('#req_addr',v).value||''; const notes=$('#req_notes',v).value||'';
+    const subject=encodeURIComponent(`Quote Request — ${name||'Event'}`); const body=encodeURIComponent(`Hi ${BRAND.brand},
 
 I'd like a quote for: ${date} · ${guests} guests
 Venue: ${addr}
@@ -615,29 +580,29 @@ Notes:
 ${notes}
 
 You can reach me at ${email}. Thank you!`);
-    $('#mailtoBtn',view).href=`mailto:${BRAND.email}?subject=${subject}&body=${body}`;
+    $('#mailtoBtn',v).href=`mailto:${BRAND.email}?subject=${subject}&body=${body}`;
   }
-  ['req_name','req_email','req_date','req_guests','req_addr','req_notes'].forEach(id=> $('#'+id,view).addEventListener('input', updateMailto));
-  updateMailto();
-
-  $('#reqForm',view).addEventListener('submit', (e)=>{
+  ['req_name','req_email','req_date','req_guests','req_addr','req_notes'].forEach(id=> $('#'+id,v).addEventListener('input', mailto));
+  $('#reqForm',v).addEventListener('submit', e=>{
     e.preventDefault();
     const rec={ id:'REQ-'+Math.random().toString(36).slice(2,8).toUpperCase(), ts:new Date().toISOString(),
-      name:$('#req_name',view).value, email:$('#req_email',view).value, date:$('#req_date',view).value,
-      guests:+$('#req_guests',view).value, addr:$('#req_addr',view).value, notes:$('#req_notes',view).value };
-    const arr=JSON.parse(localStorage.getItem('vh_requests')||'[]'); arr.push(rec);
-    localStorage.setItem('vh_requests', JSON.stringify(arr));
-    toast(`Request logged: ${rec.id}`); e.target.reset(); updateMailto();
+      name:$('#req_name',v).value, email:$('#req_email',v).value, date:$('#req_date',v).value,
+      guests:+$('#req_guests',v).value, addr:$('#req_addr',v).value, notes:$('#req_notes',v).value, handled:false };
+    const arr=JSON.parse(localStorage.getItem('vh_requests')||'[]'); arr.push(rec); localStorage.setItem('vh_requests', JSON.stringify(arr));
+    toast(`Request logged: ${rec.id}`); e.target.reset(); mailto();
   });
-  return view;
+  mailto(); return v;
 };
 
-/* ========= ADMIN-ONLY VIEWS (next level layouts) ========= */
+/* ===== ADMIN VIEWS ===== */
+function money(n){ return `$${(+n||0).toFixed(2)}`; }
+function printNode(node,title='Print'){ const w=window.open('','_blank'); w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>${title}</title><style>body{font-family:${getComputedStyle(document.body).fontFamily}; color:#222; margin:20px}.small{color:#555} table{width:100%; border-collapse:collapse} th,td{border-bottom:1px solid #ddd; padding:8px; text-align:left; vertical-align:top}.menu-card{border:1px solid #ddd; border-radius:22px; padding:26px}</style></head><body>`); w.document.body.appendChild(node.cloneNode(true)); w.document.write('</body></html>'); w.document.close(); w.focus(); w.print(); }
+
 views['#invoice']=function(){
   const saved = ( ()=>{ try{ return JSON.parse(localStorage.getItem('vh_invoice')) || null; }catch{ return null; } })()
     || {no:'0001', rows:[{desc:'Bartending — Signature Package', qty:4, rate:65}], tax:0, tip:15, disc:0, status:'Unpaid'};
-  const view=document.createElement('section'); view.className='card grid-admin';
-  view.innerHTML=`
+  const v=document.createElement('section'); v.className='card grid-admin';
+  v.innerHTML=`
     <div>
       <div style="display:flex; align-items:center; justify-content:space-between">
         <h2>Invoice</h2>
@@ -647,21 +612,11 @@ views['#invoice']=function(){
         </div>
       </div>
       <div class="grid-2" style="margin-top:8px">
-        <div>
-          <b data-bind="brand">${BRAND.brand}</b><br>
-          <span data-bind="city">${BRAND.city}</span><br>
-          <span data-bind="email">${BRAND.email}</span> · <span data-bind="phone">${BRAND.phone}</span>
-        </div>
-        <div>
-          <div class="small">Date: <span id="inv_date">—</span></div>
-          <div class="small">Invoice #: <input id="inv_no" style="width:140px" value="${saved.no||'0001'}"></div>
-        </div>
+        <div><b data-bind="brand">${BRAND.brand}</b><br><span data-bind="city">${BRAND.city}</span><br><span data-bind="email">${BRAND.email}</span> · <span data-bind="phone">${BRAND.phone}</span></div>
+        <div><div class="small">Date: <span id="inv_date">—</span></div><div class="small">Invoice #: <input id="inv_no" style="width:140px" value="${saved.no||'0001'}"></div></div>
       </div>
       <hr>
-      <table id="inv_tbl">
-        <thead><tr><th>Description</th><th style="width:90px">Qty</th><th style="width:90px">Rate</th><th style="width:110px">Amount</th></tr></thead>
-        <tbody id="inv_body"></tbody>
-      </table>
+      <table id="inv_tbl"><thead><tr><th>Description</th><th style="width:90px">Qty</th><th style="width:90px">Rate</th><th style="width:110px">Amount</th></tr></thead><tbody id="inv_body"></tbody></table>
     </div>
     <aside class="sticky">
       <div class="card">
@@ -678,62 +633,26 @@ views['#invoice']=function(){
           <label class="iconbtn">Import<input id="importInv" type="file" hidden accept="application/json"></label>
         </div>
       </div>
-    </aside>
-  `;
-  const body=$('#inv_body',view);
-  function pushRow(r={desc:'Item', qty:1, rate:0}){
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td contenteditable>${r.desc||'Item'}</td><td><input type="number" value="${r.qty||0}" min="0" step="0.5"></td><td><input type="number" value="${r.rate||0}" min="0" step="1"></td><td class="amt">$0.00</td>`;
-    body.appendChild(tr);
-  }
+    </aside>`;
+  const body=$('#inv_body',v);
+  function pushRow(r={desc:'Item', qty:1, rate:0}){ const tr=document.createElement('tr'); tr.innerHTML=`<td contenteditable>${r.desc||'Item'}</td><td><input type="number" value="${r.qty||0}" min="0" step="0.5"></td><td><input type="number" value="${r.rate||0}" min="0" step="1"></td><td class="amt">$0.00</td>`; body.appendChild(tr); }
   (saved.rows||[]).forEach(pushRow);
-  function serialize(){
-    return {
-      no: $('#inv_no',view).value,
-      rows: $$('#inv_tbl tbody tr',view).map(tr=>({desc: tr.cells[0].innerText.trim(), qty:+tr.cells[1].querySelector('input').value||0, rate:+tr.cells[2].querySelector('input').value||0})),
-      tax:+$('#inv_tax',view).value||0, tip:+$('#inv_tip',view).value||0, disc:+$('#inv_disc',view).value||0,
-      status: $('#inv_status',view).value
-    };
-  }
-  function calc(){
-    let sub=0;
-    $$('#inv_tbl tbody tr',view).forEach(tr=>{
-      const qty=+tr.querySelector('td:nth-child(2) input').value||0;
-      const rate=+tr.querySelector('td:nth-child(3) input').value||0;
-      const amt=qty*rate; sub+=amt;
-      tr.querySelector('.amt').textContent=money(amt);
-    });
-    $('#inv_sub',view).textContent=money(sub);
-    const tax=+$('#inv_tax',view).value||0, tipPct=+$('#inv_tip',view).value||0, discount=+$('#inv_disc',view).value||0;
-    const tot=sub + tax + (sub*(tipPct/100)) - discount;
-    $('#inv_tot',view).textContent=money(tot);
-    localStorage.setItem('vh_invoice', JSON.stringify(serialize()));
-  }
-  $('#inv_status',view).value = saved.status||'Unpaid';
-  $('#addLine',view).addEventListener('click', ()=>{ pushRow(); calc(); });
-  $('#printInvoice',view).addEventListener('click', ()=> printNode(view, 'Invoice'));
-  $('#openPay',view).addEventListener('click', ()=>{
-    $('#pay_name').value = $('#cl_name')?.value || '';
-    $('#pay_amount').value = $('#inv_tot',view).innerText.replace(/[^0-9.]/g,'') || '0.00';
-    $('#pay_method').value = 'Card';
-    $('#payNotice').textContent='';
-    openPanel($('#payPanel'));
-  });
-  $('#exportInv',view).addEventListener('click', ()=> download('invoice.json', JSON.stringify(serialize(),null,2)));
-  $('#importInv',view).addEventListener('change', e=>{
-    const f=e.target.files[0]; if(!f) return; f.text().then(t=>{ try{ const obj=JSON.parse(t); localStorage.setItem('vh_invoice', JSON.stringify(obj)); toast('Invoice imported'); renderRoute('#invoice'); }catch{ toast('Invalid JSON','warn'); }});
-  });
-
-  (function(){ const d=new Date(); const f=n=>n.toString().padStart(2,'0'); $('#inv_date',view).textContent=`${d.getFullYear()}-${f(d.getMonth()+1)}-${f(d.getDate())}`; })();
-  view.addEventListener('input', e=>{ if(e.target.matches('input')) calc(); });
-  calc();
-  return view;
+  function serialize(){ return { no:$('#inv_no',v).value, rows: $$('#inv_tbl tbody tr',v).map(tr=>({desc: tr.cells[0].innerText.trim(), qty:+tr.cells[1].querySelector('input').value||0, rate:+tr.cells[2].querySelector('input').value||0})), tax:+$('#inv_tax',v).value||0, tip:+$('#inv_tip',v).value||0, disc:+$('#inv_disc',v).value||0, status: $('#inv_status',v).value }; }
+  function calc(){ let sub=0; $$('#inv_tbl tbody tr',v).forEach(tr=>{ const qty=+tr.querySelector('td:nth-child(2) input').value||0; const rate=+tr.querySelector('td:nth-child(3) input').value||0; const amt=qty*rate; sub+=amt; tr.querySelector('.amt').textContent=money(amt); }); $('#inv_sub',v).textContent=money(sub); const tax=+$('#inv_tax',v).value||0, tipPct=+$('#inv_tip',v).value||0, discount=+$('#inv_disc',v).value||0; $('#inv_tot',v).textContent=money(sub + tax + (sub*(tipPct/100)) - discount); localStorage.setItem('vh_invoice', JSON.stringify(serialize())); }
+  $('#inv_status',v).value=saved.status||'Unpaid';
+  $('#addLine',v).addEventListener('click', ()=>{ pushRow(); calc(); });
+  $('#printInvoice',v).addEventListener('click', ()=> printNode(v,'Invoice'));
+  $('#openPay',v).addEventListener('click', ()=>{ $('#pay_name').value = $('#cl_name')?.value || ''; $('#pay_amount').value = $('#inv_tot',v).innerText.replace(/[^0-9.]/g,'') || '0.00'; $('#pay_method').value='Card'; $('#payNotice').textContent=''; openPanel($('#payPanel')); });
+  $('#exportInv',v).addEventListener('click', ()=> download('invoice.json', JSON.stringify(serialize(),null,2)));
+  $('#importInv',v).addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; f.text().then(t=>{ try{ const obj=JSON.parse(t); localStorage.setItem('vh_invoice', JSON.stringify(obj)); toast('Invoice imported'); renderRoute('#invoice'); }catch{ toast('Invalid JSON','warn'); }}); });
+  (function(){ const d=new Date(); const f=n=>n.toString().padStart(2,'0'); $('#inv_date',v).textContent=`${d.getFullYear()}-${f(d.getMonth()+1)}-${f(d.getDate())}`; })();
+  v.addEventListener('input', e=>{ if(e.target.matches('input')) calc(); }); calc(); return v;
 };
 
 views['#contract']=function(){
   const saved = ( ()=>{ try{ return JSON.parse(localStorage.getItem('vh_contract'))||{}; }catch{ return {}; } })();
-  const view=document.createElement('section'); view.className='card grid-admin';
-  view.innerHTML=`
+  const v=document.createElement('section'); v.className='card grid-admin';
+  v.innerHTML=`
     <div>
       <div style="display:flex; align-items:center; justify-content:space-between">
         <h2>Service Agreement</h2>
@@ -751,44 +670,26 @@ views['#contract']=function(){
         <p><label>End Time<br><input id="cl_end" placeholder="9:00 PM" value="${saved.end||''}"></label></p>
       </div>
       <p><label>Venue<br><input id="cl_venue" placeholder="Venue / Address" value="${saved.venue||''}"></label></p>
-
       <div class="grid-2">
         <p><label>Quoted Total ($)<br><input id="cl_total" type="number" value="${saved.total||0}"></label></p>
         <p><label>Retainer %<br><input id="cl_rt_pct" type="number" value="${saved.rt_pct||30}"></label></p>
       </div>
-
       <h3>Scope</h3>
       <ul id="scopeList">
         <li contenteditable>Bartending service; bar setup & cleanup.</li>
         <li contenteditable>Menu per proposal; quantity planning; garnish kit & tools.</li>
         <li contenteditable>Client supplies alcohol unless otherwise agreed in writing.</li>
       </ul>
-
       <h3>Policies</h3>
       <ul id="policyList">
         <li contenteditable>Retainer due upon signing; balance due 3 days prior.</li>
         <li contenteditable>Holiday dates may be billed at 1.5×.</li>
         <li contenteditable>IDs checked; service may be refused for safety.</li>
       </ul>
-
       <h3>Signatures</h3>
       <div class="grid-2">
-        <div>
-          <p><b>Client Signature</b></p>
-          <canvas id="sigClient" class="sig-pad"></canvas>
-          <div class="no-print" style="display:flex; gap:8px; margin-top:8px">
-            <button class="button" id="sigClientClear">Clear</button>
-            <button class="button" id="sigClientSave">Save</button>
-          </div>
-        </div>
-        <div>
-          <p><b>Provider — ${BRAND.brand}</b></p>
-          <canvas id="sigProvider" class="sig-pad"></canvas>
-          <div class="no-print" style="display:flex; gap:8px; margin-top:8px">
-            <button class="button" id="sigProviderClear">Clear</button>
-            <button class="button" id="sigProviderSave">Save</button>
-          </div>
-        </div>
+        <div><p><b>Client Signature</b></p><canvas id="sigClient" class="sig-pad"></canvas><div class="no-print" style="display:flex; gap:8px; margin-top:8px"><button class="button" id="sigClientClear">Clear</button><button class="button" id="sigClientSave">Save</button></div></div>
+        <div><p><b>Provider — ${BRAND.brand}</b></p><canvas id="sigProvider" class="sig-pad"></canvas><div class="no-print" style="display:flex; gap:8px; margin-top:8px"><button class="button" id="sigProviderClear">Clear</button><button class="button" id="sigProviderSave">Save</button></div></div>
       </div>
     </div>
     <aside class="sticky">
@@ -796,60 +697,30 @@ views['#contract']=function(){
         <h3>Summary</h3>
         <div class="stat"><span>Retainer (calc)</span><b id="retainer">$0.00</b></div>
         <div class="stat"><span>Balance Due</span><b id="balance">$0.00</b></div>
-        <div class="stat"><span>COI required?</span>
-          <select id="coiReq"><option>No</option><option>Yes</option></select>
-        </div>
+        <div class="stat"><span>COI required?</span><select id="coiReq"><option>No</option><option>Yes</option></select></div>
         <div style="display:flex; gap:8px; margin-top:8px">
           <button class="iconbtn" id="exportContract">Export JSON</button>
           <label class="iconbtn">Import<input id="importContract" type="file" hidden accept="application/json"></label>
         </div>
       </div>
-    </aside>
-  `;
-  const state={...saved};
-  function serialize(){
-    return {
-      name:$('#cl_name',view).value, date:$('#cl_date',view).value, start:$('#cl_start',view).value, end:$('#cl_end',view).value,
-      venue:$('#cl_venue',view).value, total:+$('#cl_total',view).value||0, rt_pct:+$('#cl_rt_pct',view).value||30, coi:$('#coiReq',view).value,
-      scope: $$('#scopeList li',view).map(li=>li.innerText), policies: $$('#policyList li',view).map(li=>li.innerText)
-    };
-  }
-  function recalc(){
-    const total=+$('#cl_total',view).value||0, pct=(+$('#cl_rt_pct',view).value||0)/100;
-    const ret=total*pct, bal=total-ret;
-    $('#retainer',view).textContent=money(ret); $('#balance',view).textContent=money(bal);
-    localStorage.setItem('vh_contract', JSON.stringify(serialize()));
-  }
-  function wireSig(id){
-    const c=$('#'+id,view), ctx=c.getContext('2d');
-    function resize(){ const ratio=Math.max(1,Math.floor(window.devicePixelRatio||1)); const r=c.getBoundingClientRect(); c.width=Math.floor(r.width*ratio); c.height=Math.floor(r.height*ratio); ctx.setTransform(ratio,0,0,ratio,0,0); ctx.lineWidth=2; ctx.lineCap='round'; ctx.strokeStyle='#111'; }
-    resize(); window.addEventListener('resize',resize,{passive:true});
-    let d=false,lx=0,ly=0;
-    c.addEventListener('pointerdown',e=>{d=true; const r=c.getBoundingClientRect(); lx=e.clientX-r.left; ly=e.clientY-r.top; c.setPointerCapture(e.pointerId);});
-    c.addEventListener('pointerup',e=>{d=false; c.releasePointerCapture?.(e.pointerId);});
-    c.addEventListener('pointerleave',()=>d=false);
-    c.addEventListener('pointermove',e=>{ if(!d) return; const r=c.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top; ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(x,y); ctx.stroke(); lx=x; ly=y; });
-    return {clear:()=>ctx.clearRect(0,0,c.width,c.height), save:()=>{ const a=document.createElement('a'); a.href=c.toDataURL('image/png'); a.download=id+'.png'; a.click(); }};
-  }
-  const sigC=wireSig('sigClient'), sigP=wireSig('sigProvider');
-  $('#sigClientClear',view).addEventListener('click', sigC.clear); $('#sigProviderClear',view).addEventListener('click', sigP.clear);
-  $('#sigClientSave',view).addEventListener('click', sigC.save);   $('#sigProviderSave',view).addEventListener('click', sigP.save);
-  ['cl_total','cl_rt_pct'].forEach(id=> $('#'+id,view).addEventListener('input', recalc));
-  ['cl_name','cl_date','cl_start','cl_end','cl_venue','coiReq'].forEach(id=> $('#'+id,view).addEventListener('input', ()=> localStorage.setItem('vh_contract', JSON.stringify(serialize())) ));
-  $('#printContract',view).addEventListener('click', ()=> printNode(view,'Contract (Preview)'));
-  $('#clearSigs',view).addEventListener('click', ()=>{ sigC.clear(); sigP.clear(); });
-  $('#exportContract',view).addEventListener('click', ()=> download('contract.json', JSON.stringify(serialize(),null,2)));
-  $('#importContract',view).addEventListener('change', e=>{
-    const f=e.target.files[0]; if(!f) return; f.text().then(t=>{ try{ const obj=JSON.parse(t); localStorage.setItem('vh_contract', JSON.stringify(obj)); toast('Contract imported'); location.reload(); }catch{ toast('Invalid JSON','warn'); }});
-  });
-  recalc();
-  return view;
+    </aside>`;
+  function serialize(){ return { name:$('#cl_name',v).value, date:$('#cl_date',v).value, start:$('#cl_start',v).value, end:$('#cl_end',v).value, venue:$('#cl_venue',v).value, total:+$('#cl_total',v).value||0, rt_pct:+$('#cl_rt_pct',v).value||30, coi:$('#coiReq',v).value, scope: $$('#scopeList li',v).map(li=>li.innerText), policies: $$('#policyList li',v).map(li=>li.innerText) }; }
+  function recalc(){ const total=+$('#cl_total',v).value||0, pct=(+$('#cl_rt_pct',v).value||0)/100; const ret=total*pct, bal=total-ret; $('#retainer',v).textContent=money(ret); $('#balance',v).textContent=money(bal); localStorage.setItem('vh_contract', JSON.stringify(serialize())); }
+  function sigWire(id){ const c=$('#'+id,v), ctx=c.getContext('2d'); function resize(){ const ratio=Math.max(1,Math.floor(window.devicePixelRatio||1)); const r=c.getBoundingClientRect(); c.width=Math.floor(r.width*ratio); c.height=Math.floor(r.height*ratio); ctx.setTransform(ratio,0,0,ratio,0,0); ctx.lineWidth=2; ctx.lineCap='round'; ctx.strokeStyle='#111'; } resize(); window.addEventListener('resize',resize,{passive:true}); let d=false,lx=0,ly=0; c.addEventListener('pointerdown',e=>{d=true; const r=c.getBoundingClientRect(); lx=e.clientX-r.left; ly=e.clientY-r.top; c.setPointerCapture(e.pointerId);}); c.addEventListener('pointerup',e=>{d=false; c.releasePointerCapture?.(e.pointerId);}); c.addEventListener('pointerleave',()=>d=false); c.addEventListener('pointermove',e=>{ if(!d) return; const r=c.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top; ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(x,y); ctx.stroke(); lx=x; ly=y; }); return {clear:()=>ctx.clearRect(0,0,c.width,c.height), save:()=>{ const a=document.createElement('a'); a.href=c.toDataURL('image/png'); a.download=id+'.png'; a.click(); }}; }
+  const sigC=sigWire('sigClient'), sigP=sigWire('sigProvider');
+  $('#sigClientClear',v).addEventListener('click', sigC.clear); $('#sigProviderClear',v).addEventListener('click', sigP.clear);
+  $('#sigClientSave',v).addEventListener('click', sigC.save);   $('#sigProviderSave',v).addEventListener('click', sigP.save);
+  ['cl_total','cl_rt_pct'].forEach(id=> $('#'+id,v).addEventListener('input', recalc));
+  ['cl_name','cl_date','cl_start','cl_end','cl_venue','coiReq'].forEach(id=> $('#'+id,v).addEventListener('input', ()=> localStorage.setItem('vh_contract', JSON.stringify(serialize())) ));
+  $('#printContract',v).addEventListener('click', ()=> printNode(v,'Contract')); $('#clearSigs',v).addEventListener('click', ()=>{ sigC.clear(); sigP.clear(); }); $('#exportContract',v).addEventListener('click', ()=> download('contract.json', JSON.stringify(serialize(),null,2)));
+  $('#importContract',v).addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; f.text().then(t=>{ try{ const obj=JSON.parse(t); localStorage.setItem('vh_contract', JSON.stringify(obj)); toast('Contract imported'); renderRoute('#contract'); }catch{ toast('Invalid JSON','warn'); }}); });
+  recalc(); return v;
 };
 
 views['#checklists']=function(){
   const saved = ( ()=>{ try{ return JSON.parse(localStorage.getItem('vh_incidents'))||[]; }catch{ return []; } })();
-  const view=document.createElement('section'); view.className='card';
-  view.innerHTML=`
+  const v=document.createElement('section'); v.className='card';
+  v.innerHTML=`
     <div style="display:flex; align-items:center; justify-content:space-between">
       <h2>Service Checklists & Incident Log</h2>
       <div style="display:flex; gap:8px">
@@ -886,59 +757,30 @@ views['#checklists']=function(){
         </ul>
       </div>
     </div>
-    <div class="card" style="margin-top:12px">
-      <div class="stat"><span>Progress</span><progress id="prog" max="100" value="0" style="width:160px; height:12px"></progress></div>
-    </div>
+    <div class="card" style="margin-top:12px"><div class="stat"><span>Progress</span><progress id="prog" max="100" value="0" style="width:160px; height:12px"></progress></div></div>
     <div class="card" style="margin-top:12px">
       <h3>Incident & Refusal Log</h3>
-      <table id="incidentTbl">
-        <thead><tr><th>Date/Time</th><th>Name/Desc</th><th>Reason</th><th>Actions Taken</th><th>Staff</th><th class="no-print">Actions</th></tr></thead>
-        <tbody id="incidentBody"></tbody>
-      </table>
-      <div class="no-print" style="margin-top:10px; display:flex; gap:8px">
-        <button class="button" id="addIncident">Add row</button>
-        <button class="iconbtn" id="clearInc">Clear</button>
-      </div>
+      <table id="incidentTbl"><thead><tr><th>Date/Time</th><th>Name/Desc</th><th>Reason</th><th>Actions Taken</th><th>Staff</th><th class="no-print">Actions</th></tr></thead><tbody id="incidentBody"></tbody></table>
+      <div class="no-print" style="margin-top:10px; display:flex; gap:8px"><button class="button" id="addIncident">Add row</button><button class="iconbtn" id="clearInc">Clear</button></div>
       <blockquote class="small">Refusal script: "For your safety, I'm not able to serve that right now. I'm happy to get you water or food, or a rideshare if you need it."</blockquote>
-    </div>
-  `;
-  function updateProgress(){
-    const boxes=$$('ul.check input[type="checkbox"]',view);
-    const c=boxes.filter(b=>b.checked).length; const t=boxes.length||1;
-    $('#prog',view).value=Math.round((c/t)*100);
-  }
-  view.addEventListener('change', e=>{ if(e.target.matches('ul.check input[type="checkbox"]')) updateProgress(); });
-
-  const body=$('#incidentBody',view);
-  function addRow(cols){
-    const tr=document.createElement('tr');
-    const init = cols || ['','','Over-service / No ID / Aggressive / Other','Water/food · Notified planner/security · Rideshare',''];
-    tr.innerHTML = init.slice(0,5).map(c=>`<td contenteditable>${c}</td>`).join('') + `<td class="no-print"><button class="iconbtn btnDel">✖</button></td>`;
-    body.appendChild(tr);
-    tr.querySelector('.btnDel').addEventListener('click', ()=>{ tr.remove(); });
-  }
-  (saved.length? saved : [null]).forEach(cols=> addRow(cols));
-  $('#addIncident',view).addEventListener('click', ()=> addRow());
-  $('#clearInc',view).addEventListener('click', ()=>{ body.innerHTML=''; });
-  $('#saveInc',view).addEventListener('click', ()=>{
-    const rows=$$('#incidentBody tr',view).map(tr=>[...tr.cells].slice(0,5).map(td=>td.innerText));
-    localStorage.setItem('vh_incidents', JSON.stringify(rows)); toast('Incidents saved');
-  });
-  $('#exportInc',view).addEventListener('click', ()=>{
-    const rows=$$('#incidentBody tr',view).map(tr=>[...tr.cells].slice(0,5).map(td=>td.innerText));
-    download('incidents.json', JSON.stringify(rows,null,2));
-  });
-  $('#importInc',view).addEventListener('change', e=>{
-    const f=e.target.files[0]; if(!f) return; f.text().then(t=>{ try{ const obj=JSON.parse(t); localStorage.setItem('vh_incidents', JSON.stringify(obj)); toast('Imported'); renderRoute('#checklists'); }catch{ toast('Invalid JSON','warn'); }});
-  });
-  $('#printChk',view).addEventListener('click', ()=> printNode(view, 'Checklists'));
-  updateProgress();
-  return view;
+    </div>`;
+  function prog(){ const boxes=$$('ul.check input[type="checkbox"]',v); const c=boxes.filter(b=>b.checked).length; const t=boxes.length||1; $('#prog',v).value=Math.round((c/t)*100); }
+  v.addEventListener('change', e=>{ if(e.target.matches('ul.check input[type="checkbox"]')) prog(); });
+  const body=$('#incidentBody',v);
+  function row(cols){ const tr=document.createElement('tr'); const init=cols||['','','Over-service / No ID / Aggressive / Other','Water/food · Notified planner/security · Rideshare','']; tr.innerHTML=init.slice(0,5).map(c=>`<td contenteditable>${c}</td>`).join('')+`<td class="no-print"><button class="iconbtn btnDel">✖</button></td>`; body.appendChild(tr); tr.querySelector('.btnDel').addEventListener('click', ()=>tr.remove()); }
+  (saved.length?saved:[null]).forEach(cols=>row(cols));
+  $('#addIncident',v).addEventListener('click', ()=>row());
+  $('#clearInc',v).addEventListener('click', ()=>{ body.innerHTML=''; });
+  $('#saveInc',v).addEventListener('click', ()=>{ const rows=$$('#incidentBody tr',v).map(tr=>[...tr.cells].slice(0,5).map(td=>td.innerText)); localStorage.setItem('vh_incidents', JSON.stringify(rows)); toast('Incidents saved'); });
+  $('#exportInc',v).addEventListener('click', ()=>{ const rows=$$('#incidentBody tr',v).map(tr=>[...tr.cells].slice(0,5).map(td=>td.innerText)); download('incidents.json', JSON.stringify(rows,null,2)); });
+  $('#importInc',v).addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; f.text().then(t=>{ try{ const obj=JSON.parse(t); localStorage.setItem('vh_incidents', JSON.stringify(obj)); toast('Imported'); renderRoute('#checklists'); }catch{ toast('Invalid JSON','warn'); }}); });
+  $('#printChk',v).addEventListener('click', ()=> printNode(v, 'Checklists')); prog(); return v;
 };
 
 views['#marketing']=function(){
-  const view=document.createElement('section'); view.className='card grid-admin';
-  view.innerHTML=`
+  const v=document.createElement('section'); v.className='card grid-admin';
+  const [m1,m2,m3]=ensureMenuTemplates();
+  v.innerHTML=`
     <div>
       <div style="display:flex; align-items:center; justify-content:space-between">
         <h2>Marketing Kit</h2>
@@ -947,10 +789,12 @@ views['#marketing']=function(){
           <button class="button" id="copyRate">Copy 1-pager text</button>
         </div>
       </div>
+
       <h3>Brand Bio</h3>
       <p>Hi, I'm Kate — lead bartender behind <b data-bind="brand">${BRAND.brand}</b>. I craft menus that match your vibe and run a calm, safe bar that stays on schedule. Certified, insured, detail-obsessed.</p>
       <h3>Instagram Bio</h3>
       <pre class="small">Premium bartending · weddings & parties · certified + insured · signature cocktails · ${BRAND.city} · Inquire ↓</pre>
+
       <h3>Outreach Scripts</h3>
 <pre class="small">Planner/venue DM:
 Hi {{first_name}} — I run {{brand}}, a certified & insured event bartending team serving {{city/region}}.
@@ -959,6 +803,7 @@ We handle menus, quantities, and smooth, on-time service. Can I send a 1-page ra
 COI request (to insurer):
 Please issue a certificate naming {{Venue Name}} as additional insured for {{Event Date}}.
 Send as PDF to {{client email}} and cc ${BRAND.email}. Thank you.</pre>
+
       <h3>Rate Sheet (copy text)</h3>
       <pre id="rateSheet" class="small">• Essentials — from ${localStorage.getItem('vh_pkg_essentials')||'$55/hr'} (beer, wine, highballs; shopping plan; garnish kit)
 • Signature — from ${localStorage.getItem('vh_pkg_signature')||'$65/hr'} (2 signatures + tasting; elevated garnish & signage)
@@ -966,7 +811,25 @@ Send as PDF to {{client email}} and cc ${BRAND.email}. Thank you.</pre>
 • Add-ons: extra bartenders, menu boards, glassware, mobile bar.
 • TIPS/ServSafe certified. Liquor liability; COI available.
 • Service area: ${BRAND.city} + Carolinas. Inquire: ${BRAND.email} · ${BRAND.phone}</pre>
+
+      <hr>
+      <h3>Menu Templates (Admin)</h3>
+      <p class="small">Enter simple HTML lists. Allowed tags: ul/ol/li,b,i,strong,em,span.</p>
+      <div class="grid-3">
+        <p><label>Template 1<br><textarea id="ad_menu1" rows="8">${m1}</textarea></label></p>
+        <p><label>Template 2<br><textarea id="ad_menu2" rows="8">${m2}</textarea></label></p>
+        <p><label>Template 3<br><textarea id="ad_menu3" rows="8">${m3}</textarea></label></p>
+      </div>
+      <div style="margin-top:8px; display:flex; gap:8px">
+        <button class="button" id="saveMenus">Save Templates</button>
+        <button class="iconbtn" id="resetMenus">Reset to Defaults</button>
+      </div>
+
+      <hr>
+      <h3>Leads Inbox</h3>
+      <div id="leadsBox" class="small">No requests yet.</div>
     </div>
+
     <aside class="sticky">
       <div class="card">
         <h3>Brand Controls</h3>
@@ -976,7 +839,7 @@ Send as PDF to {{client email}} and cc ${BRAND.email}. Thank you.</pre>
         </div>
         <div class="grid-2">
           <p><label>Email<br><input id="ad_email" type="email" value="${BRAND.email}"></label></p>
-          <p><label>Phone<br><input id="ad_phone" value="${BRAND.phone}"></input></label></p>
+          <p><label>Phone<br><input id="ad_phone" value="${BRAND.phone}"></label></p>
         </div>
         <div class="grid-3">
           <p><label>Essentials (text)<br><input id="ad_pkg_essentials" value="${localStorage.getItem('vh_pkg_essentials')||'$55/hr'}"></label></p>
@@ -985,7 +848,7 @@ Send as PDF to {{client email}} and cc ${BRAND.email}. Thank you.</pre>
         </div>
         <div style="display:flex; gap:8px; margin-top:8px">
           <button class="button" id="saveBrand">Save Brand</button>
-          <button class="iconbtn" id="resetBrand">Reset</button>
+          <button class="iconbtn" id="resetBrandBtn">Reset</button>
           <button class="iconbtn" id="exportBrand">Export</button>
           <label class="iconbtn">Import<input id="importBrand" type="file" hidden accept="application/json"></label>
         </div>
@@ -993,57 +856,80 @@ Send as PDF to {{client email}} and cc ${BRAND.email}. Thank you.</pre>
         <h4>Payments (Demo)</h4>
         <div id="paymentsList" class="small">No payments yet.</div>
       </div>
-    </aside>
-  `;
-  $('#dlCalendar',view).addEventListener('click', ()=>{
-    const rows=[["Week","Platform","Content","Hashtags"],
-      ["1","Instagram","Behind the scenes: Menu creation","#Bartending #EventPlanning #Mixology"],
-      ["2","Instagram","Signature cocktail showcase","#Cocktails #Drinks #BartenderLife"],
-      ["3","Facebook","Client testimonial feature","#Events #WeddingBartender #CharlotteEvents"]];
-    download('content_calendar.csv', rows.map(r=>r.join(',')).join('\n'), 'text/csv'); toast('Calendar downloaded');
+    </aside>`;
+  // Menu templates
+  $('#saveMenus',v).addEventListener('click', ()=>{
+    const vals=[$('#ad_menu1',v).value,$('#ad_menu2',v).value,$('#ad_menu3',v).value].map(sanitizeListHTML);
+    localStorage.setItem('vh_menu_templates', JSON.stringify(vals)); toast('Menu templates saved');
   });
-  $('#copyRate',view).addEventListener('click', ()=>{
-    navigator.clipboard.writeText($('#rateSheet',view).textContent).then(()=> toast('Rate sheet copied')).catch(()=> toast('Copy failed','warn'));
-  });
-  $('#saveBrand',view).addEventListener('click', ()=>{
-    BRAND={...BRAND,
-      brand:$('#ad_brand',view).value.trim()||BRAND.brand,
-      city:$('#ad_city',view).value.trim()||BRAND.city,
-      email:$('#ad_email',view).value.trim()||BRAND.email,
-      phone:$('#ad_phone',view).value.trim()||BRAND.phone
-    };
-    localStorage.setItem('vh_brand', JSON.stringify(BRAND)); applyBrand(); 
-    localStorage.setItem('vh_pkg_essentials',$('#ad_pkg_essentials',view).value||'$55/hr');
-    localStorage.setItem('vh_pkg_signature', $('#ad_pkg_signature',view).value||'$65/hr');
-    localStorage.setItem('vh_pkg_premier',   $('#ad_pkg_premier',view).value||'$85/hr');
+  $('#resetMenus',v).addEventListener('click', ()=>{ localStorage.setItem('vh_menu_templates', JSON.stringify(defaultMenuTemplates())); toast('Templates reset'); renderRoute('#marketing'); });
+  // Leads inbox
+  function renderLeads(){
+    const box=$('#leadsBox',v); const arr=JSON.parse(localStorage.getItem('vh_requests')||'[]').slice().reverse();
+    if(!arr.length){ box.textContent='No requests yet.'; return; }
+    box.innerHTML = arr.map(r=>`
+      <div class="card" style="margin-bottom:8px">
+        <div style="display:flex; justify-content:space-between; gap:8px">
+          <div><b>${r.name||'(no name)'}</b> · ${r.email||''}</div>
+          <div class="small">${r.ts?.split('T')[0]||''} · ID ${r.id}</div>
+        </div>
+        <div class="small">Date: ${r.date||'—'} · Guests: ${r.guests||'—'} · Venue: ${r.addr||'—'}</div>
+        <div class="small" style="white-space:pre-wrap">${(r.notes||'').trim()}</div>
+        <div style="margin-top:6px; display:flex; gap:8px">
+          <button class="iconbtn btnHandled" data-id="${r.id}">${r.handled?'Handled':'Mark handled'}</button>
+          <button class="iconbtn btnCSV" data-id="${r.id}">Export CSV</button>
+        </div>
+      </div>`).join('');
+    $$('.btnHandled',v).forEach(b=> b.addEventListener('click', ()=>{
+      const id=b.getAttribute('data-id'); const arr=JSON.parse(localStorage.getItem('vh_requests')||'[]');
+      const i=arr.findIndex(x=>x.id===id); if(i>-1){ arr[i].handled=!arr[i].handled; localStorage.setItem('vh_requests', JSON.stringify(arr)); renderLeads(); }
+    }));
+    $$('.btnCSV',v).forEach(b=> b.addEventListener('click', ()=>{
+      const id=b.getAttribute('data-id'); const arr=JSON.parse(localStorage.getItem('vh_requests')||'[]'); const r=arr.find(x=>x.id===id); if(!r) return;
+      const rows=[['id','ts','name','email','date','guests','addr','notes','handled'],[r.id,r.ts,r.name,r.email,r.date,r.guests,r.addr,(r.notes||'').replace(/\n/g,' '),r.handled]];
+      download(`lead_${r.id}.csv`, rows.map(x=>x.join(',')).join('\n'), 'text/csv');
+    }));
+  }
+  renderLeads();
+  // Marketing actions
+  $('#dlCalendar',v).addEventListener('click', ()=>{ const rows=[["Week","Platform","Content","Hashtags"],["1","Instagram","Behind the scenes: Menu creation","#Bartending #EventPlanning #Mixology"],["2","Instagram","Signature cocktail showcase","#Cocktails #Drinks #BartenderLife"],["3","Facebook","Client testimonial feature","#Events #WeddingBartender #CharlotteEvents"]]; download('content_calendar.csv', rows.map(r=>r.join(',')).join('\n'), 'text/csv'); toast('Calendar downloaded'); });
+  $('#copyRate',v).addEventListener('click', ()=>{ navigator.clipboard.writeText($('#rateSheet',v).textContent).then(()=> toast('Rate sheet copied')).catch(()=> toast('Copy failed','warn')); });
+  // Brand controls
+  $('#saveBrand',v).addEventListener('click', ()=>{
+    BRAND={...BRAND, brand:$('#ad_brand',v).value.trim()||BRAND.brand, city:$('#ad_city',v).value.trim()||BRAND.city, email:$('#ad_email',v).value.trim()||BRAND.email, phone:$('#ad_phone',v).value.trim()||BRAND.phone };
+    localStorage.setItem('vh_brand', JSON.stringify(BRAND)); applyBrand();
+    localStorage.setItem('vh_pkg_essentials',$('#ad_pkg_essentials',v).value||'$55/hr');
+    localStorage.setItem('vh_pkg_signature', $('#ad_pkg_signature',v).value||'$65/hr');
+    localStorage.setItem('vh_pkg_premier',   $('#ad_pkg_premier',v).value||'$85/hr');
     toast('Brand + rates saved');
   });
-  $('#resetBrand',view).addEventListener('click', ()=>{ BRAND={...BRAND_DEFAULT}; localStorage.setItem('vh_brand', JSON.stringify(BRAND)); applyBrand(); toast('Brand reset'); renderRoute('#marketing'); });
-  $('#exportBrand',view).addEventListener('click', ()=> download('brand.json', JSON.stringify(BRAND,null,2)));
-  $('#importBrand',view).addEventListener('change', e=>{
-    const f=e.target.files[0]; if(!f) return; f.text().then(t=>{ try{ const obj=JSON.parse(t); BRAND={...BRAND_DEFAULT,...obj}; localStorage.setItem('vh_brand', JSON.stringify(BRAND)); applyBrand(); toast('Brand imported'); renderRoute('#marketing'); }catch{ toast('Invalid JSON','warn'); }});
-  });
-  function renderPayments(){
-    const box=$('#paymentsList',view);
-    const arr=JSON.parse(localStorage.getItem('vh_payments')||'[]');
-    box.innerHTML = arr.length ? arr.slice().reverse().map(p=>`<div>• ${p.ts.split('T')[0]} — <b>${p.id}</b> — $${p.amount.toFixed(2)} — ${p.method} — Inv #${p.invoice} — ${p.name}</div>`).join('') : 'No payments yet.';
-  }
-  renderPayments();
-  return view;
+  $('#resetBrandBtn',v).addEventListener('click', ()=>{ BRAND={...BRAND_DEFAULT}; localStorage.setItem('vh_brand', JSON.stringify(BRAND)); applyBrand(); toast('Brand reset'); renderRoute('#marketing'); });
+  $('#exportBrand',v).addEventListener('click', ()=> download('brand.json', JSON.stringify(BRAND,null,2)));
+  $('#importBrand',v).addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; f.text().then(t=>{ try{ const obj=JSON.parse(t); BRAND={...BRAND_DEFAULT,...obj}; localStorage.setItem('vh_brand', JSON.stringify(BRAND)); applyBrand(); toast('Brand imported'); renderRoute('#marketing'); }catch{ toast('Invalid JSON','warn'); }}); });
+  // Payments
+  (function renderPayments(){ const box=$('#paymentsList',v); const arr=JSON.parse(localStorage.getItem('vh_payments')||'[]'); box.innerHTML = arr.length ? arr.slice().reverse().map(p=>`<div>• ${p.ts.split('T')[0]} — <b>${p.id}</b> — $${p.amount.toFixed(2)} — ${p.method} — Inv #${p.invoice} — ${p.name}</div>`).join('') : 'No payments yet.'; })();
+  return v;
 };
 
-/* ========= Router init ========= */
-function onHash(){ renderRoute(location.hash||firstUserRoute()); }
-window.addEventListener('hashchange', onHash);
+/* Payment panel wiring */
+$('#closePay').addEventListener('click', ()=> closePanel($('#payPanel')));
+$('#fillInvoiceAmt').addEventListener('click', ()=>{ const t=$('#app')?.querySelector('#inv_tot')?.innerText||'$0.00'; $('#pay_amount').value=t.replace(/[^0-9.]/g,'')||'0.00'; });
+$('#confirmPay').addEventListener('click', ()=>{
+  const name=$('#pay_name').value.trim(); const amt=parseFloat($('#pay_amount').value)||0; const method=$('#pay_method').value;
+  if(!name||!amt){ toast('Name and amount required','warn'); return; }
+  const rec={ id:'PMT-'+Math.random().toString(36).slice(2,8).toUpperCase(), ts:new Date().toISOString(), name, amount:amt, method, invoice: $('#app')?.querySelector('#inv_no')?.value||'—' };
+  const arr=JSON.parse(localStorage.getItem('vh_payments')||'[]'); arr.push(rec); localStorage.setItem('vh_payments', JSON.stringify(arr));
+  $('#payNotice').textContent = `Success: ${rec.id} for $${amt.toFixed(2)} via ${method}`; toast(`Payment recorded: ${rec.id}`);
+});
 
-document.addEventListener('DOMContentLoaded', ()=>{
-  // restore remembered admin
+/* Init */
+function onLoad(){
   if(localStorage.getItem(REMEMBER_FLAG)==='1' && localStorage.getItem(ADMIN_FLAG)==='1'){ sessionStorage.setItem(ADMIN_FLAG,'1'); }
   $('#modeChip').textContent = `Mode: ${isAdmin()?'Admin':'User'}`;
-  renderNav();
-  renderAdminMenu();
-  onHash();
-});
+  ensureMenuTemplates(); // guarantees Menus content
+  renderNav(); renderAdminMenu(); renderRoute(location.hash||firstUserRoute());
+}
+document.addEventListener('DOMContentLoaded', onLoad);
 </script>
 </body>
 </html>
