@@ -3,38 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Velvet Hour Events — Premium Bartending Services</title>
-    <meta name="description" content="Premium mobile bartending by Kate. Signature cocktails, safe service, luxe design. Certified & insured.">
-    <meta name="theme-color" content="#120d12">
-    
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="Velvet Hour Events — Premium Bartending by Kate">
-    <meta property="og:description" content="Signature cocktails, safe service, luxe design.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%23EBCB8B' offset='0'/><stop stop-color='%23E68FA0' offset='1'/></linearGradient></defs><rect width='100%' height='100%' fill='%23130f16'/><circle cx='280' cy='420' r='260' fill='url(%23g)' fill-opacity='.22'/><circle cx='900' cy='230' r='180' fill='url(%23g)' fill-opacity='.18'/><text x='90' y='360' fill='white' font-family='Inter,Segoe UI,Arial' font-size='60' font-weight='800'>Velvet Hour Events</text><text x='90' y='420' fill='white' font-family='Inter,Segoe UI,Arial' font-size='32' opacity='.85'>Premium Bartending by Kate</text></svg>">
-    
-    <!-- Schema.org markup -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Velvet Hour Events",
-      "description": "Premium mobile bartending by Kate. Signature menus, safe service, luxe presentation. Certified & insured.",
-      "areaServed": "Charlotte, NC and Carolinas",
-      "email": "hello@velvethourevents.com",
-      "telephone": "(704) 000-0000",
-      "url": "https://example.invalid/velvet-hour",
-      "sameAs": []
-    }
-    </script>
-    
+    <title>Velvet Hour Events | Premium Bartending Services</title>
+    <meta name="description" content="Premium bartending by Kate. Signature cocktails, safe service, luxe design. Certified & insured.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ===== CSS VARIABLES & RESET ===== */
         :root {
             /* Colors */
             --bg-primary: #130f16;
             --bg-secondary: #1a1520;
-            --bg-card: rgba(26, 21, 32, 0.8);
+            --bg-card: rgba(26, 21, 32, 0.85);
             --text-primary: #f9f7fb;
             --text-secondary: #d6cfdf;
             --text-muted: #bcb1cd;
@@ -44,6 +22,7 @@
             --gold: #EBCB8B;
             --rose: #E68FA0;
             --violet: #b7a0ff;
+            --accent: linear-gradient(135deg, var(--gold), var(--rose));
             
             /* Status Colors */
             --success: #60d394;
@@ -87,16 +66,15 @@
             --font-size-4xl: 2.25rem;
             
             /* Layout */
-            --header-height: 70px;
+            --header-height: 80px;
             --container-max-width: 1200px;
-            --sidebar-width: 280px;
         }
 
         /* Light theme */
         [data-theme="light"] {
             --bg-primary: #fbfafc;
             --bg-secondary: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.9);
+            --bg-card: rgba(255, 255, 255, 0.95);
             --text-primary: #191720;
             --text-secondary: #5e5a70;
             --text-muted: #8a8499;
@@ -179,12 +157,12 @@
             box-shadow: var(--shadow-md);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            transition: all var(--transition-normal);
         }
 
         .card:hover {
             box-shadow: var(--shadow-lg);
-            transform: translateY(-2px);
-            transition: all var(--transition-normal);
+            transform: translateY(-4px);
         }
 
         /* Buttons */
@@ -198,14 +176,14 @@
             font-weight: 600;
             font-size: var(--font-size-md);
             cursor: pointer;
-            transition: all var(--transition-fast);
+            transition: all var(--transition-normal);
             border: none;
             outline: none;
             text-decoration: none;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--gold), var(--rose));
+            background: var(--accent);
             color: var(--bg-primary);
         }
 
@@ -247,7 +225,7 @@
         .logo {
             font-size: var(--font-size-xl);
             font-weight: 800;
-            background: linear-gradient(135deg, var(--gold), var(--rose), var(--violet));
+            background: var(--accent);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -263,11 +241,26 @@
             padding: var(--space-sm) var(--space-md);
             border-radius: var(--radius-md);
             transition: all var(--transition-fast);
+            font-weight: 500;
         }
 
         .nav-link:hover, .nav-link.active {
             background: rgba(235, 203, 139, 0.1);
             color: var(--gold);
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--space-sm);
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: all var(--transition-fast);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.05);
         }
 
         /* Hero Section */
@@ -307,6 +300,30 @@
             margin: 0 auto var(--space-xl);
         }
 
+        .hero-actions {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .badges {
+            display: flex;
+            gap: var(--space-sm);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: var(--space-xl);
+        }
+
+        .badge {
+            padding: var(--space-sm) var(--space-md);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
         /* Grid System */
         .grid {
             display: grid;
@@ -333,7 +350,7 @@
             color: var(--text-secondary);
         }
 
-        .form-input {
+        .form-input, .form-select, .form-textarea {
             width: 100%;
             padding: var(--space-md);
             border: 1px solid var(--border-color);
@@ -344,10 +361,169 @@
             transition: all var(--transition-fast);
         }
 
-        .form-input:focus {
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
             border-color: var(--gold);
             box-shadow: 0 0 0 3px rgba(235, 203, 139, 0.2);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Packages */
+        .package-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .featured {
+            border: 2px solid var(--gold);
+            transform: scale(1.02);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--gold);
+            color: var(--bg-primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+        }
+
+        .package-features {
+            list-style: none;
+            margin: var(--space-lg) 0;
+            flex-grow: 1;
+        }
+
+        .package-features li {
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .package-features li:last-child {
+            border-bottom: none;
+        }
+
+        .package-features li::before {
+            content: '✓';
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .package-price {
+            text-align: center;
+            margin: var(--space-lg) 0;
+        }
+
+        .price {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .period {
+            color: var(--text-muted);
+        }
+
+        /* Menu Designer */
+        .designer-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+        }
+
+        .menu-preview {
+            position: sticky;
+            top: calc(var(--header-height) + var(--space-lg));
+            align-self: start;
+        }
+
+        .menu-card {
+            background: 
+                conic-gradient(from 200deg at 50% 30%, rgba(235, 203, 139, 0.18), transparent 42% 58%, rgba(230, 143, 160, 0.16) 100%),
+                var(--bg-card);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .menu-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 800;
+            margin-bottom: var(--space-sm);
+        }
+
+        .menu-subtitle {
+            color: var(--text-muted);
+            margin-bottom: var(--space-lg);
+        }
+
+        .menu-item {
+            margin: var(--space-md) 0;
+            text-align: left;
+        }
+
+        .menu-note {
+            font-size: var(--font-size-sm);
+            color: var(--text-muted);
+            margin-top: var(--space-lg);
+        }
+
+        /* Calculator */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+        }
+
+        .calculator-results {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            padding: var(--space-2xl) 0 var(--space-lg);
+            margin-top: var(--space-2xl);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
         }
 
         /* Utility Classes */
@@ -410,6 +586,9 @@
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-lg);
             animation: slideIn 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
         }
 
         .toast.success {
@@ -452,6 +631,14 @@
             .grid-2, .grid-3 {
                 grid-template-columns: 1fr;
             }
+            
+            .designer-container, .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured {
+                transform: none;
+            }
         }
 
         /* Print Styles */
@@ -483,11 +670,12 @@
                 <a href="#" class="logo">Velvet Hour Events</a>
                 
                 <div class="nav-links">
-                    <a href="#packages" class="nav-link">Packages</a>
+                    <a href="#packages" class="nav-link active">Packages</a>
                     <a href="#menus" class="nav-link">Menus</a>
+                    <a href="#designer" class="nav-link">Designer</a>
                     <a href="#calculator" class="nav-link">Calculator</a>
                     <a href="#contact" class="nav-link">Book</a>
-                    <button class="btn btn-secondary" id="theme-toggle">
+                    <button class="theme-toggle no-print" id="theme-toggle" aria-label="Toggle theme">
                         <span class="theme-icon">🌙</span>
                     </button>
                 </div>
@@ -502,13 +690,19 @@
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section class="hero section">
+        <section class="hero section" id="home">
             <div class="container">
                 <h1>Luxe Cocktails, Unforgettable Events</h1>
-                <p>Premium bartending services by Kate. Signature menus, safe service, and luxe presentation for your special occasions.</p>
+                <p>Premium bartending services by Kate. Signature menus, safe service, and luxe presentation for your special occasions in Charlotte, NC and surrounding areas.</p>
                 <div class="hero-actions">
                     <a href="#contact" class="btn btn-primary">Book Your Event</a>
-                    <a href="#packages" class="btn btn-secondary">View Packages</a>
+                    <a href="#designer" class="btn btn-secondary">Menu Designer</a>
+                </div>
+                <div class="badges">
+                    <span class="badge">TIPS/ServSafe Certified</span>
+                    <span class="badge">Liquor Liability + COI</span>
+                    <span class="badge">Zero-Proof Menus</span>
+                    <span class="badge">Planner-Friendly SOPs</span>
                 </div>
             </div>
         </section>
@@ -520,13 +714,13 @@
                 <p class="text-center text-muted mb-3">Tailored experiences for every occasion</p>
                 
                 <div class="grid grid-3">
-                    <div class="card">
+                    <div class="card package-card">
                         <h3>Essentials</h3>
                         <p class="text-muted">Perfect for corporate events and casual gatherings</p>
                         <ul class="package-features">
                             <li>4-hour minimum</li>
                             <li>1 professional bartender</li>
-                            <li>Beer, wine & classic cocktails</li>
+                            <li>Beer, wine & classic highballs</li>
                             <li>Basic garnish setup</li>
                         </ul>
                         <div class="package-price">
@@ -536,7 +730,7 @@
                         <button class="btn btn-secondary">Select Package</button>
                     </div>
                     
-                    <div class="card featured">
+                    <div class="card package-card featured">
                         <div class="featured-badge">Most Popular</div>
                         <h3>Signature</h3>
                         <p class="text-muted">Elevated experience with custom cocktail creations</p>
@@ -554,7 +748,7 @@
                         <button class="btn btn-primary">Select Package</button>
                     </div>
                     
-                    <div class="card">
+                    <div class="card package-card">
                         <h3>Premier</h3>
                         <p class="text-muted">Ultimate luxury experience for weddings and special events</p>
                         <ul class="package-features">
@@ -575,36 +769,385 @@
             </div>
         </section>
 
-        <!-- Additional sections would go here -->
+        <!-- Menu Templates Section -->
         <section id="menus" class="section">
             <div class="container">
                 <h2 class="text-center">Signature Menu Templates</h2>
                 <p class="text-center text-muted mb-3">Curated cocktail experiences for every palate</p>
-                <!-- Menu content would go here -->
+                
+                <div class="grid grid-3">
+                    <div class="card">
+                        <h3>Classic Elegance</h3>
+                        <div class="menu-item">
+                            <strong>French 75</strong> — gin, lemon, bubbles
+                        </div>
+                        <div class="menu-item">
+                            <strong>Old Fashioned</strong> — bourbon, bitters, orange
+                        </div>
+                        <div class="menu-item">
+                            <strong>House:</strong> Gin & Tonic · Vodka Soda · Paloma
+                        </div>
+                        <div class="menu-item">
+                            <strong>Zero-Proof:</strong> Citrus & Mint Cooler
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Seasonal Garden</h3>
+                        <div class="menu-item">
+                            <strong>Strawberry Basil Smash</strong> — vodka, fresh berries, herbs
+                        </div>
+                        <div class="menu-item">
+                            <strong>Cucumber Gimlet</strong> — gin, lime, cucumber
+                        </div>
+                        <div class="menu-item">
+                            <strong>House:</strong> Spritz Station · Hard Seltzers
+                        </div>
+                        <div class="menu-item">
+                            <strong>Zero-Proof:</strong> Watermelon Fizz
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Modern Luxe</h3>
+                        <div class="menu-item">
+                            <strong>Espresso Martini</strong> — vodka, coffee liqueur, espresso
+                        </div>
+                        <div class="menu-item">
+                            <strong>Ginger Pear Whiskey</strong> — bourbon, ginger, pear
+                        </div>
+                        <div class="menu-item">
+                            <strong>House:</strong> Beer/Wine Selection
+                        </div>
+                        <div class="menu-item">
+                            <strong>Zero-Proof:</strong> Spiced Apple Fizz
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <!-- Menu Designer Section -->
+        <section id="designer" class="section">
+            <div class="container">
+                <h2 class="text-center">Menu Designer</h2>
+                <p class="text-center text-muted mb-3">Create your custom print-ready menu</p>
+                
+                <div class="designer-container">
+                    <div class="designer-form">
+                        <div class="card">
+                            <h3>Customize Your Menu</h3>
+                            <p class="text-muted">Public tool for clients/planners. No admin data needed.</p>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="event-name">Event Name</label>
+                                <input type="text" id="event-name" class="form-input" placeholder="Ava & Noah — 10·19·25" value="Ava & Noah — 10·19·25">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="event-subtitle">Subtitle</label>
+                                <input type="text" id="event-subtitle" class="form-input" placeholder="Signature Cocktails + Zero-Proof" value="Signature Cocktails + Zero-Proof">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="signature-1">Signature #1</label>
+                                <input type="text" id="signature-1" class="form-input" placeholder="French 75 — gin, lemon, bubbles" value="French 75 — gin, lemon, bubbles">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="signature-2">Signature #2</label>
+                                <input type="text" id="signature-2" class="form-input" placeholder="Old Fashioned — bourbon, bitters, orange" value="Old Fashioned — bourbon, bitters, orange">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="house-drinks">House Staples (comma separated)</label>
+                                <input type="text" id="house-drinks" class="form-input" placeholder="Gin & Tonic, Vodka Soda, Paloma" value="Gin & Tonic, Vodka Soda, Paloma">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="zero-proof">Zero-Proof Option</label>
+                                <input type="text" id="zero-proof" class="form-input" placeholder="Citrus & Mint Cooler" value="Citrus & Mint Cooler">
+                            </div>
+                            
+                            <div class="grid grid-3">
+                                <div class="form-group">
+                                    <label class="form-label" for="accent-style">Accent Style</label>
+                                    <select id="accent-style" class="form-select">
+                                        <option value="velvet">Velvet Luxe</option>
+                                        <option value="minimal">Minimal</option>
+                                        <option value="lively">Lively</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="include-note">Include Note?</label>
+                                    <select id="include-note" class="form-select">
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="show-brand">Show Brand?</label>
+                                    <select id="show-brand" class="form-select">
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="hero-actions mt-3">
+                                <button class="btn btn-primary" id="preview-menu">Preview Menu</button>
+                                <button class="btn btn-secondary" id="print-menu">Print Menu</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-preview">
+                        <div class="menu-card">
+                            <div class="menu-title" id="preview-title">Ava & Noah — 10·19·25</div>
+                            <div class="menu-subtitle" id="preview-subtitle">Signature Cocktails + Zero-Proof</div>
+                            
+                            <div class="menu-item" id="preview-sig1">
+                                <strong>French 75</strong> — gin, lemon, bubbles
+                            </div>
+                            
+                            <div class="menu-item" id="preview-sig2">
+                                <strong>Old Fashioned</strong> — bourbon, bitters, orange
+                            </div>
+                            
+                            <div class="menu-item" id="preview-house">
+                                <strong>House:</strong> Gin & Tonic · Vodka Soda · Paloma
+                            </div>
+                            
+                            <div class="menu-item" id="preview-zero">
+                                <strong>Zero-Proof:</strong> Citrus & Mint Cooler
+                            </div>
+                            
+                            <div class="menu-note" id="preview-note">
+                                Please drink responsibly · IDs required
+                            </div>
+                            
+                            <div class="menu-note" id="preview-brand">
+                                — Velvet Hour Events —
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculator Section -->
         <section id="calculator" class="section">
             <div class="container">
                 <h2 class="text-center">Beverage Calculator</h2>
                 <p class="text-center text-muted mb-3">Plan your perfect bar setup</p>
-                <!-- Calculator content would go here -->
+                <p class="text-center text-muted mb-3">Rule: 1.5 drinks first hour, then ~1/hr. 750ml ≈ 16 cocktails. Wine ≈ 5 pours. Beer case ≈ 24.</p>
+                
+                <div class="calculator-grid">
+                    <div class="calculator-form">
+                        <div class="card">
+                            <h3>Event Details</h3>
+                            
+                            <div class="grid grid-3">
+                                <div class="form-group">
+                                    <label class="form-label" for="guests">Guests</label>
+                                    <input type="number" id="guests" class="form-input" value="100" min="1">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="hours">Hours of Service</label>
+                                    <input type="number" id="hours" class="form-input" value="4" min="1">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="ice">Ice per Guest (lbs)</label>
+                                    <input type="number" id="ice" class="form-input" value="1.5" step="0.1">
+                                </div>
+                            </div>
+                            
+                            <h4 class="mt-3">Beverage Distribution</h4>
+                            
+                            <div class="grid grid-3">
+                                <div class="form-group">
+                                    <label class="form-label" for="cocktail-pct">% Cocktails</label>
+                                    <input type="number" id="cocktail-pct" class="form-input" value="40" min="0" max="100">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="beer-pct">% Beer</label>
+                                    <input type="number" id="beer-pct" class="form-input" value="35" min="0" max="100">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="wine-pct">% Wine</label>
+                                    <input type="number" id="wine-pct" class="form-input" value="25" min="0" max="100">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="cocktail-bases">Cocktail Bases (comma separated)</label>
+                                <input type="text" id="cocktail-bases" class="form-input" value="vodka, tequila, bourbon">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="garnish-set">Garnish Set (comma separated)</label>
+                                <input type="text" id="garnish-set" class="form-input" value="lemon, lime, orange, cherry">
+                            </div>
+                            
+                            <button class="btn btn-primary" id="calculate-btn">Calculate</button>
+                            <button class="btn btn-secondary" id="export-csv">Export CSV</button>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-results">
+                        <div class="card">
+                            <h3>Results</h3>
+                            <div id="results-content">
+                                <div class="result-item">
+                                    <span>Guests:</span>
+                                    <span id="result-guests">100</span>
+                                </div>
+                                <div class="result-item">
+                                    <span>Hours:</span>
+                                    <span id="result-hours">4</span>
+                                </div>
+                                <div class="result-item">
+                                    <span>Estimated Total Drinks:</span>
+                                    <span id="result-total-drinks">450</span>
+                                </div>
+                                
+                                <div class="result-item mt-2">
+                                    <span><strong>COCKTAILS</strong></span>
+                                    <span id="result-cocktails">180 pours → ~12 × 750ml</span>
+                                </div>
+                                <div class="result-item">
+                                    <span>Bases:</span>
+                                    <span id="result-bases">vodka, tequila, bourbon → ~4 each</span>
+                                </div>
+                                
+                                <div class="result-item mt-2">
+                                    <span><strong>BEER</strong></span>
+                                    <span id="result-beer">158 pours → ~7 case(s)</span>
+                                </div>
+                                
+                                <div class="result-item mt-2">
+                                    <span><strong>WINE</strong></span>
+                                    <span id="result-wine">113 glasses → ~23 bottles</span>
+                                </div>
+                                
+                                <div class="result-item mt-2">
+                                    <span>MIXERS:</span>
+                                    <span id="result-mixers">~4.0 L</span>
+                                </div>
+                                <div class="result-item">
+                                    <span>SYRUP:</span>
+                                    <span id="result-syrup">~1.3 L</span>
+                                </div>
+                                <div class="result-item">
+                                    <span>CITRUS set:</span>
+                                    <span id="result-citrus">~8 pieces</span>
+                                </div>
+                                <div class="result-item">
+                                    <span>GARNISH (cherry/olive):</span>
+                                    <span id="result-garnish">~90</span>
+                                </div>
+                                <div class="result-item">
+                                    <span>ICE:</span>
+                                    <span id="result-ice">~150 lbs</span>
+                                </div>
+                                <div class="result-item">
+                                    <span>GLASSWARE:</span>
+                                    <span id="result-glassware">300</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <!-- Contact Section -->
         <section id="contact" class="section">
             <div class="container">
                 <h2 class="text-center">Book Your Event</h2>
                 <p class="text-center text-muted mb-3">Let's create something unforgettable together</p>
-                <!-- Contact form would go here -->
+                
+                <div class="grid grid-2">
+                    <div class="contact-form">
+                        <div class="card">
+                            <h3>Request a Quote</h3>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="contact-name">Name</label>
+                                <input type="text" id="contact-name" class="form-input" placeholder="Your name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="contact-email">Email</label>
+                                <input type="email" id="contact-email" class="form-input" placeholder="hello@velvethourevents.com">
+                            </div>
+                            
+                            <div class="grid grid-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="event-date">Event Date</label>
+                                    <input type="date" id="event-date" class="form-input">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="guest-count">Guest Count</label>
+                                    <input type="number" id="guest-count" class="form-input" placeholder="100" min="5">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="venue-address">Venue/Address</label>
+                                <input type="text" id="venue-address" class="form-input" placeholder="Venue or address">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="event-notes">Notes</label>
+                                <textarea id="event-notes" class="form-textarea" placeholder="Tell us your vibe, must-have drinks, timelines..."></textarea>
+                            </div>
+                            
+                            <div class="hero-actions">
+                                <button class="btn btn-primary" id="submit-request">Send Request (Demo)</button>
+                                <a href="mailto:hello@velvethourevents.com" class="btn btn-secondary" id="email-btn">Email</a>
+                                <span class="text-muted">Text: (704) 000-0000</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <div class="card">
+                            <h3>Why Choose Velvet Hour?</h3>
+                            <ul class="package-features">
+                                <li>Certified & insured for your peace of mind</li>
+                                <li>Custom menu design tailored to your event</li>
+                                <li>Professional, punctual, and polished service</li>
+                                <li>Attention to detail in every aspect</li>
+                                <li>Zero-proof options for all guests</li>
+                                <li>Flexible packages to fit your needs</li>
+                            </ul>
+                            
+                            <div class="mt-3">
+                                <h4>Service Area</h4>
+                                <p class="text-muted">Charlotte, NC and surrounding areas</p>
+                                
+                                <h4 class="mt-2">Response Time</h4>
+                                <p class="text-muted">We typically respond within 24 hours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="footer section">
+    <footer class="footer">
         <div class="container">
-            <div class="grid grid-3">
+            <div class="footer-grid">
                 <div>
                     <h3>Velvet Hour Events</h3>
                     <p class="text-muted">Premium bartending services in Charlotte, NC and surrounding areas.</p>
@@ -624,8 +1167,8 @@
                 </div>
             </div>
             
-            <div class="footer-bottom text-center mt-3">
-                <p class="text-muted">&copy; 2023 Velvet Hour Events. All rights reserved.</p>
+            <div class="footer-bottom">
+                <p class="text-muted">&copy; 2025 Velvet Hour Events — Charlotte, NC. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -641,6 +1184,9 @@
                 this.setupEventListeners();
                 this.loadThemePreference();
                 this.setupRouting();
+                this.setupMenuDesigner();
+                this.setupCalculator();
+                this.setupContactForm();
             }
             
             setupEventListeners() {
@@ -664,6 +1210,12 @@
                                 behavior: 'smooth',
                                 block: 'start'
                             });
+                            
+                            // Update active nav link
+                            document.querySelectorAll('.nav-link').forEach(link => {
+                                link.classList.remove('active');
+                            });
+                            anchor.classList.add('active');
                         }
                     });
                 });
@@ -707,7 +1259,7 @@
             }
             
             handleRouteChange() {
-                const hash = window.location.hash || '#packages';
+                const hash = window.location.hash || '#home';
                 
                 // Update active nav link
                 document.querySelectorAll('.nav-link').forEach(link => {
@@ -716,21 +1268,257 @@
                         link.classList.add('active');
                     }
                 });
+            }
+            
+            setupMenuDesigner() {
+                const previewBtn = document.getElementById('preview-menu');
+                const printBtn = document.getElementById('print-menu');
                 
-                // Scroll to section
-                const targetSection = document.querySelector(hash);
-                if (targetSection) {
-                    setTimeout(() => {
-                        targetSection.scrollIntoView({ behavior: 'smooth' });
-                    }, 100);
+                previewBtn.addEventListener('click', () => {
+                    this.updateMenuPreview();
+                    this.showToast('Menu preview updated', 'success');
+                });
+                
+                printBtn.addEventListener('click', () => {
+                    this.updateMenuPreview();
+                    window.print();
+                });
+                
+                // Initialize preview
+                this.updateMenuPreview();
+                
+                // Update preview on input changes
+                const inputs = ['event-name', 'event-subtitle', 'signature-1', 'signature-2', 'house-drinks', 'zero-proof'];
+                inputs.forEach(id => {
+                    document.getElementById(id).addEventListener('input', () => {
+                        this.updateMenuPreview();
+                    });
+                });
+                
+                const selects = ['accent-style', 'include-note', 'show-brand'];
+                selects.forEach(id => {
+                    document.getElementById(id).addEventListener('change', () => {
+                        this.updateMenuPreview();
+                    });
+                });
+            }
+            
+            updateMenuPreview() {
+                // Update text content
+                document.getElementById('preview-title').textContent = 
+                    document.getElementById('event-name').value || 'Our Event';
+                
+                document.getElementById('preview-subtitle').textContent = 
+                    document.getElementById('event-subtitle').value || 'Signature Cocktails + Zero-Proof';
+                
+                // Format signature drinks
+                const sig1 = document.getElementById('signature-1').value || 'French 75 — gin, lemon, bubbles';
+                const sig2 = document.getElementById('signature-2').value || 'Old Fashioned — bourbon, bitters, orange';
+                
+                document.getElementById('preview-sig1').innerHTML = 
+                    `<strong>${this.formatDrinkName(sig1)}</strong> — ${this.formatDrinkDescription(sig1)}`;
+                
+                document.getElementById('preview-sig2').innerHTML = 
+                    `<strong>${this.formatDrinkName(sig2)}</strong> — ${this.formatDrinkDescription(sig2)}`;
+                
+                // Format house drinks
+                const houseInput = document.getElementById('house-drinks').value || 'Gin & Tonic, Vodka Soda, Paloma';
+                const houseDrinks = houseInput.split(',').map(d => d.trim()).filter(Boolean);
+                document.getElementById('preview-house').innerHTML = 
+                    `<strong>House:</strong> ${houseDrinks.join(' · ')}`;
+                
+                // Format zero-proof
+                const zeroProof = document.getElementById('zero-proof').value || 'Citrus & Mint Cooler';
+                document.getElementById('preview-zero').innerHTML = 
+                    `<strong>Zero-Proof:</strong> ${zeroProof}`;
+                
+                // Toggle note and brand visibility
+                const showNote = document.getElementById('include-note').value === 'yes';
+                const showBrand = document.getElementById('show-brand').value === 'yes';
+                
+                document.getElementById('preview-note').style.display = showNote ? 'block' : 'none';
+                document.getElementById('preview-brand').style.display = showBrand ? 'block' : 'none';
+                
+                // Update accent style
+                const accentStyle = document.getElementById('accent-style').value;
+                const menuCard = document.querySelector('.menu-card');
+                
+                menuCard.style.background = {
+                    velvet: 'conic-gradient(from 200deg at 50% 30%, rgba(235, 203, 139, 0.18), transparent 42% 58%, rgba(230, 143, 160, 0.16) 100%), var(--bg-card)',
+                    minimal: 'var(--bg-card)',
+                    lively: 'radial-gradient(700px 220px at 10% -30%, rgba(183, 160, 255, 0.24), transparent), radial-gradient(420px 200px at 90% 120%, rgba(235, 203, 139, 0.22), transparent), var(--bg-card)'
+                }[accentStyle] || menuCard.style.background;
+            }
+            
+            formatDrinkName(drinkText) {
+                // Extract the name part (before — or -)
+                const separator = drinkText.includes('—') ? '—' : '-';
+                return drinkText.split(separator)[0].trim();
+            }
+            
+            formatDrinkDescription(drinkText) {
+                // Extract the description part (after — or -)
+                const separator = drinkText.includes('—') ? '—' : '-';
+                const parts = drinkText.split(separator);
+                return parts.length > 1 ? parts[1].trim() : '';
+            }
+            
+            setupCalculator() {
+                const calculateBtn = document.getElementById('calculate-btn');
+                const exportBtn = document.getElementById('export-csv');
+                
+                calculateBtn.addEventListener('click', () => {
+                    this.calculateBeverages();
+                    this.showToast('Calculation updated', 'success');
+                });
+                
+                exportBtn.addEventListener('click', () => {
+                    this.exportCSV();
+                });
+                
+                // Calculate on initial load
+                this.calculateBeverages();
+            }
+            
+            calculateBeverages() {
+                const guests = parseInt(document.getElementById('guests').value) || 0;
+                const hours = parseInt(document.getElementById('hours').value) || 0;
+                const icePerGuest = parseFloat(document.getElementById('ice').value) || 0;
+                
+                const cocktailPct = parseInt(document.getElementById('cocktail-pct').value) || 0;
+                const beerPct = parseInt(document.getElementById('beer-pct').value) || 0;
+                const winePct = parseInt(document.getElementById('wine-pct').value) || 0;
+                
+                const basesInput = document.getElementById('cocktail-bases').value || '';
+                const bases = basesInput.split(',').map(b => b.trim()).filter(Boolean);
+                
+                // Validate percentages
+                const totalPct = cocktailPct + beerPct + winePct;
+                if (totalPct !== 100) {
+                    this.showToast(`Percentages total ${totalPct}% (should be 100%)`, 'warning');
                 }
+                
+                // Calculate drinks
+                const drinksFirstHour = 1.5;
+                const drinksPerHourAfter = 1.0;
+                const drinksPerGuest = drinksFirstHour + Math.max(hours - 1, 0) * drinksPerHourAfter;
+                const totalDrinks = Math.round(guests * drinksPerGuest);
+                
+                const cocktailDrinks = Math.round(totalDrinks * cocktailPct / 100);
+                const beerDrinks = Math.round(totalDrinks * beerPct / 100);
+                const wineDrinks = Math.round(totalDrinks * winePct / 100);
+                
+                // Calculate supplies
+                const spiritBottles = Math.ceil(cocktailDrinks / 16);
+                const perBase = Math.ceil(spiritBottles / Math.max(1, bases.length));
+                
+                const wineBottles = Math.ceil(wineDrinks / 5);
+                const beerCases = Math.ceil(beerDrinks / 24);
+                
+                const ice = Math.ceil(icePerGuest * guests);
+                const glassware = Math.ceil(guests * (hours >= 4 ? 3 : 2));
+                
+                const mixerLiters = (cocktailDrinks * 0.75) / 33.8;
+                const syrupLiters = (cocktailDrinks * 0.25) / 33.8;
+                const citrus = Math.ceil(cocktailDrinks * 0.5 / 12);
+                const garnish = Math.ceil(cocktailDrinks * 0.5);
+                
+                // Update results
+                document.getElementById('result-guests').textContent = guests;
+                document.getElementById('result-hours').textContent = hours;
+                document.getElementById('result-total-drinks').textContent = totalDrinks;
+                
+                document.getElementById('result-cocktails').textContent = `${cocktailDrinks} pours → ~${spiritBottles} × 750ml`;
+                document.getElementById('result-bases').textContent = `${bases.join(', ')} → ~${perBase} each`;
+                
+                document.getElementById('result-beer').textContent = `${beerDrinks} pours → ~${beerCases} case(s)`;
+                document.getElementById('result-wine').textContent = `${wineDrinks} glasses → ~${wineBottles} bottles`;
+                
+                document.getElementById('result-mixers').textContent = `~${mixerLiters.toFixed(1)} L`;
+                document.getElementById('result-syrup').textContent = `~${syrupLiters.toFixed(1)} L`;
+                document.getElementById('result-citrus').textContent = `~${citrus} pieces`;
+                document.getElementById('result-garnish').textContent = `~${garnish}`;
+                document.getElementById('result-ice').textContent = `~${ice} lbs`;
+                document.getElementById('result-glassware').textContent = glassware;
+            }
+            
+            exportCSV() {
+                // In a real app, this would generate a proper CSV file
+                this.showToast('CSV export functionality would be implemented here', 'success');
+            }
+            
+            setupContactForm() {
+                const submitBtn = document.getElementById('submit-request');
+                const emailBtn = document.getElementById('email-btn');
+                
+                submitBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('contact-name').value;
+                    const email = document.getElementById('contact-email').value;
+                    
+                    if (!name || !email) {
+                        this.showToast('Please fill in required fields', 'error');
+                        return;
+                    }
+                    
+                    // In a real app, this would submit to a backend
+                    this.showToast('Request submitted successfully (demo)', 'success');
+                    
+                    // Reset form
+                    document.getElementById('contact-name').value = '';
+                    document.getElementById('contact-email').value = '';
+                    document.getElementById('event-date').value = '';
+                    document.getElementById('guest-count').value = '';
+                    document.getElementById('venue-address').value = '';
+                    document.getElementById('event-notes').value = '';
+                });
+                
+                // Update mailto link based on form inputs
+                const updateMailtoLink = () => {
+                    const name = document.getElementById('contact-name').value;
+                    const email = document.getElementById('contact-email').value;
+                    const date = document.getElementById('event-date').value;
+                    const guests = document.getElementById('guest-count').value;
+                    const venue = document.getElementById('venue-address').value;
+                    const notes = document.getElementById('event-notes').value;
+                    
+                    const subject = `Quote Request — ${name || 'Event'}`;
+                    const body = `Hi Velvet Hour Events,
+
+I'd like a quote for: ${date} · ${guests} guests
+Venue: ${venue}
+
+Notes:
+${notes}
+
+You can reach me at ${email}. Thank you!`;
+                    
+                    emailBtn.href = `mailto:hello@velvethourevents.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                };
+                
+                // Update mailto link when form inputs change
+                ['contact-name', 'contact-email', 'event-date', 'guest-count', 'venue-address', 'event-notes']
+                    .forEach(id => {
+                        document.getElementById(id).addEventListener('input', updateMailtoLink);
+                    });
             }
             
             showToast(message, type = 'success') {
                 const toastContainer = document.querySelector('.toast-container');
                 const toast = document.createElement('div');
                 toast.className = `toast ${type}`;
-                toast.textContent = message;
+                
+                const icon = {
+                    success: '✓',
+                    error: '✗',
+                    warning: '⚠'
+                }[type] || 'ℹ';
+                
+                toast.innerHTML = `
+                    <span class="toast-icon">${icon}</span>
+                    <span class="toast-message">${message}</span>
+                `;
                 
                 toastContainer.appendChild(toast);
                 
@@ -739,88 +1527,12 @@
                     toast.remove();
                 }, 5000);
             }
-            
-            // Additional utility methods would go here
-            // For handling forms, calculations, etc.
         }
         
         // Initialize the application when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             new VelvetHourApp();
         });
-        
-        // Add some additional CSS for the new components
-        const additionalStyles = `
-            .featured {
-                position: relative;
-                border: 2px solid var(--gold);
-                transform: scale(1.05);
-            }
-            
-            .featured-badge {
-                position: absolute;
-                top: -10px;
-                right: 20px;
-                background: var(--gold);
-                color: var(--bg-primary);
-                padding: 4px 12px;
-                border-radius: 20px;
-                font-size: var(--font-size-sm);
-                font-weight: 600;
-            }
-            
-            .package-features {
-                list-style: none;
-                margin: var(--space-lg) 0;
-            }
-            
-            .package-features li {
-                padding: var(--space-sm) 0;
-                border-bottom: 1px solid var(--border-color);
-            }
-            
-            .package-features li:last-child {
-                border-bottom: none;
-            }
-            
-            .package-price {
-                text-align: center;
-                margin: var(--space-lg) 0;
-            }
-            
-            .price {
-                font-size: var(--font-size-3xl);
-                font-weight: 700;
-                color: var(--gold);
-            }
-            
-            .period {
-                color: var(--text-muted);
-            }
-            
-            @media (max-width: 768px) {
-                .featured {
-                    transform: none;
-                }
-                
-                .nav-links.active {
-                    display: flex;
-                    flex-direction: column;
-                    position: absolute;
-                    top: 100%;
-                    left: 0;
-                    right: 0;
-                    background: var(--bg-primary);
-                    border-bottom: 1px solid var(--border-color);
-                    padding: var(--space-lg);
-                }
-            }
-        `;
-        
-        // Inject additional styles
-        const styleSheet = document.createElement('style');
-        styleSheet.textContent = additionalStyles;
-        document.head.appendChild(styleSheet);
     </script>
 </body>
 </html>
