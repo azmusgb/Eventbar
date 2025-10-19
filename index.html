@@ -1,1538 +1,813 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Velvet Hour Events | Premium Bartending Services</title>
-    <meta name="description" content="Premium bartending by Kate. Signature cocktails, safe service, luxe design. Certified & insured.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* ===== CSS VARIABLES & RESET ===== */
-        :root {
-            /* Colors */
-            --bg-primary: #130f16;
-            --bg-secondary: #1a1520;
-            --bg-card: rgba(26, 21, 32, 0.85);
-            --text-primary: #f9f7fb;
-            --text-secondary: #d6cfdf;
-            --text-muted: #bcb1cd;
-            --border-color: rgba(255, 255, 255, 0.14);
-            
-            /* Brand Colors */
-            --gold: #EBCB8B;
-            --rose: #E68FA0;
-            --violet: #b7a0ff;
-            --accent: linear-gradient(135deg, var(--gold), var(--rose));
-            
-            /* Status Colors */
-            --success: #60d394;
-            --warning: #ffb860;
-            --error: #ff6c6c;
-            
-            /* Spacing */
-            --space-xs: 0.25rem;
-            --space-sm: 0.5rem;
-            --space-md: 1rem;
-            --space-lg: 1.5rem;
-            --space-xl: 2rem;
-            --space-2xl: 3rem;
-            
-            /* Border Radius */
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 16px;
-            --radius-xl: 20px;
-            
-            /* Shadows */
-            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
-            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
-            --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.2);
-            
-            /* Transitions */
-            --transition-fast: 0.15s ease;
-            --transition-normal: 0.3s ease;
-            --transition-slow: 0.5s ease;
-            
-            /* Typography */
-            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            --font-size-xs: 0.75rem;
-            --font-size-sm: 0.875rem;
-            --font-size-md: 1rem;
-            --font-size-lg: 1.125rem;
-            --font-size-xl: 1.25rem;
-            --font-size-2xl: 1.5rem;
-            --font-size-3xl: 1.875rem;
-            --font-size-4xl: 2.25rem;
-            
-            /* Layout */
-            --header-height: 80px;
-            --container-max-width: 1200px;
-        }
-
-        /* Light theme */
-        [data-theme="light"] {
-            --bg-primary: #fbfafc;
-            --bg-secondary: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.95);
-            --text-primary: #191720;
-            --text-secondary: #5e5a70;
-            --text-muted: #8a8499;
-            --border-color: #ece7f0;
-            --gold: #b88a44;
-            --rose: #c06072;
-        }
-
-        /* Reset & Base Styles */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
-        body {
-            font-family: var(--font-family);
-            line-height: 1.6;
-            color: var(--text-primary);
-            background: 
-                radial-gradient(1200px 800px at 15% -10%, #20182a, transparent 60%),
-                radial-gradient(900px 600px at 120% 10%, #2a1b24, transparent 40%),
-                var(--bg-primary);
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Typography */
-        h1, h2, h3, h4, h5, h6 {
-            line-height: 1.2;
-            margin-bottom: var(--space-md);
-            font-weight: 700;
-        }
-
-        h1 {
-            font-size: var(--font-size-4xl);
-        }
-
-        h2 {
-            font-size: var(--font-size-3xl);
-        }
-
-        h3 {
-            font-size: var(--font-size-2xl);
-        }
-
-        p {
-            margin-bottom: var(--space-md);
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-            transition: color var(--transition-fast);
-        }
-
-        /* Layout */
-        .container {
-            max-width: var(--container-max-width);
-            margin: 0 auto;
-            padding: 0 var(--space-md);
-        }
-
-        .section {
-            padding: var(--space-2xl) 0;
-        }
-
-        /* Cards */
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            box-shadow: var(--shadow-md);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all var(--transition-normal);
-        }
-
-        .card:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-4px);
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-sm);
-            padding: var(--space-md) var(--space-lg);
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            font-size: var(--font-size-md);
-            cursor: pointer;
-            transition: all var(--transition-normal);
-            border: none;
-            outline: none;
-            text-decoration: none;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: var(--bg-primary);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--gold);
-        }
-
-        /* Navigation */
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(19, 15, 22, 0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            height: var(--header-height);
-        }
-
-        .nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 100%;
-        }
-
-        .logo {
-            font-size: var(--font-size-xl);
-            font-weight: 800;
-            background: var(--accent);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: var(--space-lg);
-            align-items: center;
-        }
-
-        .nav-link {
-            padding: var(--space-sm) var(--space-md);
-            border-radius: var(--radius-md);
-            transition: all var(--transition-fast);
-            font-weight: 500;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            background: rgba(235, 203, 139, 0.1);
-            color: var(--gold);
-        }
-
-        .theme-toggle {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: var(--space-sm);
-            cursor: pointer;
-            color: var(--text-primary);
-            transition: all var(--transition-fast);
-        }
-
-        .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: var(--space-2xl) 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(235, 203, 139, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(230, 143, 160, 0.1) 0%, transparent 50%);
-            z-index: -1;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: var(--space-md);
-            background: linear-gradient(135deg, var(--text-primary), var(--gold));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .hero p {
-            font-size: var(--font-size-lg);
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto var(--space-xl);
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: var(--space-md);
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .badges {
-            display: flex;
-            gap: var(--space-sm);
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: var(--space-xl);
-        }
-
-        .badge {
-            padding: var(--space-sm) var(--space-md);
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            font-size: var(--font-size-sm);
-            color: var(--text-secondary);
-        }
-
-        /* Grid System */
-        .grid {
-            display: grid;
-            gap: var(--space-lg);
-        }
-
-        .grid-2 {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-
-        .grid-3 {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        }
-
-        /* Forms */
-        .form-group {
-            margin-bottom: var(--space-lg);
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: var(--space-sm);
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-
-        .form-input, .form-select, .form-textarea {
-            width: 100%;
-            padding: var(--space-md);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            font-size: var(--font-size-md);
-            transition: all var(--transition-fast);
-        }
-
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(235, 203, 139, 0.2);
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        /* Packages */
-        .package-card {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        .featured {
-            border: 2px solid var(--gold);
-            transform: scale(1.02);
-        }
-
-        .featured-badge {
-            position: absolute;
-            top: -10px;
-            right: 20px;
-            background: var(--gold);
-            color: var(--bg-primary);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: var(--font-size-sm);
-            font-weight: 600;
-        }
-
-        .package-features {
-            list-style: none;
-            margin: var(--space-lg) 0;
-            flex-grow: 1;
-        }
-
-        .package-features li {
-            padding: var(--space-sm) 0;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-
-        .package-features li:last-child {
-            border-bottom: none;
-        }
-
-        .package-features li::before {
-            content: '✓';
-            color: var(--gold);
-            font-weight: bold;
-        }
-
-        .package-price {
-            text-align: center;
-            margin: var(--space-lg) 0;
-        }
-
-        .price {
-            font-size: var(--font-size-3xl);
-            font-weight: 700;
-            color: var(--gold);
-        }
-
-        .period {
-            color: var(--text-muted);
-        }
-
-        /* Menu Designer */
-        .designer-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-xl);
-        }
-
-        .menu-preview {
-            position: sticky;
-            top: calc(var(--header-height) + var(--space-lg));
-            align-self: start;
-        }
-
-        .menu-card {
-            background: 
-                conic-gradient(from 200deg at 50% 30%, rgba(235, 203, 139, 0.18), transparent 42% 58%, rgba(230, 143, 160, 0.16) 100%),
-                var(--bg-card);
-            border-radius: var(--radius-xl);
-            padding: var(--space-xl);
-            text-align: center;
-            box-shadow: var(--shadow-xl);
-        }
-
-        .menu-title {
-            font-size: var(--font-size-2xl);
-            font-weight: 800;
-            margin-bottom: var(--space-sm);
-        }
-
-        .menu-subtitle {
-            color: var(--text-muted);
-            margin-bottom: var(--space-lg);
-        }
-
-        .menu-item {
-            margin: var(--space-md) 0;
-            text-align: left;
-        }
-
-        .menu-note {
-            font-size: var(--font-size-sm);
-            color: var(--text-muted);
-            margin-top: var(--space-lg);
-        }
-
-        /* Calculator */
-        .calculator-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-xl);
-        }
-
-        .calculator-results {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-        }
-
-        .result-item {
-            display: flex;
-            justify-content: space-between;
-            padding: var(--space-sm) 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .result-item:last-child {
-            border-bottom: none;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--bg-secondary);
-            padding: var(--space-2xl) 0 var(--space-lg);
-            margin-top: var(--space-2xl);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-xl);
-            margin-bottom: var(--space-xl);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: var(--space-lg);
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-        }
-
-        /* Utility Classes */
-        .text-center { text-align: center; }
-        .text-muted { color: var(--text-muted); }
-        .mt-1 { margin-top: var(--space-sm); }
-        .mt-2 { margin-top: var(--space-md); }
-        .mt-3 { margin-top: var(--space-lg); }
-        .mb-1 { margin-bottom: var(--space-sm); }
-        .mb-2 { margin-bottom: var(--space-md); }
-        .mb-3 { margin-bottom: var(--space-lg); }
-        .hidden { display: none; }
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-
-        /* Loading States */
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--gold);
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Toast Notifications */
-        .toast-container {
-            position: fixed;
-            bottom: var(--space-lg);
-            right: var(--space-lg);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-        }
-
-        .toast {
-            padding: var(--space-md) var(--space-lg);
-            border-radius: var(--radius-md);
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-lg);
-            animation: slideIn 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-
-        .toast.success {
-            border-left: 4px solid var(--success);
-        }
-
-        .toast.error {
-            border-left: 4px solid var(--error);
-        }
-
-        .toast.warning {
-            border-left: 4px solid var(--warning);
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero {
-                padding: var(--space-xl) 0;
-            }
-            
-            .grid-2, .grid-3 {
-                grid-template-columns: 1fr;
-            }
-            
-            .designer-container, .calculator-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .featured {
-                transform: none;
-            }
-        }
-
-        /* Print Styles */
-        @media print {
-            .no-print {
-                display: none !important;
-            }
-            
-            .card {
-                box-shadow: none;
-                border: 1px solid #ddd;
-            }
-            
-            body {
-                background: #fff;
-                color: #222;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Velvet Hour Events — Premium Bartending by Kate</title>
+<meta name="description" content="Signature cocktails, safe service, luxe design. Single-file SPA with public tabs and PIN-gated admin tools.">
+<meta name="theme-color" content="#130f16">
+<meta property="og:title" content="Velvet Hour Events — Premium Bartending by Kate">
+<meta property="og:description" content="Signature cocktails, safe service, luxe design.">
+<style>
+/* ===================== Design Tokens ===================== */
+:root{
+  --bg:#130f16; --ink:#f9f7fb; --muted:#cfc6da; --muted2:#a99fba; --card:#1a1520; --edge:rgba(255,255,255,.13);
+  --gold:#EBCB8B; --rose:#E68FA0; --violet:#B7A0FF; --green:#60d394; --warn:#ffb860; --err:#ff6c6c;
+  --pad:22px; --r:16px; --r-lg:20px; --w:1180px; --nav-h:64px;
+  --shadow:0 24px 60px rgba(8,6,10,.45);
+  --font: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+}
+@media(prefers-color-scheme:light){
+  :root{ --bg:#fbfafc; --card:#fff; --ink:#191720; --muted:#5e5a70; --muted2:#7b758a; --edge:#ece7f0; --shadow:none }
+}
+[data-theme="light"]{ --bg:#fbfafc; --card:#fff; --ink:#191720; --muted:#5e5a70; --muted2:#7b758a; --edge:#ece7f0; --shadow:none }
+
+/* ===================== Base ===================== */
+*{box-sizing:border-box}
+html,body{height:100%}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:
+    radial-gradient(1200px 800px at 15% -10%, #20182a, transparent 60%),
+    radial-gradient(900px 600px at 120% 10%, #2a1b24, transparent 40%),
+    var(--bg);
+  color:var(--ink); font-family:var(--font); line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.container{max-width:var(--w); margin:0 auto; padding:0 18px}
+.section{padding:28px 0 48px}
+.card{background:color-mix(in oklab, var(--card) 94%, black 6%); border:1px solid var(--edge); border-radius:var(--r-lg); padding:var(--pad); box-shadow:var(--shadow)}
+h1,h2,h3{margin:0 0 10px}
+h1{font-size:clamp(28px,4vw,40px)}
+.small{color:var(--muted); font-size:13.5px}
+kbd{background:#0003; border:1px solid var(--edge); padding:.18em .48em; border-radius:6px; font-size:.85em}
+a{color:inherit; text-decoration:none}
+
+/* ===================== Top bar ===================== */
+.header{position:sticky; top:0; z-index:60; height:var(--nav-h); display:flex; align-items:center}
+.nav{
+  width:100%; margin:10px auto; padding:8px 12px; border:1px solid var(--edge); border-radius:14px;
+  background:color-mix(in oklab, var(--bg) 78%, black 22%); backdrop-filter:saturate(1.05) blur(10px);
+  display:flex; align-items:center; gap:10px;
+}
+.wordmark{font-weight:900; letter-spacing:.2px; font-size:20px; line-height:1;
+  background:linear-gradient(92deg,var(--gold),var(--rose),var(--violet));
+  -webkit-background-clip:text; background-clip:text; color:transparent}
+.nav a.tab{padding:9px 12px; border-radius:12px}
+.nav a.tab[aria-current="page"]{background:color-mix(in oklab, var(--gold) 16%, transparent 84%)}
+.spacer{flex:1}
+.badge{font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid var(--edge); color:var(--muted); display:flex; gap:6px; align-items:center}
+.select{appearance:none; background:transparent; border:0; color:inherit; font:inherit}
+
+/* ===================== Admin dropdown ===================== */
+.menu-wrap{position:relative}
+.menu-btn{display:inline-flex; align-items:center; gap:8px; padding:9px 12px; border:1px solid var(--edge); border-radius:12px;
+  background:color-mix(in oklab, var(--bg) 70%, black 30%); cursor:pointer}
+.menu{position:absolute; right:0; top:calc(100% + 8px); min-width:220px; background:color-mix(in oklab, var(--card) 96%, black 4%);
+  border:1px solid var(--edge); border-radius:12px; box-shadow:var(--shadow); padding:8px; display:none}
+.menu[open]{display:block}
+.menu h6{margin:4px 8px 6px; font-size:12px; color:var(--muted); font-weight:700}
+.menu a,.menu button{width:100%; text-align:left; background:transparent; border:0; color:inherit; padding:10px; border-radius:10px; cursor:pointer}
+.menu a:hover,.menu button:hover{background:color-mix(in oklab, var(--gold) 10%, transparent 90%)}
+
+/* ===================== Controls ===================== */
+button,.button{
+  display:inline-flex; align-items:center; gap:8px; padding:12px 14px; border-radius:12px; border:1px solid var(--edge);
+  background:linear-gradient(90deg, color-mix(in oklab, var(--gold) 35%, transparent 65%), color-mix(in oklab, var(--rose) 30%, transparent 70%));
+  color:var(--ink); font-weight:700; cursor:pointer; min-height:42px
+}
+button.ghost{background:transparent}
+input,select,textarea{width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--edge);
+  background:color-mix(in oklab, var(--bg) 70%, black 30%); color:var(--ink)}
+label{font-weight:700; font-size:13px; color:var(--muted2)}
+.grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+.grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+@media(max-width:900px){ .grid-2,.grid-3{grid-template-columns:1fr} }
+
+/* ===================== Views (SPA) ===================== */
+.view{display:none}
+.view[aria-hidden="false"]{display:block; animation:fade .18s ease}
+@keyframes fade{from{opacity:.4; transform:translateY(6px)}}
+
+/* ===================== Hero / coupe ===================== */
+.hero{display:grid; grid-template-columns:1.1fr .9fr; gap:20px; align-items:center}
+.coupe{border-radius:18px; border:1px solid var(--edge); background:linear-gradient(180deg, #1f1724, #161018);
+  display:flex; align-items:center; justify-content:center; padding:10px; overflow:hidden}
+.coupe svg{transition:transform .3s ease}
+.coupe:hover svg{transform:scale(1.02)}
+.tag{font-size:12px; border:1px solid var(--edge); border-radius:999px; padding:6px 10px}
+
+/* ===================== Menu Card ===================== */
+.menu-card{width:100%; max-width:620px; margin:0 auto; border-radius:22px; border:1px solid var(--edge);
+  background: conic-gradient(from 200deg at 50% 30%, color-mix(in oklab,var(--gold) 18%, transparent 82%), transparent 42% 58%, color-mix(in oklab,var(--rose) 16%, transparent 84%) 100%), color-mix(in oklab, var(--card) 92%, black 8%);
+  padding:26px; box-shadow:var(--shadow)}
+.menu-card .title{font-size:28px; font-weight:900; text-align:center; margin-bottom:6px; word-wrap:break-word}
+.menu-card .subtitle{font-size:13px; color:var(--muted); text-align:center; margin-bottom:16px}
+.menu-item{margin:10px 0}
+.menu-note{font-size:12px; opacity:.9; text-align:center; margin-top:10px}
+
+/* ===================== Tables & print ===================== */
+table{width:100%; border-collapse:collapse}
+th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; vertical-align:top}
+.sig{border:1px solid var(--edge); border-radius:12px; background:color-mix(in oklab, var(--bg) 72%, black 28%); width:100%; height:160px}
+@media print{ .header,.no-print{display:none!important} .card{box-shadow:none; border-color:#ddd} body{background:#fff;color:#222} }
+
+/* ===================== Toast ===================== */
+.toast-wrap{position:fixed; bottom:16px; right:16px; z-index:80; display:flex; flex-direction:column; gap:10px}
+.toast{background:color-mix(in oklab,var(--card) 96%, black 4%); border:1px solid var(--edge); border-radius:12px; padding:10px 12px; box-shadow:var(--shadow)}
+.toast.ok{border-left:4px solid var(--green)} .toast.warn{border-left:4px solid var(--warn)} .toast.err{border-left:4px solid var(--err)}
+</style>
 </head>
 <body>
-    <!-- Toast Container -->
-    <div class="toast-container" aria-live="polite" aria-atomic="true"></div>
+<div class="toast-wrap" aria-live="polite" aria-atomic="true"></div>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <a href="#" class="logo">Velvet Hour Events</a>
-                
-                <div class="nav-links">
-                    <a href="#packages" class="nav-link active">Packages</a>
-                    <a href="#menus" class="nav-link">Menus</a>
-                    <a href="#designer" class="nav-link">Designer</a>
-                    <a href="#calculator" class="nav-link">Calculator</a>
-                    <a href="#contact" class="nav-link">Book</a>
-                    <button class="theme-toggle no-print" id="theme-toggle" aria-label="Toggle theme">
-                        <span class="theme-icon">🌙</span>
-                    </button>
-                </div>
-                
-                <button class="btn btn-secondary mobile-menu-btn no-print" aria-label="Toggle menu">
-                    <span>☰</span>
-                </button>
-            </nav>
+<!-- ===================== Header ===================== -->
+<header class="header">
+  <div class="container nav" role="navigation" aria-label="Primary">
+    <div class="wordmark">Velvet Hour Events</div>
+    <a class="tab" data-route="packages" aria-current="page">Packages</a>
+    <a class="tab" data-route="menus">Menus</a>
+    <a class="tab" data-route="designer">Designer</a>
+    <a class="tab" data-route="calculator">Calculator</a>
+    <a class="tab" data-route="book">Book</a>
+    <div class="spacer"></div>
+    <span class="badge">Theme
+      <select id="themePick" class="select" aria-label="Theme">
+        <option value="velvet">Velvet</option>
+        <option value="light">Light</option>
+      </select>
+    </span>
+
+    <!-- Right-side Admin dropdown -->
+    <div class="menu-wrap">
+      <button id="adminBtn" class="menu-btn" aria-haspopup="menu" aria-expanded="false">Admin ▾</button>
+      <div id="adminMenu" class="menu" role="menu" aria-label="Admin menu">
+        <h6>Access</h6>
+        <button data-action="unlock">Unlock Admin</button>
+        <button data-action="lock">Lock Admin</button>
+        <button data-action="resetpin">Reset PIN (0000)</button>
+        <hr style="border:0;border-top:1px solid var(--edge);margin:6px 0">
+        <h6>Admin Tabs</h6>
+        <a data-route="contract" role="menuitem">Contract</a>
+        <a data-route="invoice" role="menuitem">Invoice</a>
+        <a data-route="checklists" role="menuitem">Checklists</a>
+        <a data-route="marketing" role="menuitem">Marketing</a>
+        <a data-route="brand" role="menuitem">Brand & Defaults</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <!-- ===================== PACKAGES (Public) ===================== -->
+  <section id="view-packages" class="view" aria-hidden="false">
+    <div class="section card hero">
+      <div>
+        <h1>Luxe cocktails. Calm, professional service.</h1>
+        <p class="small">Premium bartending by <b>Kate</b>, serving Charlotte, NC and the Carolinas. Menu design, quantity planning, and safe, on-time execution with a designer’s eye.</p>
+        <div style="display:flex; gap:10px; margin-top:10px" class="no-print">
+          <a class="button" data-route="book">Request a Quote</a>
+          <a class="button" data-route="designer">Menu Designer</a>
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section class="hero section" id="home">
-            <div class="container">
-                <h1>Luxe Cocktails, Unforgettable Events</h1>
-                <p>Premium bartending services by Kate. Signature menus, safe service, and luxe presentation for your special occasions in Charlotte, NC and surrounding areas.</p>
-                <div class="hero-actions">
-                    <a href="#contact" class="btn btn-primary">Book Your Event</a>
-                    <a href="#designer" class="btn btn-secondary">Menu Designer</a>
-                </div>
-                <div class="badges">
-                    <span class="badge">TIPS/ServSafe Certified</span>
-                    <span class="badge">Liquor Liability + COI</span>
-                    <span class="badge">Zero-Proof Menus</span>
-                    <span class="badge">Planner-Friendly SOPs</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Packages Section -->
-        <section id="packages" class="section">
-            <div class="container">
-                <h2 class="text-center">Our Premium Packages</h2>
-                <p class="text-center text-muted mb-3">Tailored experiences for every occasion</p>
-                
-                <div class="grid grid-3">
-                    <div class="card package-card">
-                        <h3>Essentials</h3>
-                        <p class="text-muted">Perfect for corporate events and casual gatherings</p>
-                        <ul class="package-features">
-                            <li>4-hour minimum</li>
-                            <li>1 professional bartender</li>
-                            <li>Beer, wine & classic highballs</li>
-                            <li>Basic garnish setup</li>
-                        </ul>
-                        <div class="package-price">
-                            <span class="price">$55</span>
-                            <span class="period">/hour</span>
-                        </div>
-                        <button class="btn btn-secondary">Select Package</button>
-                    </div>
-                    
-                    <div class="card package-card featured">
-                        <div class="featured-badge">Most Popular</div>
-                        <h3>Signature</h3>
-                        <p class="text-muted">Elevated experience with custom cocktail creations</p>
-                        <ul class="package-features">
-                            <li>4-hour minimum</li>
-                            <li>1 professional bartender</li>
-                            <li>2 signature cocktails</li>
-                            <li>Premium garnish station</li>
-                            <li>Custom menu design</li>
-                        </ul>
-                        <div class="package-price">
-                            <span class="price">$65</span>
-                            <span class="period">/hour</span>
-                        </div>
-                        <button class="btn btn-primary">Select Package</button>
-                    </div>
-                    
-                    <div class="card package-card">
-                        <h3>Premier</h3>
-                        <p class="text-muted">Ultimate luxury experience for weddings and special events</p>
-                        <ul class="package-features">
-                            <li>4-hour minimum</li>
-                            <li>1-2 professional bartenders</li>
-                            <li>3+ signature cocktails</li>
-                            <li>Zero-proof menu included</li>
-                            <li>Custom signage & branding</li>
-                            <li>Premium glassware available</li>
-                        </ul>
-                        <div class="package-price">
-                            <span class="price">$85</span>
-                            <span class="period">/hour</span>
-                        </div>
-                        <button class="btn btn-secondary">Select Package</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Menu Templates Section -->
-        <section id="menus" class="section">
-            <div class="container">
-                <h2 class="text-center">Signature Menu Templates</h2>
-                <p class="text-center text-muted mb-3">Curated cocktail experiences for every palate</p>
-                
-                <div class="grid grid-3">
-                    <div class="card">
-                        <h3>Classic Elegance</h3>
-                        <div class="menu-item">
-                            <strong>French 75</strong> — gin, lemon, bubbles
-                        </div>
-                        <div class="menu-item">
-                            <strong>Old Fashioned</strong> — bourbon, bitters, orange
-                        </div>
-                        <div class="menu-item">
-                            <strong>House:</strong> Gin & Tonic · Vodka Soda · Paloma
-                        </div>
-                        <div class="menu-item">
-                            <strong>Zero-Proof:</strong> Citrus & Mint Cooler
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>Seasonal Garden</h3>
-                        <div class="menu-item">
-                            <strong>Strawberry Basil Smash</strong> — vodka, fresh berries, herbs
-                        </div>
-                        <div class="menu-item">
-                            <strong>Cucumber Gimlet</strong> — gin, lime, cucumber
-                        </div>
-                        <div class="menu-item">
-                            <strong>House:</strong> Spritz Station · Hard Seltzers
-                        </div>
-                        <div class="menu-item">
-                            <strong>Zero-Proof:</strong> Watermelon Fizz
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>Modern Luxe</h3>
-                        <div class="menu-item">
-                            <strong>Espresso Martini</strong> — vodka, coffee liqueur, espresso
-                        </div>
-                        <div class="menu-item">
-                            <strong>Ginger Pear Whiskey</strong> — bourbon, ginger, pear
-                        </div>
-                        <div class="menu-item">
-                            <strong>House:</strong> Beer/Wine Selection
-                        </div>
-                        <div class="menu-item">
-                            <strong>Zero-Proof:</strong> Spiced Apple Fizz
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Menu Designer Section -->
-        <section id="designer" class="section">
-            <div class="container">
-                <h2 class="text-center">Menu Designer</h2>
-                <p class="text-center text-muted mb-3">Create your custom print-ready menu</p>
-                
-                <div class="designer-container">
-                    <div class="designer-form">
-                        <div class="card">
-                            <h3>Customize Your Menu</h3>
-                            <p class="text-muted">Public tool for clients/planners. No admin data needed.</p>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="event-name">Event Name</label>
-                                <input type="text" id="event-name" class="form-input" placeholder="Ava & Noah — 10·19·25" value="Ava & Noah — 10·19·25">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="event-subtitle">Subtitle</label>
-                                <input type="text" id="event-subtitle" class="form-input" placeholder="Signature Cocktails + Zero-Proof" value="Signature Cocktails + Zero-Proof">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="signature-1">Signature #1</label>
-                                <input type="text" id="signature-1" class="form-input" placeholder="French 75 — gin, lemon, bubbles" value="French 75 — gin, lemon, bubbles">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="signature-2">Signature #2</label>
-                                <input type="text" id="signature-2" class="form-input" placeholder="Old Fashioned — bourbon, bitters, orange" value="Old Fashioned — bourbon, bitters, orange">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="house-drinks">House Staples (comma separated)</label>
-                                <input type="text" id="house-drinks" class="form-input" placeholder="Gin & Tonic, Vodka Soda, Paloma" value="Gin & Tonic, Vodka Soda, Paloma">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="zero-proof">Zero-Proof Option</label>
-                                <input type="text" id="zero-proof" class="form-input" placeholder="Citrus & Mint Cooler" value="Citrus & Mint Cooler">
-                            </div>
-                            
-                            <div class="grid grid-3">
-                                <div class="form-group">
-                                    <label class="form-label" for="accent-style">Accent Style</label>
-                                    <select id="accent-style" class="form-select">
-                                        <option value="velvet">Velvet Luxe</option>
-                                        <option value="minimal">Minimal</option>
-                                        <option value="lively">Lively</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label" for="include-note">Include Note?</label>
-                                    <select id="include-note" class="form-select">
-                                        <option value="yes">Yes</option>
-                                        <option value="no">No</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label" for="show-brand">Show Brand?</label>
-                                    <select id="show-brand" class="form-select">
-                                        <option value="yes">Yes</option>
-                                        <option value="no">No</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="hero-actions mt-3">
-                                <button class="btn btn-primary" id="preview-menu">Preview Menu</button>
-                                <button class="btn btn-secondary" id="print-menu">Print Menu</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-preview">
-                        <div class="menu-card">
-                            <div class="menu-title" id="preview-title">Ava & Noah — 10·19·25</div>
-                            <div class="menu-subtitle" id="preview-subtitle">Signature Cocktails + Zero-Proof</div>
-                            
-                            <div class="menu-item" id="preview-sig1">
-                                <strong>French 75</strong> — gin, lemon, bubbles
-                            </div>
-                            
-                            <div class="menu-item" id="preview-sig2">
-                                <strong>Old Fashioned</strong> — bourbon, bitters, orange
-                            </div>
-                            
-                            <div class="menu-item" id="preview-house">
-                                <strong>House:</strong> Gin & Tonic · Vodka Soda · Paloma
-                            </div>
-                            
-                            <div class="menu-item" id="preview-zero">
-                                <strong>Zero-Proof:</strong> Citrus & Mint Cooler
-                            </div>
-                            
-                            <div class="menu-note" id="preview-note">
-                                Please drink responsibly · IDs required
-                            </div>
-                            
-                            <div class="menu-note" id="preview-brand">
-                                — Velvet Hour Events —
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Calculator Section -->
-        <section id="calculator" class="section">
-            <div class="container">
-                <h2 class="text-center">Beverage Calculator</h2>
-                <p class="text-center text-muted mb-3">Plan your perfect bar setup</p>
-                <p class="text-center text-muted mb-3">Rule: 1.5 drinks first hour, then ~1/hr. 750ml ≈ 16 cocktails. Wine ≈ 5 pours. Beer case ≈ 24.</p>
-                
-                <div class="calculator-grid">
-                    <div class="calculator-form">
-                        <div class="card">
-                            <h3>Event Details</h3>
-                            
-                            <div class="grid grid-3">
-                                <div class="form-group">
-                                    <label class="form-label" for="guests">Guests</label>
-                                    <input type="number" id="guests" class="form-input" value="100" min="1">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label" for="hours">Hours of Service</label>
-                                    <input type="number" id="hours" class="form-input" value="4" min="1">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label" for="ice">Ice per Guest (lbs)</label>
-                                    <input type="number" id="ice" class="form-input" value="1.5" step="0.1">
-                                </div>
-                            </div>
-                            
-                            <h4 class="mt-3">Beverage Distribution</h4>
-                            
-                            <div class="grid grid-3">
-                                <div class="form-group">
-                                    <label class="form-label" for="cocktail-pct">% Cocktails</label>
-                                    <input type="number" id="cocktail-pct" class="form-input" value="40" min="0" max="100">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label" for="beer-pct">% Beer</label>
-                                    <input type="number" id="beer-pct" class="form-input" value="35" min="0" max="100">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label" for="wine-pct">% Wine</label>
-                                    <input type="number" id="wine-pct" class="form-input" value="25" min="0" max="100">
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="cocktail-bases">Cocktail Bases (comma separated)</label>
-                                <input type="text" id="cocktail-bases" class="form-input" value="vodka, tequila, bourbon">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="garnish-set">Garnish Set (comma separated)</label>
-                                <input type="text" id="garnish-set" class="form-input" value="lemon, lime, orange, cherry">
-                            </div>
-                            
-                            <button class="btn btn-primary" id="calculate-btn">Calculate</button>
-                            <button class="btn btn-secondary" id="export-csv">Export CSV</button>
-                        </div>
-                    </div>
-                    
-                    <div class="calculator-results">
-                        <div class="card">
-                            <h3>Results</h3>
-                            <div id="results-content">
-                                <div class="result-item">
-                                    <span>Guests:</span>
-                                    <span id="result-guests">100</span>
-                                </div>
-                                <div class="result-item">
-                                    <span>Hours:</span>
-                                    <span id="result-hours">4</span>
-                                </div>
-                                <div class="result-item">
-                                    <span>Estimated Total Drinks:</span>
-                                    <span id="result-total-drinks">450</span>
-                                </div>
-                                
-                                <div class="result-item mt-2">
-                                    <span><strong>COCKTAILS</strong></span>
-                                    <span id="result-cocktails">180 pours → ~12 × 750ml</span>
-                                </div>
-                                <div class="result-item">
-                                    <span>Bases:</span>
-                                    <span id="result-bases">vodka, tequila, bourbon → ~4 each</span>
-                                </div>
-                                
-                                <div class="result-item mt-2">
-                                    <span><strong>BEER</strong></span>
-                                    <span id="result-beer">158 pours → ~7 case(s)</span>
-                                </div>
-                                
-                                <div class="result-item mt-2">
-                                    <span><strong>WINE</strong></span>
-                                    <span id="result-wine">113 glasses → ~23 bottles</span>
-                                </div>
-                                
-                                <div class="result-item mt-2">
-                                    <span>MIXERS:</span>
-                                    <span id="result-mixers">~4.0 L</span>
-                                </div>
-                                <div class="result-item">
-                                    <span>SYRUP:</span>
-                                    <span id="result-syrup">~1.3 L</span>
-                                </div>
-                                <div class="result-item">
-                                    <span>CITRUS set:</span>
-                                    <span id="result-citrus">~8 pieces</span>
-                                </div>
-                                <div class="result-item">
-                                    <span>GARNISH (cherry/olive):</span>
-                                    <span id="result-garnish">~90</span>
-                                </div>
-                                <div class="result-item">
-                                    <span>ICE:</span>
-                                    <span id="result-ice">~150 lbs</span>
-                                </div>
-                                <div class="result-item">
-                                    <span>GLASSWARE:</span>
-                                    <span id="result-glassware">300</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section">
-            <div class="container">
-                <h2 class="text-center">Book Your Event</h2>
-                <p class="text-center text-muted mb-3">Let's create something unforgettable together</p>
-                
-                <div class="grid grid-2">
-                    <div class="contact-form">
-                        <div class="card">
-                            <h3>Request a Quote</h3>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="contact-name">Name</label>
-                                <input type="text" id="contact-name" class="form-input" placeholder="Your name">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="contact-email">Email</label>
-                                <input type="email" id="contact-email" class="form-input" placeholder="hello@velvethourevents.com">
-                            </div>
-                            
-                            <div class="grid grid-2">
-                                <div class="form-group">
-                                    <label class="form-label" for="event-date">Event Date</label>
-                                    <input type="date" id="event-date" class="form-input">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label" for="guest-count">Guest Count</label>
-                                    <input type="number" id="guest-count" class="form-input" placeholder="100" min="5">
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="venue-address">Venue/Address</label>
-                                <input type="text" id="venue-address" class="form-input" placeholder="Venue or address">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="event-notes">Notes</label>
-                                <textarea id="event-notes" class="form-textarea" placeholder="Tell us your vibe, must-have drinks, timelines..."></textarea>
-                            </div>
-                            
-                            <div class="hero-actions">
-                                <button class="btn btn-primary" id="submit-request">Send Request (Demo)</button>
-                                <a href="mailto:hello@velvethourevents.com" class="btn btn-secondary" id="email-btn">Email</a>
-                                <span class="text-muted">Text: (704) 000-0000</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-info">
-                        <div class="card">
-                            <h3>Why Choose Velvet Hour?</h3>
-                            <ul class="package-features">
-                                <li>Certified & insured for your peace of mind</li>
-                                <li>Custom menu design tailored to your event</li>
-                                <li>Professional, punctual, and polished service</li>
-                                <li>Attention to detail in every aspect</li>
-                                <li>Zero-proof options for all guests</li>
-                                <li>Flexible packages to fit your needs</li>
-                            </ul>
-                            
-                            <div class="mt-3">
-                                <h4>Service Area</h4>
-                                <p class="text-muted">Charlotte, NC and surrounding areas</p>
-                                
-                                <h4 class="mt-2">Response Time</h4>
-                                <p class="text-muted">We typically respond within 24 hours</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <h3>Velvet Hour Events</h3>
-                    <p class="text-muted">Premium bartending services in Charlotte, NC and surrounding areas.</p>
-                </div>
-                
-                <div>
-                    <h4>Contact</h4>
-                    <p class="text-muted">hello@velvethourevents.com</p>
-                    <p class="text-muted">(704) 000-0000</p>
-                </div>
-                
-                <div>
-                    <h4>Certifications</h4>
-                    <p class="text-muted">TIPS Certified</p>
-                    <p class="text-muted">ServSafe Alcohol</p>
-                    <p class="text-muted">Fully Insured</p>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p class="text-muted">&copy; 2025 Velvet Hour Events — Charlotte, NC. All rights reserved.</p>
-            </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:12px">
+          <span class="tag">TIPS/ServSafe</span>
+          <span class="tag">Liquor Liability + COI</span>
+          <span class="tag">Zero-Proof Menus</span>
+          <span class="tag">Planner-Friendly SOPs</span>
         </div>
-    </footer>
+      </div>
+      <div class="coupe" aria-hidden="true">
+        <svg width="100%" height="220" viewBox="0 0 520 220" role="img" aria-label="Decorative coupe glass">
+          <defs>
+            <linearGradient id="sh" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#EBCB8B"/><stop offset="1" stop-color="#E68FA0"/>
+            </linearGradient>
+            <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <path d="M30 30h460c0 60-90 100-230 100S30 90 30 30z" fill="url(#sh)" fill-opacity=".18" stroke="url(#sh)" stroke-opacity=".6" stroke-width="2" filter="url(#glow)"/>
+          <rect x="250" y="130" width="20" height="40" rx="8" fill="#f6f1f9" opacity=".5"/>
+          <rect x="230" y="170" width="60" height="10" rx="5" fill="#f6f1f9" opacity=".4"/>
+        </svg>
+      </div>
+    </div>
 
-    <script>
-        // Enhanced JavaScript with modern features
-        class VelvetHourApp {
-            constructor() {
-                this.init();
-            }
-            
-            init() {
-                this.setupEventListeners();
-                this.loadThemePreference();
-                this.setupRouting();
-                this.setupMenuDesigner();
-                this.setupCalculator();
-                this.setupContactForm();
-            }
-            
-            setupEventListeners() {
-                // Theme toggle
-                document.getElementById('theme-toggle').addEventListener('click', () => {
-                    this.toggleTheme();
-                });
-                
-                // Mobile menu
-                document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
-                    this.toggleMobileMenu();
-                });
-                
-                // Smooth scrolling for anchor links
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const target = document.querySelector(anchor.getAttribute('href'));
-                        if (target) {
-                            target.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                            
-                            // Update active nav link
-                            document.querySelectorAll('.nav-link').forEach(link => {
-                                link.classList.remove('active');
-                            });
-                            anchor.classList.add('active');
-                        }
-                    });
-                });
-            }
-            
-            toggleTheme() {
-                const currentTheme = document.body.getAttribute('data-theme') || 'dark';
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                document.body.setAttribute('data-theme', newTheme);
-                localStorage.setItem('velvet-hour-theme', newTheme);
-                
-                // Update theme icon
-                const themeIcon = document.querySelector('.theme-icon');
-                themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
-                
-                this.showToast(`Switched to ${newTheme} theme`, 'success');
-            }
-            
-            loadThemePreference() {
-                const savedTheme = localStorage.getItem('velvet-hour-theme') || 'dark';
-                document.body.setAttribute('data-theme', savedTheme);
-                
-                // Set correct theme icon
-                const themeIcon = document.querySelector('.theme-icon');
-                themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
-            }
-            
-            toggleMobileMenu() {
-                const navLinks = document.querySelector('.nav-links');
-                navLinks.classList.toggle('active');
-            }
-            
-            setupRouting() {
-                // Simple client-side routing for SPA-like experience
-                window.addEventListener('hashchange', () => {
-                    this.handleRouteChange();
-                });
-                
-                // Initial route handling
-                this.handleRouteChange();
-            }
-            
-            handleRouteChange() {
-                const hash = window.location.hash || '#home';
-                
-                // Update active nav link
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === hash) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-            
-            setupMenuDesigner() {
-                const previewBtn = document.getElementById('preview-menu');
-                const printBtn = document.getElementById('print-menu');
-                
-                previewBtn.addEventListener('click', () => {
-                    this.updateMenuPreview();
-                    this.showToast('Menu preview updated', 'success');
-                });
-                
-                printBtn.addEventListener('click', () => {
-                    this.updateMenuPreview();
-                    window.print();
-                });
-                
-                // Initialize preview
-                this.updateMenuPreview();
-                
-                // Update preview on input changes
-                const inputs = ['event-name', 'event-subtitle', 'signature-1', 'signature-2', 'house-drinks', 'zero-proof'];
-                inputs.forEach(id => {
-                    document.getElementById(id).addEventListener('input', () => {
-                        this.updateMenuPreview();
-                    });
-                });
-                
-                const selects = ['accent-style', 'include-note', 'show-brand'];
-                selects.forEach(id => {
-                    document.getElementById(id).addEventListener('change', () => {
-                        this.updateMenuPreview();
-                    });
-                });
-            }
-            
-            updateMenuPreview() {
-                // Update text content
-                document.getElementById('preview-title').textContent = 
-                    document.getElementById('event-name').value || 'Our Event';
-                
-                document.getElementById('preview-subtitle').textContent = 
-                    document.getElementById('event-subtitle').value || 'Signature Cocktails + Zero-Proof';
-                
-                // Format signature drinks
-                const sig1 = document.getElementById('signature-1').value || 'French 75 — gin, lemon, bubbles';
-                const sig2 = document.getElementById('signature-2').value || 'Old Fashioned — bourbon, bitters, orange';
-                
-                document.getElementById('preview-sig1').innerHTML = 
-                    `<strong>${this.formatDrinkName(sig1)}</strong> — ${this.formatDrinkDescription(sig1)}`;
-                
-                document.getElementById('preview-sig2').innerHTML = 
-                    `<strong>${this.formatDrinkName(sig2)}</strong> — ${this.formatDrinkDescription(sig2)}`;
-                
-                // Format house drinks
-                const houseInput = document.getElementById('house-drinks').value || 'Gin & Tonic, Vodka Soda, Paloma';
-                const houseDrinks = houseInput.split(',').map(d => d.trim()).filter(Boolean);
-                document.getElementById('preview-house').innerHTML = 
-                    `<strong>House:</strong> ${houseDrinks.join(' · ')}`;
-                
-                // Format zero-proof
-                const zeroProof = document.getElementById('zero-proof').value || 'Citrus & Mint Cooler';
-                document.getElementById('preview-zero').innerHTML = 
-                    `<strong>Zero-Proof:</strong> ${zeroProof}`;
-                
-                // Toggle note and brand visibility
-                const showNote = document.getElementById('include-note').value === 'yes';
-                const showBrand = document.getElementById('show-brand').value === 'yes';
-                
-                document.getElementById('preview-note').style.display = showNote ? 'block' : 'none';
-                document.getElementById('preview-brand').style.display = showBrand ? 'block' : 'none';
-                
-                // Update accent style
-                const accentStyle = document.getElementById('accent-style').value;
-                const menuCard = document.querySelector('.menu-card');
-                
-                menuCard.style.background = {
-                    velvet: 'conic-gradient(from 200deg at 50% 30%, rgba(235, 203, 139, 0.18), transparent 42% 58%, rgba(230, 143, 160, 0.16) 100%), var(--bg-card)',
-                    minimal: 'var(--bg-card)',
-                    lively: 'radial-gradient(700px 220px at 10% -30%, rgba(183, 160, 255, 0.24), transparent), radial-gradient(420px 200px at 90% 120%, rgba(235, 203, 139, 0.22), transparent), var(--bg-card)'
-                }[accentStyle] || menuCard.style.background;
-            }
-            
-            formatDrinkName(drinkText) {
-                // Extract the name part (before — or -)
-                const separator = drinkText.includes('—') ? '—' : '-';
-                return drinkText.split(separator)[0].trim();
-            }
-            
-            formatDrinkDescription(drinkText) {
-                // Extract the description part (after — or -)
-                const separator = drinkText.includes('—') ? '—' : '-';
-                const parts = drinkText.split(separator);
-                return parts.length > 1 ? parts[1].trim() : '';
-            }
-            
-            setupCalculator() {
-                const calculateBtn = document.getElementById('calculate-btn');
-                const exportBtn = document.getElementById('export-csv');
-                
-                calculateBtn.addEventListener('click', () => {
-                    this.calculateBeverages();
-                    this.showToast('Calculation updated', 'success');
-                });
-                
-                exportBtn.addEventListener('click', () => {
-                    this.exportCSV();
-                });
-                
-                // Calculate on initial load
-                this.calculateBeverages();
-            }
-            
-            calculateBeverages() {
-                const guests = parseInt(document.getElementById('guests').value) || 0;
-                const hours = parseInt(document.getElementById('hours').value) || 0;
-                const icePerGuest = parseFloat(document.getElementById('ice').value) || 0;
-                
-                const cocktailPct = parseInt(document.getElementById('cocktail-pct').value) || 0;
-                const beerPct = parseInt(document.getElementById('beer-pct').value) || 0;
-                const winePct = parseInt(document.getElementById('wine-pct').value) || 0;
-                
-                const basesInput = document.getElementById('cocktail-bases').value || '';
-                const bases = basesInput.split(',').map(b => b.trim()).filter(Boolean);
-                
-                // Validate percentages
-                const totalPct = cocktailPct + beerPct + winePct;
-                if (totalPct !== 100) {
-                    this.showToast(`Percentages total ${totalPct}% (should be 100%)`, 'warning');
-                }
-                
-                // Calculate drinks
-                const drinksFirstHour = 1.5;
-                const drinksPerHourAfter = 1.0;
-                const drinksPerGuest = drinksFirstHour + Math.max(hours - 1, 0) * drinksPerHourAfter;
-                const totalDrinks = Math.round(guests * drinksPerGuest);
-                
-                const cocktailDrinks = Math.round(totalDrinks * cocktailPct / 100);
-                const beerDrinks = Math.round(totalDrinks * beerPct / 100);
-                const wineDrinks = Math.round(totalDrinks * winePct / 100);
-                
-                // Calculate supplies
-                const spiritBottles = Math.ceil(cocktailDrinks / 16);
-                const perBase = Math.ceil(spiritBottles / Math.max(1, bases.length));
-                
-                const wineBottles = Math.ceil(wineDrinks / 5);
-                const beerCases = Math.ceil(beerDrinks / 24);
-                
-                const ice = Math.ceil(icePerGuest * guests);
-                const glassware = Math.ceil(guests * (hours >= 4 ? 3 : 2));
-                
-                const mixerLiters = (cocktailDrinks * 0.75) / 33.8;
-                const syrupLiters = (cocktailDrinks * 0.25) / 33.8;
-                const citrus = Math.ceil(cocktailDrinks * 0.5 / 12);
-                const garnish = Math.ceil(cocktailDrinks * 0.5);
-                
-                // Update results
-                document.getElementById('result-guests').textContent = guests;
-                document.getElementById('result-hours').textContent = hours;
-                document.getElementById('result-total-drinks').textContent = totalDrinks;
-                
-                document.getElementById('result-cocktails').textContent = `${cocktailDrinks} pours → ~${spiritBottles} × 750ml`;
-                document.getElementById('result-bases').textContent = `${bases.join(', ')} → ~${perBase} each`;
-                
-                document.getElementById('result-beer').textContent = `${beerDrinks} pours → ~${beerCases} case(s)`;
-                document.getElementById('result-wine').textContent = `${wineDrinks} glasses → ~${wineBottles} bottles`;
-                
-                document.getElementById('result-mixers').textContent = `~${mixerLiters.toFixed(1)} L`;
-                document.getElementById('result-syrup').textContent = `~${syrupLiters.toFixed(1)} L`;
-                document.getElementById('result-citrus').textContent = `~${citrus} pieces`;
-                document.getElementById('result-garnish').textContent = `~${garnish}`;
-                document.getElementById('result-ice').textContent = `~${ice} lbs`;
-                document.getElementById('result-glassware').textContent = glassware;
-            }
-            
-            exportCSV() {
-                // In a real app, this would generate a proper CSV file
-                this.showToast('CSV export functionality would be implemented here', 'success');
-            }
-            
-            setupContactForm() {
-                const submitBtn = document.getElementById('submit-request');
-                const emailBtn = document.getElementById('email-btn');
-                
-                submitBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    const name = document.getElementById('contact-name').value;
-                    const email = document.getElementById('contact-email').value;
-                    
-                    if (!name || !email) {
-                        this.showToast('Please fill in required fields', 'error');
-                        return;
-                    }
-                    
-                    // In a real app, this would submit to a backend
-                    this.showToast('Request submitted successfully (demo)', 'success');
-                    
-                    // Reset form
-                    document.getElementById('contact-name').value = '';
-                    document.getElementById('contact-email').value = '';
-                    document.getElementById('event-date').value = '';
-                    document.getElementById('guest-count').value = '';
-                    document.getElementById('venue-address').value = '';
-                    document.getElementById('event-notes').value = '';
-                });
-                
-                // Update mailto link based on form inputs
-                const updateMailtoLink = () => {
-                    const name = document.getElementById('contact-name').value;
-                    const email = document.getElementById('contact-email').value;
-                    const date = document.getElementById('event-date').value;
-                    const guests = document.getElementById('guest-count').value;
-                    const venue = document.getElementById('venue-address').value;
-                    const notes = document.getElementById('event-notes').value;
-                    
-                    const subject = `Quote Request — ${name || 'Event'}`;
-                    const body = `Hi Velvet Hour Events,
+    <div class="section card">
+      <h2>Packages</h2>
+      <div class="grid-3" style="margin-top:8px">
+        <div class="card">
+          <h3>Essentials</h3>
+          <div class="small">4-hr min · 1 bartender</div>
+          <ul style="margin:10px 0 14px; padding-left:18px">
+            <li>Beer & wine + classic highballs</li>
+            <li>Shopping plan & garnish kit</li>
+            <li>Print-ready menu card</li>
+          </ul>
+          <div class="small">From <b style="color:var(--green)">$55/hr</b></div>
+        </div>
+        <div class="card" style="border-color:rgba(235,203,139,.55)">
+          <h3>Signature</h3>
+          <div class="small">4-hr min · 1 bartender</div>
+          <ul style="margin:10px 0 14px; padding-left:18px">
+            <li>Two signature cocktails + tasting</li>
+            <li>Elevated garnish & signage</li>
+            <li>Menu designer & printing guide</li>
+          </ul>
+          <div class="small">From <b style="color:var(--green)">$65/hr</b></div>
+        </div>
+        <div class="card">
+          <h3>Premier</h3>
+          <div class="small">4-hr min · 1 bartender</div>
+          <ul style="margin:10px 0 14px; padding-left:18px">
+            <li>Zero-proof menu · custom signage</li>
+            <li>Optional glassware + mobile bar</li>
+            <li>Concierge planning</li>
+          </ul>
+          <div class="small">From <b style="color:var(--green)">$85/hr</b></div>
+        </div>
+      </div>
+      <p class="small" style="margin-top:10px">Holiday dates may price at 1.5×. Client typically supplies alcohol; we provide a detailed shopping plan and serve.</p>
+    </div>
+  </section>
+
+  <!-- ===================== MENUS (Public) ===================== -->
+  <section id="view-menus" class="view" aria-hidden="true">
+    <div class="section card">
+      <div style="display:flex; align-items:center; justify-content:space-between">
+        <h2>Menu Templates</h2>
+        <button class="ghost no-print" onclick="window.print()">Print</button>
+      </div>
+      <div class="grid-3" style="margin-top:8px">
+        <div class="card">
+          <h3>Classic Elegance</h3>
+          <div class="menu-item"><b>French 75</b> — gin, lemon, bubbles</div>
+          <div class="menu-item"><b>Old Fashioned</b> — bourbon, bitters, orange</div>
+          <div class="menu-item"><b>House:</b> Gin & Tonic · Vodka Soda · Paloma</div>
+          <div class="menu-item"><b>Zero-Proof:</b> Citrus & Mint Cooler</div>
+        </div>
+        <div class="card">
+          <h3>Seasonal Garden</h3>
+          <div class="menu-item"><b>Strawberry Basil Smash</b> — vodka, berries, herbs</div>
+          <div class="menu-item"><b>Cucumber Gimlet</b> — gin, lime, cucumber</div>
+          <div class="menu-item"><b>House:</b> Spritz Station · Hard Seltzers</div>
+          <div class="menu-item"><b>Zero-Proof:</b> Watermelon Fizz</div>
+        </div>
+        <div class="card">
+          <h3>Modern Luxe</h3>
+          <div class="menu-item"><b>Espresso Martini</b> — vodka, coffee liqueur, espresso</div>
+          <div class="menu-item"><b>Ginger Pear Whiskey</b> — bourbon, ginger, pear</div>
+          <div class="menu-item"><b>House:</b> Beer/Wine selection</div>
+          <div class="menu-item"><b>Zero-Proof:</b> Spiced Apple Fizz</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DESIGNER (Public) ===================== -->
+  <section id="view-designer" class="view" aria-hidden="true">
+    <div class="section card">
+      <div style="display:flex; align-items:center; justify-content:space-between">
+        <h2>Menu Designer (Print-ready)</h2>
+        <div class="no-print" style="display:flex; gap:8px">
+          <button onclick="renderMenu()">Preview</button>
+          <button onclick="printMenu()">Print Card</button>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div>
+          <div class="grid-2">
+            <p><label>Event Name<br><input id="m_event" value="Ava & Noah — 10·19·25"></label></p>
+            <p><label>Subtitle<br><input id="m_sub" value="Signature Cocktails + Zero-Proof"></label></p>
+          </div>
+          <p><label>Signature #1<br><input id="m_s1" value="French 75 — gin, lemon, bubbles"></label></p>
+          <p><label>Signature #2<br><input id="m_s2" value="Old Fashioned — bourbon, bitters, orange"></label></p>
+          <p><label>House Staples (comma)<br><input id="m_house" value="Gin & Tonic, Vodka Soda, Paloma"></label></p>
+          <p><label>Zero-Proof<br><input id="m_zero" value="Citrus & Mint Cooler"></label></p>
+          <div class="grid-3">
+            <p><label>Accent Style<br>
+              <select id="m_style"><option value="velvet">Velvet Luxe</option><option value="minimal">Minimal</option><option value="lively">Lively</option></select>
+            </label></p>
+            <p><label>Include note?<br><select id="m_note"><option>Yes</option><option>No</option></select></label></p>
+            <p><label>Show brand?<br><select id="m_brand"><option>Yes</option><option>No</option></select></label></p>
+          </div>
+        </div>
+        <div id="menuPreview">
+          <div class="menu-card" id="menuCard">
+            <div class="title" id="mc_title">Ava & Noah — 10·19·25</div>
+            <div class="subtitle" id="mc_sub">Signature Cocktails + Zero-Proof</div>
+            <div class="menu-item" id="mc_s1"><b>French 75</b> — gin, lemon, bubbles</div>
+            <div class="menu-item" id="mc_s2"><b>Old Fashioned</b> — bourbon, bitters, orange</div>
+            <div class="menu-item" id="mc_house"><b>House:</b> Gin & Tonic · Vodka Soda · Paloma</div>
+            <div class="menu-item" id="mc_zero"><b>Zero-Proof:</b> Citrus & Mint Cooler</div>
+            <div class="menu-note" id="mc_note">Please drink responsibly · IDs required</div>
+            <div class="menu-note" id="mc_brand">— Velvet Hour Events —</div>
+          </div>
+        </div>
+      </div>
+      <p class="small">Tip: <kbd>Ctrl/Cmd+P</kbd> → More settings → Margins: None. Prints perfectly on 5×7 or A5.</p>
+    </div>
+  </section>
+
+  <!-- ===================== CALCULATOR (Public) ===================== -->
+  <section id="view-calculator" class="view" aria-hidden="true">
+    <div class="section card">
+      <div style="display:flex; align-items:center; justify-content:space-between">
+        <h2>Shopping Calculator</h2>
+        <div class="no-print" style="display:flex; gap:8px">
+          <button onclick="calcRun()">Calculate</button>
+          <button onclick="calcExport()">Export CSV</button>
+        </div>
+      </div>
+      <p class="small">Rule of thumb: 1.5 drinks first hour, then ~1/hr. 750ml ≈ 16 cocktails (1.5 oz). Wine bottle ≈ 5 pours. Beer case ≈ 24.</p>
+      <form class="grid-3 no-print" aria-label="Shopping calculator input">
+        <p><label>Guests<br><input id="c_guests" type="number" value="100" min="1"></label></p>
+        <p><label>Hours of Service<br><input id="c_hours" type="number" value="4" min="1"></label></p>
+        <p><label>Ice per guest (lbs)<br><input id="c_ice" type="number" value="1.5" step="0.1"></label></p>
+        <p><label>% Cocktails<br><input id="c_pc" type="number" value="40" min="0" max="100"></label></p>
+        <p><label>% Beer<br><input id="c_pb" type="number" value="35" min="0" max="100"></label></p>
+        <p><label>% Wine<br><input id="c_pw" type="number" value="25" min="0" max="100"></label></p>
+        <p class="grid-2" style="grid-column:1/-1"><label>Cocktail bases (comma separated)<br><input id="c_bases" value="vodka, tequila, bourbon"></label></p>
+        <p class="grid-2" style="grid-column:1/-1"><label>Garnish set (comma separated)<br><input id="c_garn" value="lemon, lime, orange, cherry"></label></p>
+      </form>
+      <pre id="calc_out" style="white-space:pre-wrap; border:1px solid var(--edge); padding:12px; border-radius:12px; background:color-mix(in oklab, var(--bg) 70%, black 30%)" aria-live="polite"></pre>
+    </div>
+  </section>
+
+  <!-- ===================== BOOK (Public) ===================== -->
+  <section id="view-book" class="view" aria-hidden="true">
+    <div class="section card">
+      <h2>Request a Quote</h2>
+      <form onsubmit="logRequest(event)">
+        <div class="grid-2">
+          <p><label>Name<br><input id="req_name" required placeholder="Your name"></label></p>
+          <p><label>Email<br><input id="req_email" type="email" required placeholder="hello@velvethourevents.com"></label></p>
+        </div>
+        <div class="grid-2">
+          <p><label>Event Date<br><input id="req_date" type="date" required></label></p>
+          <p><label>Guest Count<br><input id="req_guests" type="number" min="5" required placeholder="100"></label></p>
+        </div>
+        <p><label>Venue/Address<br><input id="req_addr" required placeholder="Venue or address"></label></p>
+        <p><label>Notes<br><textarea id="req_notes" rows="4" placeholder="Tell us your vibe, must-have drinks, timelines…"></textarea></label></p>
+        <div style="display:flex; gap:10px; align-items:center" class="no-print">
+          <button class="button" type="submit">Send Request (Demo)</button>
+          <a class="button ghost" id="mailtoBtn" href="#" aria-label="Send via email">Email</a>
+          <span class="small">Text: (704) 000-0000</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== ADMIN: Contract ===================== -->
+  <section id="view-contract" class="view" aria-hidden="true" data-admin>
+    <div class="section card">
+      <div style="display:flex; align-items:center; justify-content:space-between">
+        <h2>Service Agreement</h2>
+        <div class="no-print" style="display:flex; gap:8px">
+          <button class="ghost" onclick="printView('view-contract')">Print</button>
+          <button class="ghost" onclick="clearSigs()">Clear signatures</button>
+          <button class="ghost" onclick="exportDraft('vh_contract','contract.json')">Export</button>
+          <label class="ghost">Import<input type="file" accept="application/json" hidden onchange="importDraft(event,'vh_contract')"></label>
+        </div>
+      </div>
+      <div class="small">Provider: <b>Velvet Hour Events</b> — hello@velvethourevents.com — (704) 000-0000</div>
+      <hr style="border:0;border-top:1px solid var(--edge);margin:12px 0">
+      <div class="grid-2">
+        <p><label>Client<br><input id="cl_name"></label></p>
+        <p><label>Event Date<br><input id="cl_date" type="date"></label></p>
+      </div>
+      <div class="grid-2">
+        <p><label>Start Time<br><input id="cl_start" placeholder="5:00 PM"></label></p>
+        <p><label>End Time<br><input id="cl_end" placeholder="9:00 PM"></label></p>
+      </div>
+      <p><label>Venue<br><input id="cl_venue" placeholder="Venue / Address"></label></p>
+      <h3>Scope</h3>
+      <ul>
+        <li>Bartending service; bar setup & cleanup.</li>
+        <li>Menu per proposal; quantity planning; garnish kit & tools.</li>
+        <li>Client supplies alcohol unless otherwise agreed in writing.</li>
+      </ul>
+      <h3>Fees & Payment</h3>
+      <ul>
+        <li>Rate as quoted; 4-hour minimum unless specified.</li>
+        <li>Retainer: 30% due upon signing; balance due 3 days prior.</li>
+        <li>Holiday dates may be billed at 1.5×.</li>
+      </ul>
+      <div class="grid-2" style="margin-top:10px">
+        <div>
+          <p><b>Client Signature</b></p>
+          <canvas id="sigClient" class="sig"></canvas>
+          <div class="no-print" style="display:flex; gap:8px; margin-top:8px">
+            <button class="ghost" onclick="sigClear('sigClient')">Clear</button>
+            <button class="ghost" onclick="sigSave('sigClient')">Save</button>
+          </div>
+        </div>
+        <div>
+          <p><b>Provider Signature — Velvet Hour Events</b></p>
+          <canvas id="sigProvider" class="sig"></canvas>
+          <div class="no-print" style="display:flex; gap:8px; margin-top:8px">
+            <button class="ghost" onclick="sigClear('sigProvider')">Clear</button>
+            <button class="ghost" onclick="sigSave('sigProvider')">Save</button>
+          </div>
+        </div>
+      </div>
+      <p class="small">Template only — confirm state/venue requirements.</p>
+    </div>
+  </section>
+
+  <!-- ===================== ADMIN: Invoice ===================== -->
+  <section id="view-invoice" class="view" aria-hidden="true" data-admin>
+    <div class="section card">
+      <div style="display:flex; align-items:center; justify-content:space-between">
+        <h2>Invoice</h2>
+        <div class="no-print" style="display:flex; gap:8px">
+          <button class="ghost" onclick="invoiceAdd()">Add Line</button>
+          <button class="ghost" onclick="invoiceCalc()">Update Total</button>
+          <button class="ghost" onclick="printView('view-invoice')">Print</button>
+          <button class="ghost" onclick="exportDraft('vh_invoice','invoice.json')">Export</button>
+          <label class="ghost">Import<input type="file" hidden accept="application/json" onchange="importDraft(event,'vh_invoice')"></label>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div><b>Velvet Hour Events</b><br>Charlotte, NC<br>hello@velvethourevents.com · (704) 000-0000</div>
+        <div>
+          <div class="small">Date: <span id="inv_date">—</span></div>
+          <div class="small">Invoice #: <input id="inv_no" style="width:140px" value="0001" aria-label="Invoice number"></div>
+        </div>
+      </div>
+      <hr style="border:0;border-top:1px solid var(--edge);margin:12px 0">
+      <table id="inv_tbl">
+        <thead><tr><th>Description</th><th style="width:90px">Qty</th><th style="width:90px">Rate</th><th style="width:110px">Amount</th></tr></thead>
+        <tbody id="inv_body">
+          <tr>
+            <td contenteditable>Bartending — Signature Package</td>
+            <td><input type="number" value="4" min="0" step="0.5"></td>
+            <td><input type="number" value="65" min="0" step="1"></td>
+            <td class="amt">$260.00</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr><td colspan="3" style="text-align:right"><b>Subtotal</b></td><td id="inv_sub">$260.00</td></tr>
+          <tr><td colspan="3" style="text-align:right">Tax</td><td><input id="inv_tax" type="number" value="0" min="0" step="1" aria-label="Tax amount"></td></tr>
+          <tr><td colspan="3" style="text-align:right">Service/Gratuity %</td><td><input id="inv_tip" type="number" value="15" min="0" step="1" aria-label="Gratuity percent"></td></tr>
+          <tr><td colspan="3" style="text-align:right">Discount</td><td><input id="inv_disc" type="number" value="0" min="0" step="1" aria-label="Discount amount"></td></tr>
+          <tr><td colspan="3" style="text-align:right"><b>Total</b></td><td id="inv_tot"><b>$260.00</b></td></tr>
+        </tfoot>
+      </table>
+      <p class="small">Demo only — totals stored locally.</p>
+    </div>
+  </section>
+
+  <!-- ===================== ADMIN: Checklists ===================== -->
+  <section id="view-checklists" class="view" aria-hidden="true" data-admin>
+    <div class="section card">
+      <div style="display:flex; align-items:center; justify-content:space-between">
+        <h2>Service Checklists & Incident Log</h2>
+        <div class="no-print" style="display:flex; gap:8px">
+          <button class="ghost" onclick="printView('view-checklists')">Print</button>
+          <button class="ghost" onclick="exportDraft('vh_incidents','incidents.json')">Export</button>
+          <label class="ghost">Import<input type="file" hidden accept="application/json" onchange="importDraft(event,'vh_incidents')"></label>
+        </div>
+      </div>
+      <h3>Pre-Event (48–72h)</h3>
+      <ul>
+        <li>Confirm headcount, menu, glassware, ice plan</li>
+        <li>Send shopping list & quantities</li>
+        <li>COI wording if needed</li>
+        <li>Pack kit; label bins; confirm travel/parking</li>
+      </ul>
+      <h3>On-Site Setup (90–120m)</h3>
+      <ul>
+        <li>Walkthrough: bar location, water, trash, power</li>
+        <li>Station: tools, garnishes, signage, spill mats</li>
+        <li>Safety: ID checks; incident log ready</li>
+      </ul>
+      <h3>Teardown</h3>
+      <ul>
+        <li>Close tabs; secure alcohol per client direction</li>
+        <li>Bag trash; wipe surfaces; inventory tools</li>
+        <li>Thank planner/host; request testimonial</li>
+      </ul>
+      <hr style="border:0;border-top:1px solid var(--edge);margin:12px 0">
+      <h3>Incident & Refusal Log</h3>
+      <table id="incidentTbl">
+        <thead><tr><th>Date/Time</th><th>Name/Desc</th><th>Reason</th><th>Actions Taken</th><th>Staff</th></tr></thead>
+        <tbody id="incidentBody"><tr><td contenteditable></td><td contenteditable></td><td contenteditable>Over-service / No ID / Aggressive / Other</td><td contenteditable>Water/food · Notified planner/security · Rideshare</td><td contenteditable></td></tr></tbody>
+      </table>
+      <div class="no-print" style="margin-top:10px; display:flex; gap:8px">
+        <button onclick="incidentAdd()">Add row</button>
+        <button class="ghost" onclick="saveIncidents()">Save Draft</button>
+      </div>
+      <blockquote class="small">Refusal: “For your safety, I’m not able to serve that right now. I’m happy to get you water or food, or a rideshare if you need it.”</blockquote>
+    </div>
+  </section>
+
+  <!-- ===================== ADMIN: Marketing ===================== -->
+  <section id="view-marketing" class="view" aria-hidden="true" data-admin>
+    <div class="section card">
+      <div style="display:flex; align-items:center; justify-content:space-between">
+        <h2>Marketing Kit</h2>
+        <div class="no-print" style="display:flex; gap:8px">
+          <button onclick="downloadCalendar()">Content Calendar (CSV)</button>
+          <button class="ghost" onclick="copyRateSheet()">Copy 1-pager</button>
+        </div>
+      </div>
+      <h3>Brand Bio</h3>
+      <p>Hi, I’m Kate — lead bartender behind <b>Velvet Hour Events</b>. I craft menus that match your vibe and run a calm, safe bar that stays on schedule. Certified, insured, detail-obsessed.</p>
+      <h3>Instagram Bio</h3>
+      <pre class="small">Premium bartending · weddings & parties · certified + insured · signature cocktails · Charlotte, NC · Inquire ↓</pre>
+      <h3>Outreach</h3>
+      <pre class="small">Planner/venue DM:
+Hi {{first_name}} — I run Velvet Hour Events, a certified & insured event bartending team serving Charlotte & the Carolinas.
+We handle menus, quantities, and smooth, on-time service. Can I send a 1-page rate sheet and COI?
+
+COI (to insurer):
+Please issue a certificate naming {{Venue Name}} as additional insured for {{Event Date}}.
+Send as PDF to {{client email}} and cc hello@velvethourevents.com.</pre>
+      <h3>Rate Sheet (copy)</h3>
+      <pre id="rateSheet" class="small">• Essentials — from $55/hr (beer, wine, highballs; shopping plan; garnish kit)
+• Signature — from $65/hr (2 signatures + tasting; elevated garnish & signage)
+• Premier — from $85/hr (signatures + zero-proof menu; custom signage)
+• Add-ons: extra bartenders, menu boards, glassware, mobile bar.
+• TIPS/ServSafe certified. Liquor liability; COI available.
+• Service area: Charlotte + Carolinas. Inquire: hello@velvethourevents.com · (704) 000-0000</pre>
+    </div>
+  </section>
+
+  <!-- ===================== ADMIN: Brand ===================== -->
+  <section id="view-brand" class="view" aria-hidden="true" data-admin>
+    <div class="section card">
+      <h2>Brand & Defaults</h2>
+      <div class="grid-2">
+        <p><label>Brand Name<br><input id="ad_brand" placeholder="Velvet Hour Events"></label></p>
+        <p><label>City/Region<br><input id="ad_city" placeholder="Charlotte, NC"></label></p>
+      </div>
+      <div class="grid-2">
+        <p><label>Email<br><input id="ad_email" type="email" placeholder="hello@velvethourevents.com"></label></p>
+        <p><label>Phone<br><input id="ad_phone" placeholder="(704) 000-0000"></label></p>
+      </div>
+      <div style="display:flex; gap:8px; margin-top:8px">
+        <button onclick="saveBrand()">Save</button>
+        <button class="ghost" onclick="resetBrand()">Reset</button>
+        <button class="ghost" onclick="exportAll()">Export All</button>
+        <label class="ghost">Import All<input type="file" hidden accept="application/json" onchange="importAll(event)"></label>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="container section small">&copy; 2025 <span data-bind="brand">Velvet Hour Events</span> — <span data-bind="city">Charlotte, NC</span></footer>
+
+<script>
+/* ===================== Tiny helpers ===================== */
+const $ = (q, p=document) => p.querySelector(q);
+const $$ = (q, p=document) => [...p.querySelectorAll(q)];
+const toastWrap = $('.toast-wrap');
+function toast(msg, type='ok'){ const d=document.createElement('div'); d.className=`toast ${type}`; d.textContent=msg; toastWrap.appendChild(d); setTimeout(()=>d.remove(), 3400); }
+function download(name, data, type='application/json'){ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([data],{type})); a.download=name; a.click(); }
+
+/* ===================== SPA Router ===================== */
+const tabs = $$('.nav a.tab');
+function show(route){
+  // update active
+  tabs.forEach(t=> t.setAttribute('aria-current', t.dataset.route===route ? 'page':'false'));
+  // toggle views
+  $$('[id^="view-"]').forEach(v=> v.setAttribute('aria-hidden', v.id !== 'view-'+route));
+  // if admin is locked, guard admin views
+  if(!isAdmin() && $('#view-'+route)?.hasAttribute('data-admin')){ toast('Admin only. Unlock from the Admin menu.', 'warn'); show('packages'); return; }
+  history.replaceState({}, '', '#'+route);
+}
+tabs.forEach(t=> t.addEventListener('click', ()=> show(t.dataset.route)));
+window.addEventListener('hashchange', ()=> show((location.hash||'#packages').slice(1)));
+show((location.hash||'#packages').slice(1));
+
+/* ===================== Theme ===================== */
+const themePick=$('#themePick');
+function applyTheme(v){ if(v==='light'){document.body.setAttribute('data-theme','light');} else {document.body.removeAttribute('data-theme');} localStorage.setItem('vh_theme', v); }
+themePick.addEventListener('change',e=>applyTheme(e.target.value));
+(function(){const v=localStorage.getItem('vh_theme')||'velvet'; themePick.value=v; applyTheme(v);})();
+
+/* ===================== Admin gating (PIN) ===================== */
+const ADMIN_KEY='vh_admin_on';
+const PIN_KEY='vh_admin_pin';
+function isAdmin(){ return localStorage.getItem(ADMIN_KEY)==='1'; }
+function setAdmin(on){ localStorage.setItem(ADMIN_KEY, on?'1':'0'); refreshAdminUI(); }
+function refreshAdminUI(){
+  // hide Admin tabs in dropdown when locked? keep visible but guard on open
+  // add subtle badge on header when unlocked
+  $('#adminBtn').textContent = isAdmin() ? 'Admin ✓ ▾' : 'Admin ▾';
+  // If current view is admin and we just locked, bounce back
+  const current = (location.hash||'#packages').slice(1);
+  if(!isAdmin() && $('#view-'+current)?.hasAttribute('data-admin')) show('packages');
+}
+refreshAdminUI();
+// Dropdown open/close
+const adminBtn = $('#adminBtn'), adminMenu = $('#adminMenu');
+adminBtn.addEventListener('click', (e)=>{ const open = adminMenu.hasAttribute('open'); adminMenu.toggleAttribute('open', !open); adminBtn.setAttribute('aria-expanded', String(!open)); });
+document.addEventListener('click', (e)=>{ if(!adminMenu.contains(e.target) && e.target!==adminBtn){ adminMenu.removeAttribute('open'); adminBtn.setAttribute('aria-expanded','false'); }});
+// Menu actions
+adminMenu.addEventListener('click', (e)=>{
+  const a = e.target.closest('[data-route],[data-action]'); if(!a) return;
+  if(a.dataset.route){ show(a.dataset.route); adminMenu.removeAttribute('open'); return; }
+  if(a.dataset.action==='unlock'){
+    const pin = prompt('Enter 4-digit PIN','');
+    const good = (pin||'') === (localStorage.getItem(PIN_KEY)||'0000');
+    if(good){ setAdmin(true); toast('Admin unlocked'); } else { toast('Wrong PIN','err'); }
+  }
+  if(a.dataset.action==='lock'){ setAdmin(false); toast('Admin locked','warn'); }
+  if(a.dataset.action==='resetpin'){ localStorage.setItem(PIN_KEY,'0000'); toast('PIN reset to 0000','ok'); }
+});
+
+/* ===================== Brand model (used in footer & email) ===================== */
+const BRAND_DEFAULT={brand:"Velvet Hour Events", email:"hello@velvethourevents.com", phone:"(704) 000-0000", city:"Charlotte, NC"};
+let BRAND=JSON.parse(localStorage.getItem('vh_brand')||'null')||BRAND_DEFAULT;
+function applyBrand(){
+  $$('[data-bind="brand"]').forEach(el=>el.textContent=BRAND.brand);
+  $$('[data-bind="city"]').forEach(el=>el.textContent=BRAND.city);
+  updateMailto();
+}
+function saveBrand(){
+  BRAND = {brand:$('#ad_brand').value||BRAND.brand, city:$('#ad_city').value||BRAND.city, email:$('#ad_email').value||BRAND.email, phone:$('#ad_phone').value||BRAND.phone};
+  localStorage.setItem('vh_brand', JSON.stringify(BRAND)); applyBrand(); toast('Brand saved');
+}
+function resetBrand(){ BRAND={...BRAND_DEFAULT}; localStorage.setItem('vh_brand', JSON.stringify(BRAND)); ['ad_brand','ad_city','ad_email','ad_phone'].forEach(id=> $('#'+id).value=''); applyBrand(); toast('Brand reset','warn'); }
+applyBrand();
+
+/* ===================== Menu Designer ===================== */
+function titleCaseDrink(s){ return s.replace(/^\s*([^-—–:]+)[-—–:]?\s*/,(m,name)=>`<b>${name.trim()}</b> — `); }
+function renderMenu(){
+  const t=$('#m_event').value||"Our Event";
+  const sub=$('#m_sub').value||"";
+  const s1=$('#m_s1').value||""; const s2=$('#m_s2').value||"";
+  const house=$('#m_house').value||""; const zero=$('#m_zero').value||"";
+  const style=$('#m_style').value; const noteOn=$('#m_note').value==="Yes"; const brandOn=$('#m_brand').value==="Yes";
+  $('#mc_title').textContent=t; $('#mc_sub').textContent=sub;
+  $('#mc_s1').innerHTML=titleCaseDrink(s1); $('#mc_s2').innerHTML=titleCaseDrink(s2);
+  $('#mc_house').innerHTML=`<b>House:</b> ${house.split(',').map(s=>s.trim()).filter(Boolean).join(' · ')}`;
+  $('#mc_zero').innerHTML=`<b>Zero-Proof:</b> ${zero}`;
+  $('#mc_note').style.display = noteOn?'block':'none';
+  $('#mc_brand').style.display = brandOn?'block':'none';
+  const card=$('#menuCard');
+  card.style.background={
+    velvet:"conic-gradient(from 200deg at 50% 30%, color-mix(in oklab,var(--gold) 18%, transparent 82%), transparent 42% 58%, color-mix(in oklab,var(--rose) 16%, transparent 84%) 100%), color-mix(in oklab, var(--card) 92%, black 8%)",
+    minimal:"color-mix(in oklab, var(--card) 94%, black 6%)",
+    lively:"radial-gradient(700px 220px at 10% -30%, color-mix(in oklab,var(--violet) 24%, transparent 76%), transparent), radial-gradient(420px 200px at 90% 120%, color-mix(in oklab,var(--gold) 22%, transparent 78%), transparent), color-mix(in oklab, var(--card) 92%, black 8%)"
+  }[style]||card.style.background;
+}
+function printMenu(){
+  renderMenu();
+  const el=$('#menuCard').cloneNode(true);
+  const w=window.open('','_blank');
+  w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Menu</title>
+  <style>body{font-family:${getComputedStyle(document.body).fontFamily}; color:#222; margin:0; padding:24px}
+  .menu-card{width:100%; max-width:620px; margin:0 auto; border-radius:22px; border:1px solid #ddd; padding:26px}</style></head><body>`);
+  w.document.body.appendChild(el); w.document.close(); w.focus(); w.print();
+}
+document.addEventListener('DOMContentLoaded', renderMenu);
+
+/* ===================== Calculator ===================== */
+function calcRun(){
+  const g=+$('#c_guests').value||0, h=+$('#c_hours').value||0;
+  const pc=(+$('#c_pc').value||0)/100, pb=(+$('#c_pb').value||0)/100, pw=(+$('#c_pw').value||0)/100;
+  const bases=($('#c_bases').value||'').split(',').map(s=>s.trim()).filter(Boolean);
+  const drinksPerGuest=1.5+Math.max(h-1,0)*1.0;
+  const total=Math.round(g*drinksPerGuest);
+  const cocktails=Math.round(total*pc), beer=Math.round(total*pb), wine=Math.round(total*pw);
+  const spiritBottles=Math.ceil(cocktails/16), perBase=Math.ceil(spiritBottles/Math.max(1,bases.length));
+  const wineBottles=Math.ceil(wine/5), beerCases=Math.ceil(beer/24);
+  const ice=Math.ceil((+$('#c_ice').value||1.5)*g);
+  const glassware=Math.ceil(g*(h>=4?3:2));
+  const mixerLiters=(cocktails*0.75)/33.8, syrupLiters=(cocktails*0.25)/33.8, citrus=Math.ceil(cocktails*0.5/12), cherryOlive=Math.ceil(cocktails*0.5);
+  const lines=[
+    `Guests: ${g} · Hours: ${h}`,
+    `Estimated total drinks: ${total}`,
+    ``,
+    `COCKTAILS ~ ${cocktails} pours → ~${spiritBottles} × 750ml`,
+    `  Bases: ${bases.join(", ")||"choose bases"} → ~${perBase} each`,
+    `BEER ~ ${beer} pours → ~${beerCases} case(s)`,
+    `WINE ~ ${wine} glasses → ~${wineBottles} bottles`,
+    ``,
+    `MIXERS: ~${mixerLiters.toFixed(1)} L · SYRUP: ~${syrupLiters.toFixed(1)} L`,
+    `CITRUS set: ~${citrus} pieces · GARNISH (cherry/olive): ~${cherryOlive}`,
+    `ICE: ~${ice} lbs · GLASSWARE: ${glassware}`
+  ];
+  $('#calc_out').textContent=lines.join('\n');
+  window._calcCSV=[["Item","Qty","Unit"],
+    ["Base spirits (750ml total)",spiritBottles,"bottles"],
+    ["Beer",beerCases,"cases"],
+    ["Wine (750ml)",wineBottles,"bottles"],
+    ["Mixers",mixerLiters.toFixed(1),"L"],
+    ["Simple syrup",syrupLiters.toFixed(1),"L"],
+    ["Citrus (mixed)",citrus,"pieces"],
+    ["Cherries/olives",cherryOlive,"units"],
+    ["Ice",ice,"lbs"],
+    ["Cups/Glassware",glassware,"each"]
+  ];
+}
+function calcExport(){ if(!window._calcCSV) calcRun(); download('shopping_list.csv', window._calcCSV.map(r=>r.join(',')).join('\n'), 'text/csv'); }
+document.addEventListener('DOMContentLoaded', calcRun);
+
+/* ===================== Contact ===================== */
+function updateMailto(){
+  const name=($('#req_name')||{}).value||'', email=($('#req_email')||{}).value||'', date=($('#req_date')||{}).value||'', guests=($('#req_guests')||{}).value||'';
+  const addr=($('#req_addr')||{}).value||'', notes=($('#req_notes')||{}).value||'';
+  const subject=encodeURIComponent(`Quote Request — ${name||'Event'}`);
+  const body=encodeURIComponent(
+`Hi ${BRAND.brand},
 
 I'd like a quote for: ${date} · ${guests} guests
-Venue: ${venue}
+Venue: ${addr}
 
 Notes:
 ${notes}
 
-You can reach me at ${email}. Thank you!`;
-                    
-                    emailBtn.href = `mailto:hello@velvethourevents.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                };
-                
-                // Update mailto link when form inputs change
-                ['contact-name', 'contact-email', 'event-date', 'guest-count', 'venue-address', 'event-notes']
-                    .forEach(id => {
-                        document.getElementById(id).addEventListener('input', updateMailtoLink);
-                    });
-            }
-            
-            showToast(message, type = 'success') {
-                const toastContainer = document.querySelector('.toast-container');
-                const toast = document.createElement('div');
-                toast.className = `toast ${type}`;
-                
-                const icon = {
-                    success: '✓',
-                    error: '✗',
-                    warning: '⚠'
-                }[type] || 'ℹ';
-                
-                toast.innerHTML = `
-                    <span class="toast-icon">${icon}</span>
-                    <span class="toast-message">${message}</span>
-                `;
-                
-                toastContainer.appendChild(toast);
-                
-                // Remove toast after 5 seconds
-                setTimeout(() => {
-                    toast.remove();
-                }, 5000);
-            }
-        }
-        
-        // Initialize the application when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            new VelvetHourApp();
-        });
-    </script>
+You can reach me at ${email}. Thank you!`);
+  const href=`mailto:${BRAND.email}?subject=${subject}&body=${body}`;
+  const btn=$('#mailtoBtn'); if(btn) btn.href=href;
+}
+['req_name','req_email','req_date','req_guests','req_addr','req_notes'].forEach(id=>{ const el=$('#'+id); if(el) el.addEventListener('input', updateMailto); });
+updateMailto();
+function logRequest(e){
+  e.preventDefault();
+  const rec={ id:'REQ-'+Math.random().toString(36).slice(2,8).toUpperCase(), ts:new Date().toISOString(),
+    name:$('#req_name').value, email:$('#req_email').value, date:$('#req_date').value,
+    guests:+$('#req_guests').value, addr:$('#req_addr').value, notes:$('#req_notes').value };
+  const arr=JSON.parse(localStorage.getItem('vh_requests')||'[]'); arr.push(rec); localStorage.setItem('vh_requests', JSON.stringify(arr));
+  toast(`Request logged: ${rec.id}`,'ok');
+}
+
+/* ===================== Contract/Invoice persistence ===================== */
+function exportDraft(key, filename){ const s=localStorage.getItem(key)||'{}'; download(filename, s); }
+function importDraft(e, key){
+  const f=e.target.files[0]; if(!f) return;
+  f.text().then(t=>{ try{ const obj=JSON.parse(t); localStorage.setItem(key, JSON.stringify(obj));
+    if(key==='vh_invoice') loadInvoice(obj);
+    if(key==='vh_contract') loadContract(obj);
+    if(key==='vh_incidents'){ localStorage.setItem(key, JSON.stringify(obj)); location.reload(); }
+    toast('Imported','ok');
+  }catch{ toast('Invalid JSON','warn'); }});
+}
+
+/* Contract persistence & signatures */
+function serializeContract(){ return { name:$('#cl_name').value, date:$('#cl_date').value, start:$('#cl_start').value, end:$('#cl_end').value, venue:$('#cl_venue').value }; }
+function loadContract(obj){ if(!obj) return; $('#cl_name').value=obj.name||''; $('#cl_date').value=obj.date||''; $('#cl_start').value=obj.start||''; $('#cl_end').value=obj.end||''; $('#cl_venue').value=obj.venue||''; }
+;['cl_name','cl_date','cl_start','cl_end','cl_venue'].forEach(id=>{ const el=$('#'+id); if(el) el.addEventListener('input',()=> localStorage.setItem('vh_contract', JSON.stringify(serializeContract()))); });
+(function(){ const s=localStorage.getItem('vh_contract'); if(s){ loadContract(JSON.parse(s)); } })();
+/* Signatures */
+['sigClient','sigProvider'].forEach(id=>{
+  const c=$('#'+id); if(!c) return; const ctx=c.getContext('2d');
+  function resize(){ const r=Math.max(1,Math.floor(window.devicePixelRatio||1)), b=c.getBoundingClientRect(); c.width=b.width*r; c.height=b.height*r; ctx.scale(r,r); ctx.lineWidth=2; ctx.lineCap='round'; ctx.strokeStyle='#111'; }
+  resize(); window.addEventListener('resize', resize, {passive:true});
+  let d=false,lx=0,ly=0;
+  c.addEventListener('pointerdown',e=>{d=true; const b=c.getBoundingClientRect(); lx=e.clientX-b.left; ly=e.clientY-b.top; c.setPointerCapture(e.pointerId);});
+  c.addEventListener('pointerup',e=>{d=false; c.releasePointerCapture(e.pointerId);});
+  c.addEventListener('pointerleave',()=>d=false);
+  c.addEventListener('pointermove',e=>{ if(!d) return; const b=c.getBoundingClientRect(), x=e.clientX-b.left, y=e.clientY-b.top; ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(x,y); ctx.stroke(); lx=x; ly=y; });
+});
+function sigClear(id){ const c=$('#'+id), ctx=c.getContext('2d'); ctx.clearRect(0,0,c.width,c.height); }
+function sigSave(id){ const a=document.createElement('a'); a.href=$('#'+id).toDataURL('image/png'); a.download=id+'.png'; a.click(); }
+function clearSigs(){ ['sigClient','sigProvider'].forEach(sigClear); }
+
+/* Invoice persistence */
+function serializeInvoice(){
+  return { no:$('#inv_no').value,
+    rows: $$('#inv_tbl tbody tr').map(tr=>({desc:tr.cells[0].innerText.trim(), qty:+tr.cells[1].querySelector('input').value||0, rate:+tr.cells[2].querySelector('input').value||0})),
+    tax:+$('#inv_tax').value||0, tip:+$('#inv_tip').value||0, disc:+$('#inv_disc').value||0 };
+}
+function loadInvoice(obj){
+  if(!obj) return; $('#inv_no').value=obj.no||'0001'; $('#inv_tax').value=obj.tax||0; $('#inv_tip').value=obj.tip||0; $('#inv_disc').value=obj.disc||0;
+  const body=$('#inv_body'); body.innerHTML='';
+  (obj.rows||[]).forEach(r=>{ const tr=document.createElement('tr');
+    tr.innerHTML=`<td contenteditable>${r.desc||'Item'}</td><td><input type="number" value="${r.qty||0}" min="0" step="0.5"></td><td><input type="number" value="${r.rate||0}" min="0" step="1"></td><td class="amt">$0.00</td>`;
+    body.appendChild(tr); });
+  invoiceCalc();
+}
+function saveInvoice(){ localStorage.setItem('vh_invoice', JSON.stringify(serializeInvoice())); }
+function invoiceAdd(){ const tr=document.createElement('tr'); tr.innerHTML=`<td contenteditable>Item</td><td><input type="number" value="1" min="0" step="0.5"></td><td><input type="number" value="0" min="0" step="1"></td><td class="amt">$0.00</td>`; $('#inv_body').appendChild(tr); saveInvoice(); invoiceCalc(); }
+function invoiceCalc(){
+  let sub=0; $$('#inv_tbl tbody tr').forEach(tr=>{ const q=+tr.querySelector('td:nth-child(2) input').value||0; const r=+tr.querySelector('td:nth-child(3) input').value||0; const a=q*r; sub+=a; tr.querySelector('.amt').textContent=`$${a.toFixed(2)}`; });
+  $('#inv_sub').textContent=`$${sub.toFixed(2)}`; const tax=+$('#inv_tax').value||0, tip=+$('#inv_tip').value||0, disc=+$('#inv_disc').value||0; const tot=sub + tax + (sub*(tip/100)) - disc; $('#inv_tot').innerHTML=`<b>$${tot.toFixed(2)}</b>`; saveInvoice();
+}
+(function(){ const d=new Date(); const f=n=>n.toString().padStart(2,'0'); $('#inv_date').textContent=`${d.getFullYear()}-${f(d.getMonth()+1)}-${f(d.getDate())}`; const s=localStorage.getItem('vh_invoice'); if(s){ loadInvoice(JSON.parse(s)); } else { invoiceCalc(); } })();
+
+/* ===================== Incidents ===================== */
+function incidentAdd(){ const tr=document.createElement('tr'); tr.innerHTML="<td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td><td contenteditable></td>"; $('#incidentBody').appendChild(tr); }
+function saveIncidents(){ const rows=$$('#incidentBody tr').map(tr=>[...tr.cells].map(td=>td.innerText)); localStorage.setItem('vh_incidents', JSON.stringify(rows)); toast('Incidents saved'); }
+(function(){ const s=localStorage.getItem('vh_incidents'); if(s){ const rows=JSON.parse(s); const body=$('#incidentBody'); body.innerHTML=''; rows.forEach(cols=>{ const tr=document.createElement('tr'); tr.innerHTML=cols.map(c=>`<td contenteditable>${c}</td>`).join(''); body.appendChild(tr); }); } })();
+
+/* ===================== Admin data backup ===================== */
+function exportAll(){ const dump={}; Object.keys(localStorage).forEach(k=>{ if(k.startsWith('vh_')) dump[k]=localStorage.getItem(k); }); download('velvet_hour_backup.json', JSON.stringify(dump,null,2)); }
+function importAll(e){ const f=e.target.files[0]; if(!f) return; f.text().then(t=>{ try{ const obj=JSON.parse(t); for(const [k,v] of Object.entries(obj)){ if(k.startsWith('vh_')) localStorage.setItem(k,v); } toast('Imported backup'); location.reload(); }catch{ toast('Invalid backup','err'); } }); }
+
+/* ===================== Print helper ===================== */
+function printView(id){
+  const clone=$('#'+id).cloneNode(true); $$('.no-print', clone).forEach(el=>el.remove());
+  const w=window.open('','_blank');
+  w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Print</title>
+  <style>body{font-family:${getComputedStyle(document.body).fontFamily}; color:#222; margin:20px}
+  .small{color:#555} table{width:100%; border-collapse:collapse} th,td{border-bottom:1px solid #ddd; padding:8px; text-align:left; vertical-align:top}
+  .menu-card{border:1px solid #ddd; border-radius:22px; padding:26px}</style></head><body>`);
+  w.document.body.appendChild(clone); w.document.close(); w.focus(); w.print();
+}
+</script>
 </body>
 </html>
