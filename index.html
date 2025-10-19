@@ -1,1434 +1,1194 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Velvet Hour Events — All-in-One Premium Bartending Kit</title>
-<meta name="description" content="Premium bartending by Kate. Luxe single-file toolkit with branding studio, menu designer, shopping calculator, contract w/ signatures, invoice, checklists, marketing, and a mock payment flow.">
-<meta name="theme-color" content="#120d12">
-<meta property="og:title" content="Velvet Hour Events — Premium Bartending by Kate">
-<meta property="og:description" content="Signature cocktails, safe service, luxe design. All-in-one pro toolkit in a single HTML.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%23EBCB8B' offset='0'/><stop stop-color='%23E68FA0' offset='1'/></linearGradient></defs><rect width='100%' height='100%' fill='%23130f16'/><circle cx='280' cy='420' r='260' fill='url(%23g)' fill-opacity='.22'/><circle cx='900' cy='230' r='180' fill='url(%23g)' fill-opacity='.18'/><text x='90' y='360' fill='white' font-family='Inter,Segoe UI,Arial' font-size='60' font-weight='800'>Velvet Hour Events</text><text x='90' y='420' fill='white' font-family='Inter,Segoe UI,Arial' font-size='32' opacity='.85'>Premium Bartending by Kate</text></svg>">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23EBCB8B'/%3E%3Cstop offset='1' stop-color='%23E68FA0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='12' width='64' height='64' fill='%23130f16'/%3E%3Cpath d='M20 46c4-6 10-9 12-9s8 3 12 9' fill='none' stroke='url(%23g)' stroke-width='3.5' stroke-linecap='round'/%3E%3Cpath d='M21 31h22M24 31l-2-10a4 4 0 014-5h12a4 4 0 014 5l-2 10' stroke='%23fff' stroke-linecap='round' stroke-width='2' fill='none'/%3E%3C/svg%3E">
-<style>
-/* ===== Design Tokens (Luxe Velvet) ===== */
-:root{
-  --bg:#130f16; --ink:#f6f1f9; --muted:#c6bcd0; --card:#1a1520; --edge:rgba(255,255,255,.10);
-  --gold:#EBCB8B; --rose:#E68FA0; --violet:#b7a0ff;
-  --ok:#60d394; --warn:#ffb860; --err:#ff6c6c;
-  --radius:20px; --pad:20px; --shadow:0 30px 80px rgba(10,6,12,.55);
-  --font: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
-}
-[data-theme="champagne"]{ --bg:#fbfafc; --card:#ffffff; --ink:#191720; --muted:#5e5a70; --edge:#ece7f0; --gold:#b88a44; --rose:#c06072; --shadow:none }
-[data-theme="botanical"]{ --bg:#0f1512; --card:#111a15; --ink:#eaf6ef; --muted:#a3c2b1; --gold:#9fe4b3; --rose:#c1ffea; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velvet Hour Events | Premium Bartending Services</title>
+    <style>
+        /* ===== CSS RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* ===== Base ===== */
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0; background:
-    radial-gradient(1200px 800px at 15% -10%, #20182a, transparent 60%),
-    radial-gradient(900px 600px at 120% 10%, #2a1b24, transparent 40%),
-    var(--bg);
-  color:var(--ink); font-family:var(--font); line-height:1.55; -webkit-font-smoothing:antialiased;
-}
-.container{max-width:1180px; margin:0 auto; padding:24px}
-.card{background:color-mix(in oklab, var(--card) 92%, black 8%); border:1px solid var(--edge); border-radius:var(--radius); padding:var(--pad); box-shadow:var(--shadow)}
-h1,h2,h3{margin:0 0 10px}
-h1{font-size:34px; letter-spacing:.2px}
-.small{color:var(--muted); font-size:13px}
-hr{border:0; border-top:1px solid var(--edge); margin:12px 0}
-a{color:inherit; text-decoration:none}
-kbd{background:#0003; border:1px solid var(--edge); padding:.18em .48em; border-radius:6px; font-size:.85em}
+        :root {
+            /* Color Palette */
+            --dark-bg: #0f0a14;
+            --card-bg: #1a1520;
+            --accent-dark: #2a1e2e;
+            --gold: #d4af37;
+            --gold-light: #e6c86e;
+            --cream: #f5f1e6;
+            --muted-text: #a89bb9;
+            --border: rgba(212, 175, 55, 0.2);
+            --success: #4caf50;
+            --warning: #ff9800;
+            --error: #f44336;
+            
+            /* Typography */
+            --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --font-accent: 'Playfair Display', serif;
+            
+            /* Spacing & Sizing */
+            --radius: 12px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+        }
 
-/* ===== Nav & Skip ===== */
-.skip-link{position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;}
-.skip-link:focus{left:16px; top:10px; width:auto; height:auto; padding:8px 10px; border-radius:8px; background:#0008; color:#fff}
-.nav{position:sticky; top:0; backdrop-filter: blur(12px); z-index:60; margin:-6px -6px 18px; padding:10px 16px; display:flex; gap:14px; align-items:center; border:1px solid var(--edge); border-radius:14px; background:color-mix(in oklab, var(--bg) 75%, black 25%);}
-.wordmark{font-weight:900; letter-spacing:.2px; font-size:22px; background:linear-gradient(92deg,var(--gold),var(--rose),var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent}
-.badge{font-size:12px; padding:5px 9px; border-radius:999px; border:1px solid var(--edge); color:var(--muted); display:flex; gap:6px; align-items:center}
-.iconbtn{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--edge); border-radius:10px; background:color-mix(in oklab, var(--bg) 70%, black 30%)}
-.button{display:inline-flex; gap:8px; align-items:center; padding:10px 14px; border-radius:12px; border:1px solid var(--edge);
-  background:linear-gradient(90deg, color-mix(in oklab, var(--gold) 35%, transparent 65%), color-mix(in oklab, var(--rose) 30%, transparent 70%));
-  color:var(--ink); transition:transform .08s ease-in-out; }
-.button:hover{transform:translateY(-1px)}
-select, input[type="text"], input[type="email"], input[type="number"], input[type="date"], textarea{
-  width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--edge); background:color-mix(in oklab, var(--bg) 70%, black 30%);
-  color:var(--ink); outline:none;
-}
+        body {
+            font-family: var(--font-main);
+            background: var(--dark-bg);
+            color: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-/* ===== Grids ===== */
-.grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
-.grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
-@media (max-width: 900px){ .grid-3{grid-template-columns:1fr} .grid-2{grid-template-columns:1fr}}
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4 {
+            font-family: var(--font-accent);
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
 
-/* ===== Hero ===== */
-.hero{display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:center}
-.kpis{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
-.kpi{border:1px dashed var(--edge); border-radius:14px; padding:12px}
-.tag{font-size:12px; border:1px solid var(--edge); border-radius:999px; padding:4px 8px}
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
 
-/* Coupe glass SVG container */
-.coupe{border-radius:18px; border:1px solid var(--edge); background:linear-gradient(180deg, #1f1724, #161018); display:flex; align-items:center; justify-content:center; padding:10px; overflow:hidden}
-.coupe:hover svg{transform:scale(1.02)}
-.coupe svg{transition:transform .35s ease}
+        h2 {
+            font-size: 2rem;
+            color: var(--gold);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
 
-/* ===== Menu Card ===== */
-.menu-card{width:100%; max-width:620px; margin:0 auto; border-radius:22px; border:1px solid var(--edge);
-  background: conic-gradient(from 200deg at 50% 30%, color-mix(in oklab,var(--gold) 18%, transparent 82%), transparent 42% 58%, color-mix(in oklab,var(--rose) 16%, transparent 84%) 100%), color-mix(in oklab, var(--card) 92%, black 8%);
-  padding:26px; box-shadow:var(--shadow)}
-.menu-card .title{font-size:30px; font-weight:900; text-align:center; margin-bottom:6px; word-wrap:break-word}
-.menu-card .subtitle{font-size:13px; color:var(--muted); text-align:center; margin-bottom:16px}
-.menu-item{margin:10px 0}
-.menu-item b{font-weight:900}
-.menu-note{font-size:12px; opacity:.85; text-align:center; margin-top:10px}
-@media (max-width:520px){ .menu-card{padding:18px} .menu-card .title{font-size:24px} .menu-card .subtitle{font-size:12px}}
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
 
-/* ===== Tables & Print ===== */
-table{width:100%; border-collapse:collapse}
-th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; vertical-align:top}
-.sig-pad{border:1px solid var(--edge); border-radius:12px; background:color-mix(in oklab, var(--bg) 72%, black 28%); width:100%; height:180px}
-@media print{
-  body{background:#fff; color:#222}
-  .nav,.no-print{display:none!important}
-  .card{box-shadow:none; border-color:#ddd}
-}
+        h3 {
+            font-size: 1.5rem;
+            color: var(--cream);
+        }
 
-/* Panels & Modals */
-.panel{position:fixed; top:0; right:0; width:420px; max-width:100%; height:100%; background:color-mix(in oklab, var(--card) 95%, black 5%); border-left:1px solid var(--edge); box-shadow:var(--shadow); transform:translateX(100%); transition:transform .25s ease; z-index:80; display:flex; flex-direction:column}
-.panel[data-open="true"]{transform:none}
-.panel header{display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--edge)}
-.panel .content{padding:16px; overflow:auto}
+        p {
+            margin-bottom: 1rem;
+            color: var(--muted-text);
+        }
 
-/* Toasts */
-.toast-wrap{position:fixed; bottom:18px; left:50%; transform:translateX(-50%); z-index:90}
-.toast{background:color-mix(in oklab, var(--card) 95%, black 5%); border:1px solid var(--edge); border-radius:12px; padding:10px 14px; margin-top:10px; min-width:220px}
-.toast.ok{border-color:color-mix(in oklab,var(--ok) 40%, var(--edge) 60%)}
-.toast.warn{border-color:color-mix(in oklab,var(--warn) 40%, var(--edge) 60%)}
+        /* ===== LAYOUT & CONTAINERS ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-/* A11y focus */
-:focus-visible{outline:2px solid color-mix(in oklab, var(--gold) 60%, white 40%); outline-offset:2px; border-radius:8px}
+        section {
+            padding: 5rem 0;
+        }
 
-/* Reduce motion */
-@media (prefers-reduced-motion: reduce){
-  *{transition:none!important; animation:none!important}
-}
-</style>
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"LocalBusiness",
-  "name":"Velvet Hour Events",
-  "description":"Premium mobile bartending by Kate. Signature menus, safe service, luxe presentation. Certified & insured.",
-  "areaServed":"Charlotte, NC and Carolinas",
-  "email":"hello@velvethourevents.com",
-  "telephone":"(704) 000-0000",
-  "url":"https://example.invalid/velvet-hour",
-  "sameAs":[]
-}
-</script>
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header p {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 10, 20, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-accent);
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--muted-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(15, 10, 20, 0.9), rgba(42, 30, 46, 0.8)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230f0a14"/><path d="M30,30 Q50,10 70,30 T90,50 T70,70 T50,90 T30,70 T10,50 T30,30" fill="none" stroke="%23d4af37" stroke-width="0.5" opacity="0.1"/></svg>');
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--dark-bg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        /* ===== PACKAGES SECTION ===== */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .package-card {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-card.featured {
+            border: 2px solid var(--gold);
+            transform: scale(1.05);
+        }
+
+        .package-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+        }
+
+        .package-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin: 1rem 0;
+        }
+
+        .package-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .package-features li {
+            padding: 0.5rem 0;
+            color: var(--muted-text);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .package-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* ===== MENU DESIGNER ===== */
+        .designer-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .designer-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--cream);
+            font-weight: 500;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius);
+            background: var(--accent-dark);
+            border: 1px solid var(--border);
+            color: var(--cream);
+            font-family: var(--font-main);
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+
+        .menu-preview {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-card {
+            width: 100%;
+            max-width: 400px;
+            background: linear-gradient(135deg, var(--card-bg), var(--accent-dark));
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .menu-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+        }
+
+        .menu-subtitle {
+            color: var(--muted-text);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .menu-items {
+            text-align: left;
+            margin: 1.5rem 0;
+        }
+
+        .menu-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item-name {
+            font-weight: 600;
+            color: var(--cream);
+        }
+
+        .menu-item-desc {
+            color: var(--muted-text);
+            font-size: 0.9rem;
+        }
+
+        .menu-footer {
+            margin-top: 1.5rem;
+            color: var(--muted-text);
+            font-size: 0.8rem;
+        }
+
+        /* ===== CALCULATOR SECTION ===== */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .calc-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .calc-results {
+            padding: 2rem;
+            background: var(--accent-dark);
+            border-radius: var(--radius);
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: var(--muted-text);
+        }
+
+        .result-value {
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        /* ===== CONTRACT & INVOICE ===== */
+        .tools-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            color: var(--muted-text);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .tab-btn.active {
+            color: var(--gold);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .invoice-table th, .invoice-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .invoice-table th {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .invoice-totals {
+            margin-top: 1.5rem;
+            text-align: right;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            max-width: 300px;
+            margin-left: auto;
+        }
+
+        .grand-total {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--accent-dark);
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .social-links a {
+            color: var(--muted-text);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--gold);
+        }
+
+        .copyright {
+            color: var(--muted-text);
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 992px) {
+            .designer-container, .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .package-card.featured {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+            
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== UTILITY CLASSES ===== */
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <a class="skip-link" href="#top">Skip to content</a>
-  <div class="toast-wrap" aria-live="polite" aria-atomic="true"></div>
-  <div class="container">
-
-    <!-- NAV -->
-    <nav class="nav" role="navigation" aria-label="Primary">
-      <div class="wordmark" data-bind="brand" aria-label="Brand">Velvet Hour Events</div>
-      <span class="badge" aria-label="Theme switcher">Theme
-        <select id="themePick" aria-label="Theme">
-          <option value="velvet" selected>Velvet</option>
-          <option value="champagne">Champagne</option>
-          <option value="botanical">Botanical</option>
-        </select>
-      </span>
-      <button class="iconbtn no-print" id="openAdmin" aria-haspopup="dialog" aria-controls="adminPanel" aria-label="Open Admin Panel">⚙️ Admin</button>
-      <div style="margin-left:auto"></div>
-      <a href="#packages">Packages</a>
-      <a href="#menus">Menus</a>
-      <a href="#designer">Designer</a>
-      <a href="#calculator">Calculator</a>
-      <a href="#contract">Contract</a>
-      <a href="#invoice">Invoice</a>
-      <a href="#checklists">Checklists</a>
-      <a href="#marketing">Marketing</a>
-      <a href="#contact">Book</a>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">Velvet Hour</div>
+            <div class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="#packages">Packages</a>
+                <a href="#designer">Menu Designer</a>
+                <a href="#calculator">Calculator</a>
+                <a href="#tools">Tools</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
     </nav>
 
-    <!-- HERO -->
-    <section class="card hero" id="top">
-      <div>
-        <h1>Luxe cocktails. Calm, professional service.</h1>
-        <p class="small">Premium bartending by <b>Kate</b>, serving <span data-bind="city">Charlotte, NC</span> and the Carolinas. Menu design, quantity planning, and safe, on‑time execution with a designer's eye.</p>
-        <div style="display:flex; gap:10px; margin-top:10px" class="no-print">
-          <a class="button" href="#contact" aria-label="Go to booking form">Book Kate</a>
-          <a class="button" href="#designer" aria-label="Open menu designer">Menu Designer</a>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Crafting Unforgettable Moments, One Cocktail at a Time</h1>
+                <p>Elevate your event with premium bartending services, signature cocktails, and impeccable service. From intimate gatherings to grand celebrations, we bring the velvet touch to every occasion.</p>
+                <div class="hero-btns">
+                    <a href="#packages" class="btn btn-primary">View Packages</a>
+                    <a href="#contact" class="btn btn-secondary">Get a Quote</a>
+                </div>
+            </div>
         </div>
-        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:12px">
-          <span class="tag">TIPS/ServSafe</span>
-          <span class="tag">Liquor Liability + COI</span>
-          <span class="tag">Zero‑Proof Menus</span>
-          <span class="tag">Planner‑Friendly SOPs</span>
-        </div>
-      </div>
-      <div class="coupe" aria-hidden="true">
-        <!-- Inline SVG: coupe glass with shimmer -->
-        <svg width="100%" height="220" viewBox="0 0 520 220" role="img" aria-label="Decorative coupe glass">
-          <defs>
-            <linearGradient id="sh" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#EBCB8B"/><stop offset="1" stop-color="#E68FA0"/>
-            </linearGradient>
-            <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <path d="M30 30h460c0 60-90 100-230 100S30 90 30 30z" fill="url(#sh)" fill-opacity=".18" stroke="url(#sh)" stroke-opacity=".6" stroke-width="2" filter="url(#glow)"/>
-          <rect x="250" y="130" width="20" height="40" rx="8" fill="#f6f1f9" opacity=".5"/>
-          <rect x="230" y="170" width="60" height="10" rx="5" fill="#f6f1f9" opacity=".4"/>
-        </svg>
-      </div>
     </section>
 
-    <!-- PACKAGES -->
-    <section id="packages" class="card">
-      <h2>Packages</h2>
-      <div class="grid-3" id="pkgGrid">
-        <div class="card">
-          <h3>Essentials</h3>
-          <div class="small">4‑hr min · 1 bartender</div>
-          <div class="small">Beer & wine + classic highballs</div>
-          <div style="display:flex; align-items:baseline; gap:8px">
-            <span class="small">From</span><div id="pkg_essentials" style="font-size:28px; font-weight:900; background:linear-gradient(92deg,var(--ok),var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent">$55/hr</div>
-          </div>
+    <!-- Packages Section -->
+    <section id="packages">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Premium Packages</h2>
+                <p>Choose from our carefully curated service tiers, each designed to deliver exceptional experiences for your specific needs.</p>
+            </div>
+            <div class="packages-grid">
+                <div class="card package-card">
+                    <div class="package-icon">🍸</div>
+                    <h3>Essentials</h3>
+                    <div class="package-price">$55<span>/hour</span></div>
+                    <p>Perfect for casual gatherings and corporate events</p>
+                    <ul class="package-features">
+                        <li>4-hour minimum booking</li>
+                        <li>1 professional bartender</li>
+                        <li>Beer, wine & classic cocktails</li>
+                        <li>Basic garnishes & bar setup</li>
+                        <li>Standard glassware</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary">Select Plan</a>
+                </div>
+                <div class="card package-card featured">
+                    <div class="package-icon">🌟</div>
+                    <h3>Signature</h3>
+                    <div class="package-price">$75<span>/hour</span></div>
+                    <p>Our most popular choice for weddings and special events</p>
+                    <ul class="package-features">
+                        <li>4-hour minimum booking</li>
+                        <li>1-2 professional bartenders</li>
+                        <li>2 custom signature cocktails</li>
+                        <li>Premium garnishes & presentation</li>
+                        <li>Elegant glassware</li>
+                        <li>Custom menu signage</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Select Plan</a>
+                </div>
+                <div class="card package-card">
+                    <div class="package-icon">💫</div>
+                    <h3>Premier</h3>
+                    <div class="package-price">$95<span>/hour</span></div>
+                    <p>The ultimate luxury experience for discerning hosts</p>
+                    <ul class="package-features">
+                        <li>4-hour minimum booking</li>
+                        <li>2 professional bartenders</li>
+                        <li>3 custom signature cocktails</li>
+                        <li>Zero-proof cocktail menu</li>
+                        <li>Luxury garnishes & presentation</li>
+                        <li>Crystal glassware</li>
+                        <li>Custom menu & signage suite</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary">Select Plan</a>
+                </div>
+            </div>
         </div>
-        <div class="card" style="border-color:rgba(235,203,139,.55)">
-          <h3>Signature</h3>
-          <div class="small">4‑hr min · 1 bartender</div>
-          <div class="small">Two signatures + tasting</div>
-          <div style="display:flex; align-items:baseline; gap:8px">
-            <span class="small">From</span><div id="pkg_signature" style="font-size:28px; font-weight:900; background:linear-gradient(92deg,var(--ok),var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent">$65/hr</div>
-          </div>
-        </div>
-        <div class="card">
-          <h3>Premier</h3>
-          <div class="small">4‑hr min · 1 bartender</div>
-          <div class="small">Zero‑proof menu · custom signage</div>
-          <div style="display:flex; align-items:baseline; gap:8px">
-            <span class="small">From</span><div id="pkg_premier" style="font-size:28px; font-weight:900; background:linear-gradient(92deg,var(--ok),var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent">$85/hr</div>
-          </div>
-        </div>
-      </div>
-      <p class="small">Holiday dates may price at 1.5×. Client typically supplies alcohol; we provide a detailed shopping plan and serve.</p>
     </section>
 
-    <!-- MENUS (Templates) -->
-    <section id="menus" class="card">
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:10px">
-        <h2>Menu Templates</h2>
-        <div class="no-print" style="display:flex; gap:8px">
-          <button class="button" onclick="window.print()" aria-label="Print page">Print</button>
+    <!-- Menu Designer -->
+    <section id="designer">
+        <div class="container">
+            <div class="section-header">
+                <h2>Menu Designer</h2>
+                <p>Create a custom cocktail menu for your event with our easy-to-use designer. Print-ready templates included.</p>
+            </div>
+            <div class="designer-container">
+                <div class="designer-controls card">
+                    <div class="form-group">
+                        <label for="event-name">Event Name</label>
+                        <input type="text" id="event-name" placeholder="e.g., Sarah & James Wedding">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-date">Event Date</label>
+                        <input type="text" id="event-date" placeholder="e.g., October 19, 2025">
+                    </div>
+                    <div class="form-group">
+                        <label for="signature-1">Signature Cocktail #1</label>
+                        <input type="text" id="signature-1" placeholder="e.g., French 75 - gin, lemon, champagne">
+                    </div>
+                    <div class="form-group">
+                        <label for="signature-2">Signature Cocktail #2</label>
+                        <input type="text" id="signature-2" placeholder="e.g., Velvet Old Fashioned - bourbon, bitters">
+                    </div>
+                    <div class="form-group">
+                        <label for="house-drinks">House Selections</label>
+                        <input type="text" id="house-drinks" placeholder="e.g., Gin & Tonic, Vodka Soda, Paloma">
+                    </div>
+                    <div class="form-group">
+                        <label for="zero-proof">Zero-Proof Options</label>
+                        <input type="text" id="zero-proof" placeholder="e.g., Citrus Mint Spritzer, Berry Fizz">
+                    </div>
+                    <button class="btn btn-primary" onclick="updateMenuPreview()">Update Preview</button>
+                    <button class="btn btn-secondary mt-1" onclick="printMenu()">Print Menu</button>
+                </div>
+                <div class="menu-preview">
+                    <div class="menu-card card">
+                        <h3 class="menu-title" id="preview-title">Sarah & James</h3>
+                        <p class="menu-subtitle" id="preview-date">October 19, 2025</p>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <div class="menu-item-name" id="preview-sig1">French 75</div>
+                                <div class="menu-item-desc">gin, lemon, champagne</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-name" id="preview-sig2">Velvet Old Fashioned</div>
+                                <div class="menu-item-desc">bourbon, bitters, orange</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-name">House Selections</div>
+                                <div class="menu-item-desc" id="preview-house">Gin & Tonic, Vodka Soda, Paloma</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-name">Zero-Proof</div>
+                                <div class="menu-item-desc" id="preview-zero">Citrus Mint Spritzer, Berry Fizz</div>
+                            </div>
+                        </div>
+                        <p class="menu-footer">Please enjoy responsibly • IDs required for alcohol service</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="grid-3" id="menuTemplates">
-        <div class="card">
-          <h3>Wedding Menu</h3>
-          <ul class="menu">
-            <li><b>Signatures:</b> French 75 — gin, lemon, bubbles</li>
-            <li>Old Fashioned — bourbon, bitters, orange</li>
-            <li><b>House:</b> Gin & Tonic · Vodka Soda · Paloma</li>
-            <li><b>Zero‑Proof:</b> Citrus & Mint Cooler</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Summer Garden</h3>
-          <ul class="menu">
-            <li><b>Signatures:</b> Strawberry Basil Smash · Cucumber Gimlet</li>
-            <li>Spritz station · Hard seltzers</li>
-            <li><b>Zero‑Proof:</b> Watermelon Fizz</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Corporate Mixer</h3>
-          <ul class="menu">
-            <li><b>Signatures:</b> Espresso Martini · Ginger Pear Whiskey</li>
-            <li>Beer/Wine only option</li>
-            <li><b>Zero‑Proof:</b> Spiced Apple Fizz</li>
-          </ul>
-        </div>
-      </div>
     </section>
 
-    <!-- MENU DESIGNER -->
-    <section id="designer" class="card">
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:10px">
-        <h2>Menu Designer (Print‑ready)</h2>
-        <div class="no-print" style="display:flex; gap:8px">
-          <button class="button" onclick="renderMenu()">Preview</button>
-          <button class="button" onclick="printMenu()">Print Menu Card</button>
+    <!-- Calculator Section -->
+    <section id="calculator">
+        <div class="container">
+            <div class="section-header">
+                <h2>Beverage Calculator</h2>
+                <p>Estimate your beverage needs based on guest count, duration, and drink preferences.</p>
+            </div>
+            <div class="calculator-grid">
+                <div class="card">
+                    <h3>Input Your Event Details</h3>
+                    <div class="calc-inputs">
+                        <div class="form-group">
+                            <label for="guest-count">Number of Guests</label>
+                            <input type="number" id="guest-count" value="100" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="event-hours">Hours of Service</label>
+                            <input type="number" id="event-hours" value="4" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="cocktail-percent">% Cocktails</label>
+                            <input type="number" id="cocktail-percent" value="40" min="0" max="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="beer-percent">% Beer</label>
+                            <input type="number" id="beer-percent" value="35" min="0" max="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="wine-percent">% Wine</label>
+                            <input type="number" id="wine-percent" value="25" min="0" max="100">
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label for="liquor-bases">Liquor Bases (comma separated)</label>
+                            <input type="text" id="liquor-bases" value="vodka, gin, tequila, bourbon">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mt-1" onclick="calculateBeverages()">Calculate</button>
+                </div>
+                <div class="calc-results card">
+                    <h3>Your Shopping List</h3>
+                    <div id="results-container">
+                        <div class="result-item">
+                            <span class="result-label">Total Drinks</span>
+                            <span class="result-value" id="total-drinks">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Cocktails</span>
+                            <span class="result-value" id="cocktail-count">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Beers</span>
+                            <span class="result-value" id="beer-count">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Wine Servings</span>
+                            <span class="result-value" id="wine-count">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Liquor Bottles</span>
+                            <span class="result-value" id="liquor-bottles">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Wine Bottles</span>
+                            <span class="result-value" id="wine-bottles">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Beer Cases</span>
+                            <span class="result-value" id="beer-cases">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Ice (lbs)</span>
+                            <span class="result-value" id="ice-amount">-</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary mt-2" onclick="exportShoppingList()">Export Shopping List</button>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="grid-2">
-        <div>
-          <div class="grid-2">
-            <p><label>Event Name<br><input id="m_event" placeholder="Ava & Noah — 10·19·25"></label></p>
-            <p><label>Subtitle<br><input id="m_sub" placeholder="Signature Cocktails + Zero‑Proof"></label></p>
-          </div>
-          <p><label>Signature #1<br><input id="m_s1" value="French 75 — gin, lemon, bubbles"></label></p>
-          <p><label>Signature #2<br><input id="m_s2" value="Old Fashioned — bourbon, bitters, orange"></label></p>
-          <p><label>House Staples (comma)<br><input id="m_house" value="Gin & Tonic, Vodka Soda, Paloma"></label></p>
-          <p><label>Zero‑Proof<br><input id="m_zero" value="Citrus & Mint Cooler"></label></p>
-          <div class="grid-3">
-            <p><label>Accent Style<br>
-              <select id="m_style" aria-label="Menu accent style">
-                <option value="velvet">Velvet Luxe</option>
-                <option value="minimal">Minimal</option>
-                <option value="lively">Lively</option>
-              </select>
-            </label></p>
-            <p><label>Include footer note?<br>
-              <select id="m_note" aria-label="Include footer note"><option>Yes</option><option>No</option></select>
-            </label></p>
-            <p><label>Brand at footer?<br>
-              <select id="m_brand" aria-label="Include brand at footer"><option>Yes</option><option>No</option></select>
-            </label></p>
-          </div>
-        </div>
-        <div id="menuPreview">
-          <div class="menu-card" id="menuCard">
-            <div class="title" id="mc_title">Ava & Noah — 10·19·25</div>
-            <div class="subtitle" id="mc_sub">Signature Cocktails + Zero‑Proof</div>
-            <div class="menu-item" id="mc_s1"><b>French 75</b> — gin, lemon, bubbles</div>
-            <div class="menu-item" id="mc_s2"><b>Old Fashioned</b> — bourbon, bitters, orange</div>
-            <div class="menu-item" id="mc_house"><b>House:</b> Gin & Tonic · Vodka Soda · Paloma</div>
-            <div class="menu-item" id="mc_zero"><b>Zero‑Proof:</b> Citrus & Mint Cooler</div>
-            <div class="menu-note" id="mc_note">Please drink responsibly · IDs required</div>
-            <div class="menu-note" id="mc_brand">— <span data-bind="brand">Velvet Hour Events</span> —</div>
-          </div>
-        </div>
-      </div>
-      <p class="small">Tip: <kbd>Ctrl/Cmd+P</kbd> → More settings → Margins: None. Prints perfectly on 5×7 or A5.</p>
     </section>
 
-    <!-- SHOPPING CALCULATOR -->
-    <section id="calculator" class="card">
-      <div style="display:flex; align-items:center; justify-content:space-between">
-        <h2>Shopping Calculator</h2>
-        <div class="no-print" style="display:flex; gap:8px">
-          <button class="button" onclick="calcRun()">Calculate</button>
-          <button class="button" onclick="calcExport()">Export CSV</button>
+    <!-- Tools Section (Contract & Invoice) -->
+    <section id="tools">
+        <div class="container">
+            <div class="section-header">
+                <h2>Business Tools</h2>
+                <p>Professional resources to streamline your event planning and management.</p>
+            </div>
+            <div class="card">
+                <div class="tools-tabs">
+                    <button class="tab-btn active" onclick="openTab('contract')">Service Agreement</button>
+                    <button class="tab-btn" onclick="openTab('invoice')">Invoice Generator</button>
+                    <button class="tab-btn" onclick="openTab('checklist')">Event Checklist</button>
+                </div>
+                
+                <div id="contract" class="tab-content active">
+                    <h3>Service Agreement Template</h3>
+                    <div class="form-group">
+                        <label for="client-name">Client Name</label>
+                        <input type="text" id="client-name" placeholder="Full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="client-email">Client Email</label>
+                        <input type="email" id="client-email" placeholder="email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-address">Event Address</label>
+                        <input type="text" id="event-address" placeholder="Venue name and address">
+                    </div>
+                    <div class="form-group">
+                        <label for="agreement-date">Agreement Date</label>
+                        <input type="date" id="agreement-date">
+                    </div>
+                    <div class="form-group">
+                        <label for="service-package">Service Package</label>
+                        <select id="service-package">
+                            <option value="essentials">Essentials</option>
+                            <option value="signature">Signature</option>
+                            <option value="premier">Premier</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary">Generate Agreement</button>
+                </div>
+                
+                <div id="invoice" class="tab-content">
+                    <h3>Invoice Generator</h3>
+                    <table class="invoice-table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Quantity</th>
+                                <th>Rate</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoice-items">
+                            <tr>
+                                <td contenteditable="true">Bartending Services - Signature Package</td>
+                                <td><input type="number" value="4" min="0" step="0.5" style="width: 70px;"></td>
+                                <td><input type="number" value="75" min="0" step="1" style="width: 70px;"></td>
+                                <td>$300.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-secondary" onclick="addInvoiceItem()">+ Add Item</button>
+                    
+                    <div class="invoice-totals">
+                        <div class="total-row">
+                            <span>Subtotal:</span>
+                            <span>$300.00</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Tax (8%):</span>
+                            <span>$24.00</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Service Fee:</span>
+                            <span>$45.00</span>
+                        </div>
+                        <div class="total-row grand-total">
+                            <span>Total:</span>
+                            <span>$369.00</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary mt-2">Generate Invoice</button>
+                </div>
+                
+                <div id="checklist" class="tab-content">
+                    <h3>Event Planning Checklist</h3>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox"> Finalize guest count
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox"> Confirm menu selections
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox"> Send shopping list to client
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox"> Confirm venue details
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox"> Prepare garnish kit
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox"> Charge POS/iPad
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox"> Confirm staff assignments
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox"> Pack equipment & glassware
+                        </label>
+                    </div>
+                    <button class="btn btn-primary">Save Checklist</button>
+                </div>
+            </div>
         </div>
-      </div>
-      <p class="small">Rule of thumb: 1.5 drinks first hour, then ~1/hr. 750ml ≈ 16 cocktails (1.5 oz). Wine bottle ≈ 5 pours. Beer case ≈ 24.</p>
-      <form class="grid-3 no-print" aria-label="Shopping calculator input">
-        <p><label>Guests<br><input id="c_guests" type="number" value="100" min="1"></label></p>
-        <p><label>Hours of Service<br><input id="c_hours" type="number" value="4" min="1"></label></p>
-        <p><label>Ice per guest (lbs)<br><input id="c_ice" type="number" value="1.5" step="0.1"></label></p>
-        <p><label>% Cocktails<br><input id="c_pc" type="number" value="40" min="0" max="100"></label></p>
-        <p><label>% Beer<br><input id="c_pb" type="number" value="35" min="0" max="100"></label></p>
-        <p><label>% Wine<br><input id="c_pw" type="number" value="25" min="0" max="100"></label></p>
-        <p class="grid-2" style="grid-column:1/-1"><label>Cocktail bases (comma separated)<br><input id="c_bases" value="vodka, tequila, bourbon"></label></p>
-        <p class="grid-2" style="grid-column:1/-1"><label>Garnish set (comma separated)<br><input id="c_garn" value="lemon, lime, orange, cherry"></label></p>
-      </form>
-      <pre id="calc_out" style="white-space:pre-wrap; border:1px solid var(--edge); padding:12px; border-radius:12px; background:color-mix(in oklab, var(--bg) 70%, black 30%)" aria-live="polite"></pre>
     </section>
 
-    <!-- COST CALCULATOR -->
-    <section id="costs" class="card">
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
-        <h2>Cost & Profit Calculator</h2>
-        <div class="no-print" style="display:flex; gap:8px">
-          <button class="button" onclick="calculateCosts()">Calculate</button>
-          <button class="button" onclick="exportCostBreakdown()">Export</button>
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get In Touch</h2>
+                <p>Ready to elevate your event? Contact us for a personalized quote and consultation.</p>
+            </div>
+            <div class="card" style="max-width: 600px; margin: 0 auto;">
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="contact-name">Your Name</label>
+                        <input type="text" id="contact-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">Email Address</label>
+                        <input type="email" id="contact-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-phone">Phone Number</label>
+                        <input type="tel" id="contact-phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-type">Event Type</label>
+                        <select id="event-type">
+                            <option value="">Select an option</option>
+                            <option value="wedding">Wedding</option>
+                            <option value="corporate">Corporate Event</option>
+                            <option value="birthday">Birthday Party</option>
+                            <option value="anniversary">Anniversary</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-date-contact">Event Date</label>
+                        <input type="date" id="event-date-contact">
+                    </div>
+                    <div class="form-group">
+                        <label for="guest-count-contact">Estimated Guest Count</label>
+                        <input type="number" id="guest-count-contact" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Additional Details</label>
+                        <textarea id="message" rows="4" placeholder="Tell us about your event, special requests, or any questions you have..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Request</button>
+                </form>
+            </div>
         </div>
-      </div>
-      <p class="small">Track costs and calculate profit margins for accurate pricing.</p>
-      <div class="grid-2">
-        <div>
-          <h3>Costs</h3>
-          <p><label>Bartender Rate/hr<br><input id="cost_rate" type="number" value="65" min="0" step="1"></label></p>
-          <p><label>Hours<br><input id="cost_hours" type="number" value="4" min="1" step="0.5"></label></p>
-          <p><label>Additional Staff Cost<br><input id="cost_staff" type="number" value="0" min="0" step="1"></label></p>
-          <p><label>Travel/Setup<br><input id="cost_travel" type="number" value="25" min="0" step="1"></label></p>
-          <p><label>Supplies (garnish, ice, etc)<br><input id="cost_supplies" type="number" value="50" min="0" step="1"></label></p>
-          <p><label>Equipment Rental<br><input id="cost_equip" type="number" value="0" min="0" step="1"></label></p>
-          <p><label>Desired Profit Margin %<br><input id="cost_margin" type="number" value="30" min="0" max="100" step="1"></label></p>
-        </div>
-        <div>
-          <h3>Breakdown</h3>
-          <pre id="cost_output" style="white-space:pre-wrap; border:1px solid var(--edge); padding:12px; border-radius:12px; background:color-mix(in oklab, var(--bg) 70%, black 30%); min-height:200px" aria-live="polite">Click Calculate to see breakdown</pre>
-        </div>
-      </div>
     </section>
 
-    <!-- CONTRACT -->
-    <section id="contract" class="card">
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:10px">
-        <h2>Service Agreement</h2>
-        <div class="no-print" style="display:flex; gap:8px">
-          <button class="button" onclick="printSection('contract')">Print</button>
-          <button class="button" onclick="clearSignatures()">Clear signatures</button>
-          <button class="iconbtn" onclick="exportDraft('vh_contract','contract.json')" aria-label="Export contract JSON">Export</button>
-          <label class="iconbtn" aria-label="Import contract JSON"><input type="file" accept="application/json" hidden onchange="importDraft(event,'vh_contract');">Import</label>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">Velvet Hour</div>
+                <p>Crafting exceptional beverage experiences for Charlotte and the Carolinas.</p>
+                <div class="social-links">
+                    <a href="#">📘</a>
+                    <a href="#">📷</a>
+                    <a href="#">💼</a>
+                    <a href="#">✉️</a>
+                </div>
+                <p class="copyright">© 2025 Velvet Hour Events. All rights reserved.</p>
+            </div>
         </div>
-      </div>
-      <div class="small">Provider: <b data-bind="brand">Velvet Hour Events</b> — <span data-bind="email">hello@velvethourevents.com</span> — <span data-bind="phone">(704) 000‑0000</span></div>
-      <hr>
-      <div class="grid-2">
-        <p><label>Client<br><input id="cl_name"></label></p>
-        <p><label>Event Date<br><input id="cl_date" type="date"></label></p>
-      </div>
-      <div class="grid-2">
-        <p><label>Start Time<br><input id="cl_start" placeholder="5:00 PM"></label></p>
-        <p><label>End Time<br><input id="cl_end" placeholder="9:00 PM"></label></p>
-      </div>
-      <p><label>Venue<br><input id="cl_venue" placeholder="Venue / Address"></label></p>
-      <h3>Scope</h3>
-      <ul>
-        <li>Bartending service; bar setup & cleanup.</li>
-        <li>Menu per proposal; quantity planning; garnish kit & tools.</li>
-        <li>Client supplies alcohol unless otherwise agreed in writing.</li>
-      </ul>
-      <h3>Fees & Payment</h3>
-      <ul>
-        <li>Rate as quoted; 4‑hour minimum unless specified.</li>
-        <li>Retainer: 30% due upon signing; balance due 3 days prior.</li>
-        <li>Holiday dates may be billed at 1.5×.</li>
-      </ul>
-      <h3>Insurance & Compliance</h3>
-      <ul>
-        <li>General & liquor liability insurance; COI available on request.</li>
-        <li>Responsible alcohol service; IDs checked; service may be refused for safety.</li>
-      </ul>
-      <h3>Client Responsibilities</h3>
-      <ul>
-        <li>Provide bar space, water, power, trash, and ice unless contracted.</li>
-        <li>Obtain venue permissions/permits as applicable.</li>
-      </ul>
-      <h3>Cancellation</h3>
-      <ul>
-        <li>≥30 days: retainer refundable less $50 admin; 7–29 days: 50%; &lt;7 days: 100%.</li>
-      </ul>
-      <h3>Liability</h3>
-      <ul>
-        <li>Provider not liable for unattended property, guest misconduct, or venue hazards.</li>
-      </ul>
-      <div class="grid-2">
-        <div>
-          <p><b>Client Signature</b></p>
-          <canvas id="sigClient" class="sig-pad"></canvas>
-          <div class="no-print" style="display:flex; gap:8px; margin-top:8px">
-            <button class="button" onclick="sigClear('sigClient')">Clear</button>
-            <button class="button" onclick="sigSave('sigClient')">Save</button>
-          </div>
-        </div>
-        <div>
-          <p><b>Provider Signature — <span data-bind="brand">Velvet Hour Events</span></b></p>
-          <canvas id="sigProvider" class="sig-pad"></canvas>
-          <div class="no-print" style="display:flex; gap:8px; margin-top:8px">
-            <button class="button" onclick="sigClear('sigProvider')">Clear</button>
-            <button class="button" onclick="sigSave('sigProvider')">Save</button>
-          </div>
-        </div>
-      </div>
-      <p class="small">Template only — confirm state/venue requirements.</p>
-    </section>
-
-    <!-- INVOICE -->
-    <section id="invoice" class="card">
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:10px">
-        <h2>Invoice</h2>
-        <div class="no-print" style="display:flex; gap:8px">
-          <button class="button" onclick="invoiceAdd()">Add Line</button>
-          <button class="button" onclick="invoiceCalc()">Update Total</button>
-          <button class="button" onclick="openPay()" aria-haspopup="dialog" aria-controls="payPanel">Pay Now (Demo)</button>
-          <button class="iconbtn" onclick="printSection('invoice')">Print</button>
-          <button class="iconbtn" onclick="exportDraft('vh_invoice','invoice.json')" aria-label="Export invoice JSON">Export</button>
-          <label class="iconbtn" aria-label="Import invoice JSON"><input type="file" accept="application/json" hidden onchange="importDraft(event,'vh_invoice');">Import</label>
-        </div>
-      </div>
-      <div class="grid-2">
-        <div>
-          <b data-bind="brand">Velvet Hour Events</b><br>
-          <span data-bind="city">Charlotte, NC</span><br>
-          <span data-bind="email">hello@velvethourevents.com</span> · <span data-bind="phone">(704) 000‑0000</span>
-        </div>
-        <div>
-          <div class="small">Date: <span id="inv_date">—</span></div>
-          <div class="small">Invoice #: <input id="inv_no" style="width:140px" value="0001" aria-label="Invoice number"></div>
-        </div>
-      </div>
-      <hr>
-      <table id="inv_tbl">
-        <thead><tr><th>Description</th><th style="width:90px">Qty</th><th style="width:90px">Rate</th><th style="width:110px">Amount</th></tr></thead>
-        <tbody id="inv_body">
-          <tr>
-            <td contenteditable>Bartending — Signature Package</td>
-            <td><input type="number" value="4" min="0" step="0.5"></td>
-            <td><input type="number" value="65" min="0" step="1"></td>
-            <td class="amt">$260</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr><td colspan="3" style="text-align:right"><b>Subtotal</b></td><td id="inv_sub">$260.00</td></tr>
-          <tr><td colspan="3" style="text-align:right">Tax</td><td><input id="inv_tax" type="number" value="0" min="0" step="1" aria-label="Tax amount"></td></tr>
-          <tr><td colspan="3" style="text-align:right">Service/Gratuity %</td><td><input id="inv_tip" type="number" value="15" min="0" step="1" aria-label="Gratuity percent"></td></tr>
-          <tr><td colspan="3" style="text-align:right">Discount</td><td><input id="inv_disc" type="number" value="0" min="0" step="1" aria-label="Discount amount"></td></tr>
-          <tr><td colspan="3" style="text-align:right"><b>Total</b></td><td id="inv_tot"><b>$260.00</b></td></tr>
-        </tfoot>
-      </table>
-      <p class="small">Payment due upon receipt unless otherwise stated. Gratuity may be included as a service charge on request.</p>
-      <div class="small">Demo payments are logged locally only. See Admin → Payments.</div>
-    </section>
-
-    <!-- CHECKLISTS -->
-    <section id="checklists" class="card">
-      <h2>Checklists</h2>
-      <div class="grid-3">
-        <div>
-          <h3>Pre‑Event</h3>
-          <ul style="margin:0; padding-left:20px">
-            <li>Confirm guest count</li>
-            <li>Finalize menu</li>
-            <li>Send shopping list</li>
-            <li>Confirm venue details</li>
-            <li>Pack garnish kit</li>
-            <li>Charge POS/iPad</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Day‑Of</h3>
-          <ul style="margin:0; padding-left:20px">
-            <li>Ice procurement</li>
-            <li>Bar setup (30‑45 min)</li>
-            <li>Check IDs policy</li>
-            <li>Water station</li>
-            <li>Test equipment</li>
-            <li>Review special requests</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Post‑Event</h3>
-          <ul style="margin:0; padding-left:20px">
-            <li>Break down bar</li>
-            <li>Inventory remaining</li>
-            <li>Clean & pack gear</li>
-            <li>Process final payment</li>
-            <li>Send thank‑you</li>
-            <li>Request review</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- MARKETING -->
-    <section id="marketing" class="card">
-      <h2>Marketing & Outreach</h2>
-      <div class="grid-3">
-        <div>
-          <h3>Email Templates</h3>
-          <p class="small">Quick responses for inquiries, follow‑ups, and confirmations.</p>
-          <button class="button" onclick="copyTemplate('tpl_inquiry')">Copy Inquiry Response</button>
-        </div>
-        <div>
-          <h3>Content Calendar</h3>
-          <p class="small">Monthly social media & email schedule.</p>
-          <button class="button" onclick="downloadCalendar()">Download CSV</button>
-        </div>
-        <div>
-          <h3>Rate Sheet</h3>
-          <p class="small">Clean pricing overview for planners.</p>
-          <button class="button" onclick="copyRateSheet()">Copy to Clipboard</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="card">
-      <h2>Request a Quote</h2>
-      <form onsubmit="logRequest(event)">
-        <div class="grid-2">
-          <p><label>Name<br><input id="req_name" required placeholder="Your name"></label></p>
-          <p><label>Email<br><input id="req_email" type="email" required placeholder="hello@velvethourevents.com"></label></p>
-        </div>
-        <div class="grid-2">
-          <p><label>Event Date<br><input id="req_date" type="date" required></label></p>
-          <p><label>Guest Count<br><input id="req_guests" type="number" min="5" required placeholder="100"></label></p>
-        </div>
-        <p><label>Venue/Address<br><input id="req_addr" required placeholder="Venue or address"></label></p>
-        <p><label>Notes<br><textarea id="req_notes" rows="4" placeholder="Tell us your vibe, must‑have drinks, timelines…"></textarea></label></p>
-        <div style="display:flex; gap:10px; align-items:center" class="no-print">
-          <button class="button" type="submit">Send Request (Demo)</button>
-          <a class="iconbtn" id="mailtoBtn" href="#" aria-label="Send via email">Email</a>
-          <span class="small">Prefer texting? <span data-bind="phone">(704) 000‑0000</span></span>
-        </div>
-      </form>
-    </section>
-
-    <footer class="small">&copy; 2025 <span data-bind="brand">Velvet Hour Events</span> — <span data-bind="city">Charlotte, NC</span> · Updated October 19, 2025</footer>
-  </div>
-
-  <!-- ADMIN PANEL -->
-  <section id="adminPanel" class="panel" role="dialog" aria-modal="true" aria-labelledby="adminTitle" aria-hidden="true">
-    <header>
-      <h3 id="adminTitle">Admin — Brand & Defaults</h3>
-      <button class="iconbtn" id="closeAdmin" aria-label="Close admin panel">✖</button>
-    </header>
-    <div class="content">
-      <h4>Brand</h4>
-      <div class="grid-2">
-        <p><label>Brand Name<br><input id="ad_brand"></label></p>
-        <p><label>City/Region<br><input id="ad_city"></label></p>
-      </div>
-      <div class="grid-2">
-        <p><label>Email<br><input id="ad_email" type="email"></label></p>
-        <p><label>Phone<br><input id="ad_phone"></label></p>
-      </div>
-      <div style="display:flex; gap:8px; margin:6px 0 14px">
-        <button class="button" onclick="saveBrandForm()">Save</button>
-        <button class="iconbtn" onclick="resetBrand()">Reset</button>
-        <button class="iconbtn" onclick="exportBrand()">Export</button>
-        <label class="iconbtn">Import<input type="file" accept="application/json" hidden onchange="importBrand(event)"></label>
-        <button class="iconbtn" onclick="exportAll()">Export All</button>
-        <label class="iconbtn">Import All<input type="file" accept="application/json" hidden onchange="importAll(event)"></label>
-      </div>
-      <hr>
-      <h4>Default Package Prices</h4>
-      <div class="grid-3">
-        <p><label>Essentials (text)<br><input id="ad_pkg_essentials" placeholder="$55/hr"></label></p>
-        <p><label>Signature (text)<br><input id="ad_pkg_signature" placeholder="$65/hr"></label></p>
-        <p><label>Premier (text)<br><input id="ad_pkg_premier" placeholder="$85/hr"></label></p>
-      </div>
-      <div style="margin:6px 0 14px"><button class="button" onclick="savePackages()">Save Package Pricing</button></div>
-      <hr>
-      <h4>Demo Payments</h4>
-      <div id="paymentsList" class="small">No payments yet.</div>
-      <div style="margin-top:10px"><button class="iconbtn" onclick="clearAllData()">Clear All Data</button></div>
-    </div>
-  </section>
-
-  <!-- PAYMENT PANEL -->
-  <section id="payPanel" class="panel" role="dialog" aria-modal="true" aria-labelledby="payTitle" aria-hidden="true">
-    <header>
-      <h3 id="payTitle">Demo Payment</h3>
-      <button class="iconbtn" id="closePay" aria-label="Close payment panel">✖</button>
-    </header>
-    <div class="content">
-      <p class="small">This is a demo payment flow. Nothing is charged; results are stored locally for preview.</p>
-      <p><label>Name on Card<br><input id="pay_name" placeholder="Client Name"></label></p>
-      <div class="grid-2">
-        <p><label>Amount<br><input id="pay_amount" type="number" min="0" step="0.01"></label></p>
-        <p><label>Method<br>
-          <select id="pay_method" aria-label="Payment method">
-            <option>Card</option><option>ACH</option><option>Cash</option>
-          </select></label></p>
-      </div>
-      <div style="display:flex; gap:8px">
-        <button class="button" onclick="simulatePay()">Confirm Payment</button>
-        <button class="iconbtn" onclick="fillInvoiceAmount()">Use Invoice Total</button>
-      </div>
-      <p class="small" id="payNotice"></p>
-    </div>
-  </section>
-
-<script>
-// ===== FIXED UTILITIES =====
-const $ = (q, p = document) => p.querySelector(q);
-const $$ = (q, p = document) => Array.from(p.querySelectorAll(q));
-const toastWrap = $('.toast-wrap');
-
-function toast(msg, type = 'ok') { 
-  const d = document.createElement('div'); 
-  d.className = `toast ${type}`; 
-  d.textContent = msg; 
-  toastWrap.appendChild(d); 
-  setTimeout(() => d.remove(), 3400); 
-}
-
-function download(filename, data, type = 'application/json') { 
-  const blob = new Blob([data], { type }); 
-  const a = document.createElement('a'); 
-  a.href = URL.createObjectURL(blob); 
-  a.download = filename; 
-  a.click(); 
-}
-
-// ===== THEME HANDLING =====
-const themePick = $('#themePick');
-function applyTheme(v) {
-  if (v === 'champagne') {
-    document.body.setAttribute('data-theme', 'champagne');
-  } else if (v === 'botanical') {
-    document.body.setAttribute('data-theme', 'botanical');
-  } else {
-    document.body.removeAttribute('data-theme');
-  }
-  localStorage.setItem('vh_theme', v);
-}
-
-themePick.addEventListener('change', e => applyTheme(e.target.value));
-(function() {
-  applyTheme(localStorage.getItem('vh_theme') || 'velvet'); 
-  themePick.value = localStorage.getItem('vh_theme') || 'velvet';
-})();
-
-// ===== BRAND MODEL =====
-const BRAND_DEFAULT = {
-  brand: "Velvet Hour Events", 
-  email: "hello@velvethourevents.com", 
-  phone: "(704) 000-0000", 
-  city: "Charlotte, NC"
-};
-
-let BRAND = JSON.parse(localStorage.getItem('vh_brand') || 'null') || BRAND_DEFAULT;
-
-function applyBrand() {
-  $$('[data-bind="brand"]').forEach(el => el.textContent = BRAND.brand);
-  $$('[data-bind="email"]').forEach(el => el.textContent = BRAND.email);
-  $$('[data-bind="phone"]').forEach(el => el.textContent = BRAND.phone);
-  $$('[data-bind="city"]').forEach(el => el.textContent = BRAND.city);
-  updateMailto();
-}
-
-applyBrand();
-
-// ===== MENU DESIGNER =====
-function titleCaseDrink(s) { 
-  return s.replace(/^\s*([^-—–:]+)[-—–:]?\s*/, (m, name) => `<b>${name.trim()}</b> — `); 
-}
-
-function renderMenu() {
-  const t = $('#m_event').value || "Our Event";
-  const sub = $('#m_sub').value || "";
-  const s1 = $('#m_s1').value || "";
-  const s2 = $('#m_s2').value || "";
-  const house = $('#m_house').value || "";
-  const zero = $('#m_zero').value || "";
-  const style = $('#m_style').value;
-  const noteOn = $('#m_note').value === "Yes";
-  const brandOn = $('#m_brand').value === "Yes";
-
-  $('#mc_title').textContent = t;
-  $('#mc_sub').textContent = sub;
-  $('#mc_s1').innerHTML = titleCaseDrink(s1);
-  $('#mc_s2').innerHTML = titleCaseDrink(s2);
-  $('#mc_house').innerHTML = `<b>House:</b> ${house.split(',').map(s => s.trim()).filter(Boolean).join(' · ')}`;
-  $('#mc_zero').innerHTML = `<b>Zero-Proof:</b> ${zero}`;
-  $('#mc_note').style.display = noteOn ? 'block' : 'none';
-  $('#mc_brand').style.display = brandOn ? 'block' : 'none';
-
-  const card = $('#menuCard');
-  const backgrounds = {
-    velvet: "conic-gradient(from 200deg at 50% 30%, color-mix(in oklab,var(--gold) 18%, transparent 82%), transparent 42% 58%, color-mix(in oklab,var(--rose) 16%, transparent 84%) 100%), color-mix(in oklab, var(--card) 92%, black 8%)",
-    minimal: "color-mix(in oklab, var(--card) 94%, black 6%)",
-    lively: "radial-gradient(700px 220px at 10% -30%, color-mix(in oklab,var(--violet) 24%, transparent 76%), transparent), radial-gradient(420px 200px at 90% 120%, color-mix(in oklab,var(--gold) 22%, transparent 78%), transparent), color-mix(in oklab, var(--card) 92%, black 8%)"
-  };
-  card.style.background = backgrounds[style] || card.style.background;
-}
-
-function printMenu() {
-  renderMenu();
-  const el = $('#menuCard').cloneNode(true);
-  const w = window.open('', '_blank');
-  w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Print — Menu</title>
-  <style>body{font-family:${getComputedStyle(document.body).fontFamily}; color:#222; margin:0; padding:24px}
-  .menu-card{width:100%; max-width:620px; margin:0 auto; border-radius:22px; border:1px solid #ddd; padding:26px}</style></head><body>`);
-  w.document.body.appendChild(el);
-  w.document.write('</body></html>');
-  w.document.close();
-  w.focus();
-  w.print();
-}
-
-// ===== CALCULATOR =====
-function calcRun() {
-  const g = +$('#c_guests').value || 0;
-  const h = +$('#c_hours').value || 0;
-  const pc = (+$('#c_pc').value || 0) / 100;
-  const pb = (+$('#c_pb').value || 0) / 100;
-  const pw = (+$('#c_pw').value || 0) / 100;
-  const bases = ($('#c_bases').value || '').split(',').map(s => s.trim()).filter(Boolean);
-  
-  const drinksPerGuest = 1.5 + Math.max(h - 1, 0) * 1.0;
-  const total = Math.round(g * drinksPerGuest);
-  const cocktails = Math.round(total * pc);
-  const beer = Math.round(total * pb);
-  const wine = Math.round(total * pw);
-  
-  const spiritBottles = Math.ceil(cocktails / 16);
-  const perBase = Math.ceil(spiritBottles / Math.max(1, bases.length));
-  const wineBottles = Math.ceil(wine / 5);
-  const beerCases = Math.ceil(beer / 24);
-  const ice = Math.ceil((+$('#c_ice').value || 1.5) * g);
-  const glassware = Math.ceil(g * (h >= 4 ? 3 : 2));
-  
-  const mixerLiters = (cocktails * 0.75) / 33.8;
-  const syrupLiters = (cocktails * 0.25) / 33.8;
-  const citrus = Math.ceil(cocktails * 0.5 / 12);
-  const cherryOlive = Math.ceil(cocktails * 0.5);
-
-  const lines = [
-    `Guests: ${g} · Hours: ${h}`,
-    `Estimated total drinks: ${total}`,
-    ``,
-    `COCKTAILS ~ ${cocktails} pours → ~${spiritBottles} × 750ml`,
-    `  Bases: ${bases.join(", ") || "choose bases"} → ~${perBase} each`,
-    `BEER ~ ${beer} pours → ~${beerCases} case(s)`,
-    `WINE ~ ${wine} glasses → ~${wineBottles} bottles`,
-    ``,
-    `MIXERS: ~${mixerLiters.toFixed(1)} L · SYRUP: ~${syrupLiters.toFixed(1)} L`,
-    `CITRUS set: ~${citrus} pieces · GARNISH (cherry/olive): ~${cherryOlive}`,
-    `ICE: ~${ice} lbs · GLASSWARE: ${glassware}`
-  ];
-  
-  $('#calc_out').textContent = lines.join('\n');
-  
-  window._calcCSV = [
-    ["Item", "Qty", "Unit"],
-    ["Base spirits (750ml total)", spiritBottles, "bottles"],
-    ["Beer", beerCases, "cases"],
-    ["Wine (750ml)", wineBottles, "bottles"],
-    ["Mixers", mixerLiters.toFixed(1), "L"],
-    ["Simple syrup", syrupLiters.toFixed(1), "L"],
-    ["Citrus (mixed)", citrus, "pieces"],
-    ["Cherries/olives", cherryOlive, "units"],
-    ["Ice", ice, "lbs"],
-    ["Cups/Glassware", glassware, "each"]
-  ];
-}
-
-function calcExport() {
-  if (!window._calcCSV) calcRun();
-  const rows = window._calcCSV.map(r => r.join(','));
-  download('shopping_list.csv', rows.join('\n'), 'text/csv');
-}
-
-// ===== COST CALCULATOR =====
-function calculateCosts() {
-  const rate = +$('#cost_rate').value || 0;
-  const hours = +$('#cost_hours').value || 0;
-  const staff = +$('#cost_staff').value || 0;
-  const travel = +$('#cost_travel').value || 0;
-  const supplies = +$('#cost_supplies').value || 0;
-  const equip = +$('#cost_equip').value || 0;
-  const marginPct = +$('#cost_margin').value || 0;
-  
-  const labor = rate * hours;
-  const totalCost = labor + staff + travel + supplies + equip;
-  const margin = totalCost * (marginPct / 100);
-  const clientPrice = totalCost + margin;
-  
-  const lines = [
-    `COSTS BREAKDOWN`,
-    ``,
-    `Labor: ${hours}hrs × ${rate} = ${labor.toFixed(2)}`,
-    `Additional Staff: ${staff.toFixed(2)}`,
-    `Travel/Setup: ${travel.toFixed(2)}`,
-    `Supplies: ${supplies.toFixed(2)}`,
-    `Equipment: ${equip.toFixed(2)}`,
-    ``,
-    `Total Cost: ${totalCost.toFixed(2)}`,
-    `Profit Margin (${marginPct}%): ${margin.toFixed(2)}`,
-    ``,
-    `CLIENT QUOTE: ${clientPrice.toFixed(2)}`,
-    ``,
-    `Per Hour: ${(clientPrice / hours).toFixed(2)}/hr`
-  ];
-  
-  $('#cost_output').textContent = lines.join('\n');
-}
-
-function exportCostBreakdown() {
-  calculateCosts();
-  const text = $('#cost_output').textContent;
-  download('cost_breakdown.txt', text, 'text/plain');
-}
-
-// ===== INVOICE =====
-function invoiceAdd() {
-  const tr = document.createElement('tr');
-  tr.innerHTML = `<td contenteditable>Item</td><td><input type="number" value="1" min="0" step="0.5"></td><td><input type="number" value="0" min="0" step="1"></td><td class="amt">$0.00</td>`;
-  $('#inv_body').appendChild(tr);
-  saveInvoice();
-  invoiceCalc();
-}
-
-function invoiceCalc() {
-  let sub = 0;
-  $$('#inv_tbl tbody tr').forEach(tr => {
-    const qty = +tr.querySelector('td:nth-child(2) input').value || 0;
-    const rate = +tr.querySelector('td:nth-child(3) input').value || 0;
-    const amt = qty * rate;
-    sub += amt;
-    tr.querySelector('.amt').textContent = `$${amt.toFixed(2)}`;
-  });
-  
-  $('#inv_sub').textContent = `$${sub.toFixed(2)}`;
-  
-  const tax = +$('#inv_tax').value || 0;
-  const tipPct = +$('#inv_tip').value || 0;
-  const discount = +$('#inv_disc').value || 0;
-  const tot = sub + tax + (sub * (tipPct / 100)) - discount;
-  
-  $('#inv_tot').innerHTML = `<b>$${tot.toFixed(2)}</b>`;
-  saveInvoice();
-}
-
-// Initialize invoice date
-(function() {
-  const d = new Date();
-  const f = n => n.toString().padStart(2, '0');
-  $('#inv_date').textContent = `${d.getFullYear()}-${f(d.getMonth() + 1)}-${f(d.getDate())}`;
-})();
-
-function serializeInvoice() {
-  return {
-    no: $('#inv_no').value,
-    rows: $$('#inv_tbl tbody tr').map(tr => ({
-      desc: tr.cells[0].innerText.trim(),
-      qty: +tr.cells[1].querySelector('input').value || 0,
-      rate: +tr.cells[2].querySelector('input').value || 0
-    })),
-    tax: +$('#inv_tax').value || 0,
-    tip: +$('#inv_tip').value || 0,
-    disc: +$('#inv_disc').value || 0
-  };
-}
-
-function loadInvoice(obj) {
-  if (!obj) return;
-  $('#inv_no').value = obj.no || '0001';
-  $('#inv_tax').value = obj.tax || 0;
-  $('#inv_tip').value = obj.tip || 0;
-  $('#inv_disc').value = obj.disc || 0;
-  
-  const body = $('#inv_body');
-  body.innerHTML = '';
-  
-  (obj.rows || []).forEach(r => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td contenteditable>${r.desc || 'Item'}</td><td><input type="number" value="${r.qty || 0}" min="0" step="0.5"></td><td><input type="number" value="${r.rate || 0}" min="0" step="1"></td><td class="amt">$0.00</td>`;
-    body.appendChild(tr);
-  });
-  
-  invoiceCalc();
-}
-
-function saveInvoice() {
-  localStorage.setItem('vh_invoice', JSON.stringify(serializeInvoice()));
-}
-
-// Load saved invoice
-(function() {
-  const s = localStorage.getItem('vh_invoice');
-  if (s) {
-    loadInvoice(JSON.parse(s));
-  }
-})();
-
-// ===== CONTRACT PERSISTENCE =====
-function serializeContract() {
-  return {
-    name: $('#cl_name').value,
-    date: $('#cl_date').value,
-    start: $('#cl_start').value,
-    end: $('#cl_end').value,
-    venue: $('#cl_venue').value
-  };
-}
-
-function loadContract(obj) {
-  if (!obj) return;
-  $('#cl_name').value = obj.name || '';
-  $('#cl_date').value = obj.date || '';
-  $('#cl_start').value = obj.start || '';
-  $('#cl_end').value = obj.end || '';
-  $('#cl_venue').value = obj.venue || '';
-}
-
-['cl_name', 'cl_date', 'cl_start', 'cl_end', 'cl_venue'].forEach(id => {
-  const el = $('#' + id);
-  el.addEventListener('input', () => {
-    localStorage.setItem('vh_contract', JSON.stringify(serializeContract()));
-  });
-});
-
-// Load saved contract
-(function() {
-  const s = localStorage.getItem('vh_contract');
-  if (s) {
-    loadContract(JSON.parse(s));
-  }
-})();
-
-// ===== DRAFT EXPORT/IMPORT =====
-function exportDraft(key, filename) {
-  const s = localStorage.getItem(key) || '{}';
-  download(filename, s);
-}
-
-function importDraft(e, key) {
-  const f = e.target.files[0];
-  if (!f) return;
-  
-  f.text().then(t => {
-    try {
-      const obj = JSON.parse(t);
-      localStorage.setItem(key, JSON.stringify(obj));
-      
-      if (key === 'vh_invoice') loadInvoice(obj);
-      if (key === 'vh_contract') loadContract(obj);
-      
-      toast('Imported', 'ok');
-    } catch {
-      toast('Invalid JSON', 'warn');
-    }
-  });
-}
-
-// ===== SIGNATURES =====
-['sigClient', 'sigProvider'].forEach(id => {
-  const canvas = $('#' + id);
-  const ctx = canvas.getContext('2d');
-  
-  function resize() {
-    const ratio = Math.max(1, Math.floor(window.devicePixelRatio || 1));
-    const { width, height } = canvas.getBoundingClientRect();
-    canvas.width = Math.floor(width * ratio);
-    canvas.height = Math.floor(height * ratio);
-    ctx.scale(ratio, ratio);
-    ctx.lineWidth = 2;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = '#111';
-  }
-  
-  resize();
-  window.addEventListener('resize', resize, { passive: true });
-  
-  let drawing = false;
-  let lx = 0;
-  let ly = 0;
-  
-  canvas.addEventListener('pointerdown', e => {
-    drawing = true;
-    const r = canvas.getBoundingClientRect();
-    lx = e.clientX - r.left;
-    ly = e.clientY - r.top;
-    canvas.setPointerCapture(e.pointerId);
-  });
-  
-  canvas.addEventListener('pointerup', e => {
-    drawing = false;
-    canvas.releasePointerCapture(e.pointerId);
-  });
-  
-  canvas.addEventListener('pointerleave', () => {
-    drawing = false;
-  });
-  
-  canvas.addEventListener('pointermove', e => {
-    if (!drawing) return;
-    const r = canvas.getBoundingClientRect();
-    const x = e.clientX - r.left;
-    const y = e.clientY - r.top;
-    
-    ctx.beginPath();
-    ctx.moveTo(lx, ly);
-    ctx.lineTo(x, y);
-    ctx.stroke();
-    
-    lx = x;
-    ly = y;
-  });
-});
-
-function sigClear(id) {
-  const c = $('#' + id);
-  const ctx = c.getContext('2d');
-  ctx.clearRect(0, 0, c.width, c.height);
-}
-
-function sigSave(id) {
-  const data = $('#' + id).toDataURL('image/png');
-  const a = document.createElement('a');
-  a.href = data;
-  a.download = id + '.png';
-  a.click();
-}
-
-function clearSignatures() {
-  ['sigClient', 'sigProvider'].forEach(sigClear);
-}
-
-// ===== EMAIL TEMPLATES =====
-function copyTemplate(id) {
-  const templates = {
-    tpl_inquiry: `Hi {{name}},
-
-Thank you for reaching out to {{brand}}! I'd love to help make your {{event_type}} unforgettable.
-
-For {{date}}, I have availability. Based on {{guest_count}} guests, I recommend our {{package}} package.
-
-Can we schedule a quick call to discuss your vision and menu preferences?
-
-Best,
-Kate`
-  };
-  
-  const text = templates[id] || "Template not found";
-  navigator.clipboard.writeText(text).then(() => toast('Template copied', 'ok'));
-}
-
-// ===== CONTACT FORM =====
-function updateMailto() {
-  const name = ($('#req_name') || {}).value || '';
-  const email = ($('#req_email') || {}).value || '';
-  const date = ($('#req_date') || {}).value || '';
-  const guests = ($('#req_guests') || {}).value || '';
-  const addr = ($('#req_addr') || {}).value || '';
-  const notes = ($('#req_notes') || {}).value || '';
-  
-  const subject = encodeURIComponent(`Quote Request — ${name || 'Event'}`);
-  const body = encodeURIComponent(
-`Hi ${BRAND.brand},
-
-I'd like a quote for: ${date} · ${guests} guests
-Venue: ${addr}
-
-Notes:
-${notes}
-
-You can reach me at ${email}. Thank you!`);
-
-  const href = `mailto:${BRAND.email}?subject=${subject}&body=${body}`;
-  const btn = $('#mailtoBtn');
-  if (btn) btn.href = href;
-}
-
-['req_name', 'req_email', 'req_date', 'req_guests', 'req_addr', 'req_notes'].forEach(id => {
-  const el = $('#' + id);
-  if (el) el.addEventListener('input', updateMailto);
-});
-
-updateMailto();
-
-function logRequest(e) {
-  e.preventDefault();
-  const rec = {
-    id: 'REQ-' + Math.random().toString(36).slice(2, 8).toUpperCase(),
-    ts: new Date().toISOString(),
-    name: $('#req_name').value,
-    email: $('#req_email').value,
-    date: $('#req_date').value,
-    guests: +$('#req_guests').value,
-    addr: $('#req_addr').value,
-    notes: $('#req_notes').value
-  };
-  
-  const arr = JSON.parse(localStorage.getItem('vh_requests') || '[]');
-  arr.push(rec);
-  localStorage.setItem('vh_requests', JSON.stringify(arr));
-  
-  toast(`Request logged: ${rec.id}`, 'ok');
-}
-
-// ===== PRINT SECTION =====
-function printSection(id) {
-  const clone = $('#' + id).cloneNode(true);
-  const w = window.open('', '_blank');
-  w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Print — ${id}</title>
-  <style>body{font-family:${getComputedStyle(document.body).fontFamily}; color:#222; margin:20px}
-  .small{color:#555} table{width:100%; border-collapse:collapse} th,td{border-bottom:1px solid #ddd; padding:8px; text-align:left; vertical-align:top}
-  .menu-card{border:1px solid #ddd; border-radius:22px; padding:26px}
-  </style></head><body>`);
-  w.document.body.appendChild(clone);
-  w.document.write('</body></html>');
-  w.document.close();
-  w.focus();
-  w.print();
-}
-
-// ===== PAYMENT SIMULATION =====
-const payPanel = $('#payPanel');
-$('#closePay').addEventListener('click', () => closePanel(payPanel));
-
-function openPay() {
-  $('#pay_name').value = $('#cl_name').value || '';
-  $('#pay_amount').value = (getInvoiceTotal() || 0).toFixed(2);
-  $('#pay_method').value = 'Card';
-  $('#payNotice').textContent = '';
-  panelReturnFocus = document.activeElement;
-  openPanel(payPanel);
-}
-
-function fillInvoiceAmount() {
-  $('#pay_amount').value = (getInvoiceTotal() || 0).toFixed(2);
-}
-
-function getInvoiceTotal() {
-  const txt = $('#inv_tot').innerText.replace(/[^0-9.]/g, '');
-  return parseFloat(txt) || 0;
-}
-
-function simulatePay() {
-  const name = $('#pay_name').value.trim();
-  const amt = parseFloat($('#pay_amount').value) || 0;
-  const method = $('#pay_method').value;
-  
-  if (!name || !amt) {
-    toast('Name and amount required', 'warn');
-    return;
-  }
-  
-  const rec = {
-    id: 'PMT-' + Math.random().toString(36).slice(2, 8).toUpperCase(),
-    ts: new Date().toISOString(),
-    name: name,
-    amount: amt,
-    method: method,
-    invoice: $('#inv_no').value
-  };
-  
-  const arr = JSON.parse(localStorage.getItem('vh_payments') || '[]');
-  arr.push(rec);
-  localStorage.setItem('vh_payments', JSON.stringify(arr));
-  
-  $('#payNotice').textContent = `Success: ${rec.id} for $${amt.toFixed(2)} via ${method}`;
-  toast(`Payment recorded: ${rec.id}`, 'ok');
-  renderPayments();
-}
-
-// ===== ADMIN PANEL =====
-const adminPanel = $('#adminPanel');
-const openAdminBtn = $('#openAdmin');
-const closeAdminBtn = $('#closeAdmin');
-let panelReturnFocus = null;
-
-openAdminBtn.addEventListener('click', () => {
-  panelReturnFocus = document.activeElement;
-  openPanel(adminPanel);
-  loadAdminForm();
-  renderPayments();
-});
-
-closeAdminBtn.addEventListener('click', () => closePanel(adminPanel));
-
-function openPanel(p) {
-  p.dataset.open = "true";
-  p.setAttribute('aria-hidden', 'false');
-  p.querySelector('header button').focus();
-}
-
-function closePanel(p) {
-  p.dataset.open = "false";
-  p.setAttribute('aria-hidden', 'true');
-  if (panelReturnFocus) panelReturnFocus.focus();
-}
-
-function loadAdminForm() {
-  $('#ad_brand').value = BRAND.brand;
-  $('#ad_city').value = BRAND.city;
-  $('#ad_email').value = BRAND.email;
-  $('#ad_phone').value = BRAND.phone;
-  $('#ad_pkg_essentials').value = (localStorage.getItem('vh_pkg_essentials') || '$55/hr');
-  $('#ad_pkg_signature').value = (localStorage.getItem('vh_pkg_signature') || '$65/hr');
-  $('#ad_pkg_premier').value = (localStorage.getItem('vh_pkg_premier') || '$85/hr');
-}
-
-function saveBrandForm() {
-  BRAND = {
-    ...BRAND,
-    brand: $('#ad_brand').value.trim() || BRAND.brand,
-    city: $('#ad_city').value.trim() || BRAND.city,
-    email: $('#ad_email').value.trim() || BRAND.email,
-    phone: $('#ad_phone').value.trim() || BRAND.phone
-  };
-  
-  localStorage.setItem('vh_brand', JSON.stringify(BRAND));
-  applyBrand();
-  toast('Brand saved', 'ok');
-}
-
-function resetBrand() {
-  BRAND = { ...BRAND_DEFAULT };
-  localStorage.setItem('vh_brand', JSON.stringify(BRAND));
-  applyBrand();
-  loadAdminForm();
-  toast('Brand reset', 'warn');
-}
-
-function exportBrand() {
-  download('brand.json', JSON.stringify(BRAND, null, 2));
-}
-
-function importBrand(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  
-  file.text().then(t => {
-    try {
-      const obj = JSON.parse(t);
-      BRAND = { ...BRAND_DEFAULT, ...obj };
-      localStorage.setItem('vh_brand', JSON.stringify(BRAND));
-      applyBrand();
-      loadAdminForm();
-      toast('Brand imported', 'ok');
-    } catch {
-      toast('Invalid JSON', 'warn');
-    }
-  });
-}
-
-function exportAll() {
-  const dump = {};
-  for (const k of Object.keys(localStorage)) {
-    if (k.startsWith('vh_')) dump[k] = localStorage.getItem(k);
-  }
-  download('velvet_hour_backup.json', JSON.stringify(dump, null, 2));
-  toast('Backup exported', 'ok');
-}
-
-function importAll(e) {
-  const f = e.target.files[0];
-  if (!f) return;
-  
-  f.text().then(t => {
-    try {
-      const obj = JSON.parse(t);
-      for (const [k, v] of Object.entries(obj)) {
-        if (k.startsWith('vh_')) localStorage.setItem(k, v);
-      }
-      toast('All data imported', 'ok');
-      setTimeout(() => location.reload(), 1000);
-    } catch {
-      toast('Invalid backup', 'warn');
-    }
-  });
-}
-
-function savePackages() {
-  const e = $('#ad_pkg_essentials').value || '$55/hr';
-  const s = $('#ad_pkg_signature').value || '$65/hr';
-  const p = $('#ad_pkg_premier').value || '$85/hr';
-  
-  localStorage.setItem('vh_pkg_essentials', e);
-  localStorage.setItem('vh_pkg_signature', s);
-  localStorage.setItem('vh_pkg_premier', p);
-  
-  $('#pkg_essentials').textContent = e;
-  $('#pkg_signature').textContent = s;
-  $('#pkg_premier').textContent = p;
-  
-  toast('Package pricing saved', 'ok');
-}
-
-function clearAllData() {
-  if (!confirm('Clear ALL data? This cannot be undone!')) return;
-  
-  Object.keys(localStorage).forEach(k => {
-    if (k.startsWith('vh_')) localStorage.removeItem(k);
-  });
-  
-  toast('All data cleared', 'warn');
-  setTimeout(() => location.reload(), 1000);
-}
-
-// Admin: payments list
-function renderPayments() {
-  const box = $('#paymentsList');
-  const arr = JSON.parse(localStorage.getItem('vh_payments') || '[]');
-  
-  if (!arr.length) {
-    box.textContent = 'No payments yet.';
-    return;
-  }
-  
-  box.innerHTML = arr.slice().reverse().map(p => 
-    `<div style="padding:6px; border-bottom:1px solid var(--edge)">• ${p.ts.split('T')[0]} — <b>${p.id}</b> — $${p.amount.toFixed(2)} — ${p.method} — Inv #${p.invoice} — ${p.name}</div>`
-  ).join('');
-}
-
-// ===== KEYBOARD SHORTCUTS =====
-document.addEventListener('keydown', (e) => {
-  // Escape closes panels
-  if (e.key === 'Escape') {
-    [adminPanel, payPanel].forEach(p => {
-      if (p && p.dataset.open === "true") {
-        closePanel(p);
-      }
-    });
-  }
-  
-  // Ctrl+S quick save
-  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-    e.preventDefault();
-    saveInvoice();
-    localStorage.setItem('vh_contract', JSON.stringify(serializeContract()));
-    toast('Quick save complete', 'ok');
-  }
-});
-
-// ===== MARKETING FUNCTIONS =====
-function downloadCalendar() {
-  const calendar = [
-    ["Week", "Platform", "Content Type", "Topic", "Notes"],
-    ["1", "Instagram", "Reel", "Signature cocktail demo", "Show mixing technique"],
-    ["1", "Email", "Newsletter", "Monthly packages & availability", "Include testimonial"],
-    ["2", "Instagram", "Carousel", "Behind the scenes setup", "Show professionalism"],
-    ["2", "LinkedIn", "Post", "Event bartending tips", "Target planners"],
-    ["3", "Instagram", "Story", "Poll: Favorite spirit", "Engagement"],
-    ["3", "Email", "Follow-up", "Inquiry follow-ups", "Personal touch"],
-    ["4", "Instagram", "Post", "Client testimonial", "Social proof"],
-    ["4", "Facebook", "Event", "Open house/tasting", "If applicable"]
-  ];
-  
-  const csv = calendar.map(row => row.join(',')).join('\n');
-  download('content_calendar.csv', csv, 'text/csv');
-}
-
-function copyRateSheet() {
-  const text = `Velvet Hour Events — Rate Sheet
-
-PACKAGES:
-• Essentials — from $55/hr (beer, wine, highballs; shopping plan; garnish kit)
-• Signature — from $65/hr (2 signatures + tasting; elevated garnish & signage)
-• Premier — from $85/hr (signatures + zero-proof menu; custom signage)
-
-ADD-ONS:
-• Extra bartenders
-• Menu boards & signage
-• Glassware rental
-• Mobile bar setup
-
-CREDENTIALS:
-• TIPS/ServSafe certified
-• Liquor liability insurance
-• COI available upon request
-
-SERVICE AREA: ${BRAND.city} + surrounding Carolinas
-
-CONTACT:
-${BRAND.email}
-${BRAND.phone}
-
-Let's create something memorable for your event!`;
-  
-  navigator.clipboard.writeText(text).then(() => toast('Rate sheet copied', 'ok'));
-}
-
-// ===== INITIALIZE PACKAGE PRICING =====
-(function() {
-  const essentials = localStorage.getItem('vh_pkg_essentials') || '$55/hr';
-  const signature = localStorage.getItem('vh_pkg_signature') || '$65/hr';
-  const premier = localStorage.getItem('vh_pkg_premier') || '$85/hr';
-  
-  if ($('#pkg_essentials')) $('#pkg_essentials').textContent = essentials;
-  if ($('#pkg_signature')) $('#pkg_signature').textContent = signature;
-  if ($('#pkg_premier')) $('#pkg_premier').textContent = premier;
-})();
-
-console.log('🍸 Velvet Hour Events Toolkit loaded successfully!');
-</script>
+    </footer>
+
+    <script>
+        // Menu Designer Functionality
+        function updateMenuPreview() {
+            const eventName = document.getElementById('event-name').value || 'Your Event';
+            const eventDate = document.getElementById('event-date').value || 'Event Date';
+            const sig1 = document.getElementById('signature-1').value || 'Signature Cocktail 1';
+            const sig2 = document.getElementById('signature-2').value || 'Signature Cocktail 2';
+            const house = document.getElementById('house-drinks').value || 'House selections';
+            const zero = document.getElementById('zero-proof').value || 'Non-alcoholic options';
+            
+            document.getElementById('preview-title').textContent = eventName;
+            document.getElementById('preview-date').textContent = eventDate;
+            
+            // Extract cocktail names from full descriptions
+            const sig1Name = sig1.split(' - ')[0] || sig1.split(',')[0] || sig1;
+            const sig2Name = sig2.split(' - ')[0] || sig2.split(',')[0] || sig2;
+            
+            document.getElementById('preview-sig1').textContent = sig1Name;
+            document.getElementById('preview-sig2').textContent = sig2Name;
+            document.getElementById('preview-house').textContent = house;
+            document.getElementById('preview-zero').textContent = zero;
+        }
+        
+        function printMenu() {
+            const printContent = document.querySelector('.menu-card').outerHTML;
+            const originalContent = document.body.innerHTML;
+            
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+            location.reload(); // Reload to restore functionality
+        }
+        
+        // Beverage Calculator Functionality
+        function calculateBeverages() {
+            const guests = parseInt(document.getElementById('guest-count').value) || 0;
+            const hours = parseInt(document.getElementById('event-hours').value) || 0;
+            const cocktailPct = parseInt(document.getElementById('cocktail-percent').value) || 0;
+            const beerPct = parseInt(document.getElementById('beer-percent').value) || 0;
+            const winePct = parseInt(document.getElementById('wine-percent').value) || 0;
+            const bases = document.getElementById('liquor-bases').value.split(',').map(b => b.trim()).filter(b => b);
+            
+            // Calculate total drinks (1.5 drinks first hour, 1 drink each additional hour)
+            const drinksFirstHour = guests * 1.5;
+            const drinksAdditionalHours = guests * Math.max(0, hours - 1);
+            const totalDrinks = Math.round(drinksFirstHour + drinksAdditionalHours);
+            
+            // Calculate drink type breakdown
+            const cocktails = Math.round(totalDrinks * (cocktailPct / 100));
+            const beers = Math.round(totalDrinks * (beerPct / 100));
+            const wines = Math.round(totalDrinks * (winePct / 100));
+            
+            // Calculate supplies needed
+            const liquorBottles = Math.ceil(cocktails / 16); // 16 drinks per 750ml bottle
+            const wineBottles = Math.ceil(wines / 5); // 5 glasses per bottle
+            const beerCases = Math.ceil(beers / 24); // 24 beers per case
+            const iceAmount = Math.ceil(guests * 1.5); // 1.5 lbs per guest
+            
+            // Update results
+            document.getElementById('total-drinks').textContent = totalDrinks;
+            document.getElementById('cocktail-count').textContent = cocktails;
+            document.getElementById('beer-count').textContent = beers;
+            document.getElementById('wine-count').textContent = wines;
+            document.getElementById('liquor-bottles').textContent = liquorBottles;
+            document.getElementById('wine-bottles').textContent = wineBottles;
+            document.getElementById('beer-cases').textContent = beerCases;
+            document.getElementById('ice-amount').textContent = iceAmount + ' lbs';
+        }
+        
+        function exportShoppingList() {
+            const shoppingList = `
+Velvet Hour Events - Shopping List
+==================================
+
+Total Guests: ${document.getElementById('guest-count').value}
+Event Duration: ${document.getElementById('event-hours').value} hours
+
+BEVERAGES NEEDED:
+- Cocktails: ${document.getElementById('cocktail-count').textContent}
+- Beers: ${document.getElementById('beer-count').textContent} 
+- Wine servings: ${document.getElementById('wine-count').textContent}
+
+SHOPPING LIST:
+- Liquor bottles: ${document.getElementById('liquor-bottles').textContent}
+- Wine bottles: ${document.getElementById('wine-bottles').textContent}
+- Beer cases: ${document.getElementById('beer-cases').textContent}
+- Ice: ${document.getElementById('ice-amount').textContent}
+
+Additional supplies:
+- Garnishes (citrus, herbs, etc.)
+- Mixers (soda, juice, tonic)
+- Cocktail accessories (stirrers, straws)
+            `;
+            
+            const blob = new Blob([shoppingList], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'beverage-shopping-list.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        // Tab Functionality
+        function openTab(tabName) {
+            // Hide all tab content
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            // Remove active class from all tab buttons
+            const tabButtons = document.getElementsByClassName('tab-btn');
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('active');
+            }
+            
+            // Show the specific tab content and activate the button
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+        
+        // Invoice Functionality
+        function addInvoiceItem() {
+            const tbody = document.getElementById('invoice-items');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td contenteditable="true">New Item</td>
+                <td><input type="number" value="1" min="0" step="0.5" style="width: 70px;"></td>
+                <td><input type="number" value="0" min="0" step="1" style="width: 70px;"></td>
+                <td>$0.00</td>
+            `;
+            tbody.appendChild(newRow);
+        }
+        
+        // Contact Form Handler
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your inquiry! We will contact you shortly to discuss your event.');
+            this.reset();
+        });
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateMenuPreview();
+            calculateBeverages();
+        });
+    </script>
 </body>
 </html>
