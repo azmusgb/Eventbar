@@ -67,8 +67,22 @@ kbd{background:#0003; border:1px solid var(--edge); padding:.18em .48em; border-
 .button:hover{transform:translateY(-1px); box-shadow:0 6px 20px rgba(0,0,0,.18)}
 .nav a{padding:8px 10px; border-radius:10px}
 .nav a[aria-current="page"]{background:color-mix(in oklab, var(--gold) 16%, transparent 84%); color:var(--ink)}
+.nav .spacer{flex:1}
 
-/* ===== Forms ===== */
+/* ===== Admin Dropdown ===== */
+.menu-wrap{position:relative}
+#adminMenuBtn{min-height:40px}
+.menu{position:absolute; right:0; top:calc(100% + 8px); min-width:230px;
+  background:color-mix(in oklab, var(--card) 96%, black 4%); border:1px solid var(--edge); border-radius:12px; box-shadow:var(--shadow); padding:6px; z-index:70}
+.menu[hidden]{display:none}
+.menu h4{font-size:12px; margin:6px 8px; color:var(--muted-strong)}
+.menu ul{list-style:none; padding:0; margin:0}
+.menu li{margin:0}
+.menu button.menuitem{all:unset; display:flex; align-items:center; gap:8px; width:100%; padding:10px 12px; border-radius:10px; cursor:pointer}
+.menu button.menuitem:hover, .menu button.menuitem:focus-visible{background:color-mix(in oklab, var(--gold) 15%, transparent 85%)}
+.menu .sep{height:1px; margin:6px; background:var(--edge); border-radius:1px}
+
+/* ===== Forms, layout, views, components (unchanged) ===== */
 select, input[type="text"], input[type="email"], input[type="number"], input[type="date"], textarea{
   width:100%; padding:12px 12px; border-radius:12px; border:1px solid var(--edge);
   background:color-mix(in oklab, var(--bg) 70%, black 30%); color:var(--ink); outline:none;
@@ -78,12 +92,10 @@ label{font-weight:600; font-size:13px; color:var(--muted-strong)}
 .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
 @media (max-width:900px){ .grid-3{grid-template-columns:1fr} .grid-2{grid-template-columns:1fr}}
 
-/* ===== View Container ===== */
 #app{min-height:60vh}
 .view{display:none}
 .view.active{display:block}
 
-/* ===== Components used in views ===== */
 .menu-card{width:100%; max-width:620px; margin:0 auto; border-radius:22px; border:1px solid var(--edge);
   background: conic-gradient(from 200deg at 50% 30%, color-mix(in oklab,var(--gold) 18%, transparent 82%), transparent 42% 58%, color-mix(in oklab,var(--rose) 16%, transparent 84%) 100%), color-mix(in oklab, var(--card) 92%, black 8%);
   padding:26px; box-shadow:var(--shadow)}
@@ -96,7 +108,7 @@ table{width:100%; border-collapse:collapse}
 th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; vertical-align:top}
 .sig-pad{border:1px solid var(--edge); border-radius:12px; background:color-mix(in oklab, var(--bg) 72%, black 28%); width:100%; height:180px}
 
-/* ===== Toasts & Panels ===== */
+/* Toasts & Panels */
 .toast-wrap{position:fixed; bottom:18px; left:50%; transform:translateX(-50%); z-index:90}
 .toast{background:color-mix(in oklab, var(--card) 95%, black 5%); border:1px solid var(--edge); border-radius:12px; padding:10px 14px; margin-top:10px; min-width:220px}
 .toast.ok{border-color:color-mix(in oklab,var(--ok) 40%, var(--edge) 60%)}
@@ -132,19 +144,24 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
 
       <span class="badge" id="modeChip" aria-live="polite" title="Current view">Mode: User</span>
 
-      <button class="iconbtn no-print" id="adminLoginBtn" aria-label="Admin login">🔒 Admin</button>
-      <button class="iconbtn no-print" id="adminLogoutBtn" aria-label="Sign out admin" hidden>Sign out</button>
-
-      <div style="margin-left:auto"></div>
-      <a href="#packages" data-route>Packages</a>
-      <a href="#menus" data-route>Menus</a>
-      <a href="#designer" data-route>Designer</a>
+      <!-- primary routes -->
+      <a href="#packages"   data-route>Packages</a>
+      <a href="#menus"      data-route>Menus</a>
+      <a href="#designer"   data-route>Designer</a>
       <a href="#calculator" data-route>Calculator</a>
-      <a href="#contract" data-route>Contract</a>
-      <a href="#invoice" data-route>Invoice</a>
+      <a href="#contract"   data-route>Contract</a>
+      <a href="#invoice"    data-route>Invoice</a>
       <a href="#checklists" data-route>Checklists</a>
-      <a href="#marketing" data-route>Marketing</a>
-      <a href="#contact" data-route>Book</a>
+      <a href="#marketing"  data-route>Marketing</a>
+      <a href="#contact"    data-route>Book</a>
+
+      <div class="spacer"></div>
+
+      <!-- admin dropdown (far right) -->
+      <div class="menu-wrap">
+        <button id="adminMenuBtn" class="iconbtn" aria-haspopup="menu" aria-expanded="false" aria-controls="adminMenu" title="Admin menu">Admin ▾</button>
+        <div id="adminMenu" class="menu" role="menu" hidden></div>
+      </div>
     </nav>
 
     <!-- SPA outlet -->
@@ -194,7 +211,8 @@ th,td{padding:10px 8px; border-bottom:1px solid var(--edge); text-align:left; ve
       <p class="small" id="payNotice"></p>
     </div>
   </section>
-  .<script>
+
+<script>
 /* ====== Core utilities ====== */
 const $  = (q, p=document) => p.querySelector(q);
 const $$ = (q, p=document) => [...p.querySelectorAll(q)];
@@ -231,10 +249,10 @@ function applyBrand(){
 }
 applyBrand();
 
-/* ====== Router skeleton (set after views exist) ====== */
+/* ====== Router skeleton ====== */
 const app = $('#app');
 let routerReady = false;
-const routes = {}; // will be filled after view functions
+const routes = {};
 function setActiveLink(hash){
   $$('a[data-route]').forEach(a=> a.setAttribute('aria-current', a.getAttribute('href')===hash ? 'page':'false'));
 }
@@ -243,15 +261,12 @@ function renderRoute(hash){
   setActiveLink(route);
   app.setAttribute('aria-busy','true');
   app.innerHTML='';
-  // render user view
   const frag = routes[route]({admin:false});
   app.appendChild(frag);
-  // inject admin panes only if admin
-  if(isAdmin()){
-    routes[route]({admin:true, mount:app});
-  }
+  if(isAdmin()){ routes[route]({admin:true, mount:app}); }
   app.setAttribute('aria-busy','false');
 }
+function navigate(route){ if(location.hash===route){ renderRoute(route); } else { location.hash=route; } }
 
 /* ====== Shared helpers ====== */
 function money(n){ return `$${(+n||0).toFixed(2)}`; }
@@ -265,7 +280,7 @@ function printNode(node, title='Print'){
   w.document.write('</body></html>'); w.document.close(); w.focus(); w.print();
 }
 
-/* ====== View: Packages ====== */
+/* ====== Views (each gives an adminBox with a stable id for jump) ====== */
 function renderPackages({admin}={}){
   const view=document.createElement('section'); view.className='view active card';
   view.innerHTML=`
@@ -299,7 +314,7 @@ function renderPackages({admin}={}){
     <p class="small">Holiday dates may price at 1.5×. Client typically supplies alcohol; we provide a detailed shopping plan and serve.</p>
   `;
   if(admin){
-    const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.style.marginTop='12px';
+    const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.id='admin-packages'; adminBox.tabIndex="-1"; adminBox.style.marginTop='12px';
     adminBox.innerHTML=`
       <h3>Admin · Package Pricing</h3>
       <div class="grid-3">
@@ -324,7 +339,6 @@ function renderPackages({admin}={}){
   return view;
 }
 
-/* ====== View: Menus ====== */
 function renderMenus({admin}={}){
   const [m1,m2,m3] = JSON.parse(localStorage.getItem('vh_menu_templates')||'null') || [
     '<ul class="menu"><li><b>Signatures:</b> French 75 — gin, lemon, bubbles</li><li>Old Fashioned — bourbon, bitters, orange</li><li><b>House:</b> Gin & Tonic · Vodka Soda · Paloma</li><li><b>Zero-Proof:</b> Citrus & Mint Cooler</li></ul>',
@@ -346,7 +360,7 @@ function renderMenus({admin}={}){
   $('#printPage', view).addEventListener('click', ()=> printNode(view, 'Menus'));
 
   if(admin){
-    const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.style.marginTop='12px';
+    const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.id='admin-menus'; adminBox.tabIndex="-1"; adminBox.style.marginTop='12px';
     adminBox.innerHTML=`
       <h3>Admin · Templates</h3>
       <p class="small">Enter simple UL/LI markup; basic tags only.</p>
@@ -367,7 +381,6 @@ function renderMenus({admin}={}){
   return view;
 }
 
-/* ====== View: Designer ====== */
 function renderDesigner({admin}={}){
   const view=document.createElement('section'); view.className='view active card';
   view.innerHTML=`
@@ -442,10 +455,15 @@ function renderDesigner({admin}={}){
   $('#btnPreview',view).addEventListener('click', renderMenu);
   $('#btnPrint',view).addEventListener('click', ()=>{ renderMenu(); printNode($('#menuCard',view), 'Menu'); });
   renderMenu();
+
+  if(admin){
+    const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.id='admin-designer'; adminBox.tabIndex="-1"; adminBox.style.marginTop='12px';
+    adminBox.innerHTML=`<h3>Admin · Designer</h3><p class="small">No extra settings here (designer is WYSIWYG).</p>`;
+    view.appendChild(adminBox);
+  }
   return view;
 }
 
-/* ====== View: Calculator ====== */
 function renderCalculator({admin}={}){
   const view=document.createElement('section'); view.className='view active card';
   view.innerHTML=`
@@ -515,10 +533,15 @@ function renderCalculator({admin}={}){
   $('#btnCalc',view).addEventListener('click', calcRun);
   $('#btnCSV',view).addEventListener('click', calcExport);
   calcRun();
+
+  if(admin){
+    const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.id='admin-calculator'; adminBox.tabIndex="-1"; adminBox.style.marginTop='12px';
+    adminBox.innerHTML=`<h3>Admin · Calculator</h3><p class="small">No extra settings here.</p>`;
+    view.appendChild(adminBox);
+  }
   return view;
 }
 
-/* ====== View: Contract ====== */
 function renderContract({admin}={}){
   const view=document.createElement('section'); view.className='view active card';
   view.innerHTML=`
@@ -597,7 +620,7 @@ function renderContract({admin}={}){
   $('#clearSigs',view).addEventListener('click', ()=>{ sigC.clear(); sigP.clear(); });
 
   if(admin){
-    const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.style.marginTop='12px';
+    const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.id='admin-contract'; adminBox.tabIndex="-1"; adminBox.style.marginTop='12px';
     adminBox.innerHTML=`
       <h3>Admin · Contract</h3>
       <button class="iconbtn" id="exportContract">Export JSON</button>
@@ -612,7 +635,6 @@ function renderContract({admin}={}){
   return view;
 }
 
-/* ====== View: Invoice ====== */
 function renderInvoice({admin}={}){
   let saved;
   try{ saved=JSON.parse(localStorage.getItem('vh_invoice'))||null; }catch{ saved=null; }
@@ -699,7 +721,7 @@ function renderInvoice({admin}={}){
   });
 
   if(admin){
-    const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.style.marginTop='12px';
+    const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.id='admin-invoice'; adminBox.tabIndex="-1"; adminBox.style.marginTop='12px';
     adminBox.innerHTML=`
       <h3>Admin · Invoice</h3>
       <button class="iconbtn" id="exportInv">Export JSON</button>
@@ -714,7 +736,6 @@ function renderInvoice({admin}={}){
   return view;
 }
 
-/* ====== View: Checklists ====== */
 function renderChecklists({admin}={}){
   const view=document.createElement('section'); view.className='view active card';
   view.innerHTML=`
@@ -748,7 +769,7 @@ function renderChecklists({admin}={}){
   }catch{}
 
   if(admin){
-    const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.style.marginTop='12px';
+    const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.id='admin-checklists'; adminBox.tabIndex="-1"; adminBox.style.marginTop='12px';
     adminBox.innerHTML=`
       <h3>Admin · Incidents</h3>
       <div style="display:flex; gap:8px">
@@ -773,7 +794,6 @@ function renderChecklists({admin}={}){
   return view;
 }
 
-/* ====== View: Marketing (Brand + Payments in Admin) ====== */
 function renderMarketing({admin}={}){
   const view=document.createElement('section'); view.className='view active card';
   view.innerHTML=`
@@ -816,7 +836,7 @@ Send as PDF to {{client email}} and cc ${BRAND.email}. Thank you.</pre>
   });
 
   if(admin){
-    const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.style.marginTop='12px';
+    const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.id='admin-marketing'; adminBox.tabIndex="-1"; adminBox.style.marginTop='12px';
     adminBox.innerHTML=`
       <h3>Admin · Brand & Payments</h3>
       <div class="grid-2">
@@ -861,7 +881,6 @@ Send as PDF to {{client email}} and cc ${BRAND.email}. Thank you.</pre>
   return view;
 }
 
-/* ====== View: Contact ====== */
 function renderContact({admin}={}){
   const view=document.createElement('section'); view.className='view active card';
   view.innerHTML=`
@@ -919,7 +938,7 @@ You can reach me at ${email}. Thank you!`);
   });
 
   if(admin){
-    const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.style.marginTop='12px';
+    const adminBox=document.createElement('div'); adminBox.className='card'; adminBox.id='admin-contact'; adminBox.tabIndex="-1"; adminBox.style.marginTop='12px';
     const arr=JSON.parse(localStorage.getItem('vh_requests')||'[]').slice().reverse();
     adminBox.innerHTML=`
       <h3>Admin · Requests</h3>
@@ -934,6 +953,147 @@ You can reach me at ${email}. Thank you!`);
     view.appendChild(adminBox);
   }
   return view;
+}
+
+/* ====== Register routes ====== */
+routes['#packages']  = renderPackages;
+routes['#menus']     = renderMenus;
+routes['#designer']  = renderDesigner;
+routes['#calculator']= renderCalculator;
+routes['#contract']  = renderContract;
+routes['#invoice']   = renderInvoice;
+routes['#checklists']= renderChecklists;
+routes['#marketing'] = renderMarketing;
+routes['#contact']   = renderContact;
+routerReady = true;
+
+/* ====== Admin gating ====== */
+const ADMIN_FLAG='vh_is_admin';
+const REMEMBER_FLAG='vh_admin_remember';
+const PIN_KEY='vh_admin_pin';
+function storageForState(){ return (localStorage.getItem(REMEMBER_FLAG)==='1') ? localStorage : sessionStorage; }
+function isAdmin(){ try{ return storageForState().getItem(ADMIN_FLAG)==='1'; }catch{ return false; } }
+
+function setAdmin(on){
+  localStorage.removeItem(ADMIN_FLAG); sessionStorage.removeItem(ADMIN_FLAG);
+  storageForState().setItem(ADMIN_FLAG, on?'1':'0');
+  document.body.setAttribute('data-role', on?'admin':'user');
+  $('#modeChip').textContent = `Mode: ${on?'Admin':'User'}`;
+  adminMenuRender(); // refresh dropdown
+  if(routerReady){ renderRoute(location.hash || '#packages'); }
+}
+
+/* ====== Admin dropdown ====== */
+const adminBtn  = $('#adminMenuBtn');
+const adminMenu = $('#adminMenu');
+let menuOpen = false;
+function adminMenuRender(){
+  const a = isAdmin();
+  const wrap = document.createElement('div');
+  wrap.innerHTML = a ? `
+    <h4>Admin Shortcuts</h4>
+    <ul>
+      <li><button class="menuitem" role="menuitem" data-jump="#marketing"  data-anchor="admin-marketing">Brand & Payments</button></li>
+      <li><button class="menuitem" role="menuitem" data-jump="#packages"   data-anchor="admin-packages">Package Pricing</button></li>
+      <li><button class="menuitem" role="menuitem" data-jump="#menus"      data-anchor="admin-menus">Menu Templates</button></li>
+      <li><button class="menuitem" role="menuitem" data-jump="#invoice"    data-anchor="admin-invoice">Invoice Admin</button></li>
+      <li><button class="menuitem" role="menuitem" data-jump="#contract"   data-anchor="admin-contract">Contract Admin</button></li>
+      <li><button class="menuitem" role="menuitem" data-jump="#checklists" data-anchor="admin-checklists">Incidents Admin</button></li>
+      <li><button class="menuitem" role="menuitem" data-jump="#contact"    data-anchor="admin-contact">Requests Admin</button></li>
+    </ul>
+    <div class="sep"></div>
+    <h4>Data</h4>
+    <ul>
+      <li><button class="menuitem" role="menuitem" id="exportAllBtn">Export All</button></li>
+      <li>
+        <label class="menuitem" role="menuitem" style="cursor:pointer">
+          <input id="importAllInput" type="file" hidden accept="application/json">
+          Import All…
+        </label>
+      </li>
+    </ul>
+    <div class="sep"></div>
+    <ul>
+      <li><button class="menuitem" role="menuitem" id="adminSignOut">Sign out</button></li>
+    </ul>
+  ` : `
+    <h4>Admin</h4>
+    <ul>
+      <li><button class="menuitem" role="menuitem" id="adminUnlock">Unlock Admin</button></li>
+      <li><button class="menuitem" role="menuitem" id="adminResetPin">Reset PIN to 0000</button></li>
+    </ul>
+  `;
+  adminMenu.innerHTML = wrap.innerHTML;
+
+  // wire items
+  if(a){
+    adminMenu.querySelectorAll('[data-jump]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const route = btn.getAttribute('data-jump');
+        const anchor = btn.getAttribute('data-anchor');
+        closeAdminMenu();
+        navigate(route);
+        // focus the admin panel after render
+        setTimeout(()=>{ const el = document.getElementById(anchor); el?.scrollIntoView({behavior:'smooth', block:'start'}); el?.focus?.(); }, 50);
+      });
+    });
+    $('#exportAllBtn', adminMenu)?.addEventListener('click', ()=> exportAll());
+    $('#importAllInput', adminMenu)?.addEventListener('change', e=> importAll(e));
+    $('#adminSignOut', adminMenu)?.addEventListener('click', ()=>{ localStorage.removeItem(ADMIN_FLAG); sessionStorage.removeItem(ADMIN_FLAG); localStorage.removeItem(REMEMBER_FLAG); setAdmin(false); toast('Signed out of admin','warn'); closeAdminMenu(); });
+  } else {
+    $('#adminUnlock', adminMenu)?.addEventListener('click', ()=>{ openPanel($('#pinPanel')); closeAdminMenu(); });
+    $('#adminResetPin', adminMenu)?.addEventListener('click', ()=>{ localStorage.setItem(PIN_KEY,'0000'); toast('PIN reset to 0000','ok'); closeAdminMenu(); });
+  }
+}
+
+function openAdminMenu(){
+  if(menuOpen) return;
+  adminMenu.hidden=false;
+  adminBtn.setAttribute('aria-expanded','true');
+  menuOpen=true;
+  // focus first item
+  const first = adminMenu.querySelector('.menuitem'); first?.focus();
+}
+function closeAdminMenu(){
+  if(!menuOpen) return;
+  adminMenu.hidden=true;
+  adminBtn.setAttribute('aria-expanded','false');
+  menuOpen=false;
+  adminBtn.focus();
+}
+
+// click / keyboard handling
+adminBtn.addEventListener('click', (e)=>{ menuOpen ? closeAdminMenu() : openAdminMenu(); });
+document.addEventListener('click', (e)=>{
+  if(menuOpen && !adminMenu.contains(e.target) && e.target!==adminBtn){ closeAdminMenu(); }
+});
+document.addEventListener('keydown', (e)=>{
+  if(!menuOpen) return;
+  const items = [...adminMenu.querySelectorAll('.menuitem')];
+  const i = items.indexOf(document.activeElement);
+  if(e.key==='Escape'){ e.preventDefault(); closeAdminMenu(); }
+  else if(e.key==='ArrowDown'){ e.preventDefault(); (items[i+1]||items[0])?.focus(); }
+  else if(e.key==='ArrowUp'){ e.preventDefault(); (items[i-1]||items[items.length-1])?.focus(); }
+  else if(e.key==='Home'){ e.preventDefault(); items[0]?.focus(); }
+  else if(e.key==='End'){ e.preventDefault(); items[items.length-1]?.focus(); }
+});
+
+/* ====== Export/Import ALL (appears in dropdown when admin) ====== */
+function exportAll(){
+  const dump = {};
+  for(const k of Object.keys(localStorage)){ if(k.startsWith('vh_')) dump[k]=localStorage.getItem(k); }
+  download('velvet_hour_backup.json', JSON.stringify(dump,null,2));
+  toast('Backup exported','ok');
+}
+function importAll(e){
+  const f=e.target.files[0]; if(!f) return;
+  f.text().then(t=>{
+    try{
+      const obj=JSON.parse(t);
+      for(const [k,v] of Object.entries(obj)){ if(k.startsWith('vh_')) localStorage.setItem(k, v); }
+      toast('Backup imported','ok'); location.reload();
+    }catch{ toast('Invalid backup','warn'); }
+  });
 }
 
 /* ====== Shared Payment Simulation ====== */
@@ -954,35 +1114,8 @@ $('#confirmPay').addEventListener('click', ()=>{
   toast(`Payment recorded: ${rec.id}`);
 });
 
-/* ====== Hook up routes AFTER views exist ====== */
-routes['#packages']  = renderPackages;
-routes['#menus']     = renderMenus;
-routes['#designer']  = renderDesigner;
-routes['#calculator']= renderCalculator;
-routes['#contract']  = renderContract;
-routes['#invoice']   = renderInvoice;
-routes['#checklists']= renderChecklists;
-routes['#marketing'] = renderMarketing;
-routes['#contact']   = renderContact;
-routerReady = true;
-
-/* ====== Admin gating (moved AFTER router is ready) ====== */
-const ADMIN_FLAG='vh_is_admin';
-const REMEMBER_FLAG='vh_admin_remember';
-const PIN_KEY='vh_admin_pin';
-function storageForState(){ return (localStorage.getItem(REMEMBER_FLAG)==='1') ? localStorage : sessionStorage; }
-function isAdmin(){ try{ return storageForState().getItem(ADMIN_FLAG)==='1'; }catch{ return false; } }
-function setAdmin(on){
-  localStorage.removeItem(ADMIN_FLAG); sessionStorage.removeItem(ADMIN_FLAG);
-  storageForState().setItem(ADMIN_FLAG, on?'1':'0');
-  document.body.setAttribute('data-role', on?'admin':'user');
-  $('#adminLogoutBtn').hidden = !on;
-  $('#adminLoginBtn').hidden  =  on;
-  $('#modeChip').textContent = `Mode: ${on?'Admin':'User'}`;
-  if(routerReady){ renderRoute(location.hash || '#packages'); }
-}
-$('#adminLoginBtn').addEventListener('click', ()=> openPanel($('#pinPanel')));
-$('#adminLogoutBtn').addEventListener('click', ()=> { localStorage.removeItem(ADMIN_FLAG); sessionStorage.removeItem(ADMIN_FLAG); localStorage.removeItem(REMEMBER_FLAG); setAdmin(false); toast('Signed out of admin','warn'); });
+/* ====== Admin PIN logic ====== */
+function isAdminRemembered(){ return localStorage.getItem(REMEMBER_FLAG)==='1' && localStorage.getItem(ADMIN_FLAG)==='1'; }
 $('#confirmPin').addEventListener('click', ()=>{
   const input = $('#pinInput').value;
   const saved = localStorage.getItem(PIN_KEY) ?? '0000';
@@ -996,15 +1129,13 @@ $('#resetPin').addEventListener('click', ()=>{ localStorage.setItem(PIN_KEY,'000
 /* ====== Start app ====== */
 window.addEventListener('hashchange', ()=> renderRoute(location.hash));
 document.addEventListener('DOMContentLoaded', ()=>{
-  // restore remembered admin session if set
-  const remembered = localStorage.getItem(REMEMBER_FLAG)==='1';
-  const rememberedAdmin = localStorage.getItem(ADMIN_FLAG)==='1';
-  if(remembered && rememberedAdmin){ sessionStorage.setItem(ADMIN_FLAG,'1'); setAdmin(true); }
-  else { sessionStorage.setItem(ADMIN_FLAG,'0'); setAdmin(false); }
-  // demo param support: ?admin=1 (session only)
+  // restore remembered admin session
+  if(isAdminRemembered()){ sessionStorage.setItem(ADMIN_FLAG,'1'); setAdmin(true); } else { sessionStorage.setItem(ADMIN_FLAG,'0'); setAdmin(false); }
+  // demo param support: ?admin=1
   const params=new URLSearchParams(location.search);
   if(params.get('admin')==='1'){ sessionStorage.setItem(ADMIN_FLAG,'1'); setAdmin(true); }
-  // initial route
+  // initial render and menu
+  adminMenuRender();
   renderRoute(location.hash || '#packages');
 });
 </script>
